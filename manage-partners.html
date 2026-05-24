@@ -1,0 +1,108 @@
+﻿<html lang="vi"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTECH Admin - Quản Lý Đối Tác</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/pages/manage-partners.css">
+  <link rel="stylesheet" href="assets/css/common/inline-utilities.css">
+  <link rel="stylesheet" href="assets/css/common/admin-shell.css">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sb-logo"><a href="dashboard.html" class="logo"><span class="logo-badge">F</span>FTECH Admin</a></div>
+  <div class="sb-label">Super Admin</div>
+  <nav class="sb-menu">
+    <a href="dashboard.html" class="sb-item"><span class="si">📊</span>Xem báo cáo thống kê</a>
+    <a href="manage-posts.html" class="sb-item"><span class="si">✅</span>Duyệt bài viết</a>
+    <a href="manage-partners.html" class="sb-item active"><span class="si">🆕</span>Duyệt đối tác mới</a>
+    <a href="manage-accounts.html" class="sb-item"><span class="si">🛡️</span>Tài khoản admin</a>
+  </nav>
+  <div class="sb-bottom"><div class="sb-user"><div class="sb-avatar"><img src="https://i.pravatar.cc/120?img=12" alt="Nguyễn Minh Vỹ"></div><div><div class="sb-user-name">Nguyễn Minh Vỹ</div><div class="sb-user-role">Super Admin</div></div></div></div>
+</div>
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title">Duyệt Đối Tác Mới</div>
+    <div class="topbar-search"><input type="text" placeholder="Tìm đối tác, ngành hàng..."><button>🔍</button></div>
+    <div class="topbar-actions"><button class="btn-ghost">Xuất báo cáo</button><button class="btn-primary" onclick="openPartnerApprove('GearVN Affiliate','approve')">Hồ sơ chờ duyệt</button></div>
+  </div>
+  <div class="content">
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-label">Tổng đối tác</div><div class="stat-val sc-a">34</div><div class="stat-sub">28 đang hoạt động</div></div>
+      <div class="stat-card"><div class="stat-label">Chờ duyệt</div><div class="stat-val sc-p">4</div><div class="stat-sub">Cần phản hồi hôm nay</div></div>
+      <div class="stat-card"><div class="stat-label">Tổng click tháng</div><div class="stat-val sc-g">24.8K</div><div class="stat-sub"><span class="trend-up">↑ +31%</span> vs tháng trước</div></div>
+      <div class="stat-card"><div class="stat-label">Hoa hồng tháng</div><div class="stat-val sc-o">14.2M₫</div><div class="stat-sub"><span class="trend-up">↑ +22%</span> vs tháng trước</div></div>
+      <div class="stat-card"><div class="stat-label">Top đối tác</div><div class="stat-val sc-y u-style-051">Shopee</div><div class="stat-sub">4,820 clicks / tháng</div></div>
+    </div>
+
+    <div class="section-head">
+      <div class="sec-title">Đối tác nổi bật</div>
+      <div class="u-style-052">
+        <select class="fselect"><option>Tất cả ngành</option><option>Thương mại điện tử</option><option>Điện tử</option><option>Phụ kiện</option></select>
+        <select class="fselect"><option>Tất cả trạng thái</option><option>Đang hoạt động</option><option>Chờ duyệt</option><option>Tạm dừng</option></select>
+      </div>
+    </div>
+
+    <div class="partners-grid">
+      <div class="partner-card pc-active">
+        <div class="pc-head"><div class="pc-logo u-style-053"><img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=120&q=80" alt="Shopee"></div><span class="pc-status pcs-active">Hoạt động</span></div>
+        <div class="pc-name">Shopee Affiliate VN</div>
+        <div class="pc-cat"><div class="cat-dot"></div>Thương mại điện tử · shopee.vn</div>
+        <div class="pc-meta"><div>Liên hệ: partner@shopee.vn</div><div>Hợp tác từ: 01/2025</div></div>
+        <div class="pc-metrics"><div class="pcm"><div class="pcm-val u-style-023">4,820</div><div class="pcm-label">Lượt click</div></div><div class="pcm"><div class="pcm-val u-style-054">312</div><div class="pcm-label">Chuyển đổi</div></div><div class="pcm"><div class="pcm-val u-style-031">6.5%</div><div class="pcm-label">CVR</div></div></div>
+        <div class="pc-commission"><span class="pc-comm-label">Hoa hồng cơ bản</span><span class="pc-comm-val">4-8% / đơn</span></div>
+        <div class="pc-note">Đối tác hiệu suất cao nhất. Chuyên sản phẩm điện thoại và phụ kiện. Ghi chú hợp đồng: thanh toán ngày 05 hằng tháng.</div>
+        <div class="pc-footer"><button class="pc-btn">Thống kê</button><button class="pc-btn-primary" onclick="openPartnerEdit('Shopee Affiliate VN','active')">Cập nhật thông tin</button></div>
+      </div>
+
+      <div class="partner-card pc-pending">
+        <div class="pc-head"><div class="pc-logo u-style-055"><img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=120&q=80" alt="GearVN"></div><span class="pc-status pcs-pending">Chờ duyệt</span></div>
+        <div class="pc-name">GearVN Affiliate</div>
+        <div class="pc-cat"><div class="cat-dot u-style-056"></div>Gaming · gearvn.com</div>
+        <div class="pc-meta"><div>Liên hệ: biz@gearvn.com</div><div>Gửi từ: 29/03/2026</div></div>
+        <div class="pc-metrics"><div class="pcm"><div class="pcm-val u-style-057">-</div><div class="pcm-label">Lượt click</div></div><div class="pcm"><div class="pcm-val u-style-057">-</div><div class="pcm-label">Chuyển đổi</div></div><div class="pcm"><div class="pcm-val u-style-057">5%</div><div class="pcm-label">HH đề xuất</div></div></div>
+        <div class="pc-commission"><span class="pc-comm-label">Mức hoa hồng đề xuất</span><span class="pc-comm-val">5-9% / đơn</span></div>
+        <div class="pc-note">Đối tác mới chờ duyệt. Cần kiểm tra thông tin hợp đồng, email liên hệ và nhóm ngành hàng trước khi kích hoạt.</div>
+        <div class="pc-footer"><button class="pc-btn u-style-058" onclick="openPartnerApprove('GearVN Affiliate','reject')">Từ chối</button><button class="pc-btn-primary" onclick="openPartnerApprove('GearVN Affiliate','approve')">Duyệt đối tác</button></div>
+      </div>
+
+      <div class="partner-card pc-paused">
+        <div class="pc-head"><div class="pc-logo u-style-059"><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=120&q=80" alt="Tiki"></div><span class="pc-status pcs-paused">Tạm dừng</span></div>
+        <div class="pc-name">Tiki Partner</div>
+        <div class="pc-cat"><div class="cat-dot u-style-041"></div>Thương mại điện tử · tiki.vn</div>
+        <div class="pc-meta"><div>Liên hệ: affiliate@tiki.vn</div><div>Hợp tác từ: 11/2024</div></div>
+        <div class="pc-metrics"><div class="pcm"><div class="pcm-val u-style-057">890</div><div class="pcm-label">Lượt click</div></div><div class="pcm"><div class="pcm-val u-style-057">32</div><div class="pcm-label">Chuyển đổi</div></div><div class="pcm"><div class="pcm-val u-style-057">3.6%</div><div class="pcm-label">CVR</div></div></div>
+        <div class="pc-commission"><span class="pc-comm-label">Hoa hồng hiện tại</span><span class="pc-comm-val u-style-057">2-5% / đơn</span></div>
+        <div class="pc-note">Tạm dừng hợp tác để đàm phán lại mức hoa hồng. Ghi chú hợp đồng: chờ xác nhận phụ lục mới trong tháng 4.</div>
+        <div class="pc-footer"><button class="pc-btn u-style-060" onclick="openPartnerApprove('Tiki Partner','resume')">Kích hoạt lại</button><button class="pc-btn-primary" onclick="openPartnerEdit('Tiki Partner','paused')">Cập nhật thông tin</button></div>
+      </div>
+    </div>
+
+    <div class="section-head"><div class="sec-title">Tất cả đối tác (34)</div><button class="btn-ghost">Xem tất cả →</button></div>
+    <div class="table-wrap">
+      <div class="t-head">
+        <div class="th">Đối tác</div><div class="th">Ngành hàng</div><div class="th">Email</div><div class="th">Click</div><div class="th">CVR</div><div class="th">HH%</div><div class="th">Trạng thái</div><div class="th">Thao tác</div>
+      </div>
+      <div class="t-row">
+        <div class="partner-cell"><div class="p-av"><img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=96&q=80" alt="Shopee"></div><div><div class="p-name">Shopee Affiliate VN</div><div class="p-domain">shopee.vn · Hợp tác từ 01/2025</div></div></div>
+        <div class="cell-muted">TMĐT · Điện tử</div><div class="cell-muted">partner@shopee.vn</div><div class="metric-g">4,820</div><div class="metric-a">6.5%</div><div class="metric-p">4-8%</div><div><span class="pc-status pcs-active">Hoạt động</span></div><div class="u-style-061"><button class="act">📊</button><button class="act" onclick="openPartnerEdit('Shopee Affiliate VN','active')">✏️</button><button class="act" onclick="openPartnerApprove('Shopee Affiliate VN','pause')">⏸</button></div>
+      </div>
+      <div class="t-row">
+        <div class="partner-cell"><div class="p-av"><img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=96&q=80" alt="GearVN"></div><div><div class="p-name">GearVN Affiliate</div><div class="p-domain">gearvn.com · Gửi từ 29/03/2026</div></div></div>
+        <div class="cell-muted">Gaming · Phụ kiện</div><div class="cell-muted">biz@gearvn.com</div><div class="cell-muted">-</div><div class="cell-muted">-</div><div class="metric-p">5-9%</div><div><span class="pc-status pcs-pending">Chờ duyệt</span></div><div class="u-style-061"><button class="act" onclick="openPartnerApprove('GearVN Affiliate','approve')">✓</button><button class="act" onclick="openPartnerEdit('GearVN Affiliate','pending')">✏️</button><button class="act u-style-046" onclick="openPartnerApprove('GearVN Affiliate','reject')">✕</button></div>
+      </div>
+      <div class="t-row">
+        <div class="partner-cell"><div class="p-av"><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=96&q=80" alt="Tiki"></div><div><div class="p-name">Tiki Partner</div><div class="p-domain">tiki.vn · Hợp tác từ 11/2024</div></div></div>
+        <div class="cell-muted">TMĐT · Đa ngành</div><div class="cell-muted">affiliate@tiki.vn</div><div class="metric-g u-style-057">890</div><div class="metric-a u-style-057">3.6%</div><div class="metric-p u-style-057">2-5%</div><div><span class="pc-status pcs-paused">Tạm dừng</span></div><div class="u-style-061"><button class="act">📊</button><button class="act" onclick="openPartnerEdit('Tiki Partner','paused')">✏️</button><button class="act u-style-023" onclick="openPartnerApprove('Tiki Partner','resume')">▶</button></div>
+      </div>
+      <div class="t-row">
+        <div class="partner-cell"><div class="p-av"><img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=96&q=80" alt="Gaming Gear"></div><div><div class="p-name">Gaming Gear Store</div><div class="p-domain">gaminggear.vn · Hợp tác từ 06/2025</div></div></div>
+        <div class="cell-muted">Gaming · Phụ kiện</div><div class="cell-muted">partner@gaminggear.vn</div><div class="metric-g">1,420</div><div class="metric-a">4.2%</div><div class="metric-p">5-10%</div><div><span class="pc-status pcs-active">Hoạt động</span></div><div class="u-style-061"><button class="act">📊</button><button class="act">✏️</button><button class="act">⏸</button></div>
+      </div>
+    </div>
+</div>
+</div>
+<div class="modal-overlay" id="partnerEditModal"><div class="modal"><div class="modal-title">Cập nhật thông tin đối tác liên kết</div><div class="modal-sub">Biểu mẫu này dùng cho kịch bản cập nhật thông tin đối tác và điều chỉnh trạng thái hợp tác.</div><div class="form-grid"><div><label class="u-style-043">Tên đối tác</label><input class="input-field" id="partnerNameField" type="text"></div><div><label class="u-style-043">Trạng thái</label><select class="select-field" id="partnerStatusField"><option value="active">Đang hoạt động</option><option value="pending">Chờ duyệt</option><option value="paused">Tạm dừng</option></select></div><div><label class="u-style-043">Email liên hệ</label><input class="input-field" value="partner@example.com" type="text"></div><div><label class="u-style-043">Mức hoa hồng</label><input class="input-field" value="4-8% / đơn" type="text"></div></div><div class="u-style-044"><label class="u-style-043">Ghi chú hợp đồng</label><textarea class="textarea-field" placeholder="Ví dụ: đối soát ngày 05 hàng tháng, ưu tiên ngành điện thoại và phụ kiện..."></textarea></div><div class="modal-actions"><button class="btn-ghost" onclick="closePartnerModal('partnerEditModal')">Đóng</button><button class="btn-primary" onclick="savePartnerEdit()">Lưu cập nhật</button></div></div></div>
+<div class="modal-overlay" id="partnerApproveModal"><div class="modal"><div class="modal-title" id="partnerApproveTitle">Duyệt đối tác mới</div><div class="modal-sub">Biểu mẫu này dùng cho kịch bản duyệt / từ chối đối tác hoặc kích hoạt lại đối tác tạm dừng.</div><div class="u-style-045">Đối tác: <span id="partnerApproveName">GearVN Affiliate</span></div><div><label class="u-style-043">Ghi chú xử lý</label><textarea class="textarea-field" id="partnerApproveNote" placeholder="Nhập lý do duyệt, từ chối hoặc yêu cầu bổ sung hồ sơ..."></textarea></div><div class="modal-actions"><button class="btn-ghost" onclick="closePartnerModal('partnerApproveModal')">Hủy</button><button class="btn-primary" id="partnerApproveAction" onclick="submitPartnerAction()">Xác nhận</button></div></div></div>
+  <script src="assets/js/common/auth.js"></script>
+  <script src="assets/js/pages/manage-partners.js"></script>
+

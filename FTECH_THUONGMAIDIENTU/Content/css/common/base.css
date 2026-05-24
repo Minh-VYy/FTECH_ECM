@@ -1,0 +1,50 @@
+:root {
+  --surface: #f3f1ff;
+  --card: #ffffff;
+  --card2: #ebe7ff;
+  --border: rgba(76, 84, 170, 0.14);
+  --border2: rgba(76, 84, 170, 0.24);
+  --accent: #4a7dff;
+  --accent2: #8a5bff;
+  --green: #1bcf8a;
+  --red: #ff5a5a;
+  --orange: #ff9a4d;
+  --text: #303a75;
+  --body: #5d6897;
+  --muted: #8a93b8;
+  --heading-font: 'Poppins', 'Segoe UI', Arial, Helvetica, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body,button,input,select,textarea,h1,h2,h3,h4,h5,h6,strong,.logo,[class*='price']{font-family:'Poppins',sans-serif!important}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--surface);
+  color: var(--text);
+  line-height: 1.75;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
+}
+
+.btn-ghost, .btn-primary {
+  border-radius: 9px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.btn-ghost {
+  border: 1px solid var(--border2);
+  color: var(--body);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #0090ff);
+  color: #0c1017;
+}

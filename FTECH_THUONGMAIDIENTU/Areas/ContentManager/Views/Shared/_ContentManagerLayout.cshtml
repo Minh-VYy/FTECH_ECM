@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - FTECH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    @Styles.Render("~/Content/contentmanager/css")
+    <link rel="stylesheet" href="~/Content/css/common/inline-utilities.css">
+    <link rel="stylesheet" href="~/Content/css/common/admin-shell.css">
+    <link rel="stylesheet" href="~/Content/css/pages/content-manager.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sb-logo">
+            <a href="@Url.Action("Index", "Post", new { area = "ContentManager" })" class="logo">
+                <span class="logo-badge">F</span>FTECH
+            </a>
+        </div>
+        <div class="sb-role">@ViewBag.UserRole</div>
+        <a href="@Url.Action("Create", "Post", new { area = "ContentManager" })" class="sb-item"><span class="si">✏️</span>Tạo bài viết mới</a>
+        <a href="@Url.Action("Index", "Post", new { area = "ContentManager" })" class="sb-item active"><span class="si">📋</span>Bài viết của tôi<span class="sb-badge">@ViewBag.DraftCount</span></a>
+        <div class="sb-bottom">
+            <div class="sb-user">
+                <div class="sb-avatar">
+                    <img src="@ViewBag.UserAvatar" alt="@ViewBag.UserName">
+                </div>
+                <div>
+                    <div class="sb-name">@ViewBag.UserName</div>
+                    <div class="sb-role-tag">@ViewBag.UserRole</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

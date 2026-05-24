@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html lang="vi"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTECH - Đăng Bài Viết</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/pages/postManager.css">
+  <link rel="stylesheet" href="assets/css/common/inline-utilities.css">
+  <link rel="stylesheet" href="assets/css/common/admin-shell.css">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sb-logo"><a href="content-manager.html" class="logo"><span class="logo-badge">F</span>FTECH Admin</a></div>
+  <div class="sb-role">Content Manager</div>
+  <a href="postManager.html" class="sb-item active"><span class="si">✏️</span>Tạo bài viết mới</a>
+  <a href="content-manager.html" class="sb-item"><span class="si">📋</span>Bài viết của tôi</a>
+  <div class="sb-bottom">
+    <div class="sb-user">
+      <div class="sb-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80" alt="Trương Thị Kiều Nhi"></div>
+      <div>
+        <div class="sb-name">Trương Thị Kiều Nhi</div>
+        <div class="sb-role-tag">Content Manager</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main">
+<div class="page-wrap">
+ 
+  <div class="editor-topbar">
+    <div>
+      <div class="page-title">Đăng bài viết mới</div>
+      
+      <div class="u-style-078">
+        <span class="status-indicator si-draft">Bản nháp</span>
+        <span class="u-style-065">Lần lưu cuối: 2 phút trước</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <select class="status-select" id="statusSelect" onchange="updateStatus(this.value)">
+        <option value="draft">Bản nháp</option><option value="pending">Chờ duyệt</option><option value="published">Đã đăng</option>
+      </select>
+     
+      <button class="btn-primary">Gửi duyệt →</button>
+    </div>
+  </div>
+  <div class="editor-layout">
+    <div class="editor-area">
+      <div class="field-card">
+        <label class="fl">Tiêu đề bài viết</label>
+        <input class="title-input" type="text" placeholder="Nhập tiêu đề hấp dẫn..." id="postTitle" oninput="updatePreview()">
+      </div>
+      <div class="field-card u-style-079">
+        <div class="toolbar">
+          <button class="tool-btn active">B</button><button class="tool-btn"><em>I</em></button><button class="tool-btn"><u>U</u></button><button class="tool-btn"><s>S</s></button>
+          <div class="tool-sep"></div>
+          <button class="tool-btn">H1</button><button class="tool-btn">H2</button><button class="tool-btn">H3</button>
+          <div class="tool-sep"></div>
+          <button class="tool-btn">≡ List</button><button class="tool-btn">1. List</button><button class="tool-btn">❝ Quote</button>
+          <div class="tool-sep"></div>
+          <button class="tool-btn">🔗 Link</button><button class="tool-btn">🖼️ Ảnh</button><button class="tool-btn">📹 Video</button>
+          <div class="tool-sep"></div>
+          <button class="tool-btn">{ } Code</button><button class="tool-btn">— HR</button>
+        </div>
+        <div class="u-style-080">
+          <textarea class="content-area" placeholder="Bắt đầu viết nội dung bài viết của bạn tại đây...
+
+Hãy chia sẻ kiến thức, đánh giá sản phẩm, tin tức công nghệ mới nhất...
+
+Gợi ý: Viết từ 800 từ trở lên để SEO tốt hơn." id="postContent" oninput="updatePreview()"></textarea>
+        </div>
+      </div>
+      <div class="field-card">
+        <label class="fl">Mô tả ngắn (Excerpt)</label>
+        <textarea rows="3" placeholder="Mô tả tóm tắt bài viết, hiển thị trên trang danh sách blog. Nên từ 120-160 ký tự." id="postExcerpt" oninput="updatePreview()"></textarea>
+      </div>
+      <div class="field-card">
+        <label class="fl">Thông tin xuất bản</label>
+        <div class="u-style-081">
+          <div><label class="fl">Danh mục chính</label><select><option>Review</option><option>Tin tức</option><option>So sánh</option><option>Top list</option><option>Hướng dẫn</option></select></div>
+          <div><label class="fl">Sản phẩm liên quan chính</label><select><option>iPhone 16 Pro Max 256GB</option><option>MacBook Air M3 13 inch</option><option>AirPods Pro 2 USB-C</option><option>Samsung Galaxy S25 Ultra</option></select></div>
+        </div>
+      </div>
+      <div class="field-card">
+        <label class="fl">Affiliate links gắn trong bài</label>
+        <div class="u-style-081">
+          <div><label class="fl">Đối tác liên kết</label><select><option>Shopee Affiliate</option><option>Lazada Partner</option><option>Tiki Trading</option></select></div>
+          <div><label class="fl">Loại link</label><select><option>Link mua chính</option><option>Link so sánh giá</option><option>Link deal nổi bật</option></select></div>
+        </div>
+        <div class="u-style-082"><label class="fl">Affiliate URL</label><input type="text" placeholder="https://partner.example.com/ftech/review-iphone-16"></div>
+        <div class="helper-list">
+          <div class="helper-item"><div><strong>Vị trí hiển thị trong bài</strong><span>Đặt link ở phần kết luận hoặc box “Mua ở đâu” để đúng flow review → đối tác.</span></div><button class="btn-ghost u-style-083">Gắn link</button></div>
+          <div class="helper-item"><div><strong>Trạng thái kiểm tra</strong><span>Kiểm tra link còn hoạt động, đúng sản phẩm và đúng partner trước khi gửi duyệt.</span></div><span class="status-indicator si-pending u-style-084">Chờ kiểm tra</span></div>
+        </div>
+      </div>
+      <div class="field-card u-style-085" id="previewCard">
+        <label class="fl u-style-086">Xem trước bài viết</label>
+        <div class="preview-card u-style-087">
+          <div class="preview-thumb"></div>
+          <div class="preview-tag">Review · Công nghệ</div>
+          <div class="preview-title" id="pv-title">Tiêu đề bài viết...</div>
+          <div class="preview-meta"><span>👤 Nguyễn Minh Vỹ</span><span>📅 31/03/2026</span><span>⏱️ 5 phút đọc</span><span>👁️ 0 lượt xem</span></div>
+          <div class="preview-excerpt" id="pv-excerpt">Mô tả bài viết sẽ hiển thị ở đây...</div>
+        </div>
+      </div>
+    </div>
+    <div class="side-stack">
+      <div class="side-card"><div class="side-card-head">🖼️ Ảnh đại diện</div><div class="side-card-body"><div class="thumb-upload"><div class="thumb-icon">📸</div><div class="thumb-text">Kéo thả hoặc bấm để chọn ảnh<br><span class="u-style-088">PNG, JPG · Tối đa 5MB · Khuyến nghị 1200×630px</span></div></div></div></div>
+      <div class="side-card"><div class="side-card-head">🏷️ Danh mục bài viết</div><div class="side-card-body"><div class="cat-chips"><span class="cat-chip active" onclick="toggleChip(this)">Review</span><span class="cat-chip" onclick="toggleChip(this)">Tin tức</span><span class="cat-chip" onclick="toggleChip(this)">Hướng dẫn</span><span class="cat-chip" onclick="toggleChip(this)">So sánh</span><span class="cat-chip" onclick="toggleChip(this)">Top list</span><span class="cat-chip" onclick="toggleChip(this)">Khuyến mãi</span><span class="cat-chip" onclick="toggleChip(this)">Công nghệ</span><span class="cat-chip" onclick="toggleChip(this)">Gaming</span></div><div class="u-style-082"><label class="fl">Từ khóa (Tags)</label><input type="text" placeholder="iPhone, Apple, review, 2026..."></div></div></div>
+      <div class="side-card"><div class="side-card-head">📦 Sản phẩm liên quan</div><div class="side-card-body"><div class="prod-search-bar"><input type="text" placeholder="Tìm sản phẩm FTECH..."><button class="btn-primary u-style-089">+</button></div><div class="linked-prod"><img class="linked-thumb" alt="iPhone 16 Pro Max 256GB" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=300&q=80"><div class="linked-name">iPhone 16 Pro Max 256GB</div><button class="linked-remove">✕</button></div><div class="linked-prod"><img class="linked-thumb" alt="AirPods Pro 2 USB-C" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80"><div class="linked-name">AirPods Pro 2 USB-C</div><button class="linked-remove">✕</button></div></div></div>
+      <div class="side-card"><div class="side-card-head u-style-090"><span>🔗 Link đối tác / Affiliate</span><span class="u-style-091">2 links</span></div><div class="side-card-body"><div class="u-style-092"><div><label class="fl">Đối tác mặc định</label><select><option>Shopee Affiliate</option><option>Lazada Partner</option><option>Tiki Trading</option></select></div><div><label class="fl">Affiliate link chính</label><input type="text" value="https://shopee.vn/product/ftech-iphone16..."></div></div><div class="affiliate-row"><div class="aff-item"><div class="aff-icon">🛒</div><div class="aff-info"><div class="aff-name">Shopee Affiliate</div><div class="aff-url">shopee.vn/product/ftech-iphone16...</div></div><button class="aff-remove">✕</button></div><div class="aff-item"><div class="aff-icon">📦</div><div class="aff-info"><div class="aff-name">Lazada Partner</div><div class="aff-url">lazada.vn/products/apple-iphone...</div></div><button class="aff-remove">✕</button></div></div><button class="add-aff-btn">+ Thêm link affiliate</button></div></div>
+      <div class="side-card"><div class="side-card-head">🔍 SEO cơ bản</div><div class="side-card-body"><div class="u-style-093"><label class="fl">Meta Title</label><input type="text" placeholder="Tiêu đề SEO (50-60 ký tự)..." id="seoTitle" oninput="updateSEO()"><div class="char-count" id="seoTitleCount">0/60</div></div><div><label class="fl">Meta Description</label><textarea rows="3" placeholder="Mô tả SEO (120-160 ký tự)..." id="seoDesc" oninput="updateSEO()"></textarea><div class="char-count" id="seoDescCount">0/160</div></div><div class="seo-preview"><div class="seo-url">🌐 ftech.vn/blog/ten-bai-viet-cua-ban</div><div class="seo-title" id="seo-pv-title">Tiêu đề SEO bài viết</div><div class="seo-desc" id="seo-pv-desc">Mô tả SEO sẽ hiển thị ở đây. Viết mô tả hấp dẫn để tăng tỷ lệ click từ Google...</div></div></div></div>
+      
+    </div>
+  </div>
+  <div class="posts-section">
+    <div class="posts-head"><div><div class="u-style-094">Quản lý nội dung</div><div class="u-style-095">Bài viết của bạn</div></div><div class="u-style-052"><select class="status-select"><option>Tất cả trạng thái</option><option>Đã đăng</option><option>Chờ duyệt</option><option>Bản nháp</option></select><button class="btn-ghost">Tìm kiếm</button></div></div>
+    <div class="posts-table">
+      <div class="table-head"><span>Bài viết</span><span>Danh mục</span><span>Ngày</span><span>Lượt xem</span><span>Thao tác</span></div>
+      <div class="table-row"><div><div class="post-title-cell">Review iPhone 16 Pro Max: Đáng mua không?</div><div class="u-style-096"><span class="status-indicator si-published u-style-097">Đã đăng</span></div></div><div class="post-cat">Review</div><div class="post-date">14/03/2026</div><div class="post-views">👁️ 4.2K</div><div class="post-actions"><button class="act-btn">✏️</button><button class="act-btn">👁️</button><button class="act-btn u-style-098">🗑️</button></div></div>
+      <div class="table-row"><div><div class="post-title-cell">Top 5 Laptop Gaming giá tốt 2026</div><div class="u-style-096"><span class="status-indicator si-pending u-style-097">Chờ duyệt</span></div></div><div class="post-cat">Top list</div><div class="post-date">28/03/2026</div><div class="post-views">👁️ 0</div><div class="post-actions"><button class="act-btn">✏️</button><button class="act-btn">👁️</button><button class="act-btn u-style-098">🗑️</button></div></div>
+      <div class="table-row"><div><div class="post-title-cell">So sánh AirPods Pro 2 vs Sony WH-1000XM5</div><div class="u-style-096"><span class="status-indicator si-draft u-style-097">Bản nháp</span></div></div><div class="post-cat">So sánh</div><div class="post-date">31/03/2026</div><div class="post-views">👁️ -</div><div class="post-actions"><button class="act-btn">✏️</button><button class="act-btn">👁️</button><button class="act-btn u-style-098">🗑️</button></div></div>
+    </div>
+  </div>
+</div>
+
+</div>
+  <script src="assets/js/common/auth.js"></script>
+  <script src="assets/js/pages/postManager.js"></script>
+
+</body></html>

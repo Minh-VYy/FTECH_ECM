@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+}
+
+<main>
+    <section class="row mb-5 mt-5" aria-labelledby="aspnetTitle">
+        <div class="col-md-8">
+            <h1 id="title">Chào mừng đến F-TECH</h1>
+            <p class="lead">Nền tảng thương mại điện tử hiện đại giúp bạn kinh doanh trực tuyến một cách hiệu quả và chuyên nghiệp.</p>
+            <p><a href="https://ftech.vn" class="btn btn-primary btn-lg">Khám phá ngay &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                <h5>🚀 Đặc biệt</h5>
+                <p>Giải pháp quản lý shop trực tuyến toàn diện</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="row">
+        <section class="col-md-4 mb-4" aria-labelledby="featureTitle1">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title" id="featureTitle1">📦 Quản lý Sản phẩm</h5>
+                    <p class="card-text">
+                        Dễ dàng thêm, chỉnh sửa và quản lý hàng nghìn sản phẩm với hệ thống phân loại thông minh.
+                    </p>
+                    <a href="#" class="btn btn-outline-primary">Tìm hiểu thêm &raquo;</a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="col-md-4 mb-4" aria-labelledby="featureTitle2">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title" id="featureTitle2">💳 Thanh toán An toàn</h5>
+                    <p class="card-text">
+                        Hỗ trợ nhiều phương thức thanh toán với mã hóa bảo mật cấp cao.
+                    </p>
+                    <a href="#" class="btn btn-outline-primary">Tìm hiểu thêm &raquo;</a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="col-md-4 mb-4" aria-labelledby="featureTitle3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title" id="featureTitle3">📊 Thống kê Kinh doanh</h5>
+                    <p class="card-text">
+                        Phân tích chi tiết doanh số, khách hàng và hiệu suất bán hàng theo thời gian thực.
+                    </p>
+                    <a href="#" class="btn btn-outline-primary">Tìm hiểu thêm &raquo;</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>

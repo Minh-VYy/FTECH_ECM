@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Quản Lý Thông Tin Cá Nhân";
+    Layout = "~/Areas/UserAccount/Views/Shared/_UserAccountLayout.cshtml";
+}
+
+<div class="topbar">
+    <div class="topbar-title">Chỉnh Sửa Thông Tin</div>
+</div>
+
+<div class="content">
+    <div class="card" style="max-width: 600px;">
+        <div class="card-title">Cập Nhật Thông Tin Cá Nhân</div>
+        
+        @using (Html.BeginForm("Edit", "Account", new { area = "UserAccount" }, FormMethod.Post))
+        {
+            <div style="padding: 20px;">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Tên Đầy Đủ</label>
+                    <input type="text" name="fullname" value="Nguyễn Văn A" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Số Điện Thoại</label>
+                    <input type="text" name="phone" value="0123456789" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Địa Chỉ</label>
+                    <input type="text" name="address" value="123 Đường ABC, Thành Phố XYZ" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Mô Tả Bản Thân</label>
+                    <textarea name="bio" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; min-height: 100px;"></textarea>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn-primary">💾 Lưu Thay Đổi</button>
+                    <button type="button" class="btn-ghost" onclick="history.back()">❌ Hủy</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/js/common/auth.js"></script>
+}

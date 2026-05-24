@@ -1,0 +1,237 @@
+﻿@{
+    ViewBag.Title = "Dashboard Thống Kê";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="topbar">
+    <div class="topbar-title">Dashboard</div>
+    <div class="topbar-search"><input type="text" placeholder="Tìm nhanh chỉ số, bài viết, đối tác..."><button>🔍</button></div>
+    <div class="u-style-020">
+        <select class="fsel">
+            <option>Bài viết</option>
+            <option>Affiliate</option>
+            <option>Tài khoản</option>
+            <option>Đối tác</option>
+        </select>
+        <select class="fsel" id="periodSel" onchange="updatePeriod(this.value)">
+            <option value="today">Hôm nay</option>
+            <option value="week">7 ngày qua</option>
+            <option value="month" selected>Tháng 3/2026</option>
+            <option value="year">Năm 2026</option>
+        </select>
+        <button class="btn-ghost">Xuất báo cáo</button><button class="btn-primary">Làm mới</button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="welcome">
+        <div>
+            <div class="welcome-text">Chào buổi sáng, @ViewBag.UserName!</div>
+            <div class="welcome-sub">Tổng quan hiệu suất FTECH trong tháng 3/2026. Dữ liệu được cập nhật tự động mỗi 5 phút.</div>
+        </div>
+        <div class="live-badge">Live · <span id="currentTime">08:42 ICT</span></div>
+    </div>
+
+    <div class="kpi-grid">
+        <div class="kpi-card kc-blue">
+            <div class="kpi-label">Người dùng</div>
+            <div class="kpi-val" id="kpi-users">1,842</div>
+            <div class="kpi-trend">Tăng +48 trong tháng</div>
+            <div class="kpi-sub">284 tài khoản mới trong 7 ngày</div>
+        </div>
+        <div class="kpi-card kc-green">
+            <div class="kpi-label">Bài viết</div>
+            <div class="kpi-val" id="kpi-posts">248</div>
+            <div class="kpi-trend">Tăng +12 bài trong tháng</div>
+            <div class="kpi-sub">128K lượt xem trong tháng</div>
+        </div>
+        <div class="kpi-card kc-purple">
+            <div class="kpi-label">Click Affiliate</div>
+            <div class="kpi-val" id="kpi-clicks">24.8K</div>
+            <div class="kpi-trend">Tăng +31% so với tháng trước</div>
+            <div class="kpi-sub">Tỷ lệ chuyển đổi 5.0%</div>
+        </div>
+        <div class="kpi-card kc-orange">
+            <div class="kpi-label">Doanh thu affiliate</div>
+            <div class="kpi-val" id="kpi-revenue">14.2Mđ</div>
+            <div class="kpi-trend">Tăng +22% so với tháng trước</div>
+            <div class="kpi-sub">34 đối tác đang hoạt động</div>
+        </div>
+    </div>
+
+    <div class="alert-row">
+        <div class="alert-card warn">
+            <div>!</div>
+            <div>
+                <div class="alert-title u-style-021">7 bài viết đang chờ duyệt</div>
+                <div class="alert-desc">Có bài viết chờ kiểm duyệt quá 48 giờ. Nên xử lý sớm để không ảnh hưởng lịch đăng.</div>
+            </div>
+            <button class="btn-ghost u-style-022">Xem ngay</button>
+        </div>
+        <div class="alert-card good">
+            <div>+</div>
+            <div>
+                <div class="alert-title u-style-023">Affiliate tháng này tăng tốt</div>
+                <div class="alert-desc">Shopee Affiliate VN đang tăng mạnh nhờ bài review iPhone 16 Pro Max và MacBook Air M3.</div>
+            </div>
+            <button class="btn-ghost u-style-022">Chi tiết</button>
+        </div>
+    </div>
+
+    <div class="chart-grid">
+        <div class="card">
+            <div class="card-title">Bài viết và click affiliate</div>
+            <div class="card-sub">Số liệu theo tuần trong tháng 3/2026</div>
+            <div class="bar-chart" id="mainChart"></div>
+            <div class="report-table">
+                <div class="report-row"><strong>Tuần</strong><strong>Lượt xem</strong><strong>Click AFF</strong><strong>So với kỳ trước</strong></div>
+                <div class="report-row"><span>Tuần 1</span><span>24.1K</span><span>4.8K</span><span>+8%</span></div>
+                <div class="report-row"><span>Tuần 2</span><span>28.4K</span><span>5.9K</span><span>+11%</span></div>
+                <div class="report-row"><span>Tuần 3</span><span>31.2K</span><span>6.4K</span><span>+14%</span></div>
+                <div class="report-row"><span>Tuần 4</span><span>44.3K</span><span>7.7K</span><span>+19%</span></div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">Nguồn lưu lượng</div>
+            <div class="card-sub">Phân bổ click affiliate theo đối tác</div>
+            <div class="donut-wrap">
+                <div class="donut">
+                    <svg viewBox="0 0 100 100" width="120" height="120">
+                        <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(76,84,170,0.1)" stroke-width="16"/>
+                        <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(74,125,255,.7)" stroke-width="16" stroke-dasharray="95 144" stroke-dashoffset="0"/>
+                        <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(138,91,255,.7)" stroke-width="16" stroke-dasharray="46 193" stroke-dashoffset="-95"/>
+                        <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(255,138,0,.7)" stroke-width="16" stroke-dasharray="20 219" stroke-dashoffset="-141"/>
+                        <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(27,207,138,.5)" stroke-width="16" stroke-dasharray="17 222" stroke-dashoffset="-161"/>
+                    </svg>
+                    <div class="donut-center">
+                        <div class="donut-val">24.8K</div>
+                        <div class="donut-label">Tổng click</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="dl-item">
+                        <div class="dl-dot u-style-024"></div>
+                        <div class="dl-name">Shopee</div>
+                        <div class="dl-val">39%</div>
+                    </div>
+                    <div class="dl-item">
+                        <div class="dl-dot u-style-025"></div>
+                        <div class="dl-name">Lazada</div>
+                        <div class="dl-val">19%</div>
+                    </div>
+                    <div class="dl-item">
+                        <div class="dl-dot u-style-026"></div>
+                        <div class="dl-name">Tiki</div>
+                        <div class="dl-val">11%</div>
+                    </div>
+                    <div class="dl-item">
+                        <div class="dl-dot u-style-027"></div>
+                        <div class="dl-name">Khác</div>
+                        <div class="dl-val">16%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-grid">
+        <div class="card">
+            <div class="card-title">Top bài viết hiệu quả</div>
+            <div class="card-sub">Xếp hạng theo lượt xem và click affiliate</div>
+            <div class="rank-item">
+                <div class="rank-num">1</div>
+                <div class="rank-info">
+                    <div class="rank-name">Review iPhone 16 Pro Max 2026</div>
+                    <div class="rank-meta">12.4K lượt xem · 847 click AFF</div>
+                    <div class="rank-bar-wrap"><div class="rank-bar-fill u-style-028"></div></div>
+                </div>
+                <div class="rank-val u-style-023">CTR 6.8%</div>
+            </div>
+            <div class="rank-item">
+                <div class="rank-num">2</div>
+                <div class="rank-info">
+                    <div class="rank-name">So sánh AirPods Pro 2 và Sony XM5</div>
+                    <div class="rank-meta">8.1K lượt xem · 523 click AFF</div>
+                    <div class="rank-bar-wrap"><div class="rank-bar-fill u-style-029"></div></div>
+                </div>
+                <div class="rank-val u-style-023">CTR 6.5%</div>
+            </div>
+            <div class="rank-item">
+                <div class="rank-num">3</div>
+                <div class="rank-info">
+                    <div class="rank-name">Top 5 laptop gaming tầm trung</div>
+                    <div class="rank-meta">6.8K lượt xem · 412 click AFF</div>
+                    <div class="rank-bar-wrap"><div class="rank-bar-fill u-style-030"></div></div>
+                </div>
+                <div class="rank-val u-style-023">CTR 6.1%</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">Top đối tác</div>
+            <div class="card-sub">Xếp hạng theo doanh thu affiliate</div>
+            <div class="rank-item">
+                <div class="rank-num">1</div>
+                <div class="rank-info">
+                    <div class="rank-name">Shopee Affiliate VN</div>
+                    <div class="rank-meta">4,820 click · 312 chuyển đổi</div>
+                    <div class="rank-bar-wrap"><div class="rank-bar-fill u-style-028"></div></div>
+                </div>
+                <div class="rank-val u-style-031">6.2Mđ</div>
+            </div>
+            <div class="rank-item">
+                <div class="rank-num">2</div>
+                <div class="rank-info">
+                    <div class="rank-name">Lazada Partner</div>
+                    <div class="rank-meta">2,140 click · 108 chuyển đổi</div>
+                    <div class="rank-bar-wrap"><div class="rank-bar-fill u-style-032"></div></div>
+                </div>
+                <div class="rank-val u-style-031">3.1Mđ</div>
+            </div>
+            <div class="rank-item">
+                <div class="rank-num">3</div>
+                <div class="rank-info">
+                    <div class="rank-name">Tiki Trading</div>
+                    <div class="rank-meta">1,420 click · 68 chuyển đổi</div>
+                    <div class="rank-bar-wrap"><div class="rank-bar-fill u-style-033"></div></div>
+                </div>
+                <div class="rank-val u-style-031">1.9Mđ</div>
+            </div>
+        </div>
+        <div class="u-style-034">
+            <div class="card">
+                <div class="card-title">Phễu chuyển đổi</div>
+                <div class="card-sub">Lượt xem → Click → Chuyển đổi</div>
+                <div class="funnel">
+                    <div class="funnel-bar u-style-035"><span>Lượt xem bài</span><div><span class="funnel-val">128K</span> <span class="u-style-036">100%</span></div></div>
+                    <div class="funnel-bar u-style-037"><span>Click affiliate</span><div><span class="funnel-val">24.8K</span> <span class="u-style-036">19.4%</span></div></div>
+                    <div class="funnel-bar u-style-038"><span>Chuyển đổi</span><div><span class="funnel-val">1,240</span> <span class="u-style-036">5.0%</span></div></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">Hoạt động gần đây</div>
+                <div class="activity-list">
+                    <div class="act-item">
+                        <div class="act-dot u-style-039"></div>
+                        <div class="act-text">Bài viết <strong>Review iPhone 16 Pro Max</strong> vừa vượt mốc 12K lượt xem.</div>
+                        <div class="act-time">5 phút trước</div>
+                    </div>
+                    <div class="act-item">
+                        <div class="act-dot u-style-040"></div>
+                        <div class="act-text">Shopee Affiliate VN ghi nhận <strong>+120 click</strong> trong 1 giờ gần nhất.</div>
+                        <div class="act-time">1 giờ trước</div>
+                    </div>
+                    <div class="act-item">
+                        <div class="act-dot u-style-041"></div>
+                        <div class="act-text">Hiện có <strong>7 bài viết chờ duyệt</strong> trong module nội dung.</div>
+                        <div class="act-time">2 giờ trước</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/js/common/auth.js"></script>
+    <script src="~/Scripts/js/pages/dashboard.js"></script>
+}

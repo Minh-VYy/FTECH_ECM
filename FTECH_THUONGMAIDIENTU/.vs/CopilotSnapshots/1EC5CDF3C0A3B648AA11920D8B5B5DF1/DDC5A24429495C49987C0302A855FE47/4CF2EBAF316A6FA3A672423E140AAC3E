@@ -1,0 +1,67 @@
+﻿using System.Web;
+using System.Web.Optimization;
+
+namespace FTECH_THUONGMAIDIENTU
+{
+    public class BundleConfig
+    {
+        // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
+        public static void RegisterBundles(BundleCollection bundles)
+        {
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/jquery-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                        "~/Scripts/jquery.validate*"));
+
+            // Use the development version of Modernizr to develop with and learn from. Then, when you're
+            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                        "~/Scripts/modernizr-*"));
+
+            bundles.Add(new Bundle("~/bundles/bootstrap").Include(
+                      "~/Scripts/bootstrap.js"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/site.css"));
+
+            // ============ ADMIN AREA BUNDLES ============
+            bundles.Add(new StyleBundle("~/Content/admin/css").Include(
+                      "~/Content/css/common/admin-shell.css",
+                      "~/Content/css/common/inline-utilities.css",
+                      "~/Content/css/common/base.css",
+                      "~/Content/css/common/layout.css"));
+
+            bundles.Add(new StyleBundle("~/Content/admin/dashboard/css").Include(
+                      "~/Content/css/pages/dashboard.css"));
+
+            bundles.Add(new StyleBundle("~/Content/admin/affiliate/css").Include(
+                      "~/Content/css/pages/manage-affiliates.css"));
+
+            bundles.Add(new StyleBundle("~/Content/admin/partner/css").Include(
+                      "~/Content/css/pages/manage-partners.css"));
+
+            bundles.Add(new StyleBundle("~/Content/admin/account/css").Include(
+                      "~/Content/css/pages/manage-accounts.css"));
+
+            bundles.Add(new StyleBundle("~/Content/auth/css").Include(
+                      "~/Content/css/pages/login.css",
+                      "~/Content/css/common/inline-utilities.css"));
+
+            // ============ CONTENT MANAGER AREA BUNDLES ============
+            bundles.Add(new StyleBundle("~/Content/contentmanager/css").Include(
+                      "~/Content/css/pages/content-manager.css"));
+
+            // ============ PUBLIC PAGES BUNDLES ============
+            bundles.Add(new StyleBundle("~/Content/pages/trangchu/css").Include(
+                      "~/Content/css/pages/trangchu.css"));
+
+            bundles.Add(new StyleBundle("~/Content/pages/register/css").Include(
+                      "~/Content/css/pages/register.css"));
+
+            bundles.Add(new StyleBundle("~/Content/pages/product/css").Include(
+                      "~/Content/css/pages/product.css"));
+        }
+    }
+}

@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Dashboard - Quản Lý Affiliate";
+    Layout = "~/Areas/AffiliateManager/Views/Shared/_AffiliateManagerLayout.cshtml";
+}
+
+<div class="topbar">
+    <div class="topbar-title">Dashboard Affiliate</div>
+    <div class="topbar-search"><input type="text" placeholder="Tìm affiliate, link..."><button>🔍</button></div>
+    <div class="topbar-actions">
+        <button class="btn-ghost">Xuất báo cáo</button>
+        <button class="btn-primary">Làm mới</button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="kpi-grid">
+        <div class="kpi-card kc-blue">
+            <div class="kpi-label">Tổng Click</div>
+            <div class="kpi-val">24.8K</div>
+            <div class="kpi-trend">Tăng +31% trong tháng</div>
+            <div class="kpi-sub">Từ 34 đối tác</div>
+        </div>
+        <div class="kpi-card kc-green">
+            <div class="kpi-label">Conversion</div>
+            <div class="kpi-val">1,240</div>
+            <div class="kpi-trend">Tỷ lệ 5.0%</div>
+            <div class="kpi-sub">1,240 đơn hàng</div>
+        </div>
+        <div class="kpi-card kc-purple">
+            <div class="kpi-label">Doanh Thu</div>
+            <div class="kpi-val">14.2Mđ</div>
+            <div class="kpi-trend">Tăng +22%</div>
+            <div class="kpi-sub">So với tháng trước</div>
+        </div>
+        <div class="kpi-card kc-orange">
+            <div class="kpi-label">Top Partner</div>
+            <div class="kpi-val">Shopee</div>
+            <div class="kpi-trend">6.2Mđ doanh thu</div>
+            <div class="kpi-sub">4,820 clicks</div>
+        </div>
+    </div>
+
+    <div class="section-head">
+        <div class="sec-title">Affiliate Links Gần Đây</div>
+    </div>
+
+    <div class="table-wrap">
+        <div class="t-head">
+            <div class="th">Link</div>
+            <div class="th">Click</div>
+            <div class="th">Conversion</div>
+            <div class="th">Doanh Thu</div>
+            <div class="th">Tạo Lúc</div>
+        </div>
+        <div class="t-row">
+            <div><strong>shopee.vn/product/iphone</strong></div>
+            <div class="metric-g">4,820</div>
+            <div class="metric-a">312</div>
+            <div class="metric-p">6.2Mđ</div>
+            <div>01/03/2026</div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/js/common/auth.js"></script>
+    <script src="~/Scripts/js/pages/dashboard.js"></script>
+}

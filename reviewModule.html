@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>FTECH – Đánh giá sản phẩm</title>
+  <link rel="stylesheet" href="assets/css/pages/reviewModule.css">
+  <link rel="stylesheet" href="assets/css/common/inline-utilities.css">
+</head>
+<body>
+<header><div class="hdr">
+  <a href="trangchu.html" class="logo"><span class="logo-badge">F</span>FTECH</a>
+  <nav><a href="trangchu.html">Trang chủ</a><a href="product.html">Bài review</a><a href="trangchu.html#s-support">Hỗ trợ</a></nav>
+  <div class="hdr-right"><div class="account-chip" title="Nguyễn Minh Vỹ - Khách thành viên"><div class="account-avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&q=80" alt="Nguyễn Minh Vỹ"></div><div class="account-meta"><span class="account-name">Trương Thị Kiều Nhi</span><span class="account-role">Khách thành viên</span></div></div></div>
+</div></header>
+<div class="bc"><a href="trangchu.html">Trang chủ</a><span>›</span><a href="product.html">Đánh giá MacBook Air M3</a><span>›</span><span>Đánh giá sản phẩm</span></div>
+
+<div class="page">
+  <!-- PRODUCT MINI BAR -->
+  <div class="product-mini">
+    <div class="pm-img"><img src="assets/images/macbook-air-m3.svg" alt="MacBook Air M3 15 inch"></div>
+    <div class="pm-info">
+      <div class="pm-brand">Apple</div>
+      <div class="pm-name">MacBook Air M3 15" 8GB/256GB Starlight</div>
+      <div class="pm-score"><span class="pm-stars">⭐⭐⭐⭐⭐</span><strong>4.9</strong><span>· 1.240 đánh giá · đã liên kết trực tiếp từ bài review</span></div>
+    </div>
+    <div class="pm-right">
+      <div class="pm-price">28.990.000₫</div>
+      <a href="product.html" class="pm-link">← Quay lại bài review</a>
+    </div>
+  </div>
+
+  <!-- LEFT: write + reviews -->
+  <div>
+    <!-- WRITE REVIEW -->
+    <div class="write-card" id="writeSection">
+      <div class="wc-title">✍️ Viết đánh giá của bạn</div>
+
+      <div class="toast-success" id="toastSuccess">✅ Cảm ơn bạn đã đánh giá! Đánh giá sẽ được kiểm duyệt và hiển thị trong vài phút.</div>
+
+      <!-- OVERALL STARS -->
+      <div class="field">
+        <label>Đánh giá tổng thể <span class="u-style-114">*</span></label>
+        <div class="u-style-115">
+          <div class="star-picker" id="mainStars">
+            <span class="sp-star" data-v="1" onclick="setMainStar(1)">⭐</span>
+            <span class="sp-star" data-v="2" onclick="setMainStar(2)">⭐</span>
+            <span class="sp-star" data-v="3" onclick="setMainStar(3)">⭐</span>
+            <span class="sp-star" data-v="4" onclick="setMainStar(4)">⭐</span>
+            <span class="sp-star" data-v="5" onclick="setMainStar(5)">⭐</span>
+          </div>
+          <span class="sp-label" id="starLabel">Nhấn để chọn sao</span>
+        </div>
+      </div>
+
+      <!-- CRITERIA -->
+      <div class="field">
+        <label>Đánh giá theo tiêu chí</label>
+        <div class="criteria-grid">
+          <div class="criterion"><div class="criterion-label">Hiệu năng</div><div class="mini-stars" data-group="perf">
+            <span class="mstar" onclick="setMini('perf',1)">⭐</span><span class="mstar" onclick="setMini('perf',2)">⭐</span><span class="mstar" onclick="setMini('perf',3)">⭐</span><span class="mstar" onclick="setMini('perf',4)">⭐</span><span class="mstar" onclick="setMini('perf',5)">⭐</span>
+          </div></div>
+          <div class="criterion"><div class="criterion-label">Độ bền / Chất lượng build</div><div class="mini-stars" data-group="build">
+            <span class="mstar" onclick="setMini('build',1)">⭐</span><span class="mstar" onclick="setMini('build',2)">⭐</span><span class="mstar" onclick="setMini('build',3)">⭐</span><span class="mstar" onclick="setMini('build',4)">⭐</span><span class="mstar" onclick="setMini('build',5)">⭐</span>
+          </div></div>
+          <div class="criterion"><div class="criterion-label">Giá trị / Giá tiền</div><div class="mini-stars" data-group="value">
+            <span class="mstar" onclick="setMini('value',1)">⭐</span><span class="mstar" onclick="setMini('value',2)">⭐</span><span class="mstar" onclick="setMini('value',3)">⭐</span><span class="mstar" onclick="setMini('value',4)">⭐</span><span class="mstar" onclick="setMini('value',5)">⭐</span>
+          </div></div>
+          <div class="criterion"><div class="criterion-label">Dịch vụ FTECH</div><div class="mini-stars" data-group="service">
+            <span class="mstar" onclick="setMini('service',1)">⭐</span><span class="mstar" onclick="setMini('service',2)">⭐</span><span class="mstar" onclick="setMini('service',3)">⭐</span><span class="mstar" onclick="setMini('service',4)">⭐</span><span class="mstar" onclick="setMini('service',5)">⭐</span>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Tiêu đề đánh giá</label>
+        <input type="text" id="rvTitle" placeholder="VD: Pin 18 giờ cực ấn tượng!"/>
+      </div>
+      <div class="field">
+        <label>Nội dung đánh giá <span class="u-style-114">*</span></label>
+        <textarea id="rvText" placeholder="Chia sẻ trải nghiệm thực tế: Bạn dùng cho mục đích gì? Điều gì ấn tượng nhất? Có điểm nào cần cải thiện?"></textarea>
+        <div id="charCount" class="u-style-116">0 / 1000 ký tự</div>
+      </div>
+
+      <div class="field">
+        <label>Ảnh thực tế (không bắt buộc)</label>
+        <div class="upload-area" onclick="addPhoto()">
+          <p>📷 Nhấn để thêm ảnh thực tế<br/><strong>JPG, PNG</strong> — Tối đa 5 ảnh, mỗi ảnh &lt; 5MB</p>
+        </div>
+        <div class="uploaded-imgs" id="uploadedImgs"></div>
+      </div>
+
+      <button class="submit-btn" onclick="submitReview()">📤 Gửi đánh giá</button>
+    </div>
+
+    <!-- REVIEWS LIST -->
+    <div class="reviews-main">
+      <div class="rs-box">
+        <div>
+          <div class="rs-big-num">4.9</div>
+          <div class="rs-big-stars">⭐⭐⭐⭐⭐</div>
+          <div class="rs-total">1.240 đánh giá</div>
+        </div>
+        <div class="rs-bars">
+          <div class="rs-br" onclick="filterByStar(5)"><span class="rs-br-stars">⭐⭐⭐⭐⭐</span><div class="rs-br-track"><div class="rs-br-fill u-style-117"></div></div><span class="rs-br-pct">88%</span><span class="u-style-118">(1.091)</span></div>
+          <div class="rs-br" onclick="filterByStar(4)"><span class="rs-br-stars">⭐⭐⭐⭐</span><div class="rs-br-track"><div class="rs-br-fill u-style-119"></div></div><span class="rs-br-pct">9%</span><span class="u-style-118">(112)</span></div>
+          <div class="rs-br" onclick="filterByStar(3)"><span class="rs-br-stars">⭐⭐⭐</span><div class="rs-br-track"><div class="rs-br-fill u-style-120"></div></div><span class="rs-br-pct">2%</span><span class="u-style-118">(25)</span></div>
+          <div class="rs-br" onclick="filterByStar(2)"><span class="rs-br-stars">⭐⭐</span><div class="rs-br-track"><div class="rs-br-fill u-style-121"></div></div><span class="rs-br-pct">0.5%</span><span class="u-style-118">(6)</span></div>
+          <div class="rs-br" onclick="filterByStar(1)"><span class="rs-br-stars">⭐</span><div class="rs-br-track"><div class="rs-br-fill u-style-121"></div></div><span class="rs-br-pct">0.5%</span><span class="u-style-118">(6)</span></div>
+        </div>
+      </div>
+
+      <div class="reviews-header">
+        <div class="rh-title">Tất cả đánh giá</div>
+        <select class="sort-sel" onchange="sortReviews(this.value)">
+          <option value="newest">Mới nhất</option>
+          <option value="helpful">Hữu ích nhất</option>
+          <option value="highest">Điểm cao nhất</option>
+          <option value="lowest">Điểm thấp nhất</option>
+          <option value="photos">Có ảnh thực tế</option>
+        </select>
+      </div>
+
+      <div class="filter-tabs">
+        <button class="ftab active" onclick="filterTab(this,'all')">Tất cả (1.240)</button>
+        <button class="ftab" onclick="filterTab(this,'5')">⭐⭐⭐⭐⭐ 5 sao (1.091)</button>
+        <button class="ftab" onclick="filterTab(this,'4')">⭐⭐⭐⭐ 4 sao (112)</button>
+        <button class="ftab" onclick="filterTab(this,'3')">⭐⭐⭐ 3 sao (25)</button>
+        <button class="ftab" onclick="filterTab(this,'photo')">📷 Có ảnh (342)</button>
+        <button class="ftab" onclick="filterTab(this,'verified')">✓ Đã mua hàng (1.198)</button>
+      </div>
+
+      <div id="reviewsList"></div>
+
+      <div class="u-style-122">
+        <button id="loadMoreBtn" onclick="loadMoreReviews()" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='';this.style.color=''" class="u-style-123">Xem thêm đánh giá</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDEBAR -->
+  <div>
+    <div class="sidebar-card">
+      <div class="sc-title">📝 Hướng dẫn đánh giá</div>
+      <div class="guide-item"><span>✅</span><div>Chia sẻ trải nghiệm <strong>thực tế sau khi sử dụng</strong> ít nhất 1-2 tuần</div></div>
+      <div class="guide-item"><span>📷</span><div>Thêm ảnh thực tế giúp đánh giá <strong>được duyệt ưu tiên</strong> và hữu ích hơn</div></div>
+      <div class="guide-item"><span>🎯</span><div>Đánh giá chi tiết từng tiêu chí: hiệu năng, độ bền, giá trị</div></div>
+      <div class="guide-item"><span>🚫</span><div>Không dùng ngôn ngữ thô tục, không quảng cáo sản phẩm khác</div></div>
+      <div class="u-style-124">🎁 Đánh giá có ảnh thực tế và trên 100 từ sẽ nhận <strong>50 FPoint</strong> tích điểm đổi quà!</div>
+    </div>
+
+    <div class="sidebar-card u-style-125">
+      <div class="sc-title">📊 Thống kê tiêu chí</div>
+      <div class="u-style-126">
+        <div><div class="u-style-127"><span class="u-style-128">Hiệu năng</span><span class="u-style-129">4.9 ⭐</span></div><div class="u-style-130"><div class="u-style-131"></div></div></div>
+        <div><div class="u-style-127"><span class="u-style-128">Độ bền / Build</span><span class="u-style-129">4.8 ⭐</span></div><div class="u-style-130"><div class="u-style-132"></div></div></div>
+        <div><div class="u-style-127"><span class="u-style-128">Giá trị</span><span class="u-style-129">4.7 ⭐</span></div><div class="u-style-130"><div class="u-style-133"></div></div></div>
+        <div><div class="u-style-127"><span class="u-style-128">Dịch vụ FTECH</span><span class="u-style-129">5.0 ⭐</span></div><div class="u-style-130"><div class="u-style-134"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer><p>© 2026 FTECH Technology. All rights reserved.</p></footer>
+  <script src="assets/js/pages/reviewModule.js"></script>
+</body>
+</html>
+
+
+

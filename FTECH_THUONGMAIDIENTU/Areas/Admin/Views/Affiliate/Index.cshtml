@@ -1,0 +1,261 @@
+﻿@{
+    ViewBag.Title = "Quản Lý Affiliate Links";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="topbar">
+    <div class="topbar-title">@ViewBag.Title</div>
+    <div class="topbar-search">
+        <input type="text" placeholder="Tìm link, sản phẩm, bài viết, đối tác...">
+        <button>🔍</button>
+    </div>
+    <div class="topbar-actions">
+        <button class="btn-ghost">Xuất báo cáo</button>
+        <button class="btn-primary" onclick="openAffiliateModal('create')">+ Tạo link mới</button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="stat-row">
+        <div class="stat-card">
+            <div class="stat-label">Tổng link</div>
+            <div class="stat-val sc-a">486</div>
+            <div class="stat-sub">420 hoạt động · <span class="u-style-046">3 lỗi</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Tổng click tháng</div>
+            <div class="stat-val sc-g">24.8K</div>
+            <div class="stat-sub"><span class="trend-up">↑ +31%</span> vs tháng trước</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">CTR trung bình</div>
+            <div class="stat-val sc-p">4.2%</div>
+            <div class="stat-sub">Tốt nhất: Review SP (7.8%)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Hoa hồng tháng</div>
+            <div class="stat-val sc-o">14.2M₫</div>
+            <div class="stat-sub"><span class="trend-up">↑ +22%</span> vs tháng trước</div>
+        </div>
+    </div>
+
+    <div class="config-card">
+        <div class="chart-head">
+            <div class="chart-title">Cấu hình link affiliate</div>
+            <button class="btn-ghost" onclick="openCommissionModal()">Thiết lập hoa hồng</button>
+        </div>
+        <div class="config-grid">
+            <div class="config-box">
+                <div class="config-label">Người tạo link</div>
+                <div class="config-value">@ViewBag.CurrentUser</div>
+            </div>
+            <div class="config-box">
+                <div class="config-label">Partner mặc định</div>
+                <div class="config-value">Shopee Affiliate</div>
+            </div>
+            <div class="config-box">
+                <div class="config-label">Commission hiện tại</div>
+                <div class="config-value">4-8% / đơn</div>
+            </div>
+            <div class="config-box">
+                <div class="config-label">Gắn vào bài viết</div>
+                <div class="config-value">Review iPhone 16 Pro Max</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="warning-banner">
+        <div>⚠️</div>
+        <div class="wb-text">
+            <strong>3 link affiliate bị lỗi</strong> — Liên kết trỏ đến trang không tồn tại hoặc đã hết hạn. Kiểm tra và cập nhật để tránh mất doanh thu.
+        </div>
+        <button class="btn-ghost">Xem link lỗi</button>
+    </div>
+
+    <div class="filter-wrap">
+        <button class="filter-chip active" onclick="setF(this)">Tất cả (486)</button>
+        <button class="filter-chip" onclick="setF(this)">Theo sản phẩm (210)</button>
+        <button class="filter-chip" onclick="setF(this)">Theo bài viết (180)</button>
+        <button class="filter-chip" onclick="setF(this)">Theo đối tác (96)</button>
+        <button class="filter-chip u-style-047" onclick="setF(this)">Lỗi (3)</button>
+        <select class="fsel u-style-002">
+            <option>Tất cả đối tác</option>
+            <option>Shopee</option>
+            <option>Lazada</option>
+            <option>Tiki</option>
+        </select>
+        <select class="fsel">
+            <option>Click cao nhất</option>
+            <option>Mới nhất</option>
+            <option>Cũ nhất</option>
+        </select>
+    </div>
+
+    <div class="table-wrap">
+        <div class="t-head">
+            <div class="th">Link / Tên</div>
+            <div class="th">Đối tác</div>
+            <div class="th">Gắn vào</div>
+            <div class="th">Click</div>
+            <div class="th">CVR</div>
+            <div class="th">Ngày tạo</div>
+            <div class="th">HH%</div>
+            <div class="th">Trạng thái</div>
+            <div class="th">Thao tác</div>
+        </div>
+
+        @if (ViewBag.AffiliateLinks != null)
+        {
+            @foreach (var link in ViewBag.AffiliateLinks)
+            {
+                <div class="t-row">
+                    <div>
+                        <div class="link-title">
+                            <a class="product-link" href="@link.ProductLink">
+                                <img class="product-thumb" src="@link.ProductImage" alt="@link.ProductName">
+                                <span>@link.ProductName - @link.PartnerName</span>
+                            </a>
+                        </div>
+                        <div class="link-url">@link.AffiliateUrl</div>
+                        <div class="link-tags">
+                            @foreach (var tag in link.Tags)
+                            {
+                                <span class="ltag">@tag</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="cell-muted">@link.PartnerName</div>
+                    <div class="cell-muted">@link.AttachedArticle</div>
+                    <div class="metric-g">@link.Clicks.ToString("N0")</div>
+                    <div class="metric-a">@link.CVR%</div>
+                    <div class="cell-muted">@link.CreatedDate.ToString("dd/MM/yyyy")</div>
+                    <div class="metric-a">@link.Commission</div>
+                    <div>
+                        @if (link.Status == "Active")
+                        {
+                            <span class="s-active">Hoạt động</span>
+                        }
+                        else if (link.Status == "Error")
+                        {
+                            <span class="s-error">@link.StatusMessage</span>
+                        }
+                        else
+                        {
+                            <span class="s-inactive">@link.Status</span>
+                        }
+                    </div>
+                    <div class="row-acts">
+                        <button class="act">📊</button>
+                        <button class="act" onclick="openAffiliateModal('edit','@link.ProductName')">✏️</button>
+                        <button class="act">📋</button>
+                        <button class="act" onclick="openCommissionModal('@link.PartnerName')">⚙</button>
+                    </div>
+                </div>
+            }
+        }
+
+        <div class="pagination">
+            <div class="pag-info">Hiển thị 1-5 / 486 links</div>
+            <div class="pag-btns">
+                <button class="pag-btn">‹</button>
+                <button class="pag-btn active">1</button>
+                <button class="pag-btn">2</button>
+                <button class="pag-btn">3</button>
+                <button class="pag-btn">…</button>
+                <button class="pag-btn">98</button>
+                <button class="pag-btn">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<div class="modal-overlay" id="affiliateModal">
+    <div class="modal">
+        <div class="modal-title" id="affiliateModalTitle">Tạo link affiliate mới</div>
+        <div class="modal-sub">Biểu mẫu này dùng cho kịch bản tạo mới, cập nhật hoặc sửa link affiliate bị lỗi.</div>
+        <div class="form-grid">
+            <div>
+                <label class="u-style-043">Tên link / sản phẩm</label>
+                <input class="input-field" id="affiliateNameField" type="text">
+            </div>
+            <div>
+                <label class="u-style-043">Đối tác</label>
+                <select class="select-field" id="affiliatePartnerField">
+                    <option>Shopee Affiliate</option>
+                    <option>Lazada Partner</option>
+                    <option>Tiki Trading</option>
+                </select>
+            </div>
+            <div>
+                <label class="u-style-043">Gắn vào bài viết</label>
+                <input class="input-field" value="Review iPhone 16 Pro Max" type="text">
+            </div>
+            <div>
+                <label class="u-style-043">Trạng thái</label>
+                <select class="select-field">
+                    <option>Hoạt động</option>
+                    <option>Tắt</option>
+                    <option>Link lỗi</option>
+                </select>
+            </div>
+        </div>
+        <div class="u-style-044">
+            <label class="u-style-043">Affiliate URL</label>
+            <input class="input-field" value="https://partner.example.com/ftech/product-link" type="text">
+        </div>
+        <div class="u-style-044">
+            <label class="u-style-043">Ghi chú</label>
+            <textarea class="textarea-field" placeholder="Ví dụ: link này dùng cho phiên bản 256GB, ưu tiên hiển thị ở cuối bài review..."></textarea>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-ghost" onclick="closeAffiliateModal('affiliateModal')">Đóng</button>
+            <button class="btn-primary" onclick="saveAffiliateLink()">Lưu link</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="commissionModal">
+    <div class="modal">
+        <div class="modal-title">Thiết lập tỷ lệ hoa hồng</div>
+        <div class="modal-sub">Biểu mẫu này dùng cho kịch bản thiết lập commission theo đối tác hoặc nhóm sản phẩm.</div>
+        <div class="form-grid">
+            <div>
+                <label class="u-style-043">Đối tác</label>
+                <select class="select-field" id="commissionPartnerField">
+                    <option>Shopee Affiliate</option>
+                    <option>Lazada Partner</option>
+                    <option>Tiki Trading</option>
+                </select>
+            </div>
+            <div>
+                <label class="u-style-043">Nhóm sản phẩm</label>
+                <select class="select-field">
+                    <option>Điện thoại</option>
+                    <option>Laptop</option>
+                    <option>Phụ kiện</option>
+                </select>
+            </div>
+            <div>
+                <label class="u-style-043">Hoa hồng tối thiểu</label>
+                <input class="input-field" value="4%" type="text">
+            </div>
+            <div>
+                <label class="u-style-043">Hoa hồng tối đa</label>
+                <input class="input-field" value="8%" type="text">
+            </div>
+        </div>
+        <div class="u-style-044">
+            <label class="u-style-043">Ghi chú áp dụng</label>
+            <textarea class="textarea-field" placeholder="Ví dụ: áp dụng từ 10/04/2026, ưu tiên sản phẩm Apple và Samsung..."></textarea>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-ghost" onclick="closeAffiliateModal('commissionModal')">Đóng</button>
+            <button class="btn-primary" onclick="saveCommission()">Lưu commission</button>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/assets/js/pages/manage-affiliates.js"></script>
+}

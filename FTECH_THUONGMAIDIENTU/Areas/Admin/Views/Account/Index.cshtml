@@ -1,0 +1,214 @@
+﻿@{
+    ViewBag.Title = "Cập Nhật Tài Khoản Admin";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="topbar">
+    <div class="topbar-title">@ViewBag.Title</div>
+    <div class="topbar-search">
+        <input type="text" placeholder="Tìm tên, email, số điện thoại...">
+        <button type="button">🔍</button>
+    </div>
+    <div class="topbar-actions">
+        <button class="btn-ghost" type="button">Xuất CSV</button>
+        <button class="btn-primary" type="button" onclick="openUserModal()">+ Thêm tài khoản</button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="stat-row">
+        <div class="stat-card">
+            <div class="stat-icon si-blue">👥</div>
+            <div>
+                <div class="stat-label">Tổng tài khoản</div>
+                <div class="stat-val a">@ViewBag.TotalAccounts</div>
+                <div class="stat-sub">+@ViewBag.NewAccountsThisWeek tuần này</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon si-green">☑</div>
+            <div>
+                <div class="stat-label">Đang hoạt động</div>
+                <div class="stat-val g">@ViewBag.ActiveAccounts</div>
+                <div class="stat-sub">@ViewBag.ActivePercentage% tổng tài khoản</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon si-purple">🤝</div>
+            <div>
+                <div class="stat-label">Đối tác / Partner</div>
+                <div class="stat-val p">@ViewBag.PartnerCount</div>
+                <div class="stat-sub">+@ViewBag.NewPartners tháng này</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon si-orange">🔒</div>
+            <div>
+                <div class="stat-label">Tài khoản bị khóa</div>
+                <div class="stat-val o">@ViewBag.LockedAccounts</div>
+                <div class="stat-sub">Cần xem xét</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-strip">
+        <div class="detail-card">
+            <div class="detail-title">Nhóm quản trị hiện có</div>
+            <ul>
+                <li>Affiliate Manager: quản lý affiliate link và hiệu suất</li>
+                <li>Affiliate Partner Manager: duyệt và cập nhật đối tác</li>
+                <li>User Account Manager: xử lý tài khoản người dùng</li>
+            </ul>
+        </div>
+        <div class="detail-card">
+            <div class="detail-title">Quyền Super Admin</div>
+            <ul>
+                <li>Cập nhật tài khoản admin</li>
+                <li>Phân quyền vai trò</li>
+                <li>Xem trạng thái hoạt động của từng admin</li>
+                <li>Điều phối quyền truy cập hệ thống</li>
+            </ul>
+        </div>
+        <div class="detail-card">
+            <div class="detail-title">Tác vụ trên trang</div>
+            <ul>
+                <li>Sửa thông tin admin</li>
+                <li>Đổi vai trò quản trị</li>
+                <li>Ghi chú thay đổi quyền</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="toolbar-row">
+        <select class="fselect" id="roleFilter">
+            <option>Tất cả vai trò</option>
+            <option>User Account Manager</option>
+            <option>Affiliate Manager</option>
+            <option>Affiliate Partner Manager</option>
+        </select>
+        <select class="fselect" id="statusFilter">
+            <option>Tất cả trạng thái</option>
+            <option>Đang hoạt động</option>
+            <option>Cần cập nhật</option>
+        </select>
+        <select class="fselect u-style-002" id="sortFilter">
+            <option>Mới cập nhật</option>
+            <option>Vai trò cao nhất</option>
+            <option>Hoạt động nhiều nhất</option>
+        </select>
+    </div>
+
+    <div class="table-wrap">
+        <div class="t-head">
+            <div><input type="checkbox" id="selectAll" onchange="toggleSelectAll()"></div>
+            <div class="th">Tài khoản admin</div>
+            <div class="th">Vai trò</div>
+            <div class="th">Trạng thái</div>
+            <div class="th">Quyền chính</div>
+            <div class="th">Cập nhật</div>
+            <div class="th">Thao tác</div>
+        </div>
+
+        @if (ViewBag.AdminAccounts != null)
+        {
+            @foreach (var admin in ViewBag.AdminAccounts)
+            {
+                <div class="t-row">
+                    <div><input type="checkbox" class="admin-checkbox" value="@admin.Id"></div>
+                    <div class="user-cell">
+                        <div class="user-av">
+                            <img src="@admin.Avatar" alt="@admin.FullName">
+                        </div>
+                        <div>
+                            <div class="user-name">@admin.FullName</div>
+                            <div class="user-email">@admin.Email · @admin.Phone</div>
+                        </div>
+                    </div>
+                    <div><span class="role-badge">@admin.Role</span></div>
+                    <div>
+                        @if (admin.Status == "Active")
+                        {
+                            <span class="status active">Hoạt động</span>
+                        }
+                        else
+                        {
+                            <span class="status pending">Cần cập nhật</span>
+                        }
+                    </div>
+                    <div class="cell-muted">@admin.Permissions</div>
+                    <div class="cell-muted">@admin.LastUpdated.ToString("dd/MM/yyyy")</div>
+                    <div class="row-actions">
+                        <button class="act view" type="button" onclick="openUserModal('@admin.Id','view')">👁</button>
+                        <button class="act edit" type="button" onclick="openUserModal('@admin.Id','edit')">✏</button>
+                        <button class="act key" type="button" onclick="openLockModal('@admin.Id')">🔑</button>
+                    </div>
+                </div>
+            }
+        }
+
+        <div class="pagination">
+            <div class="pag-info">Hiển thị 1-3 / @ViewBag.TotalAccounts tài khoản admin</div>
+            <div class="pag-btns">
+                <button class="pag-btn" type="button" onclick="previousPage()">‹</button>
+                <button class="pag-btn active" type="button" onclick="goToPage(1)">1</button>
+                <button class="pag-btn" type="button" onclick="goToPage(2)">2</button>
+                <button class="pag-btn" type="button" onclick="goToPage(3)">3</button>
+                <button class="pag-btn" type="button" onclick="nextPage()">›</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<div class="modal-overlay" id="userModal">
+    <div class="modal">
+        <div class="modal-title">Cập nhật tài khoản admin</div>
+        <div class="modal-sub">Biểu mẫu này dùng cho kịch bản xem chi tiết admin, chỉnh vai trò và ghi chú thay đổi phân quyền.</div>
+        <div class="form-grid">
+            <div>
+                <label class="u-style-043">Họ tên</label>
+                <input class="input-field" id="userModalName" type="text">
+            </div>
+            <div>
+                <label class="u-style-043">Vai trò</label>
+                <input class="input-field" id="userModalRole" type="text">
+            </div>
+            <div>
+                <label class="u-style-043">Trạng thái</label>
+                <input class="input-field" id="userModalStatus" type="text">
+            </div>
+            <div>
+                <label class="u-style-043">Phạm vi quyền</label>
+                <input class="input-field" id="userModalScope" type="text">
+            </div>
+        </div>
+        <div class="u-style-044">
+            <label class="u-style-043">Ghi chú thay đổi</label>
+            <textarea class="textarea-field" placeholder="Ví dụ: chuyển quyền sang Affiliate Manager, bổ sung quyền kiểm tra hiệu suất, cập nhật tài khoản phụ trách mới..."></textarea>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-ghost" type="button" onclick="closeAccountModal('userModal')">Đóng</button>
+            <button class="btn-primary" type="button" onclick="saveUserProcess()">Lưu cập nhật</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="lockModal">
+    <div class="modal">
+        <div class="modal-title">Phân quyền vai trò</div>
+        <div class="modal-sub">Biểu mẫu này dùng cho kịch bản cập nhật vai trò và quyền truy cập cho tài khoản admin.</div>
+        <div class="u-style-045">Tài khoản: <span id="lockModalName">Nguyễn Tuấn Anh</span></div>
+        <div>
+            <label class="u-style-043">Ghi chú phân quyền</label>
+            <textarea class="textarea-field" id="lockReasonField" placeholder="Ví dụ: đổi sang User Account Manager, thêm quyền xem danh sách vi phạm, cập nhật phạm vi quản lý..."></textarea>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-ghost" type="button" onclick="closeAccountModal('lockModal')">Hủy</button>
+            <button class="btn-primary" type="button" onclick="submitLockAction()">Lưu quyền</button>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/assets/js/pages/manage-accounts.js"></script>
+}

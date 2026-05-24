@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - FTECH Affiliate Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    @Styles.Render("~/Content/admin/css")
+    <link rel="stylesheet" href="~/Content/css/pages/manage-affiliates.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sb-logo">
+            <a href="@Url.Action("Index", "Dashboard", new { area = "AffiliateManager" })" class="logo">
+                <span class="logo-badge">F</span>FTECH Affiliate
+            </a>
+        </div>
+        <div class="sb-label">Affiliate Manager</div>
+        <nav class="sb-menu">
+            <a href="@Url.Action("Index", "Dashboard", new { area = "AffiliateManager" })" class="sb-item">
+                <span class="si">📊</span>Dashboard
+            </a>
+            <a href="@Url.Action("Index", "Affiliate", new { area = "AffiliateManager" })" class="sb-item">
+                <span class="si">🔗</span>Quản Lý Affiliate Link
+            </a>
+            <a href="@Url.Action("Index", "Analytics", new { area = "AffiliateManager" })" class="sb-item">
+                <span class="si">📈</span>Theo Dõi Click
+            </a>
+            <a href="@Url.Action("Performance", "Analytics", new { area = "AffiliateManager" })" class="sb-item">
+                <span class="si">📉</span>Xem Thông Kê
+            </a>
+        </nav>
+        <div class="sb-bottom">
+            <div class="sb-user">
+                <div class="sb-avatar"><img src="https://i.pravatar.cc/120?img=15" alt="Manager"></div>
+                <div>
+                    <div class="sb-user-name">Affiliate Manager</div>
+                    <div class="sb-user-role">Manager</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

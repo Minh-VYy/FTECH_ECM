@@ -1,0 +1,71 @@
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(243,241,255,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  height: 64px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: var(--heading-font);
+  font-weight: 700;
+  font-size: 21px;
+}
+
+.logo-badge {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  padding: 3px 7px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+nav {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--body);
+  font-size: 14px;
+  padding: 7px 12px;
+  border-radius: 9px;
+}
+
+nav a:hover { background: rgba(255,255,255,.5); color: var(--text); }
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+footer {
+  margin-top: 32px;
+  padding: 22px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  background: #e8e4ff;
+  font-size: 13px;
+}

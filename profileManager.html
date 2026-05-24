@@ -1,0 +1,208 @@
+﻿<html lang="vi"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTECH - Tài khoản cá nhân</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/pages/profileManager.css">
+  <link rel="stylesheet" href="assets/css/common/inline-utilities.css">
+</head>
+<body>
+  <header>
+    <div class="hdr">
+      <a href="trangchu.html" class="logo"><span class="logo-badge">F</span>FTECH</a>
+      <nav>
+        <a href="trangchu.html">Trang chủ</a>
+        <a href="product.html">Review nổi bật</a>
+        <a href="reviewModule.html">Đánh giá</a>
+        <a href="trangchu.html#s-support">Hỗ trợ</a>
+      </nav>
+      <div class="hdr-right">
+        <a href="login.html" class="btn-ghost auth-logout-link" data-logout>Đăng xuất</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="page">
+    <div>
+      
+      <div class="sidebar-card">
+        <div class="avatar-wrap">
+          <div class="avatar">👨</div>
+          <div class="name">Nguyễn Minh Vỹ</div>
+          <div class="sub">@minhvy · ftech_user</div>
+          <div class="role">👤 Người dùng FTECH</div>
+          <div class="stats">
+            <div class="stat"><strong>8</strong><span>Đánh giá</span></div>
+            <div class="stat"><strong>14</strong><span>Bình luận</span></div>
+            <div class="stat"><strong>11</strong><span>Bài lưu</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="score-card">
+        <small>Mức độ tương tác</small>
+        <strong>2.450 điểm</strong>
+        <p>Cần thêm 550 điểm để mở huy hiệu Chuyên gia review. Điểm tăng qua đánh giá, bình luận hữu ích và bài viết đã lưu.</p>
+      </div>
+
+      <div class="sidebar-card menu">
+        <button class="active" onclick="sw('info')"><span>👤 Thông tin cá nhân</span></button>
+        <button onclick="sw('reviews')"><span>⭐ Đánh giá của tôi</span><span class="badge">8</span></button>
+        <button onclick="sw('comments')"><span>💬 Bình luận của tôi</span><span class="badge">14</span></button>
+        <button onclick="sw('saved')"><span>🔖 Bài viết đã lưu</span><span class="badge">11</span></button>
+        <button onclick="sw('wishlist')"><span>🤍 Sản phẩm theo dõi</span><span class="badge">24</span></button>
+        <button onclick="sw('addresses')"><span>📍 Sổ địa chỉ</span></button>
+        <button onclick="sw('password')"><span>🔒 Đổi mật khẩu</span></button>
+        <button onclick="sw('notifications')"><span>🔔 Thông báo</span></button>
+      </div>
+    </div>
+
+    <div>
+      <section class="tab-pane active" id="tab-info">
+        <div class="panel-card">
+          <div class="section-title">
+            <span>Thông tin cá nhân</span>
+            <button class="edit-btn" onclick="toggleEdit()">Chỉnh sửa</button>
+          </div>
+          <div class="form-grid">
+            <div class="field"><label>Họ</label><input value="Nguyễn" disabled=""></div>
+            <div class="field"><label>Tên</label><input value="Minh Vỹ" disabled=""></div>
+            <div class="field"><label>Email</label><input value="minhvy@email.com" disabled=""></div>
+            <div class="field"><label>Tên đăng nhập</label><input value="minhvy_ftech" disabled=""></div>
+            <div class="field"><label>Thành phố</label><select disabled=""><option>Đà Nẵng</option></select></div>
+            <div class="field full"><label>Giới thiệu ngắn</label><textarea disabled="">Mình thường xem review laptop, tai nghe và các bài so sánh giá trước khi mua.</textarea></div>
+          </div>
+          <div class="save-wrap" id="saveWrap">
+            <button class="save-btn" onclick="saveInfo()">Lưu thay đổi</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-pane" id="tab-orders">
+        <div class="panel-card">
+          <div class="section-title"><span>Lịch sử đơn hàng</span></div>
+          <table class="table">
+            <thead>
+              <tr><th>Mã đơn</th><th>Ngày</th><th>Sản phẩm</th><th>Tổng</th><th>Trạng thái</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr><td>#FTECH-24031901</td><td>19/03/2026</td><td>MacBook Air M3 + Sony WH-1000XM5</td><td>36.560.000₫</td><td><span class="status processing">Đang giao</span></td><td><a href="profileManager.html#tab-orders" class="u-style-104">Theo dõi</a></td></tr>
+              <tr><td>#FTECH-24030512</td><td>05/03/2026</td><td>iPhone 16 Pro Max 256GB</td><td>34.990.000₫</td><td><span class="status done">Hoàn tất</span></td><td><a href="product.html" class="u-style-104">Xem lại</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="tab-pane" id="tab-reviews">
+        <div class="panel-card">
+          <div class="section-title"><span>Đánh giá của tôi</span></div>
+          <div class="list">
+            <div class="item">
+              <div class="item-head"><div class="item-title">MacBook Air M3 15 inch</div><div class="item-date">12/03/2026</div></div>
+              <div class="item-text">Pin lâu, màn hình đẹp và rất phù hợp cho công việc văn phòng. Mình đã đánh giá 5 sao và có thêm 2 ảnh thực tế.</div>
+              <div class="chips"><span class="chip">5 sao</span><span class="chip">Đã duyệt</span><span class="chip">27 lượt thấy hữu ích</span></div>
+              <div class="item-actions"><a href="reviewModule.html">Xem lại đánh giá</a><button>Sửa</button></div>
+            </div>
+            <div class="item">
+              <div class="item-head"><div class="item-title">Sony WH-1000XM5</div><div class="item-date">08/03/2026</div></div>
+              <div class="item-text">Chống ồn tốt và đeo lâu khá thoải mái. Mình đã thêm phần nhận xét về chất âm và độ bền pin.</div>
+              <div class="chips"><span class="chip">5 sao</span><span class="chip">Đã duyệt</span><span class="chip">16 lượt thấy hữu ích</span></div>
+              <div class="item-actions"><a href="reviewModule.html">Xem lại đánh giá</a><button>Sửa</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-pane" id="tab-comments">
+        <div class="panel-card">
+          <div class="section-title"><span>Bình luận của tôi</span></div>
+          <div class="list">
+            <div class="item">
+              <div class="item-head"><div class="item-title">Đánh giá MacBook Air M3 sau 3 tuần</div><div class="item-date">18/03/2026</div></div>
+              <div class="item-text">Phần so sánh pin và nhiệt độ rất hữu ích. Nếu được, bài viết nên thêm góc nhìn cho lập trình viên dùng Docker và VS Code.</div>
+              <div class="item-actions"><a href="product.html">Xem bài viết</a><button>Xóa</button></div>
+            </div>
+            <div class="item">
+              <div class="item-head"><div class="item-title">Top tai nghe chống ồn đáng mua 2026</div><div class="item-date">14/03/2026</div></div>
+              <div class="item-text">Mình thích cách bài viết tổng hợp nơi mua theo từng đối tác. Có thể bổ sung thêm điểm khác nhau giữa bảo hành chính hãng và gian hàng mall.</div>
+              <div class="item-actions"><a href="product.html">Xem bài viết</a><button>Xóa</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-pane" id="tab-saved">
+        <div class="panel-card">
+          <div class="section-title"><span>Bài viết đã lưu</span></div>
+          <div class="list">
+            <div class="item">
+              <div class="item-head"><div class="item-title">Đánh giá MacBook Air M3 cho dân văn phòng và content creator</div><div class="item-date">Lưu ngày 20/03/2026</div></div>
+              <div class="item-meta">Apple · 12 phút đọc · có bảng so sánh nơi mua từ 4 đối tác</div>
+              <div class="item-actions"><a href="product.html">Đọc tiếp</a><button>Bỏ lưu</button></div>
+            </div>
+            <div class="item">
+              <div class="item-head"><div class="item-title">So sánh MacBook Air M3 và Dell XPS 13</div><div class="item-date">Lưu ngày 17/03/2026</div></div>
+              <div class="item-meta">So sánh giá · 9 phút đọc · có gợi ý theo nhu cầu học tập và công việc</div>
+              <div class="item-actions"><a href="product.html">Đọc tiếp</a><button>Bỏ lưu</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-pane" id="tab-wishlist">
+        <div class="panel-card">
+          <div class="section-title"><span>Sản phẩm theo dõi</span></div>
+          <div class="list">
+            <div class="item"><div class="item-head"><div class="item-title">ASUS ROG Zephyrus G14 RTX 4060</div><div class="item-date">Giá tốt nhất: 31.990.000₫</div></div><div class="item-meta">Đang theo dõi review mới và biến động giá từ các đối tác bán hàng.</div></div>
+            <div class="item"><div class="item-head"><div class="item-title">Apple Watch Ultra 2</div><div class="item-date">Giá tốt nhất: 22.990.000₫</div></div><div class="item-meta">Đã lưu so sánh giữa Apple, TGDĐ và đại lý mall.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-pane" id="tab-addresses">
+        <div class="panel-card">
+          <div class="section-title"><span>Sổ địa chỉ</span></div>
+          <div class="list">
+            <div class="item"><div class="item-title">Địa chỉ mặc định</div><div class="item-text">48 Cao Thắng, Hải Châu 1, Hải Châu, Đà Nẵng · 0905 123 456</div></div>
+            <div class="item"><div class="item-title">Địa chỉ văn phòng</div><div class="item-text">123 Lê Duẩn, Thạch Thang, Hải Châu, Đà Nẵng · 0905 999 888</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-pane" id="tab-password">
+        <div class="panel-card">
+          <div class="section-title"><span>Đổi mật khẩu</span></div>
+          <div class="form-grid">
+            <div class="field full"><label>Mật khẩu hiện tại</label><input id="oldPw" type="password" placeholder="Nhập mật khẩu hiện tại"></div>
+            <div class="field"><label>Mật khẩu mới</label><input id="newPw" type="password" placeholder="Tối thiểu 8 ký tự"></div>
+            <div class="field"><label>Xác nhận mật khẩu mới</label><input id="confirmPw" type="password" placeholder="Nhập lại mật khẩu mới"></div>
+          </div>
+          <div class="save-wrap u-style-108"><button class="save-btn" onclick="changePw()">Cập nhật mật khẩu</button></div>
+        </div>
+      </section>
+
+      <section class="tab-pane" id="tab-notifications">
+        <div class="panel-card">
+          <div class="section-title"><span>Thông báo</span></div>
+          <div class="toggle-row">
+            <div class="toggle-info"><strong>Review mới theo chủ đề quan tâm</strong><span>Nhận thông báo khi có bài review mới về laptop, tai nghe và thiết bị làm việc.</span></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info"><strong>Phản hồi bình luận</strong><span>Nhận thông báo khi biên tập viên hoặc người dùng khác trả lời bình luận của bạn.</span></div>
+            <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info"><strong>Ưu đãi từ đối tác</strong><span>Nhận thông báo khi giá sản phẩm đang theo dõi giảm tại đối tác uy tín.</span></div>
+            <div class="toggle" onclick="this.classList.toggle('on')"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer>© 2026 FTECH Technology. All rights reserved.</footer>
+  <script src="assets/js/common/auth.js"></script>
+  <script src="assets/js/pages/profileManager.js"></script>
+
+</body></html>

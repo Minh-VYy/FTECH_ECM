@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTECH Admin - Cập Nhật Tài Khoản Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/pages/manage-accounts.css">
+  <link rel="stylesheet" href="assets/css/common/inline-utilities.css">
+  <link rel="stylesheet" href="assets/css/common/admin-shell.css">
+</head>
+<body>
+  <div class="sidebar">
+    <div class="sb-logo"><a href="dashboard.html" class="logo"><span class="logo-badge">F</span>FTECH Admin</a></div>
+    <div class="sb-label">Super Admin</div>
+    <nav class="sb-menu">
+      <a href="dashboard.html" class="sb-item"><span class="si">📊</span>Xem báo cáo thống kê</a>
+      <a href="manage-posts.html" class="sb-item"><span class="si">✅</span>Duyệt bài viết</a>
+      <a href="manage-partners.html" class="sb-item"><span class="si">🆕</span>Duyệt đối tác mới</a>
+      <a href="manage-accounts.html" class="sb-item active"><span class="si">🛡️</span>Tài khoản admin</a>
+    </nav>
+    <div class="sb-bottom"><div class="sb-user"><div class="sb-avatar"><img src="https://i.pravatar.cc/120?img=12" alt="Nguyễn Minh Vỹ"></div><div><div class="sb-user-name">Nguyễn Minh Vỹ</div><div class="sb-user-role">Super Admin</div></div></div></div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Cập Nhật Tài Khoản Admin</div>
+      <div class="topbar-search"><input type="text" placeholder="Tìm tên, email, số điện thoại..."><button type="button">🔍</button></div>
+      <div class="topbar-actions"><button class="btn-ghost" type="button">Xuất CSV</button><button class="btn-primary" type="button">+ Thêm tài khoản</button></div>
+    </div>
+
+    <div class="content">
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-icon si-blue">👥</div><div><div class="stat-label">Tổng tài khoản</div><div class="stat-val a">1,842</div><div class="stat-sub">+48 tuần này</div></div></div>
+        <div class="stat-card"><div class="stat-icon si-green">☑</div><div><div class="stat-label">Đang hoạt động</div><div class="stat-val g">1,709</div><div class="stat-sub">92.8% tổng tài khoản</div></div></div>
+        <div class="stat-card"><div class="stat-icon si-purple">🤝</div><div><div class="stat-label">Đối tác / Partner</div><div class="stat-val p">34</div><div class="stat-sub">+3 tháng này</div></div></div>
+        <div class="stat-card"><div class="stat-icon si-orange">🔒</div><div><div class="stat-label">Tài khoản bị khóa</div><div class="stat-val o">12</div><div class="stat-sub">Cần xem xét</div></div></div>
+      </div>
+
+      <div class="detail-strip">
+        <div class="detail-card"><div class="detail-title">Nhóm quản trị hiện có</div><ul><li>Affiliate Manager: quản lý affiliate link và hiệu suất</li><li>Affiliate Partner Manager: duyệt và cập nhật đối tác</li><li>User Account Manager: xử lý tài khoản người dùng</li></ul></div>
+        <div class="detail-card"><div class="detail-title">Quyền Super Admin</div><ul><li>Cập nhật tài khoản admin</li><li>Phân quyền vai trò</li><li>Xem trạng thái hoạt động của từng admin</li><li>Điều phối quyền truy cập hệ thống</li></ul></div>
+        <div class="detail-card"><div class="detail-title">Tác vụ trên trang</div><ul><li>Sửa thông tin admin</li><li>Đổi vai trò quản trị</li><li>Ghi chú thay đổi quyền</li></ul></div>
+      </div>
+
+      <div class="toolbar-row">
+        <select class="fselect"><option>Tất cả vai trò</option><option>User Account Manager</option><option>Affiliate Manager</option><option>Affiliate Partner Manager</option></select>
+        <select class="fselect"><option>Tất cả trạng thái</option><option>Đang hoạt động</option><option>Cần cập nhật</option></select>
+        <select class="fselect u-style-002"><option>Mới cập nhật</option><option>Vai trò cao nhất</option><option>Hoạt động nhiều nhất</option></select>
+      </div>
+
+      <div class="table-wrap">
+        <div class="t-head"><div><input type="checkbox"></div><div class="th">Tài khoản admin</div><div class="th">Vai trò</div><div class="th">Trạng thái</div><div class="th">Quyền chính</div><div class="th">Cập nhật</div><div class="th">Thao tác</div></div>
+        <div class="t-row"><div><input type="checkbox"></div><div class="user-cell"><div class="user-av"><img src="https://i.pravatar.cc/120?img=13" alt="Nguyễn Tuấn Anh"></div><div><div class="user-name">Nguyễn Tuấn Anh</div><div class="user-email">tuananh@ftech.vn · 0905.678.901</div></div></div><div><span class="role-badge">User Account Manager</span></div><div><span class="status active">Hoạt động</span></div><div class="cell-muted">Xử lý user, khóa / mở khóa</div><div class="cell-muted">15/03/2026</div><div class="row-actions"><button class="act view" type="button" onclick="openUserModal('Nguyễn Tuấn Anh','User Account Manager','Hoạt động','Xử lý user, khóa / mở khóa')">👁</button><button class="act edit" type="button" onclick="openUserModal('Nguyễn Tuấn Anh','User Account Manager','Hoạt động','Xử lý user, khóa / mở khóa')">✏</button><button class="act key" type="button" onclick="openLockModal('Nguyễn Tuấn Anh')">🔑</button></div></div>
+        <div class="t-row"><div><input type="checkbox"></div><div class="user-cell"><div class="user-av"><img src="https://i.pravatar.cc/120?img=14" alt="Võ Minh Hoàng"></div><div><div class="user-name">Võ Minh Hoàng</div><div class="user-email">hoangvm@ftech.vn · 0912.345.678</div></div></div><div><span class="role-badge">Affiliate Manager</span></div><div><span class="status active">Hoạt động</span></div><div class="cell-muted">Link affiliate, click, hoa hồng</div><div class="cell-muted">18/03/2026</div><div class="row-actions"><button class="act view" type="button" onclick="openUserModal('Võ Minh Hoàng','Affiliate Manager','Hoạt động','Link affiliate, click, hoa hồng')">👁</button><button class="act edit" type="button" onclick="openUserModal('Võ Minh Hoàng','Affiliate Manager','Hoạt động','Link affiliate, click, hoa hồng')">✏</button><button class="act key" type="button" onclick="openLockModal('Võ Minh Hoàng')">🔑</button></div></div>
+        <div class="t-row"><div><input type="checkbox"></div><div class="user-cell"><div class="user-av"><img src="https://i.pravatar.cc/120?img=15" alt="Phạm Thái Bảo"></div><div><div class="user-name">Phạm Thái Bảo</div><div class="user-email">thaibao@ftech.vn</div></div></div><div><span class="role-badge">Affiliate Partner Manager</span></div><div><span class="status pending">Cần cập nhật</span></div><div class="cell-muted">Duyệt và cập nhật đối tác</div><div class="cell-muted">02/04/2026</div><div class="row-actions"><button class="act view" type="button" onclick="openUserModal('Phạm Thái Bảo','Affiliate Partner Manager','Cần cập nhật','Duyệt và cập nhật đối tác')">👁</button><button class="act key" type="button" onclick="openLockModal('Phạm Thái Bảo')">🔑</button><button class="act edit" type="button" onclick="openUserModal('Phạm Thái Bảo','Affiliate Partner Manager','Cần cập nhật','Duyệt và cập nhật đối tác')">📝</button></div></div>
+        <div class="pagination"><div class="pag-info">Hiển thị 1-3 / 3 tài khoản admin</div><div class="pag-btns"><button class="pag-btn" type="button">‹</button><button class="pag-btn active" type="button">1</button><button class="pag-btn" type="button">›</button></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="userModal"><div class="modal"><div class="modal-title">Cập nhật tài khoản admin</div><div class="modal-sub">Biểu mẫu này dùng cho kịch bản xem chi tiết admin, chỉnh vai trò và ghi chú thay đổi phân quyền.</div><div class="form-grid"><div><label class="u-style-043">Họ tên</label><input class="input-field" id="userModalName" type="text"></div><div><label class="u-style-043">Vai trò</label><input class="input-field" id="userModalRole" type="text"></div><div><label class="u-style-043">Trạng thái</label><input class="input-field" id="userModalStatus" type="text"></div><div><label class="u-style-043">Phạm vi quyền</label><input class="input-field" id="userModalScope" type="text"></div></div><div class="u-style-044"><label class="u-style-043">Ghi chú thay đổi</label><textarea class="textarea-field" placeholder="Ví dụ: chuyển quyền sang Affiliate Manager, bổ sung quyền kiểm tra hiệu suất, cập nhật tài khoản phụ trách mới..."></textarea></div><div class="modal-actions"><button class="btn-ghost" type="button" onclick="closeAccountModal('userModal')">Đóng</button><button class="btn-primary" type="button" onclick="saveUserProcess()">Lưu cập nhật</button></div></div></div>
+  <div class="modal-overlay" id="lockModal"><div class="modal"><div class="modal-title">Phân quyền vai trò</div><div class="modal-sub">Biểu mẫu này dùng cho kịch bản cập nhật vai trò và quyền truy cập cho tài khoản admin.</div><div class="u-style-045">Tài khoản: <span id="lockModalName">Nguyễn Tuấn Anh</span></div><div><label class="u-style-043">Ghi chú phân quyền</label><textarea class="textarea-field" id="lockReasonField" placeholder="Ví dụ: đổi sang User Account Manager, thêm quyền xem danh sách vi phạm, cập nhật phạm vi quản lý..."></textarea></div><div class="modal-actions"><button class="btn-ghost" type="button" onclick="closeAccountModal('lockModal')">Hủy</button><button class="btn-primary" type="button" onclick="submitLockAction()">Lưu quyền</button></div></div></div>
+  <script src="assets/js/common/auth.js"></script>
+  <script src="assets/js/pages/manage-accounts.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+@{
+    Layout = null;
+    var html = System.IO.File.ReadAllText(Server.MapPath("~/Views/register.html"));
+    html = html.Replace("href=\"assets/css/pages/register.css\"", "href=\"" +
+Url.Content("~/Content/css/pages/register.css") + "\"");
+    html = html.Replace("href=\"assets/css/common/inline-utilities.css\"", "href=\"" +
+Url.Content("~/Content/css/common/inline-utilities.css") + "\"");
+    html = html.Replace("src=\"assets/js/pages/register.js\"", "src=\"" + Url.Content("~/Scripts/js/pages/register.js") +
+"\"");
+    html = html.Replace("trangchu.html", Url.Action("Index", "Home"));
+    html = html.Replace("login.html", Url.Action("Login", "Account"));
+}
+@Html.Raw(html)

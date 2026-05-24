@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Quản Lý Tài Khoản Admin";
+    Layout = "~/Areas/SuperAdmin/Views/Shared/_SuperAdminLayout.cshtml";
+}
+
+<div class="topbar">
+    <div class="topbar-title">Quản Lý Tài Khoản Admin</div>
+    <div class="topbar-search"><input type="text" placeholder="Tìm tài khoản, email..."><button>🔍</button></div>
+    <div class="topbar-actions">
+        <button class="btn-ghost">Xuất báo cáo</button>
+        <button class="btn-primary" onclick="location.href='@Url.Action("Create", "AdminAccount", new { area = "SuperAdmin" })'">+ Tạo Admin Mới</button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="stat-row">
+        <div class="stat-card">
+            <div class="stat-label">Tổng Admin</div>
+            <div class="stat-val sc-a">5</div>
+            <div class="stat-sub">Đang hoạt động</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Super Admin</div>
+            <div class="stat-val sc-p">1</div>
+            <div class="stat-sub">Quản trị viên chính</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Content Manager</div>
+            <div class="stat-val sc-g">1</div>
+            <div class="stat-sub">Quản lý nội dung</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Affiliate Manager</div>
+            <div class="stat-val sc-o">1</div>
+            <div class="stat-sub">Quản lý liên kết</div>
+        </div>
+    </div>
+
+    <div class="section-head">
+        <div class="sec-title">Danh sách tài khoản admin</div>
+    </div>
+
+    <div class="table-wrap">
+        <div class="t-head">
+            <div class="th">Tên</div>
+            <div class="th">Email</div>
+            <div class="th">Vai Trò</div>
+            <div class="th">Trạng Thái</div>
+            <div class="th">Thao Tác</div>
+        </div>
+        <div class="t-row">
+            <div>Admin Name</div>
+            <div>admin@ftech.com</div>
+            <div><span class="cat-tag">Super Admin</span></div>
+            <div><span class="sp sp-approved">✓ Hoạt động</span></div>
+            <div>
+                <button class="act" type="button">✏️ Sửa</button>
+                <button class="act" type="button">🔒 Khóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/js/common/auth.js"></script>
+    <script src="~/Scripts/js/pages/manage-accounts.js"></script>
+}

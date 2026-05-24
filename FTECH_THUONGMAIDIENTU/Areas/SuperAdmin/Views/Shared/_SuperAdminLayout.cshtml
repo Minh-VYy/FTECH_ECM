@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - FTECH Super Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    @Styles.Render("~/Content/admin/css")
+    <link rel="stylesheet" href="~/Content/css/pages/dashboard.css">
+    <link rel="stylesheet" href="~/Content/css/pages/manage-posts.css">
+    <link rel="stylesheet" href="~/Content/css/pages/manage-partners.css">
+    <link rel="stylesheet" href="~/Content/css/pages/manage-accounts.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sb-logo">
+            <a href="@Url.Action("Index", "Dashboard", new { area = "SuperAdmin" })" class="logo">
+                <span class="logo-badge">F</span>FTECH Super Admin
+            </a>
+        </div>
+        <div class="sb-label">Super Admin</div>
+        <nav class="sb-menu">
+            <a href="@Url.Action("Index", "Dashboard", new { area = "SuperAdmin" })" class="sb-item">
+                <span class="si">📊</span>Dashboard
+            </a>
+            <a href="@Url.Action("Index", "Post", new { area = "SuperAdmin" })" class="sb-item">
+                <span class="si">✅</span>Duyệt Bài Viết
+            </a>
+            <a href="@Url.Action("Index", "Partner", new { area = "SuperAdmin" })" class="sb-item">
+                <span class="si">🆕</span>Duyệt Đối Tác
+            </a>
+            <a href="@Url.Action("Index", "AdminAccount", new { area = "SuperAdmin" })" class="sb-item">
+                <span class="si">🛡️</span>Tài Khoản Admin
+            </a>
+        </nav>
+        <div class="sb-bottom">
+            <div class="sb-user">
+                <div class="sb-avatar"><img src="https://i.pravatar.cc/120?img=12" alt="Admin"></div>
+                <div>
+                    <div class="sb-user-name">Admin</div>
+                    <div class="sb-user-role">Super Admin</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

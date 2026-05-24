@@ -1,0 +1,434 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>FTECH - Bài Viết Của Tôi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/pages/content-manager.css">
+  <link rel="stylesheet" href="assets/css/common/inline-utilities.css">
+  <link rel="stylesheet" href="assets/css/common/admin-shell.css">
+</head>
+<body>
+
+<!-- ═══════════════════ SIDEBAR ═══════════════════ -->
+<div class="sidebar">
+  <div class="sb-logo">
+    <a href="content-manager.html" class="logo"><span class="logo-badge">F</span>FTECH</a>
+  </div>
+  <div class="sb-role">Content Manager</div>
+  <a href="postManager.html" class="sb-item"><span class="si">✏️</span>Tạo bài viết mới</a>
+  <a href="content-manager.html" class="sb-item active"><span class="si">📋</span>Bài viết của tôi<span class="sb-badge">2</span></a>
+  <div class="sb-bottom">
+    <div class="sb-user">
+      <div class="sb-avatar">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80" alt="Trương Thị Kiều Nhi">
+      </div>
+      <div>
+        <div class="sb-name">Trương Thị Kiều Nhi</div>
+        <div class="sb-role-tag">Content Manager</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ MAIN ═══════════════════ -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title">Bài Viết Của Tôi</div>
+    <div class="topbar-search">
+      <input type="text" placeholder="Tìm tiêu đề, danh mục, từ khóa..."/>
+      <button>🔍</button>
+    </div>
+    <div class="u-style-001">
+      <button class="btn-ghost">Xuất CSV</button>
+      <button class="btn-primary" onclick="window.location='postManager.html'">✏️ Tạo bài mới</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- STAT CARDS -->
+    <div class="stat-row">
+      <div class="stat-card sc-all"><div class="stat-label">Tất cả bài</div><div class="stat-val sv-all">12</div><div class="stat-sub">Toàn bộ bài viết của tôi</div></div>
+      <div class="stat-card sc-draft"><div class="stat-label">Bản nháp</div><div class="stat-val sv-draft">3</div><div class="stat-sub">Chưa gửi lên duyệt</div></div>
+      <div class="stat-card sc-pending"><div class="stat-label">Đang chờ duyệt</div><div class="stat-val sv-pending">2</div><div class="stat-sub">Đang chờ Super Admin xét duyệt</div></div>
+      <div class="stat-card sc-approved"><div class="stat-label">Đã duyệt</div><div class="stat-val sv-approved">6</div><div class="stat-sub">Đang hiển thị công khai</div></div>
+      <div class="stat-card sc-rejected"><div class="stat-label">Bị từ chối</div><div class="stat-val sv-rejected">1</div><div class="stat-sub">Cần chỉnh sửa và gửi lại</div></div>
+    </div>
+
+ 
+
+    <!-- FILTER CHIPS -->
+    <div class="filter-wrap">
+      <button class="fchip active" onclick="setChip(this,'all')">Tất cả (12)</button>
+      <button class="fchip fc-draft" onclick="setChip(this,'draft')">Nháp (3)</button>
+      <button class="fchip fc-pending" onclick="setChip(this,'pending')">Chờ duyệt (2)</button>
+      <button class="fchip fc-approved" onclick="setChip(this,'approved')">Đã duyệt (6)</button>
+      <button class="fchip fc-rejected" onclick="setChip(this,'rejected')">Từ chối (1)</button>
+      <select class="fsel u-style-002">
+        <option>Tất cả danh mục</option>
+        <option>Review</option><option>So sánh</option><option>Top list</option><option>Hướng dẫn</option>
+      </select>
+      <select class="fsel">
+        <option>Mới cập nhật</option><option>Cũ nhất</option><option>A–Z</option>
+      </select>
+    </div>
+
+    <!-- BULK BAR -->
+    <div class="bulk-bar" id="bulkBar">
+      <span class="bulk-info" id="bulkInfo">0 bài được chọn</span>
+      <button class="btn-ghost u-style-003">Gửi duyệt hàng loạt</button>
+      <button class="btn-ghost u-style-004">Xóa hàng loạt</button>
+      <button class="btn-ghost u-style-005" onclick="clearSel()">Bỏ chọn</button>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrap">
+      <div class="t-head">
+        <div><input type="checkbox" id="ckAll" onchange="toggleAll(this)"></div>
+        <div class="th">Bài viết</div>
+        <div class="th">Danh mục</div>
+        <div class="th">Trạng thái</div>
+        <div class="th">Lượt xem</div>
+        <div class="th">Cập nhật</div>
+        <div class="th">Thao tác</div>
+      </div>
+
+      <!-- ── ROW 1: APPROVED ── -->
+      <div class="t-row" data-status="approved">
+        <div><input type="checkbox" class="rck" onchange="updBulk()"></div>
+        <div class="post-cell">
+          <div class="post-thumb"><img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=300&q=80" alt=""></div>
+          <div>
+            <div class="post-title">Review iPhone 16 Pro Max: Đáng mua không năm 2026?</div>
+            <div class="post-meta">Bài đã xuất bản · 3 affiliate links · 7 phút đọc</div>
+          </div>
+        </div>
+        <div><span class="cat-tag">Review</span></div>
+        <div><span class="sp sp-approved">✓ Đã duyệt</span></div>
+        <div class="metric">12.4K</div>
+        <div class="u-style-006">14/03/2026</div>
+        <div class="row-acts">
+          <button class="act" onclick="openPreview('Review iPhone 16 Pro Max: Đáng mua không năm 2026?','approved','Review')" title="Xem trước">👁️</button>
+          <button class="act act-edit" onclick="openEdit('Review iPhone 16 Pro Max: Đáng mua không năm 2026?','approved','Review')" title="Chỉnh sửa">✏️</button>
+          <button class="act act-del" onclick="openDelete('Review iPhone 16 Pro Max: Đáng mua không năm 2026?')" title="Xóa">🗑️</button>
+        </div>
+      </div>
+
+      <!-- ── ROW 2: APPROVED ── -->
+      <div class="t-row" data-status="approved">
+        <div><input type="checkbox" class="rck" onchange="updBulk()"></div>
+        <div class="post-cell">
+          <div class="post-thumb"><img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=300&q=80" alt=""></div>
+          <div>
+            <div class="post-title">So sánh AirPods Pro 2 vs Sony WH-1000XM5: Chọn cái nào?</div>
+            <div class="post-meta">Bài đã xuất bản · 2 affiliate links · 5 phút đọc</div>
+          </div>
+        </div>
+        <div><span class="cat-tag u-style-007">So sánh</span></div>
+        <div><span class="sp sp-approved">✓ Đã duyệt</span></div>
+        <div class="metric">8.1K</div>
+        <div class="u-style-006">10/03/2026</div>
+        <div class="row-acts">
+          <button class="act" onclick="openPreview('So sánh AirPods Pro 2 vs Sony WH-1000XM5','approved','So sánh')" title="Xem trước">👁️</button>
+          <button class="act act-edit" onclick="openEdit('So sánh AirPods Pro 2 vs Sony WH-1000XM5','approved','So sánh')" title="Chỉnh sửa">✏️</button>
+          <button class="act act-del" onclick="openDelete('So sánh AirPods Pro 2 vs Sony WH-1000XM5')" title="Xóa">🗑️</button>
+        </div>
+      </div>
+
+      <!-- ── ROW 3: PENDING ── -->
+      <div class="t-row u-style-008" data-status="pending">
+        <div><input type="checkbox" class="rck" onchange="updBulk()"></div>
+        <div class="post-cell">
+          <div class="post-thumb"><img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&w=300&q=80" alt=""></div>
+          <div>
+            <div class="post-title">Top 5 Laptop Gaming tầm trung tốt nhất 2026</div>
+            <div class="post-meta">Đang chờ Super Admin xét duyệt · 2 affiliate links</div>
+          </div>
+        </div>
+        <div><span class="cat-tag u-style-009">Top list</span></div>
+        <div><span class="sp sp-pending">⏳ Chờ duyệt</span></div>
+        <div class="metric metric-m">—</div>
+        <div class="u-style-006">18/03/2026</div>
+        <div class="row-acts">
+          <button class="act" onclick="openPreview('Top 5 Laptop Gaming tầm trung tốt nhất 2026','pending','Top list')" title="Xem trước">👁️</button>
+          <button class="act act-edit u-style-010" onclick="openEdit('Top 5 Laptop Gaming tầm trung tốt nhất 2026','pending','Top list')" title="Xem / Sửa" disabled title="Đang chờ duyệt — không thể sửa">✏️</button>
+        </div>
+      </div>
+
+      <!-- ── ROW 4: PENDING ── -->
+      <div class="t-row u-style-008" data-status="pending">
+        <div><input type="checkbox" class="rck" onchange="updBulk()"></div>
+        <div class="post-cell">
+          <div class="post-thumb"><img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=300&q=80" alt=""></div>
+          <div>
+            <div class="post-title">Apple Watch Series 10 — Có gì mới? Có nên nâng cấp không?</div>
+            <div class="post-meta">Đang chờ Super Admin xét duyệt · 1 affiliate link</div>
+          </div>
+        </div>
+        <div><span class="cat-tag">Review</span></div>
+        <div><span class="sp sp-pending">⏳ Chờ duyệt</span></div>
+        <div class="metric metric-m">—</div>
+        <div class="u-style-006">19/03/2026</div>
+        <div class="row-acts">
+          <button class="act" onclick="openPreview('Apple Watch Series 10 — Có gì mới?','pending','Review')" title="Xem trước">👁️</button>
+        </div>
+      </div>
+
+      <!-- ── ROW 5: DRAFT ── -->
+      <div class="t-row" data-status="draft">
+        <div><input type="checkbox" class="rck" onchange="updBulk()"></div>
+        <div class="post-cell">
+          <div class="post-thumb u-style-011">📝</div>
+          <div>
+            <div class="post-title">Hướng dẫn chọn tai nghe gaming 2026 — bản nháp</div>
+            <div class="post-meta">Bản nháp · Chưa gửi duyệt · Chưa có affiliate link</div>
+          </div>
+        </div>
+        <div><span class="cat-tag u-style-012">Hướng dẫn</span></div>
+        <div><span class="sp sp-draft">📝 Bản nháp</span></div>
+        <div class="metric metric-m">—</div>
+        <div class="u-style-006">21/03/2026</div>
+        <div class="row-acts">
+          <button class="act" onclick="openPreview('Hướng dẫn chọn tai nghe gaming 2026','draft','Hướng dẫn')" title="Xem trước">👁️</button>
+          <button class="act act-edit" onclick="openEdit('Hướng dẫn chọn tai nghe gaming 2026','draft','Hướng dẫn')" title="Chỉnh sửa">✏️</button>
+          <button class="act act-send" onclick="openSend('Hướng dẫn chọn tai nghe gaming 2026')" title="Gửi duyệt">📤</button>
+          <button class="act act-del" onclick="openDelete('Hướng dẫn chọn tai nghe gaming 2026')" title="Xóa">🗑️</button>
+        </div>
+      </div>
+
+      <!-- ── ROW 6: DRAFT ── -->
+      <div class="t-row" data-status="draft">
+        <div><input type="checkbox" class="rck" onchange="updBulk()"></div>
+        <div class="post-cell">
+          <div class="post-thumb u-style-011">📝</div>
+          <div>
+            <div class="post-title">MacBook Air M3 so với Dell XPS 13 — bản nháp</div>
+            <div class="post-meta">Bản nháp · Đã có 1 affiliate link · Cần bổ sung nội dung</div>
+          </div>
+        </div>
+        <div><span class="cat-tag u-style-007">So sánh</span></div>
+        <div><span class="sp sp-draft">📝 Bản nháp</span></div>
+        <div class="metric metric-m">—</div>
+        <div class="u-style-006">25/03/2026</div>
+        <div class="row-acts">
+          <button class="act" onclick="openPreview('MacBook Air M3 so với Dell XPS 13','draft','So sánh')" title="Xem trước">👁️</button>
+          <button class="act act-edit" onclick="openEdit('MacBook Air M3 so với Dell XPS 13','draft','So sánh')" title="Chỉnh sửa">✏️</button>
+          <button class="act act-send" onclick="openSend('MacBook Air M3 so với Dell XPS 13')" title="Gửi duyệt">📤</button>
+          <button class="act act-del" onclick="openDelete('MacBook Air M3 so với Dell XPS 13')" title="Xóa">🗑️</button>
+        </div>
+      </div>
+
+      <!-- ── ROW 7: REJECTED ── -->
+      <div class="t-row u-style-013" data-status="rejected">
+        <div><input type="checkbox" class="rck" onchange="updBulk()"></div>
+        <div class="post-cell">
+          <div class="post-thumb"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80" alt=""></div>
+          <div>
+            <div class="post-title">Gaming PC Build dưới 15 triệu — Cấu hình mạnh nhất 2026</div>
+            <div class="rejected-reason">⚠️ Lý do từ chối: nội dung chưa đầy đủ, thiếu affiliate link — cần chỉnh sửa và gửi lại</div>
+          </div>
+        </div>
+        <div><span class="cat-tag u-style-009">Hướng dẫn</span></div>
+        <div><span class="sp sp-rejected">✕ Từ chối</span></div>
+        <div class="metric metric-m">—</div>
+        <div class="u-style-006">17/03/2026</div>
+        <div class="row-acts">
+          <button class="act" onclick="openPreview('Gaming PC Build dưới 15 triệu','rejected','Hướng dẫn')" title="Xem trước">👁️</button>
+          <button class="act act-edit" onclick="openEdit('Gaming PC Build dưới 15 triệu','rejected','Hướng dẫn')" title="Chỉnh sửa & gửi lại">✏️</button>
+          <button class="act act-send" onclick="openSend('Gaming PC Build dưới 15 triệu')" title="Gửi duyệt lại">📤</button>
+          <button class="act act-del" onclick="openDelete('Gaming PC Build dưới 15 triệu')" title="Xóa">🗑️</button>
+        </div>
+      </div>
+
+      <!-- PAGINATION -->
+      <div class="pagination">
+        <div class="pag-info">Hiển thị 1–7 / 12 bài viết của bạn</div>
+        <div class="pag-btns">
+          <button class="pag-btn">‹</button>
+          <button class="pag-btn active">1</button>
+          <button class="pag-btn">2</button>
+          <button class="pag-btn">›</button>
+        </div>
+      </div>
+    </div><!-- /table-wrap -->
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+
+<!-- ═══════════════ MODAL: EDIT ═══════════════ -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal-edit">
+    <div class="modal-head">
+      <div>
+        <div class="modal-head-title" id="editModalTitle">Chỉnh sửa bài viết</div>
+        <div class="modal-head-sub" id="editModalSub">Lưu nháp hoặc gửi duyệt sau khi hoàn tất.</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('editModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field-group">
+        <label class="fl">Tiêu đề bài viết</label>
+        <input class="input-f" id="editTitle" type="text" placeholder="Nhập tiêu đề hấp dẫn...">
+      </div>
+      <div class="form-grid u-style-014">
+        <div>
+          <label class="fl">Danh mục</label>
+          <select class="select-f" id="editCat">
+            <option>Review</option><option>So sánh</option><option>Top list</option><option>Hướng dẫn</option><option>Tin tức</option>
+          </select>
+        </div>
+        <div>
+          <label class="fl">Trạng thái</label>
+          <div id="editStatusPill" class="u-style-015"><span class="status-pill pill-draft">📝 Bản nháp</span></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="fl">Nội dung</label>
+        <div class="editor-toolbar">
+          <button class="tool-btn"><b>B</b></button>
+          <button class="tool-btn"><i>I</i></button>
+          <button class="tool-btn"><u>U</u></button>
+          <div class="tool-sep"></div>
+          <button class="tool-btn">H1</button>
+          <button class="tool-btn">H2</button>
+          <div class="tool-sep"></div>
+          <button class="tool-btn">≡ List</button>
+          <button class="tool-btn">❝ Quote</button>
+          <div class="tool-sep"></div>
+          <button class="tool-btn">🔗 Link</button>
+          <button class="tool-btn">🖼️ Ảnh</button>
+        </div>
+        <textarea class="ta-f content-area" id="editContent" placeholder="Viết nội dung bài viết tại đây...&#10;&#10;Hãy chia sẻ đánh giá, so sánh, hoặc hướng dẫn chi tiết...&#10;&#10;Gợi ý: viết 800+ từ để SEO tốt hơn."></textarea>
+      </div>
+      <div class="field-group">
+        <label class="fl">Mô tả ngắn</label>
+        <textarea class="ta-f" rows="2" id="editExcerpt" placeholder="Mô tả tóm tắt, hiển thị trong danh sách blog (120–160 ký tự)..."></textarea>
+      </div>
+      <div class="form-grid u-style-014">
+        <div>
+          <label class="fl">Ảnh đại diện</label>
+          <div class="u-style-016">📸 Kéo thả hoặc bấm chọn ảnh</div>
+        </div>
+        <div>
+          <label class="fl">Từ khóa SEO</label>
+          <input class="input-f" type="text" placeholder="iPhone, Apple, review, 2026...">
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="fl">🔗 Affiliate Links trong bài</label>
+        <div class="aff-box" id="editAffBox">
+          <div class="aff-row">
+            <div class="aff-icon">🛒</div>
+            <div class="u-style-017">
+              <div class="aff-name">Shopee Affiliate</div>
+              <div class="aff-url">shopee.vn/product/ftech-example...</div>
+            </div>
+            <button class="aff-del" onclick="this.closest('.aff-row').remove()">✕</button>
+          </div>
+        </div>
+        <button class="add-aff" onclick="addAffRow()">+ Thêm affiliate link</button>
+      </div>
+      <div class="field-group">
+        <label class="fl">Ghi chú chỉnh sửa</label>
+        <textarea class="ta-f" rows="2" placeholder="Ghi chú nội bộ — lý do chỉnh sửa, những thay đổi đã thực hiện..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <span id="editAutoSave" class="u-style-018">💾 Lưu nháp tự động</span>
+      <button class="btn-cancel" onclick="closeModal('editModal')">Đóng</button>
+      <button class="btn-ghost" onclick="saveDraft()">Lưu nháp</button>
+      <button class="btn-primary" onclick="openSendFromEdit()">📤 Gửi duyệt</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ MODAL: SEND FOR REVIEW ═══════════════ -->
+<div class="modal-overlay" id="sendModal">
+  <div class="modal-simple">
+    <div class="ms-title">📤 Gửi bài lên duyệt</div>
+    <div class="ms-sub">Bài viết sẽ được gửi đến Super Admin để xét duyệt trước khi xuất bản. Bạn sẽ không thể chỉnh sửa khi đang chờ duyệt.</div>
+    <div class="ms-ref">📝 <span id="sendPostName">Tên bài viết</span></div>
+    <label class="fl2">Ghi chú gửi duyệt (không bắt buộc)</label>
+    <textarea class="ta-sm" placeholder="Ví dụ: đã bổ sung affiliate link, cập nhật thông tin mới nhất, kiểm tra kỹ lại grammar..."></textarea>
+    <div class="ms-actions">
+      <button class="btn-cancel" onclick="closeModal('sendModal')">Hủy</button>
+      <button class="btn-send" onclick="confirmSend()">📤 Gửi duyệt ngay</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ MODAL: DELETE ═══════════════ -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal-simple">
+    <div class="ms-title">🗑️ Xóa bài viết</div>
+    <div class="ms-sub">Hành động này không thể hoàn tác. Bài viết và toàn bộ dữ liệu liên quan sẽ bị xóa vĩnh viễn.</div>
+    <div class="ms-ref">📝 <span id="deletePostName">Tên bài viết</span></div>
+    <label class="fl2">Lý do xóa (không bắt buộc)</label>
+    <textarea class="ta-sm" placeholder="Ví dụ: nội dung đã lỗi thời, trùng với bài viết khác..."></textarea>
+    <div class="ms-actions">
+      <button class="btn-cancel" onclick="closeModal('deleteModal')">Hủy</button>
+      <button class="btn-danger" onclick="confirmDelete()">🗑️ Xóa vĩnh viễn</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ MODAL: PREVIEW ═══════════════ -->
+<div class="modal-overlay" id="previewModal">
+  <div class="preview-modal">
+    <div class="pv-head">
+      <div>
+        <div class="pv-head-title" id="pvHeadTitle">Xem trước bài viết</div>
+        <div class="pv-head-meta" id="pvHeadMeta">Trương Thị Kiều Nhi · Content Manager</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('previewModal')">✕</button>
+    </div>
+    <div class="pv-body">
+      <img id="pvThumb" class="pv-thumb" src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=1200&q=80" alt="" onerror="this.style.display='none'">
+      <div class="pv-tag" id="pvTag">Review</div>
+      <div class="pv-post-title" id="pvTitle">Tên bài viết</div>
+      <div class="pv-meta">
+        <span>👤 Trương Thị Kiều Nhi</span>
+        <span id="pvDate">📅 —</span>
+        <span>⏱️ ~5 phút đọc</span>
+        <span id="pvStatus"></span>
+      </div>
+      <div class="pv-content">
+        Đây là bản xem trước của bài viết. Nội dung đầy đủ sẽ hiển thị sau khi bạn hoàn thiện trong editor.<br><br>
+        <strong>Checklist trước khi gửi duyệt:</strong><br>
+        ✅ Tiêu đề rõ ràng, hấp dẫn<br>
+        ✅ Nội dung từ 800 từ trở lên<br>
+        ✅ Đã gắn affiliate link đúng vị trí<br>
+        ✅ Ảnh đại diện đã upload<br>
+        ✅ Mô tả SEO đã điền<br>
+        ✅ Kiểm tra chính tả và ngữ pháp
+      </div>
+      <div class="pv-aff" id="pvAff">
+        <div class="pv-aff-title">Affiliate links trong bài</div>
+        <div class="pv-aff-item">🛒 Shopee Affiliate — Xem sản phẩm trên Shopee <span class="u-style-019">Chưa có click</span></div>
+      </div>
+      <div class="pv-notice" id="pvNotice">
+        <span>⚠️</span>
+        <span id="pvNoticeText">Bài đang ở trạng thái nháp. Hãy hoàn thiện và gửi duyệt để xuất bản.</span>
+      </div>
+    </div>
+    <div class="pv-foot">
+      <button class="btn-cancel" onclick="closeModal('previewModal')">Đóng</button>
+      <button class="btn-ghost" id="pvEditBtn" onclick="closeModal('previewModal')">✏️ Chỉnh sửa</button>
+      <button class="btn-send" id="pvSendBtn" onclick="closeModal('previewModal');openSend(currentPreview)">📤 Gửi duyệt</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════ SCRIPT ═══════════════════ -->
+  <script src="assets/js/common/auth.js"></script>
+  <script src="assets/js/pages/content-manager.js"></script>
+
+</body>
+</html>

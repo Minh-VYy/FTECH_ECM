@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Theo Dõi Click Affiliate";
+    Layout = "~/Areas/AffiliateManager/Views/Shared/_AffiliateManagerLayout.cshtml";
+}
+
+<div class="topbar">
+    <div class="topbar-title">Theo Dõi Click</div>
+    <div class="topbar-search"><input type="text" placeholder="Tìm link, bài viết..."><button>🔍</button></div>
+    <div class="u-style-020">
+        <select class="fsel" id="periodSel" onchange="updatePeriod(this.value)">
+            <option value="today">Hôm nay</option>
+            <option value="week">7 ngày qua</option>
+            <option value="month" selected>Tháng này</option>
+            <option value="year">Năm này</option>
+        </select>
+        <button class="btn-ghost">Xuất báo cáo</button><button class="btn-primary">Làm mới</button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="welcome">
+        <div>
+            <div class="welcome-text">Theo Dõi Click Affiliate</div>
+            <div class="welcome-sub">Xem chi tiết số click từ các affiliate link trong hệ thống.</div>
+        </div>
+    </div>
+
+    <div class="chart-grid">
+        <div class="card">
+            <div class="card-title">Click Affiliate Theo Ngày</div>
+            <div class="bar-chart" id="mainChart"></div>
+        </div>
+        <div class="card">
+            <div class="card-title">Top Links</div>
+            <div class="rank-item">
+                <div class="rank-num">1</div>
+                <div class="rank-info">
+                    <div class="rank-name">Shopee - iPhone 16</div>
+                    <div class="rank-meta">847 clicks</div>
+                </div>
+                <div class="rank-val">6.8%</div>
+            </div>
+            <div class="rank-item">
+                <div class="rank-num">2</div>
+                <div class="rank-info">
+                    <div class="rank-name">Lazada - Laptop</div>
+                    <div class="rank-meta">523 clicks</div>
+                </div>
+                <div class="rank-val">5.2%</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/js/common/auth.js"></script>
+    <script src="~/Scripts/js/pages/dashboard.js"></script>
+}

@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Quản Lý Affiliate Link";
+    Layout = "~/Areas/AffiliateManager/Views/Shared/_AffiliateManagerLayout.cshtml";
+}
+
+<div class="topbar">
+    <div class="topbar-title">Quản Lý Affiliate Link</div>
+    <div class="topbar-search"><input type="text" placeholder="Tìm link, bài viết..."><button>🔍</button></div>
+    <div class="topbar-actions">
+        <button class="btn-ghost">Xuất báo cáo</button>
+        <button class="btn-primary" onclick="location.href='@Url.Action("Create", "Affiliate", new { area = "AffiliateManager" })'">+ Gắn Link Mới</button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="stat-row">
+        <div class="stat-card">
+            <div class="stat-label">Tổng Link</div>
+            <div class="stat-val sc-a">156</div>
+            <div class="stat-sub">Đang hoạt động</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Click Tháng Này</div>
+            <div class="stat-val sc-g">24.8K</div>
+            <div class="stat-sub">Trung bình/link: 159</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">CTR Cao Nhất</div>
+            <div class="stat-val sc-p">6.8%</div>
+            <div class="stat-sub">Review iPhone 16</div>
+        </div>
+    </div>
+
+    <div class="section-head">
+        <div class="sec-title">Danh sách Affiliate Links</div>
+    </div>
+
+    <div class="table-wrap">
+        <div class="t-head">
+            <div class="th">Link URL</div>
+            <div class="th">Bài Viết</div>
+            <div class="th">Partner</div>
+            <div class="th">Click</div>
+            <div class="th">CTR</div>
+            <div class="th">Thao Tác</div>
+        </div>
+        <div class="t-row">
+            <div><strong>shopee.vn/product/iphone</strong></div>
+            <div>Review iPhone 16</div>
+            <div>Shopee</div>
+            <div class="metric-g">847</div>
+            <div class="metric-a">6.8%</div>
+            <div>
+                <button class="act" type="button">📊</button>
+                <button class="act" type="button">✏️</button>
+                <button class="act" type="button">🗑️</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/js/common/auth.js"></script>
+    <script src="~/Scripts/js/pages/manage-affiliates.js"></script>
+}

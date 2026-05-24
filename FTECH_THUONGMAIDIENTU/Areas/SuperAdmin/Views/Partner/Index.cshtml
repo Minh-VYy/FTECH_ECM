@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Duyệt Đối Tác Mới";
+    Layout = "~/Areas/SuperAdmin/Views/Shared/_SuperAdminLayout.cshtml";
+}
+
+<div class="topbar">
+    <div class="topbar-title">Duyệt Đối Tác Mới</div>
+    <div class="topbar-search"><input type="text" placeholder="Tìm đối tác, ngành hàng..."><button>🔍</button></div>
+    <div class="topbar-actions">
+        <button class="btn-ghost">Xuất báo cáo</button>
+        <button class="btn-primary">Hồ sơ chờ duyệt</button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="stat-row">
+        <div class="stat-card">
+            <div class="stat-label">Tổng Đối Tác</div>
+            <div class="stat-val sc-a">34</div>
+            <div class="stat-sub">28 đang hoạt động</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Chờ Duyệt</div>
+            <div class="stat-val sc-p">4</div>
+            <div class="stat-sub">Cần phản hồi</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Tổng Click</div>
+            <div class="stat-val sc-g">24.8K</div>
+            <div class="stat-sub">Trong tháng</div>
+        </div>
+    </div>
+
+    <div class="section-head">
+        <div class="sec-title">Đối tác nổi bật</div>
+    </div>
+
+    <div class="partners-grid">
+        <div class="partner-card pc-pending">
+            <div class="pc-head">
+                <div class="pc-logo u-style-055"><img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=120&q=80" alt="Partner"></div>
+                <span class="pc-status pcs-pending">Chờ duyệt</span>
+            </div>
+            <div class="pc-name">Đối Tác Mới</div>
+            <div class="pc-cat"><div class="cat-dot"></div>Ngành hàng · website.com</div>
+            <div class="pc-meta">
+                <div>Liên hệ: contact@partner.com</div>
+                <div>Gửi từ: 29/03/2026</div>
+            </div>
+            <div class="pc-footer">
+                <button class="pc-btn" type="button" onclick="alert('Từ chối đối tác')">Từ Chối</button>
+                <button class="pc-btn-primary" type="button" onclick="alert('Duyệt đối tác')">Duyệt Đối Tác</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/js/common/auth.js"></script>
+    <script src="~/Scripts/js/pages/manage-partners.js"></script>
+}

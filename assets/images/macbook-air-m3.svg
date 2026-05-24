@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">MacBook Air M3</title>
+  <desc id="desc">Static placeholder product image for MacBook Air M3</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5f7ff"/>
+      <stop offset="100%" stop-color="#dde5ff"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8db1ff"/>
+      <stop offset="100%" stop-color="#4f6bcc"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="640" height="640" fill="url(#bg)"/>
+  <g transform="translate(92 128)">
+    <rect x="64" y="24" width="328" height="216" rx="16" fill="#1f274f"/>
+    <rect x="80" y="40" width="296" height="184" rx="10" fill="url(#screen)"/>
+    <circle cx="228" cy="32" r="4" fill="#3f4f8f"/>
+
+    <path d="M0 264h456l-24 24H24z" fill="#9fb0e6"/>
+    <rect x="192" y="264" width="72" height="8" rx="4" fill="#7f91c9"/>
+  </g>
+
+  <text x="320" y="534" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="700" fill="#405493">MacBook Air M3</text>
+</svg>

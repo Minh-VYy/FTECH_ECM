@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\backend",
+    "\\backend\\src",
+    "\\backend\\src\\Fintech.Api",
+    "\\backend\\src\\Fintech.Api\\bin",
+    "\\backend\\src\\Fintech.Api\\bin\\Release",
+    "\\backend\\src\\Fintech.Api\\bin\\Release\\net9.0",
+    "\\backend\\src\\Fintech.Api\\obj",
+    "\\backend\\src\\Fintech.Api\\obj\\Debug",
+    "\\backend\\src\\Fintech.Api\\obj\\Debug\\net9.0",
+    "\\backend\\src\\Fintech.Application",
+    "\\backend\\src\\Fintech.Application\\bin"
+  ],
+  "PreviewInSolutionExplorer": false
+}

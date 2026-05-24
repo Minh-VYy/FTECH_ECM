@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Xem Thông Kê Hiệu Suất";
+    Layout = "~/Areas/AffiliateManager/Views/Shared/_AffiliateManagerLayout.cshtml";
+}
+
+<div class="topbar">
+    <div class="topbar-title">Xem Thông Kê Hiệu Suất</div>
+    <div class="u-style-020">
+        <select class="fsel">
+            <option>Tất cả bài viết</option>
+            <option>Top 10</option>
+            <option>Bottom 10</option>
+        </select>
+        <button class="btn-ghost">Xuất báo cáo</button><button class="btn-primary">Làm mới</button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="card">
+        <div class="card-title">Hiệu Suất Affiliate Tổng Hợp</div>
+        
+        <div class="table-wrap">
+            <div class="t-head">
+                <div class="th">Bài Viết</div>
+                <div class="th">Click</div>
+                <div class="th">Conversion</div>
+                <div class="th">CTR</div>
+                <div class="th">Doanh Thu</div>
+            </div>
+            <div class="t-row">
+                <div><strong>Review iPhone 16 Pro Max</strong></div>
+                <div class="metric-g">847</div>
+                <div class="metric-a">312</div>
+                <div>6.8%</div>
+                <div class="metric-p">6.2Mđ</div>
+            </div>
+            <div class="t-row">
+                <div><strong>So sánh AirPods Pro 2</strong></div>
+                <div class="metric-g">523</div>
+                <div class="metric-a">108</div>
+                <div>5.2%</div>
+                <div class="metric-p">3.1Mđ</div>
+            </div>
+            <div class="t-row">
+                <div><strong>Top 5 Laptop Gaming</strong></div>
+                <div class="metric-g">412</div>
+                <div class="metric-a">68</div>
+                <div>4.1%</div>
+                <div class="metric-p">1.9Mđ</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/js/common/auth.js"></script>
+}

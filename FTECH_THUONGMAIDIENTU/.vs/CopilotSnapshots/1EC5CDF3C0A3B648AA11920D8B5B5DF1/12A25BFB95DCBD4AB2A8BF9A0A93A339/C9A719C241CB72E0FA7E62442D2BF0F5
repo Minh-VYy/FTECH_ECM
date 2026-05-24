@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lỗi - F-TECH Thương Mại Điện Tử</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .error-container {
+            text-align: center;
+            background: white;
+            padding: 50px 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+        }
+        .error-container h1 {
+            font-size: 80px;
+            margin: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        .error-container h2 {
+            font-size: 24px;
+            color: #333;
+            margin-top: 20px;
+        }
+        .error-container p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+        .error-container a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .error-container a:hover {
+            background-color: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>⚠️</h1>
+        <h2>Oops! Đã xảy ra lỗi</h2>
+        <p>Xin lỗi, có lỗi xảy ra khi xử lý yêu cầu của bạn.</p>
+        <p>Vui lòng quay lại trang chủ hoặc liên hệ với bộ phận hỗ trợ nếu vấn đề vẫn tiếp tục.</p>
+        <a href="/">Quay về trang chủ</a>
+    </div>
+</body>
+</html>

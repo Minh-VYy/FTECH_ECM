@@ -1,0 +1,86 @@
+﻿<html lang="vi"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTECH - Cổng đăng nhập phân quyền</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/pages/login.css">
+  <link rel="stylesheet" href="assets/css/common/inline-utilities.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="trangchu.html" class="logo"><span class="logo-badge">F</span>FTECH</a>
+      <div class="header-links">
+        <span class="u-style-042">Chưa có tài khoản ?</span>
+        <a href="register.html" class="btn-primary">Đăng kí</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="left-panel">
+      <div class="auth-card">
+        <div class="auth-head">
+          <div class="mini-logo"><span class="logo-badge">F</span>FTECH</div>
+          <div class="auth-title">Cổng đăng nhập hệ thống</div>
+        </div>
+
+        <div class="social-row">
+          <button class="social-btn" onclick="socialAuth('Google')">🌐 Google</button>
+          <button class="social-btn" onclick="socialAuth('Facebook')">📘 Facebook</button>
+        </div>
+
+        <div class="divider"><span>hoặc đăng nhập bằng tài khoản đã được cấp quyền</span></div>
+
+
+        <div class="toast" id="toastSuccess">Xác thực thành công. Hệ thống đang điều hướng theo quyền truy cập của bạn.</div>
+        <div class="toast-error" id="toastError">Thông tin đăng nhập không hợp lệ hoặc tài khoản chưa có quyền truy cập.</div>
+
+        <form id="loginForm" novalidate="">
+          <div class="field">
+            <label>Tài khoản / Email</label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input id="identifier" type="text" placeholder="Tên đăng nhập hoặc email">
+            </div>
+            <div class="field-error" id="errIdentifier">Vui lòng nhập tài khoản hoặc email.</div>
+          </div>
+
+          <div class="field">
+            <label>Mật khẩu</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input id="loginPassword" type="password" placeholder="Nhập mật khẩu">
+              <button class="toggle-pw" type="button" onclick="togglePw()">👁</button>
+            </div>
+            <div class="field-error" id="errPassword">Vui lòng nhập mật khẩu.</div>
+          </div>
+
+          <div class="field-row">
+            <label class="remember-wrap"><input type="checkbox"> Duy trì phiên đăng nhập</label>
+            <a href="reset-password.html" class="forgot-link">Quên mật khẩu?</a>
+          </div>
+
+          <button class="submit-btn" id="loginBtn" type="submit">Đăng nhập →</button>
+        </form>
+
+        <div class="register-link">Chưa có tài khoản? <a href="register.html">Đăng kí</a></div>
+      </div>
+    </section>
+
+    
+  </main>
+
+  <footer>© 2026 FTECH Technology. Bảo mật SSL - Thông tin của bạn được mã hoá an toàn.</footer>
+
+  <div class="modal-overlay" id="roleModal">
+    <div class="modal">
+      <div class="modal-icon" id="modalIcon">👤</div>
+      <div class="modal-title" id="modalTitle">Xác thực thành công</div>
+      <div class="modal-desc" id="modalDesc">Hệ thống đã xác định vai trò và chuẩn bị mở khu vực chức năng tương ứng.</div>
+      <div class="modal-role" id="modalRole">Người dùng</div>
+      <button class="modal-btn" onclick="closeModal()">Vào khu vực được cấp quyền</button>
+    </div>
+  </div>
+  <script src="assets/js/pages/login.js"></script>
+</body></html>

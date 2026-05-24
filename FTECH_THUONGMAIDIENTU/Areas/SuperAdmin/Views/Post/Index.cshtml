@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Duyệt Bài Viết";
+    Layout = "~/Areas/SuperAdmin/Views/Shared/_SuperAdminLayout.cshtml";
+}
+
+<div class="topbar">
+    <div class="topbar-title">Duyệt Bài Viết</div>
+    <div class="topbar-search"><input type="text" placeholder="Tìm bài viết, tác giả..."><button>🔍</button></div>
+    <div class="topbar-actions">
+        <button class="btn-ghost">Xuất báo cáo</button>
+        <button class="btn-primary">Làm mới</button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="stat-row">
+        <div class="stat-card">
+            <div class="stat-label">Chờ Duyệt</div>
+            <div class="stat-val sc-p">7</div>
+            <div class="stat-sub">Cần xử lý ngay</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Đã Duyệt</div>
+            <div class="stat-val sc-g">248</div>
+            <div class="stat-sub">Đã xuất bản</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Từ Chối</div>
+            <div class="stat-val sc-o">12</div>
+            <div class="stat-sub">Cần chỉnh sửa</div>
+        </div>
+    </div>
+
+    <div class="section-head">
+        <div class="sec-title">Bài viết chờ duyệt</div>
+        <select class="fsel">
+            <option>Mới cập nhật</option>
+            <option>Cũ nhất</option>
+        </select>
+    </div>
+
+    <div class="table-wrap">
+        <div class="t-head">
+            <div class="th">Bài Viết</div>
+            <div class="th">Tác Giả</div>
+            <div class="th">Ngày Gửi</div>
+            <div class="th">Danh Mục</div>
+            <div class="th">Thao Tác</div>
+        </div>
+        <div class="t-row">
+            <div>Tiêu đề bài viết</div>
+            <div>Nguyễn A</div>
+            <div>20/03/2026</div>
+            <div><span class="cat-tag">Review</span></div>
+            <div>
+                <button class="act" type="button">✓ Duyệt</button>
+                <button class="act" type="button">✕ Từ chối</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/js/common/auth.js"></script>
+    <script src="~/Scripts/js/pages/manage-posts.js"></script>
+}

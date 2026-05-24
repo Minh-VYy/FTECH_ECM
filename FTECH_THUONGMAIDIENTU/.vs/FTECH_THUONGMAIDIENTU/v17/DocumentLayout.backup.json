@@ -1,0 +1,1014 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\superadmin\\views\\post\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\superadmin\\views\\post\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\useraccount\\views\\account\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\useraccount\\views\\account\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\admin\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\admin\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\admin\\views\\affiliate\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\admin\\views\\affiliate\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\admin\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\admin\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\admin\\views\\account\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\admin\\views\\account\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\areas\\useraccount\\views\\shared\\_useraccountlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\useraccount\\views\\shared\\_useraccountlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\useraccount\\views\\account\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\useraccount\\views\\account\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\useraccount\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\useraccount\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\review\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\review\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\home\\trangchu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\home\\trangchu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\account\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\account\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\account\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\account\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\areas\\contentmanager\\views\\post\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\contentmanager\\views\\post\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\areas\\contentmanager\\views\\post\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\contentmanager\\views\\post\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\superadmin\\views\\shared\\_superadminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\superadmin\\views\\shared\\_superadminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\superadmin\\controllers\\partnercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\superadmin\\controllers\\partnercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\superadmin\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\superadmin\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\superadmin\\controllers\\adminaccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\superadmin\\controllers\\adminaccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\contentmanager\\contentmanagerarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\contentmanager\\contentmanagerarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\contentmanager\\views\\shared\\_contentmanagerlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\contentmanager\\views\\shared\\_contentmanagerlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\contentmanager\\views\\post\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\contentmanager\\views\\post\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\contentmanager\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\contentmanager\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\admin\\controllers\\partnercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\admin\\controllers\\partnercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\admin\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\admin\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\admin\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\admin\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\manage-affiliates.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\manage-affiliates.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\useraccount\\useraccountarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\useraccount\\useraccountarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\affiliatemanager\\affiliatemanagerarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\affiliatemanager\\affiliatemanagerarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\superadmin\\superadminarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\superadmin\\superadminarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\admin\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\admin\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\admin\\views\\partner\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\admin\\views\\partner\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\dashboard.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\dashboard.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\login.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\manage-accounts.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\manage-accounts.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\content-manager.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\content-manager.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\app_start\\filterconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:app_start\\filterconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\manage-partners.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\manage-partners.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\superadmin\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\superadmin\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\affiliatemanager\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\affiliatemanager\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\affiliatemanager\\controllers\\affiliatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\affiliatemanager\\controllers\\affiliatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\affiliatemanager\\controllers\\analyticscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\affiliatemanager\\controllers\\analyticscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\affiliatemanager\\views\\shared\\_affiliatemanagerlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\affiliatemanager\\views\\shared\\_affiliatemanagerlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\superadmin\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\superadmin\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\superadmin\\views\\partner\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\superadmin\\views\\partner\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\superadmin\\views\\adminaccount\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\superadmin\\views\\adminaccount\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\affiliatemanager\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\affiliatemanager\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\affiliatemanager\\views\\affiliate\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\affiliatemanager\\views\\affiliate\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\affiliatemanager\\views\\analytics\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\affiliatemanager\\views\\analytics\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\affiliatemanager\\views\\analytics\\performance.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\affiliatemanager\\views\\analytics\\performance.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 9,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Account\\Login.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T13:48:19.072Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Affiliate\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Affiliate\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Affiliate\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Affiliate\\Index.cshtml",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAAABYAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T13:36:34.147Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Dashboard\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Dashboard\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Dashboard\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Dashboard\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAO0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T13:48:50.267Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BundleConfig.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\App_Start\\BundleConfig.cs",
+              "RelativeDocumentMoniker": "App_Start\\BundleConfig.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\App_Start\\BundleConfig.cs",
+              "RelativeToolTip": "App_Start\\BundleConfig.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAlwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T13:15:09.296Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Views\\Account\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Areas\\UserAccount\\Views\\Account\\Dashboard.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Views\\Account\\Dashboard.cshtml",
+              "RelativeToolTip": "Areas\\UserAccount\\Views\\Account\\Dashboard.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:10:21.308Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Post\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Views\\Post\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Post\\Index.cshtml",
+              "RelativeToolTip": "Areas\\SuperAdmin\\Views\\Post\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:08:44.068Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Account\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Account\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Account\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Account\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T13:36:53.701Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_UserAccountLayout.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Views\\Shared\\_UserAccountLayout.cshtml",
+              "RelativeDocumentMoniker": "Areas\\UserAccount\\Views\\Shared\\_UserAccountLayout.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Views\\Shared\\_UserAccountLayout.cshtml",
+              "RelativeToolTip": "Areas\\UserAccount\\Views\\Shared\\_UserAccountLayout.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:08:02.91Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Views\\Account\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Areas\\UserAccount\\Views\\Account\\Edit.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Views\\Account\\Edit.cshtml",
+              "RelativeToolTip": "Areas\\UserAccount\\Views\\Account\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:22:20.509Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Areas\\UserAccount\\Controllers\\AccountController.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Areas\\UserAccount\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T14:07:28.709Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T13:15:28.042Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T13:15:26.811Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Error.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Error.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T13:15:27.436Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Review\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Review\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Review\\Index.cshtml",
+              "RelativeToolTip": "Views\\Review\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:41:17.983Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Product\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Product\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Product\\Index.cshtml",
+              "RelativeToolTip": "Views\\Product\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:40:38.498Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Trangchu.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Home\\Trangchu.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Trangchu.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Home\\Trangchu.cshtml",
+              "RelativeToolTip": "Views\\Home\\Trangchu.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:39:54.205Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ResetPassword.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\ResetPassword.cshtml",
+              "RelativeDocumentMoniker": "Views\\Account\\ResetPassword.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\ResetPassword.cshtml",
+              "RelativeToolTip": "Views\\Account\\ResetPassword.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:38:54.847Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "Views\\Account\\Register.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\Register.cshtml",
+              "RelativeToolTip": "Views\\Account\\Register.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAH8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:38:31.823Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\Profile.cshtml",
+              "RelativeDocumentMoniker": "Views\\Account\\Profile.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\Profile.cshtml",
+              "RelativeToolTip": "Views\\Account\\Profile.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:42:04.123Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Account\\Login.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:38:09.904Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Views\\Post\\Create.cshtml",
+              "RelativeDocumentMoniker": "Areas\\ContentManager\\Views\\Post\\Create.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Views\\Post\\Create.cshtml",
+              "RelativeToolTip": "Areas\\ContentManager\\Views\\Post\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAH8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:36:56.671Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Views\\Post\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Areas\\ContentManager\\Views\\Post\\Edit.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Views\\Post\\Edit.cshtml",
+              "RelativeToolTip": "Areas\\ContentManager\\Views\\Post\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:37:44.93Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "PartnerController.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Controllers\\PartnerController.cs",
+              "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Controllers\\PartnerController.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Controllers\\PartnerController.cs",
+              "RelativeToolTip": "Areas\\SuperAdmin\\Controllers\\PartnerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T14:06:22.567Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "_SuperAdminLayout.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Shared\\_SuperAdminLayout.cshtml",
+              "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Views\\Shared\\_SuperAdminLayout.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Shared\\_SuperAdminLayout.cshtml",
+              "RelativeToolTip": "Areas\\SuperAdmin\\Views\\Shared\\_SuperAdminLayout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:07:45.488Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Controllers\\DashboardController.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "Areas\\SuperAdmin\\Controllers\\DashboardController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T14:05:55.409Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "AdminAccountController.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Controllers\\AdminAccountController.cs",
+              "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Controllers\\AdminAccountController.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Controllers\\AdminAccountController.cs",
+              "RelativeToolTip": "Areas\\SuperAdmin\\Controllers\\AdminAccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T14:06:36.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ContentManagerAreaRegistration.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\ContentManagerAreaRegistration.cs",
+              "RelativeDocumentMoniker": "Areas\\ContentManager\\ContentManagerAreaRegistration.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\ContentManagerAreaRegistration.cs",
+              "RelativeToolTip": "Areas\\ContentManager\\ContentManagerAreaRegistration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T13:50:12.521Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "_ContentManagerLayout.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Views\\Shared\\_ContentManagerLayout.cshtml",
+              "RelativeDocumentMoniker": "Areas\\ContentManager\\Views\\Shared\\_ContentManagerLayout.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Views\\Shared\\_ContentManagerLayout.cshtml",
+              "RelativeToolTip": "Areas\\ContentManager\\Views\\Shared\\_ContentManagerLayout.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T13:50:22.531Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Views\\Post\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\ContentManager\\Views\\Post\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Views\\Post\\Index.cshtml",
+              "RelativeToolTip": "Areas\\ContentManager\\Views\\Post\\Index.cshtml",
+              "ViewState": "AgIAAPYAAAAAAAAAAAAAAPwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T13:49:57.255Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "PostController.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Controllers\\PostController.cs",
+              "RelativeDocumentMoniker": "Areas\\ContentManager\\Controllers\\PostController.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Controllers\\PostController.cs",
+              "RelativeToolTip": "Areas\\ContentManager\\Controllers\\PostController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T13:51:07.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "PartnerController.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Controllers\\PartnerController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\PartnerController.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Controllers\\PartnerController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\PartnerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T13:50:47.316Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\DashboardController.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\DashboardController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T13:50:41.381Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\AccountController.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAmwCAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T13:50:53.129Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "UserAccountAreaRegistration.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\UserAccountAreaRegistration.cs",
+              "RelativeDocumentMoniker": "Areas\\UserAccount\\UserAccountAreaRegistration.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\UserAccountAreaRegistration.cs",
+              "RelativeToolTip": "Areas\\UserAccount\\UserAccountAreaRegistration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T14:05:45.91Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "manage-affiliates.html",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\manage-affiliates.html",
+              "RelativeDocumentMoniker": "Views\\manage-affiliates.html",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\manage-affiliates.html",
+              "RelativeToolTip": "Views\\manage-affiliates.html",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-05-09T13:42:39.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "AffiliateManagerAreaRegistration.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\AffiliateManagerAreaRegistration.cs",
+              "RelativeDocumentMoniker": "Areas\\AffiliateManager\\AffiliateManagerAreaRegistration.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\AffiliateManagerAreaRegistration.cs",
+              "RelativeToolTip": "Areas\\AffiliateManager\\AffiliateManagerAreaRegistration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T14:05:41.258Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "SuperAdminAreaRegistration.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\SuperAdminAreaRegistration.cs",
+              "RelativeDocumentMoniker": "Areas\\SuperAdmin\\SuperAdminAreaRegistration.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\SuperAdminAreaRegistration.cs",
+              "RelativeToolTip": "Areas\\SuperAdmin\\SuperAdminAreaRegistration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T14:05:35.433Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "Performance.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Analytics\\Performance.cshtml",
+              "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Views\\Analytics\\Performance.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Analytics\\Performance.cshtml",
+              "RelativeToolTip": "Areas\\AffiliateManager\\Views\\Analytics\\Performance.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:10:08.38Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Analytics\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Views\\Analytics\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Analytics\\Index.cshtml",
+              "RelativeToolTip": "Areas\\AffiliateManager\\Views\\Analytics\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:09:54.377Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Affiliate\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Views\\Affiliate\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Affiliate\\Index.cshtml",
+              "RelativeToolTip": "Areas\\AffiliateManager\\Views\\Affiliate\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:09:36.468Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Dashboard\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Views\\Dashboard\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Dashboard\\Index.cshtml",
+              "RelativeToolTip": "Areas\\AffiliateManager\\Views\\Dashboard\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:09:25.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\AdminAccount\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Views\\AdminAccount\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\AdminAccount\\Index.cshtml",
+              "RelativeToolTip": "Areas\\SuperAdmin\\Views\\AdminAccount\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:09:12.712Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Partner\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Views\\Partner\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Partner\\Index.cshtml",
+              "RelativeToolTip": "Areas\\SuperAdmin\\Views\\Partner\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:08:56.168Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Dashboard\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Views\\Dashboard\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Dashboard\\Index.cshtml",
+              "RelativeToolTip": "Areas\\SuperAdmin\\Views\\Dashboard\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:08:33.181Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "_AffiliateManagerLayout.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Shared\\_AffiliateManagerLayout.cshtml",
+              "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Views\\Shared\\_AffiliateManagerLayout.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Shared\\_AffiliateManagerLayout.cshtml",
+              "RelativeToolTip": "Areas\\AffiliateManager\\Views\\Shared\\_AffiliateManagerLayout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:07:53.564Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "AnalyticsController.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Controllers\\AnalyticsController.cs",
+              "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Controllers\\AnalyticsController.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Controllers\\AnalyticsController.cs",
+              "RelativeToolTip": "Areas\\AffiliateManager\\Controllers\\AnalyticsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T14:07:15.376Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "AffiliateController.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Controllers\\AffiliateController.cs",
+              "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Controllers\\AffiliateController.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Controllers\\AffiliateController.cs",
+              "RelativeToolTip": "Areas\\AffiliateManager\\Controllers\\AffiliateController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T14:07:03.182Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Controllers\\DashboardController.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "Areas\\AffiliateManager\\Controllers\\DashboardController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T14:06:50.42Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "PostController.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Controllers\\PostController.cs",
+              "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Controllers\\PostController.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Controllers\\PostController.cs",
+              "RelativeToolTip": "Areas\\SuperAdmin\\Controllers\\PostController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T14:06:09.878Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "_AdminLayout.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Shared\\_AdminLayout.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Shared\\_AdminLayout.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Shared\\_AdminLayout.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Shared\\_AdminLayout.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T13:51:22.555Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Partner\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Partner\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Partner\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Partner\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T13:49:25.126Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "dashboard.html",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\dashboard.html",
+              "RelativeDocumentMoniker": "Views\\dashboard.html",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\dashboard.html",
+              "RelativeToolTip": "Views\\dashboard.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-05-09T13:41:46.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "login.html",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\login.html",
+              "RelativeDocumentMoniker": "Views\\login.html",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\login.html",
+              "RelativeToolTip": "Views\\login.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-05-09T13:41:48.735Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "manage-accounts.html",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\manage-accounts.html",
+              "RelativeDocumentMoniker": "Views\\manage-accounts.html",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\manage-accounts.html",
+              "RelativeToolTip": "Views\\manage-accounts.html",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-05-09T13:34:47.116Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "content-manager.html",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\content-manager.html",
+              "RelativeDocumentMoniker": "Views\\content-manager.html",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\content-manager.html",
+              "RelativeToolTip": "Views\\content-manager.html",
+              "ViewState": "AgIAAIwBAAAAAAAAAAAAALEBAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-05-09T13:38:09.986Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "FilterConfig.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\App_Start\\FilterConfig.cs",
+              "RelativeDocumentMoniker": "App_Start\\FilterConfig.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\App_Start\\FilterConfig.cs",
+              "RelativeToolTip": "App_Start\\FilterConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T13:15:13.461Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "RouteConfig.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\App_Start\\RouteConfig.cs",
+              "RelativeDocumentMoniker": "App_Start\\RouteConfig.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\App_Start\\RouteConfig.cs",
+              "RelativeToolTip": "App_Start\\RouteConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T13:15:10.126Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "manage-partners.html",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\manage-partners.html",
+              "RelativeDocumentMoniker": "Views\\manage-partners.html",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\manage-partners.html",
+              "RelativeToolTip": "Views\\manage-partners.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-05-09T13:41:40.352Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "packages.config",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\packages.config",
+              "RelativeDocumentMoniker": "packages.config",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\packages.config",
+              "RelativeToolTip": "packages.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-05-09T13:39:31.286Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T13:15:17.186Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 406,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
