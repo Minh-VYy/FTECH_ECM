@@ -1,0 +1,18 @@
+@{
+    Layout = null;
+    var html = System.IO.File.ReadAllText(Server.MapPath("~/Views/dashboard.html"));
+    html = html.Replace("href=\"assets/css/pages/dashboard.css\"", "href=\"" +
+Url.Content("~/Content/css/pages/dashboard.css") + "\"");
+    html = html.Replace("href=\"assets/css/common/inline-utilities.css\"", "href=\"" +
+Url.Content("~/Content/css/common/inline-utilities.css") + "\"");
+    html = html.Replace("href=\"assets/css/common/admin-shell.css\"", "href=\"" +
+Url.Content("~/Content/css/common/admin-shell.css") + "\"");
+    html = html.Replace("src=\"assets/js/common/auth.js\"", "src=\"" + Url.Content("~/Scripts/js/common/auth.js") + "\"");
+    html = html.Replace("src=\"assets/js/pages/dashboard.js\"", "src=\"" + Url.Content("~/Scripts/js/pages/dashboard.js") +
+"\"");
+    html = html.Replace("dashboard.html", Url.Action("Index", "Dashboard", new { area = "Admin" }));
+    html = html.Replace("manage-posts.html", Url.Action("Index", "Post", new { area = "Admin" }));
+    html = html.Replace("manage-partners.html", Url.Action("Index", "Partner", new { area = "Admin" }));
+    html = html.Replace("manage-accounts.html", Url.Action("Accounts", "Account", new { area = "Admin" }));
+}
+@Html.Raw(html)

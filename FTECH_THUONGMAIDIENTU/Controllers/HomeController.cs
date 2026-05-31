@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FTECH_THUONGMAIDIENTU.Data;
 
 namespace FTECH_THUONGMAIDIENTU.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly StatisticsRepository statisticsRepository = new StatisticsRepository();
+        private readonly PostRepository postRepository = new PostRepository();
+
         public ActionResult Index()
         {
             ViewBag.Title = "FTECH – Công Nghệ Đỉnh Cao";
+            ViewBag.Summary = statisticsRepository.GetSummary();
+            ViewBag.FeaturedPosts = postRepository.GetPublishedPosts(3);
+            ViewBag.TopPost = postRepository.GetTopPublishedPost();
             return View("Trangchu");
         }
 
@@ -42,7 +49,7 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
                     ViewBag.SuccessMessage = "Cảm ơn bạn! Tin nhắn của bạn đã được gửi thành công. Chúng tôi sẽ liên hệ lại trong thời gian sớm nhất.";
                     return RedirectToAction("Contact");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     ViewBag.ErrorMessage = "Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại.";
                 }

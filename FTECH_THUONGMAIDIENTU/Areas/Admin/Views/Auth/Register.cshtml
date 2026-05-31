@@ -1,0 +1,114 @@
+@{
+    ViewBag.Title = "Đăng ký tài khoản";
+    ViewBag.AuthHeaderHint = "Đã có tài khoản ?";
+    ViewBag.AuthCtaText = "Đăng nhập";
+    ViewBag.AuthCtaUrl = Url.Action("Login", "Account", new { area = "Admin" });
+    var termsUrl = Url.Action("Index", "Home") + "#s-support";
+    var loginUrl = Url.Action("Login", "Account", new { area = "Admin" });
+    Layout = "~/Areas/Admin/Views/Shared/_AdminAuthLayout.cshtml";
+}
+
+<div class="auth-card">
+    <div class="auth-head">
+        <div class="mini-logo"><span class="logo-badge">F</span>FTECH</div>
+        <div class="auth-title">Tạo tài khoản mới</div>
+        <div class="auth-subtitle">Tham gia FTECH để theo dõi review, lưu bài viết và tương tác với hệ thống affiliate
+            rõ ràng hơn.</div>
+        </div>
+
+        <div class="social-row">
+            <button class="social-btn" type="button" onclick="socialAuth('Google')">🌐 Google</button>
+            <button class="social-btn" type="button" onclick="socialAuth('Facebook')">📘 Facebook</button>
+        </div>
+
+        <div class="divider"><span>hoặc đăng ký bằng email</span></div>
+
+        <div class="toast" id="toastSuccess">Đăng ký thành công. Bạn có thể chuyển sang đăng nhập để tiếp tục sử dụng hệ
+            thống.</div>
+            <div class="toast-error" id="toastError">Vui lòng kiểm tra lại thông tin bên dưới.</div>
+            <div class="verify-box" id="verifyBox">Hệ thống đã ghi nhận yêu cầu tạo tài khoản. Trong bản demo, đây là bước mô
+                phỏng xác nhận email trước khi chuyển sang đăng nhập.</div>
+
+                <form id="registerForm" novalidate="">
+                    <div class="form-row">
+                        <div class="field">
+                            <label>Họ</label>
+                            <div class="input-wrap">
+                                <span class="input-icon">👤</span>
+                                <input id="lastName" type="text" placeholder="Nguyễn">
+                            </div>
+                            <div class="field-error" id="errLastName">Vui lòng nhập họ.</div>
+                        </div>
+                        <div class="field">
+                            <label>Tên</label>
+                            <div class="input-wrap">
+                                <span class="input-icon">✏️</span>
+                                <input id="firstName" type="text" placeholder="Văn A">
+                            </div>
+                            <div class="field-error" id="errFirstName">Vui lòng nhập tên.</div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Email</label>
+                        <div class="input-wrap">
+                            <span class="input-icon">✉️</span>
+                            <input id="email" type="email" placeholder="example@email.com">
+                        </div>
+                        <div class="field-error" id="errEmail">Email không hợp lệ.</div>
+                    </div>
+
+                    <div class="field">
+                        <label>Tên đăng nhập</label>
+                        <div class="input-wrap">
+                            <span class="input-icon">🪪</span>
+                            <input id="username" type="text" placeholder="ftech_username">
+                        </div>
+                        <div class="field-error" id="errUsername">Tên đăng nhập tối thiểu 4 ký tự.</div>
+                        <div class="field-hint">Tên đăng nhập dùng để đăng nhập và hiển thị công khai khi bạn đánh giá hoặc bình
+                            luận.</div>
+                        </div>
+
+                        <div class="field">
+                            <label>Mật khẩu</label>
+                            <div class="input-wrap">
+                                <span class="input-icon">🔒</span>
+                                <input id="password" type="password" placeholder="Tối thiểu 8 ký tự">
+                                <button class="toggle-pw" type="button" onclick="togglePw('password', this)">👁</button>
+                            </div>
+                            <div class="pw-bars">
+                                <div class="pw-bar" id="bar1"></div>
+                                <div class="pw-bar" id="bar2"></div>
+                                <div class="pw-bar" id="bar3"></div>
+                                <div class="pw-bar" id="bar4"></div>
+                            </div>
+                            <div class="pw-label" id="pwLabel">Nhập mật khẩu để xem độ mạnh.</div>
+                            <div class="field-error" id="errPassword">Mật khẩu phải có ít nhất 8 ký tự.</div>
+                        </div>
+
+                        <div class="field">
+                            <label>Xác nhận mật khẩu</label>
+                            <div class="input-wrap">
+                                <span class="input-icon">🔐</span>
+                                <input id="confirmPassword" type="password" placeholder="Nhập lại mật khẩu">
+                                <button class="toggle-pw" type="button" onclick="togglePw('confirmPassword', this)">👁</button>
+                            </div>
+                            <div class="field-error" id="errConfirmPassword">Mật khẩu xác nhận không khớp.</div>
+                        </div>
+
+                        <label class="check-row">
+                            <input id="terms" type="checkbox">
+                            <span>Tôi đồng ý với <a href="@termsUrl">Điều khoản dịch vụ</a> và <a href="@termsUrl">Chính sách quyền
+                                riêng tư</a> của FTECH.</span>
+                            </label>
+                            <div class="check-error" id="errTerms">Bạn phải đồng ý điều khoản để tiếp tục.</div>
+
+                            <button class="submit-btn" id="submitBtn" type="submit">Tạo tài khoản →</button>
+                        </form>
+
+                        <div class="login-link">Đã có tài khoản? <a href="@loginUrl">Đăng nhập ngay</a></div>
+                    </div>
+
+                    @section scripts {
+                        <script src="~/Scripts/js/pages/register.js"></script>
+                    }

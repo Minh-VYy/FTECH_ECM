@@ -17,7 +17,7 @@
 
   function logout() {
     clearAuthStorage();
-    window.location.href = 'login.html';
+    window.location.href = '/Account/Login';
   }
 
   function ensureAdminLogoutButton() {

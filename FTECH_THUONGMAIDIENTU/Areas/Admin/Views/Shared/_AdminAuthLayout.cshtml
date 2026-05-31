@@ -1,0 +1,43 @@
+@{
+    Layout = null;
+    var title = ViewBag.Title as string ?? "Cổng đăng nhập phân quyền";
+    var authHeaderHint = ViewBag.AuthHeaderHint as string ?? "Chưa có tài khoản ?";
+    var authCtaText = ViewBag.AuthCtaText as string ?? "Đăng kí";
+    var authCtaUrl = ViewBag.AuthCtaUrl as string ?? Url.Action("Register", "Account", new { area = "Admin" });
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@title - FTECH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+    @Styles.Render("~/Content/auth/css")
+    <link rel="stylesheet" href="~/Content/css/common/inline-utilities.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="@Url.Action("Index", "Home")" class="logo"><span class="logo-badge">F</span>FTECH</a>
+            <div class="header-links">
+                <span class="u-style-042">@authHeaderHint</span>
+                <a href="@authCtaUrl" class="btn-primary">@authCtaText</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer>© 2026 FTECH Technology. Bảo mật SSL - Thông tin của bạn được mã hoá an toàn.</footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

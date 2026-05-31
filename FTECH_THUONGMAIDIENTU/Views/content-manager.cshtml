@@ -1,0 +1,18 @@
+@{
+    Layout = null;
+    var html = System.IO.File.ReadAllText(Server.MapPath("~/Views/content-manager.html"));
+    html = html.Replace("href=\"assets/css/pages/content-manager.css\"", "href=\"" +
+Url.Content("~/Content/css/pages/content-manager.css") + "\"");
+    html = html.Replace("href=\"assets/css/common/inline-utilities.css\"", "href=\"" +
+Url.Content("~/Content/css/common/inline-utilities.css") + "\"");
+    html = html.Replace("href=\"assets/css/common/admin-shell.css\"", "href=\"" +
+Url.Content("~/Content/css/common/admin-shell.css") + "\"");
+    html = html.Replace("src=\"assets/js/common/include.js\"", "src=\"" + Url.Content("~/Scripts/js/common/include.js") +
+"\"");
+    html = html.Replace("src=\"assets/js/common/auth.js\"", "src=\"" + Url.Content("~/Scripts/js/common/auth.js") + "\"");
+    html = html.Replace("src=\"assets/js/pages/content-manager.js\"", "src=\"" +
+Url.Content("~/Scripts/js/pages/content-manager.js") + "\"");
+    html = html.Replace("content-manager.html", Url.Action("Index", "Post", new { area = "ContentManager" }));
+    html = html.Replace("postManager.html", Url.Action("Create", "Post", new { area = "ContentManager" }));
+}
+@Html.Raw(html)

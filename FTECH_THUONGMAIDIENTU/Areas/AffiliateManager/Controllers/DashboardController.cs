@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using FTECH_THUONGMAIDIENTU.Data;
 
 namespace FTECH_THUONGMAIDIENTU.Areas.AffiliateManager.Controllers
 {
@@ -8,11 +9,14 @@ namespace FTECH_THUONGMAIDIENTU.Areas.AffiliateManager.Controllers
     /// </summary>
     public class DashboardController : Controller
     {
+        private readonly StatisticsRepository statisticsRepository = new StatisticsRepository();
+
         // GET: AffiliateManager/Dashboard
         public ActionResult Index()
         {
             ViewBag.Title = "Dashboard - Quản Lý Affiliate";
             ViewBag.UserRole = "Affiliate Manager";
+            ViewBag.Summary = statisticsRepository.GetSummary();
             return View();
         }
     }

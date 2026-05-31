@@ -1,0 +1,71 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTECH - Đăng Bài Viết</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href='@Url.Content("~/Content/css/pages/postManager.css")'>
+    <link rel="stylesheet" href='@Url.Content("~/Content/css/common/inline-utilities.css")'>
+    <link rel="stylesheet" href='@Url.Content("~/Content/css/common/admin-shell.css")'>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sb-logo"><a href='@Url.Action("Index", "Post", new { area = "ContentManager" })' class="logo"><span
+            class="logo-badge">F</span>FTECH Admin</a></div>
+            <div class="sb-role">Content Manager</div>
+            <a href='@Url.Action("Create", "Post", new { area = "ContentManager" })' class="sb-item active"><span
+                class="si">✏️</span>Tạo bài viết mới</a>
+                <a href='@Url.Action("Index", "Post", new { area = "ContentManager" })' class="sb-item"><span
+                    class="si">📋</span>Bài viết của tôi</a>
+                    <div class="sb-bottom">
+                        <div class="sb-user">
+                            <div class="sb-avatar"><img
+                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80"
+                                alt="Trương Thị Kiều Nhi"></div>
+                                <div>
+                                    <div class="sb-name">Trương Thị Kiều Nhi</div>
+                                    <div class="sb-role-tag">Content Manager</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main">
+                        <div class="page-wrap">
+
+                            <div class="editor-topbar">
+                                <div>
+                                    <div class="page-title">Đăng bài viết mới</div>
+
+                                    <div class="u-style-078">
+                                        <span class="status-indicator si-draft">Bản nháp</span>
+                                        <span class="u-style-065">Lần lưu cuối: 2 phút trước</span>
+                                    </div>
+                                </div>
+                                <div class="topbar-actions">
+                                    <select class="status-select" id="statusSelect" onchange="updateStatus(this.value)">
+                                        <option value="draft">Bản nháp</option>
+                                        <option value="pending">Chờ duyệt</option>
+                                        <option value="published">Đã đăng</option>
+                                    </select>
+
+                                    <button class="btn-primary">Gửi duyệt →</button>
+                                </div>
+                            </div>
+                            ...
+                        </div>
+
+                        <script src='@Url.Content("~/Scripts/js/common/auth.js")'></script>
+                        <script src='@Url.Content("~/Scripts/js/pages/postManager.js")'></script>
+
+                    </body>
+
+                </html>

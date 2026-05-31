@@ -120,6 +120,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Data\AccountRepository.cs" />
+    <Compile Include="Data\AdminRepository.cs" />
+    <Compile Include="Data\MemberRepository.cs" />
+    <Compile Include="Data\PostRepository.cs" />
+    <Compile Include="Data\StatisticsRepository.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
@@ -137,6 +142,8 @@
     <Compile Include="Areas\SuperAdmin\SuperAdminAreaRegistration.cs" />
     <Compile Include="Areas\UserAccount\Controllers\AccountController.cs" />
     <Compile Include="Areas\UserAccount\UserAccountAreaRegistration.cs" />
+    <Compile Include="Infrastructure\PasswordHasher.cs" />
+    <Compile Include="Infrastructure\SqlConnectionFactory.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -144,6 +151,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Auth\AccountAuthRequest.cs" />
+    <Compile Include="Models\Auth\AuthResult.cs" />
+    <Compile Include="Models\Auth\RegisterMemberRequest.cs" />
+    <Compile Include="Models\Auth\ResetPasswordRequest.cs" />
+    <Compile Include="Models\Admin\AdminProfileSummary.cs" />
+    <Compile Include="Models\Dashboard\DashboardSummary.cs" />
+    <Compile Include="Models\ContentManager\CategoryOption.cs" />
+    <Compile Include="Models\ContentManager\PostEditorRequest.cs" />
+    <Compile Include="Models\ContentManager\PostEditorViewModel.cs" />
+    <Compile Include="Models\Posts\PostSummary.cs" />
+    <Compile Include="Models\UserAccount\MemberProfileSummary.cs" />
+    <Compile Include="Models\UserAccount\MemberProfileUpdateRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,13 +212,16 @@
     <Content Include="Views\manage-affiliates.html" />
     <Content Include="Views\manage-partners.html" />
     <Content Include="Views\manage-posts.html" />
-    <Content Include="Views\postManager.html" />
-    <Content Include="Views\product.html" />
-    <Content Include="Views\profileManager.html" />
     <Content Include="Views\register.html" />
     <Content Include="Views\reset-password.html" />
     <Content Include="Views\reviewModule.html" />
     <Content Include="Views\trangchu.html" />
+    <Content Include="Views\manage-posts.cshtml" />
+    <Content Include="Views\manage-partners.cshtml" />
+    <Content Include="Views\manage-affiliates.cshtml" />
+    <Content Include="Views\manage-accounts.cshtml" />
+    <Content Include="Views\dashboard.cshtml" />
+    <Content Include="Views\content-manager.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -219,9 +241,12 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Affiliate\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Auth\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Auth\Register.cshtml" />
+    <Content Include="Areas\Admin\Views\Auth\ResetPassword.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Partner\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminAuthLayout.cshtml" />
     <Content Include="Areas\ContentManager\Views\Post\Index.cshtml" />
     <Content Include="Areas\ContentManager\Views\Shared\_ContentManagerLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
@@ -239,20 +264,15 @@
     <Content Include="Areas\UserAccount\Views\Account\Dashboard.cshtml" />
     <Content Include="Areas\UserAccount\Views\Account\Edit.cshtml" />
     <Content Include="Areas\UserAccount\Views\Account\Profile.cshtml" />
-    <Content Include="CONVERSION_COMPLETE.md" />
-    <Content Include="MISSING_FILES_ANALYSIS.md" />
     <Content Include="Areas\ContentManager\Views\Post\Create.cshtml" />
     <Content Include="Areas\ContentManager\Views\Post\Edit.cshtml" />
     <None Include="packages.config" />
-    <Content Include="PROJECT_STRUCTURE_5AREAS.md" />
-    <Content Include="URL_MAPPING_GUIDE.md" />
-    <Content Include="QUICK_START.md" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Home\Trangchu.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Post\Manage.cshtml" />
     <Content Include="Views\Review\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>

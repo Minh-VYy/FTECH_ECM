@@ -1,0 +1,72 @@
+@model FTECH_THUONGMAIDIENTU.Models.ContentManager.PostEditorViewModel
+@{
+    ViewBag.Title = "Tạo Bài Viết Mới";
+    Layout = "~/Areas/ContentManager/Views/Shared/_ContentManagerLayout.cshtml";
+}
+
+<div class="topbar">
+    <div class="topbar-title">Tạo Bài Viết Mới</div>
+    <div class="topbar-actions">
+        <button class="btn-ghost" type="button"
+                onclick="window.location='@Url.Action("Index", "Post", new { area = "ContentManager" })'">← Quay
+            lại</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="card" style="max-width: 920px;">
+            <div class="card-title">Nháp bài viết</div>
+            @using (Html.BeginForm("Create", "Post", new { area = "ContentManager" }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div style="padding: 20px; display: grid; gap: 16px;">
+                    <div>
+                        <label style="display: block; margin-bottom: 6px; font-weight: 600;">Tiêu đề</label>
+                        <input type="text" name="Title" value="@Model.Title"
+                               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 6px; font-weight: 600;">Slug</label>
+                        <input type="text" name="Slug" value="@Model.Slug"
+                               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 6px; font-weight: 600;">Danh mục</label>
+                        <select name="CategoryID"
+                                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                            @foreach (var category in Model.Categories)
+                            {
+                                <option value="@category.CategoryID" @(category.CategoryID == Model.CategoryID ? "selected" : null)>
+                                    @category.CategoryName</option>
+                                }
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; font-weight: 600;">Ảnh đại diện</label>
+                            <input type="text" name="ThumbnailURL" value="@Model.ThumbnailURL"
+                                   style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; font-weight: 600;">Nội dung</label>
+                            <textarea name="Content" rows="12"
+                                      style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">@Model.Content</textarea>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; font-weight: 600;">Trạng thái</label>
+                            <input type="text" name="Status"
+                                   value="@(string.IsNullOrWhiteSpace(Model.Status) ? "Nháp" : Model.Status)"
+                                   style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button type="submit" class="btn-primary">💾 Lưu nháp</button>
+                            <button type="button" class="btn-ghost" onclick="history.back()">Hủy</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        @section scripts {
+            <script src="~/Scripts/js/common/auth.js"></script>
+            <script src="~/Scripts/js/pages/content-manager.js"></script>
+        }

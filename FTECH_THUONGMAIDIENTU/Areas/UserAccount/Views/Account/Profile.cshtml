@@ -1,16 +1,50 @@
+@model FTECH_THUONGMAIDIENTU.Models.UserAccount.MemberProfileSummary
 @{
-    Layout = null;
-    var html = System.IO.File.ReadAllText(Server.MapPath("~/Views/profileManager.html"));
-    html = html.Replace("href=\"assets/css/pages/profileManager.css\"", "href=\"" +
-Url.Content("~/Content/css/pages/profileManager.css") + "\"");
-    html = html.Replace("href=\"assets/css/common/inline-utilities.css\"", "href=\"" +
-Url.Content("~/Content/css/common/inline-utilities.css") + "\"");
-    html = html.Replace("src=\"assets/js/common/auth.js\"", "src=\"" + Url.Content("~/Scripts/js/common/auth.js") + "\"");
-    html = html.Replace("src=\"assets/js/pages/profileManager.js\"", "src=\"" +
-Url.Content("~/Scripts/js/pages/profileManager.js") + "\"");
-    html = html.Replace("trangchu.html", Url.Action("Index", "Home"));
-    html = html.Replace("product.html", Url.Action("Index", "Product"));
-    html = html.Replace("reviewModule.html", Url.Action("Index", "Review"));
-    html = html.Replace("login.html", Url.Action("Login", "Account"));
+    ViewBag.Title = "Quản Lý Thông Tin Cá Nhân";
+    Layout = "~/Areas/UserAccount/Views/Shared/_UserAccountLayout.cshtml";
 }
-@Html.Raw(html)
+
+<div class="topbar">
+    <div class="topbar-title">Thông Tin Cá Nhân</div>
+    <div class="topbar-actions">
+        <button class="btn-primary"
+                onclick="location.href='@Url.Action("Edit", "Account", new { area = "UserAccount" })'">✏️ Chỉnh Sửa</button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="card">
+        <div class="card-title">Thông Tin Cá Nhân</div>
+        <div style="padding: 20px;">
+            <div style="display: flex; gap: 20px; margin-bottom: 20px; align-items: center;">
+                <img src="@(Model.AvatarURL ?? "https://i.pravatar.cc/150?img=20")" alt="User"
+                     style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+                <div>
+                    <h3>@Model.FullName</h3>
+                    <p>Email: @Model.Email</p>
+                    <p>Tham gia: @Model.CreatedAt.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Vai Trò:</strong> Khách Hàng</p>
+                    <p><strong>Trạng thái:</strong> @Model.Status</p>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid #eee; padding-top: 20px;">
+                <h4>Thống Kê</h4>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #3498db;">@Model.ClickCount</div>
+                        <div style="font-size: 12px; color: #7f8c8d;">Lượt click affiliate</div>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #27ae60;">@Model.CommentCount</div>
+                        <div style="font-size: 12px; color: #7f8c8d;">Bình luận đã gửi</div>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #e74c3c;">@Model.RatingCount</div>
+                        <div style="font-size: 12px; color: #7f8c8d;">Đánh giá đã gửi</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
