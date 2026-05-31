@@ -1,4 +1,4 @@
-@{
+﻿@{
     ViewBag.Title = "Cổng đăng nhập phân quyền";
     Layout = "~/Areas/Admin/Views/Shared/_AdminAuthLayout.cshtml";
 }
@@ -83,7 +83,7 @@
 
                 function closeModal() {
                 document.getElementById('roleModal').classList.remove('show');
-                window.location.href = '@Url.Action("Index", "Dashboard", new { area = "Admin" })';
+                window.location.href = selectedRedirect;
                 }
             </script>
         }

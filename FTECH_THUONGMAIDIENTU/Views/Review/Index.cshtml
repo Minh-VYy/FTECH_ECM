@@ -1,12 +1,13 @@
 @{
     Layout = null;
+    var assetVersion = DateTime.UtcNow.Ticks.ToString();
     var html = System.IO.File.ReadAllText(Server.MapPath("~/Views/reviewModule.html"));
     html = html.Replace("href=\"assets/css/pages/reviewModule.css\"", "href=\"" +
 Url.Content("~/Content/css/pages/reviewModule.css") + "\"");
     html = html.Replace("href=\"assets/css/common/inline-utilities.css\"", "href=\"" +
 Url.Content("~/Content/css/common/inline-utilities.css") + "\"");
     html = html.Replace("src=\"assets/js/pages/reviewModule.js\"", "src=\"" +
-Url.Content("~/Scripts/js/pages/reviewModule.js") + "\"");
+Url.Content("~/Scripts/js/pages/reviewModule.js?v=" + assetVersion) + "\"");
     html = html.Replace("trangchu.html", Url.Action("Index", "Home"));
     html = html.Replace("product.html", Url.Action("Index", "Product"));
 }

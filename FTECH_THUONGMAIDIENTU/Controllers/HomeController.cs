@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Data;
+using FTECH_THUONGMAIDIENTU.Models.Dashboard;
+using FTECH_THUONGMAIDIENTU.Models.Posts;
 
 namespace FTECH_THUONGMAIDIENTU.Controllers
 {
@@ -11,14 +13,30 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
     {
         private readonly StatisticsRepository statisticsRepository = new StatisticsRepository();
         private readonly PostRepository postRepository = new PostRepository();
+        private readonly AffiliatePartnerRepository partnerRepository = new AffiliatePartnerRepository();
 
         public ActionResult Index()
         {
             ViewBag.Title = "FTECH – Công Nghệ Đỉnh Cao";
             ViewBag.Summary = statisticsRepository.GetSummary();
-            ViewBag.FeaturedPosts = postRepository.GetPublishedPosts(3);
-            ViewBag.TopPost = postRepository.GetTopPublishedPost();
+            ViewBag.FeaturedPosts = postRepository.GetRecentPosts(6);
+            ViewBag.TopPost = postRepository.GetTopPost();
             return View("Trangchu");
+        }
+
+        [HttpGet]
+        public JsonResult Feed()
+        {
+            var featuredPosts = postRepository.GetRecentPosts(12).ToList();
+            var partners = partnerRepository.GetActivePartners(12).ToList();
+
+            return Json(new
+            {
+                summary = statisticsRepository.GetSummary(),
+                featuredPosts = featuredPosts.Select(MapPostCard),
+                topPosts = featuredPosts.Take(8).Select(MapPostCard),
+                partnerNames = partners.Select(MapPartnerCard)
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult About()
@@ -56,6 +74,37 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
             }
 
             return View("Contact");
+        }
+
+        private static object MapPostCard(PostSummary post)
+        {
+            return new
+            {
+                post.PostID,
+                post.Title,
+                post.Slug,
+                post.ThumbnailURL,
+                post.CategoryName,
+                post.ViewCount,
+                post.RatingCount,
+                post.AverageRating,
+                post.CreatedAt,
+                Content = post.Content,
+                Url = string.IsNullOrWhiteSpace(post.Slug)
+                    ? $"/Product/Index/{post.PostID}"
+                    : $"/product/{HttpUtility.UrlPathEncode(post.Slug)}.html"
+            };
+        }
+
+        private static object MapPartnerCard(AffiliatePartnerSummary partner)
+        {
+            return new
+            {
+                partner.PartnerID,
+                partner.PartnerName,
+                partner.WebsiteUrl,
+                partner.Status
+            };
         }
     }
 }

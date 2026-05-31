@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace FTECH_THUONGMAIDIENTU.Models.Posts
 {
@@ -12,6 +12,8 @@ namespace FTECH_THUONGMAIDIENTU.Models.Posts
 
         public string ThumbnailURL { get; set; }
 
+        public string Content { get; set; }
+
         public string CategoryName { get; set; }
 
         public string Status { get; set; }
@@ -19,6 +21,10 @@ namespace FTECH_THUONGMAIDIENTU.Models.Posts
         public string RejectionReason { get; set; }
 
         public int ViewCount { get; set; }
+
+        public int RatingCount { get; set; }
+
+        public double AverageRating { get; set; }
 
         public DateTime CreatedAt { get; set; }
     }

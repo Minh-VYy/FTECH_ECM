@@ -1,7 +1,8 @@
-@using FTECH_THUONGMAIDIENTU.Models.Posts
+﻿@using FTECH_THUONGMAIDIENTU.Models.Posts
 @{
     Layout = null;
     var featuredPost = ViewBag.FeaturedPost as PostSummary;
+    var relatedPosts = (ViewBag.RelatedPosts as IEnumerable<PostSummary> ?? Enumerable.Empty<PostSummary>()).ToList();
 }
 <html lang="vi">
 
@@ -37,36 +38,97 @@
                         @(featuredPost?.Title ?? "Chưa có bài nổi bật")</h1>
                         <p style="margin: 0 0 18px; color: #4b5563; font-size: 16px; line-height: 1.8;">
                             @(featuredPost != null
-                                ? $"Danh mục {featuredPost.CategoryName}, đăng ngày {featuredPost.CreatedAt:dd/MM/yyyy} và đang có               {featuredPost.ViewCount:N0} lượt xem."
+                                ? $"Danh mục {featuredPost.CategoryName}, đăng ngày {featuredPost.CreatedAt:dd/MM/yyyy} và đang có        {featuredPost.ViewCount:N0} lượt xem."
                                 : "Hệ thống chưa có bài review đã xuất bản để hiển thị.")
                         </p>
                         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                             <span class="badge">@((featuredPost?.CategoryName) ?? "Review")</span>
                             <span class="badge">@(featuredPost?.ViewCount.ToString("N0") ?? "0") lượt xem</span>
-                            <span class="badge">@(featuredPost?.CreatedAt.ToString("dd/MM/yyyy") ?? "--/--/----")</span>
-                        </div>
-                    </div>
-                    <div>
-                        <div
-                            style="border-radius: 22px; overflow: hidden; background: linear-gradient(135deg, #e9eef7, #f8fafc); min-height: 320px; display: flex; align-items: center; justify-content: center;">
-                            @if (!string.IsNullOrWhiteSpace(featuredPost?.ThumbnailURL))
-                            {
-                                <img src="@featuredPost.ThumbnailURL" alt="@featuredPost.Title"
-                                     style="width: 100%; height: 100%; object-fit: cover;">
-                            }
-                            else
-                            {
-                                <div style="padding: 32px; text-align: center; color: #6b7280; font-weight: 600;">Chưa có ảnh đại
-                                    diện</div>
+                            <span class="badge">@(featuredPost?.RatingCount ?? 0) đánh giá</span>
+                            <span class="badge">@(featuredPost?.AverageRating > 0 ? featuredPost.AverageRating.ToString("0.0") +
+                                                 "/5" : "Chưa có sao")</span>
+                                <span class="badge">@(featuredPost?.CreatedAt.ToString("dd/MM/yyyy") ?? "--/--/----")</span>
+                                @if (!string.IsNullOrWhiteSpace(featuredPost?.Slug))
+                                {
+                                    <span class="badge">@featuredPost.Slug</span>
                                 }
                             </div>
                         </div>
+                        <div>
+                            <div
+                                style="border-radius: 22px; overflow: hidden; background: linear-gradient(135deg, #e9eef7, #f8fafc); min-height: 320px; display: flex; align-items: center; justify-content: center;">
+                                @if (!string.IsNullOrWhiteSpace(featuredPost?.ThumbnailURL))
+                                {
+                                    <img src="@featuredPost.ThumbnailURL" alt="@featuredPost.Title"
+                                         style="width: 100%; height: 100%; object-fit: cover;">
+                                }
+                                else
+                                {
+                                    <div style="padding: 32px; text-align: center; color: #6b7280; font-weight: 600;">Chưa có ảnh đại
+                                        diện</div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div data-include='@Url.Content("~/components/footer.html")'></div>
-                <script src='@Url.Content("~/Scripts/js/common/include.js")'></script>
-                <script src='@Url.Content("~/Scripts/js/pages/product.js")'></script>
-            </body>
+                    <article class="card" style="padding: 28px; margin-top: 24px;">
+                        <div
+                            style="color: #6b7280; font-size: 13px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 10px;">
+                            Nội dung từ database
+                        </div>
+                        <div style="color: #1f2937; font-size: 17px; line-height: 1.85; white-space: pre-line;">
+                            @(string.IsNullOrWhiteSpace(featuredPost?.Content)
+                                ? "Bài viết chưa có nội dung chi tiết trong database."
+                                : featuredPost.Content)
+                        </div>
+                    </article>
 
-        </html>
+                    <section class="card" style="padding: 28px; margin-top: 24px;">
+                        <div
+                            style="color: #6b7280; font-size: 13px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 10px;">
+                            Bài review liên quan
+                        </div>
+                        <div style="display: grid; gap: 16px;">
+                            @if (relatedPosts.Count > 0)
+                            {
+                                foreach (var post in relatedPosts.Where(item => item.PostID != featuredPost?.PostID).Take(4))
+                                {
+                                    <a href="@(string.IsNullOrWhiteSpace(post.Slug) ? Url.Action("Index", "Product", new { id = post.PostID }) : Url.RouteUrl("ProductBySlug", new { slug = post.Slug }))"
+                                       style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 18px; text-decoration: none; color: inherit;">
+                                        <div
+                                            style="border-radius: 14px; overflow: hidden; background: #f3f4f6; min-height: 80px; display: flex; align-items: center; justify-content: center;">
+                                            @if (!string.IsNullOrWhiteSpace(post.ThumbnailURL))
+                                            {
+                                                <img src="@post.ThumbnailURL" alt="@post.Title"
+                                                     style="width: 100%; height: 100%; object-fit: cover;">
+                                            }
+                                            else
+                                            {
+                                                <span>📝</span>
+                                            }
+                                        </div>
+                                        <div>
+                                            <div style="font-weight: 700; font-size: 16px; line-height: 1.4; margin-bottom: 6px;">@post.Title
+                                            </div>
+                                            <div style="color: #6b7280; font-size: 13px; margin-bottom: 8px;">@post.CategoryName ·
+                                                @post.CreatedAt:dd/MM/yyyy · @post.ViewCount:N0 lượt xem</div>
+                                                <div style="color: #2563eb; font-size: 13px; font-weight: 600;">@(post.AverageRating > 0 ?
+                                                                            post.AverageRating.ToString("0.0") + "/5" : "Chưa có đánh giá")</div>
+                                                </div>
+                                            </a>
+                                        }
+                                    }
+                            else
+                                    {
+                                        <div style="color: #6b7280;">Chưa có bài viết liên quan.</div>
+                                    }
+                                </div>
+                            </section>
+
+                            <div data-include='@Url.Content("~/components/footer.html")'></div>
+                            <script src='@Url.Content("~/Scripts/js/common/include.js")'></script>
+                            <script src='@Url.Content("~/Scripts/js/pages/product.js")'></script>
+                        </body>
+
+                    </html>

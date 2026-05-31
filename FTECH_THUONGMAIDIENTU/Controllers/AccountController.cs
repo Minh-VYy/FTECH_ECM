@@ -1,5 +1,6 @@
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Data;
+using FTECH_THUONGMAIDIENTU.Infrastructure;
 using FTECH_THUONGMAIDIENTU.Models.Auth;
 using FTECH_THUONGMAIDIENTU.Models.UserAccount;
 
@@ -61,7 +62,7 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
             var result = accountRepository.RegisterMember(request);
             if (result.Success)
             {
-                result.RedirectUrl = Url.Action("Login", "Account");
+                result.RedirectUrl = Url.Content("~/login.html");
             }
 
             return Json(ToJson(result));
@@ -88,12 +89,13 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
             var result = accountRepository.ResetPassword(request);
             if (result.Success)
             {
-                result.RedirectUrl = Url.Action("Login", "Account");
+                result.RedirectUrl = Url.Content("~/login.html");
             }
 
             return Json(ToJson(result));
         }
 
+        [SessionRoleAuthorize(SessionKey = "CurrentUserRole", AllowedRolesCsv = RoleKeys.Customer, LoginUrl = "/Account/Login")]
         public ActionResult Profile()
         {
             ViewBag.Title = "Tài khoản cá nhân";
@@ -109,13 +111,15 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
         {
             switch (roleKey)
             {
-                case "content":
-                    return Url.Action("Index", "Post", new { area = "ContentManager" });
-                case "partner":
-                    return Url.Action("Index", "Dashboard", new { area = "AffiliateManager" });
-                case "admin":
+                case RoleKeys.SuperAdmin:
                     return Url.Action("Index", "Dashboard", new { area = "Admin" });
-                case "customer":
+                case RoleKeys.ContentManager:
+                    return Url.Action("Index", "Post", new { area = "ContentManager" });
+                case RoleKeys.AffiliateManager:
+                    return Url.Action("Index", "Dashboard", new { area = "AffiliateManager" });
+                case RoleKeys.UserAccountManager:
+                    return Url.Action("Index", "AdminAccount", new { area = "SuperAdmin" });
+                case RoleKeys.Customer:
                 default:
                     return Url.Action("Index", "Home");
             }

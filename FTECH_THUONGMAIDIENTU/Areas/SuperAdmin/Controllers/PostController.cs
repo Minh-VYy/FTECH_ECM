@@ -1,10 +1,12 @@
 ﻿using System.Web.Mvc;
+using FTECH_THUONGMAIDIENTU.Infrastructure;
 
 namespace FTECH_THUONGMAIDIENTU.Areas.SuperAdmin.Controllers
 {
     /// <summary>
     /// Quản lý bài viết - Super Admin duyệt bài viết
     /// </summary>
+    [SessionRoleAuthorize(SessionKey = "AdminRole", AllowedRolesCsv = RoleKeys.SuperAdmin, LoginUrl = "/Admin/Account/Login")]
     public class PostController : Controller
     {
         // GET: SuperAdmin/Post

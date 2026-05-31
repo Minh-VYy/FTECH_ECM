@@ -4,17 +4,20 @@
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - FTECH Super Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
     @Styles.Render("~/Content/admin/css")
     <link rel="stylesheet" href="~/Content/css/pages/dashboard.css">
     <link rel="stylesheet" href="~/Content/css/pages/manage-posts.css">
     <link rel="stylesheet" href="~/Content/css/pages/manage-partners.css">
     <link rel="stylesheet" href="~/Content/css/pages/manage-accounts.css">
 </head>
+
 <body>
     <div class="sidebar">
         <div class="sb-logo">
@@ -41,7 +44,7 @@
             <div class="sb-user">
                 <div class="sb-avatar"><img src="https://i.pravatar.cc/120?img=12" alt="Admin"></div>
                 <div>
-                    <div class="sb-user-name">Admin</div>
+                    <div class="sb-user-name">@(ViewBag.AdminName ?? ViewBag.UserName ?? "Super Admin")</div>
                     <div class="sb-user-role">Super Admin</div>
                 </div>
             </div>
@@ -56,4 +59,5 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+
 </html>

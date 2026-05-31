@@ -1,10 +1,12 @@
 ﻿using System.Web.Mvc;
+using FTECH_THUONGMAIDIENTU.Infrastructure;
 
 namespace FTECH_THUONGMAIDIENTU.Areas.AffiliateManager.Controllers
 {
     /// <summary>
     /// Quản lý affiliate link
     /// </summary>
+    [SessionRoleAuthorize(SessionKey = "AdminRole", AllowedRolesCsv = RoleKeys.SuperAdmin + "," + RoleKeys.AffiliateManager, LoginUrl = "/Admin/Account/Login")]
     public class AffiliateController : Controller
     {
         // GET: AffiliateManager/Affiliate

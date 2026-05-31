@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Data;
+using FTECH_THUONGMAIDIENTU.Infrastructure;
 using FTECH_THUONGMAIDIENTU.Models.Auth;
 
 namespace FTECH_THUONGMAIDIENTU.Areas.Admin.Controllers
@@ -51,6 +52,11 @@ namespace FTECH_THUONGMAIDIENTU.Areas.Admin.Controllers
 
         public ActionResult Accounts()
         {
+            if (!string.Equals(Session["AdminRole"] as string, RoleKeys.SuperAdmin, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return RedirectToAction("Login", "Account", new { area = "Admin" });
+            }
+
             ViewBag.Title = "Quản Lý Tài Khoản Admin";
             return View("Index");
         }

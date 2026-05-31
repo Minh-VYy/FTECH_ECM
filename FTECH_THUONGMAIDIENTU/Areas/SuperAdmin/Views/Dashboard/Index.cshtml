@@ -1,100 +1,108 @@
-﻿@{
+﻿@using FTECH_THUONGMAIDIENTU.Models.Dashboard
+@{
     ViewBag.Title = "Dashboard - Thống Kê Hệ Thống";
     Layout = "~/Areas/SuperAdmin/Views/Shared/_SuperAdminLayout.cshtml";
+    var summary = ViewBag.Summary as DashboardSummary ?? new DashboardSummary();
 }
 
 <div class="topbar">
     <div class="topbar-title">Dashboard</div>
-    <div class="topbar-search"><input type="text" placeholder="Tìm nhanh chỉ số, bài viết, đối tác..."><button>🔍</button></div>
-    <div class="u-style-020">
-        <select class="fsel">
-            <option>Bài viết</option>
-            <option>Affiliate</option>
-            <option>Tài khoản</option>
-            <option>Đối tác</option>
-        </select>
-        <select class="fsel" id="periodSel" onchange="updatePeriod(this.value)">
-            <option value="today">Hôm nay</option>
-            <option value="week">7 ngày qua</option>
-            <option value="month" selected>Tháng 3/2026</option>
-            <option value="year">Năm 2026</option>
-        </select>
-        <button class="btn-ghost">Xuất báo cáo</button><button class="btn-primary">Làm mới</button>
-    </div>
-</div>
-
-<div class="content">
-    <div class="welcome">
-        <div>
-            <div class="welcome-text">Chào buổi sáng, Super Admin!</div>
-            <div class="welcome-sub">Tổng quan hiệu suất FTECH trong tháng 3/2026. Dữ liệu được cập nhật tự động mỗi 5 phút.</div>
-        </div>
-        <div class="live-badge">Live · <span id="currentTime">08:42 ICT</span></div>
-    </div>
-
-    <div class="kpi-grid">
-        <div class="kpi-card kc-blue">
-            <div class="kpi-label">Người dùng</div>
-            <div class="kpi-val" id="kpi-users">1,842</div>
-            <div class="kpi-trend">Tăng +48 trong tháng</div>
-            <div class="kpi-sub">284 tài khoản mới trong 7 ngày</div>
-        </div>
-        <div class="kpi-card kc-green">
-            <div class="kpi-label">Bài viết</div>
-            <div class="kpi-val" id="kpi-posts">248</div>
-            <div class="kpi-trend">Tăng +12 bài trong tháng</div>
-            <div class="kpi-sub">128K lượt xem trong tháng</div>
-        </div>
-        <div class="kpi-card kc-purple">
-            <div class="kpi-label">Click Affiliate</div>
-            <div class="kpi-val" id="kpi-clicks">24.8K</div>
-            <div class="kpi-trend">Tăng +31% so với tháng trước</div>
-            <div class="kpi-sub">Tỷ lệ chuyển đổi 5.0%</div>
-        </div>
-        <div class="kpi-card kc-orange">
-            <div class="kpi-label">Doanh thu affiliate</div>
-            <div class="kpi-val" id="kpi-revenue">14.2Mđ</div>
-            <div class="kpi-trend">Tăng +22% so với tháng trước</div>
-            <div class="kpi-sub">34 đối tác đang hoạt động</div>
+    <div class="topbar-search"><input type="text"
+                                          placeholder="Tìm nhanh chỉ số, bài viết, đối tác..."><button>🔍</button></div>
+        <div class="u-style-020">
+            <select class="fsel">
+                <option>Bài viết</option>
+                <option>Affiliate</option>
+                <option>Tài khoản</option>
+                <option>Đối tác</option>
+            </select>
+            <select class="fsel" id="periodSel" onchange="updatePeriod(this.value)">
+                <option value="today">Hôm nay</option>
+                <option value="week">7 ngày qua</option>
+                <option value="month" selected>Tháng 3/2026</option>
+                <option value="year">Năm 2026</option>
+            </select>
+            <button class="btn-ghost">Xuất báo cáo</button><button class="btn-primary">Làm mới</button>
         </div>
     </div>
 
-    <div class="alert-row">
-        <div class="alert-card warn">
-            <div>!</div>
+    <div class="content">
+        <div class="welcome">
             <div>
-                <div class="alert-title u-style-021">7 bài viết đang chờ duyệt</div>
-                <div class="alert-desc">Có bài viết chờ kiểm duyệt quá 48 giờ. Nên xử lý sớm để không ảnh hưởng lịch đăng.</div>
+                <div class="welcome-text">Chào buổi sáng, @(ViewBag.UserName ?? "Super Admin")!</div>
+                <div class="welcome-sub">Tổng quan hiệu suất FTECH trong tháng 3/2026. Dữ liệu được cập nhật tự động mỗi 5
+                    phút.</div>
+                </div>
+                <div class="live-badge">Live · <span id="currentTime">08:42 ICT</span></div>
             </div>
-            <button class="btn-ghost u-style-022" onclick="location.href='@Url.Action("Index", "Post", new { area = "SuperAdmin" })'">Xem ngay</button>
-        </div>
-        <div class="alert-card good">
-            <div>+</div>
-            <div>
-                <div class="alert-title u-style-023">Affiliate tháng này tăng tốt</div>
-                <div class="alert-desc">Shopee Affiliate VN đang tăng mạnh nhờ bài review iPhone 16 Pro Max và MacBook Air M3.</div>
-            </div>
-            <button class="btn-ghost u-style-022">Chi tiết</button>
-        </div>
-    </div>
 
-    <div class="chart-grid">
-        <div class="card">
-            <div class="card-title">Bài viết và click affiliate</div>
-            <div class="card-sub">Số liệu theo tuần trong tháng 3/2026</div>
-            <div class="bar-chart" id="mainChart"></div>
-            <div class="report-table">
-                <div class="report-row"><strong>Tuần</strong><strong>Lượt xem</strong><strong>Click AFF</strong><strong>So với kỳ trước</strong></div>
-                <div class="report-row"><span>Tuần 1</span><span>24.1K</span><span>4.8K</span><span>+8%</span></div>
-                <div class="report-row"><span>Tuần 2</span><span>28.4K</span><span>5.9K</span><span>+11%</span></div>
-                <div class="report-row"><span>Tuần 3</span><span>31.2K</span><span>6.4K</span><span>+14%</span></div>
-                <div class="report-row"><span>Tuần 4</span><span>44.3K</span><span>7.7K</span><span>+19%</span></div>
+            <div class="kpi-grid">
+                <div class="kpi-card kc-blue">
+                    <div class="kpi-label">Người dùng</div>
+                    <div class="kpi-val" id="kpi-users">@summary.MemberCount</div>
+                    <div class="kpi-trend">Tăng +48 trong tháng</div>
+                    <div class="kpi-sub">@summary.AdminCount tài khoản quản trị</div>
+                </div>
+                <div class="kpi-card kc-green">
+                    <div class="kpi-label">Bài viết</div>
+                    <div class="kpi-val" id="kpi-posts">@summary.PostCount</div>
+                    <div class="kpi-trend">Tăng +12 bài trong tháng</div>
+                    <div class="kpi-sub">@summary.PublishedPostCount bài đã xuất bản</div>
+                </div>
+                <div class="kpi-card kc-purple">
+                    <div class="kpi-label">Click Affiliate</div>
+                    <div class="kpi-val" id="kpi-clicks">@summary.ClickCount</div>
+                    <div class="kpi-trend">Số click ghi nhận trong DB</div>
+                    <div class="kpi-sub">@summary.CommentCount lượt bình luận</div>
+                </div>
+                <div class="kpi-card kc-orange">
+                    <div class="kpi-label">Doanh thu affiliate</div>
+                    <div class="kpi-val" id="kpi-revenue">@summary.PartnerCount</div>
+                    <div class="kpi-trend">Đối tác đang hoạt động</div>
+                    <div class="kpi-sub">@summary.PendingPostCount bài chờ duyệt</div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
 
-@section scripts {
-    <script src="~/Scripts/js/common/auth.js"></script>
-    <script src="~/Scripts/js/pages/dashboard.js"></script>
-}
+            <div class="alert-row">
+                <div class="alert-card warn">
+                    <div>!</div>
+                    <div>
+                        <div class="alert-title u-style-021">@summary.PendingPostCount bài viết đang chờ duyệt</div>
+                        <div class="alert-desc">Có bài viết chờ kiểm duyệt quá 48 giờ. Nên xử lý sớm để không ảnh hưởng lịch
+                            đăng.</div>
+                        </div>
+                        <button class="btn-ghost u-style-022"
+                                onclick="location.href='@Url.Action("Index", "Post", new { area = "SuperAdmin" })'">Xem ngay</button>
+                    </div>
+                    <div class="alert-card good">
+                        <div>+</div>
+                        <div>
+                            <div class="alert-title u-style-023">Affiliate tháng này tăng tốt</div>
+                            <div class="alert-desc">Shopee Affiliate VN đang tăng mạnh nhờ bài review iPhone 16 Pro Max và MacBook
+                                Air M3.</div>
+                            </div>
+                            <button class="btn-ghost u-style-022">Chi tiết</button>
+                        </div>
+                    </div>
+
+                    <div class="chart-grid">
+                        <div class="card">
+                            <div class="card-title">Bài viết và click affiliate</div>
+                            <div class="card-sub">Số liệu theo tuần trong tháng 3/2026</div>
+                            <div class="bar-chart" id="mainChart"></div>
+                            <div class="report-table">
+                                <div class="report-row"><strong>Tuần</strong><strong>Lượt xem</strong><strong>Click
+                                    AFF</strong><strong>So với kỳ trước</strong></div>
+                                    <div class="report-row"><span>Tuần 1</span><span>24.1K</span><span>4.8K</span><span>+8%</span></div>
+                                    <div class="report-row"><span>Tuần 2</span><span>28.4K</span><span>5.9K</span><span>+11%</span></div>
+                                    <div class="report-row"><span>Tuần 3</span><span>31.2K</span><span>6.4K</span><span>+14%</span></div>
+                                    <div class="report-row"><span>Tuần 4</span><span>44.3K</span><span>7.7K</span><span>+19%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @section scripts {
+                        <script src="~/Scripts/js/common/auth.js"></script>
+                        <script src="~/Scripts/js/pages/dashboard.js"></script>
+                    }

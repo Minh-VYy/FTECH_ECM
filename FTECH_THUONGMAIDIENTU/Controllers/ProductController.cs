@@ -1,6 +1,8 @@
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Data;
 using FTECH_THUONGMAIDIENTU.Models.Posts;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FTECH_THUONGMAIDIENTU.Controllers
 {
@@ -8,10 +10,11 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
     {
         private readonly PostRepository postRepository = new PostRepository();
 
-        public ActionResult Index()
+        public ActionResult Index(int? id, string slug)
         {
             ViewBag.Title = "Chi tiết bài review sản phẩm";
-            ViewBag.FeaturedPost = postRepository.GetTopPublishedPost();
+            ViewBag.FeaturedPost = postRepository.GetPost(id, slug) ?? postRepository.GetTopPost();
+            ViewBag.RelatedPosts = postRepository.GetRecentPosts(6).ToList();
             return View();
         }
     }

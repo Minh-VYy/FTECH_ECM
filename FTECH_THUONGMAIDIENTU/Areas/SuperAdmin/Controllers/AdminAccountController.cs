@@ -1,10 +1,12 @@
 ﻿using System.Web.Mvc;
+using FTECH_THUONGMAIDIENTU.Infrastructure;
 
 namespace FTECH_THUONGMAIDIENTU.Areas.SuperAdmin.Controllers
 {
     /// <summary>
     /// Quản lý tài khoản admin - Super Admin quản lý tất cả admin account
     /// </summary>
+    [SessionRoleAuthorize(SessionKey = "AdminRole", AllowedRolesCsv = RoleKeys.SuperAdmin + "," + RoleKeys.UserAccountManager, LoginUrl = "/Admin/Account/Login")]
     public class AdminAccountController : Controller
     {
         // GET: SuperAdmin/AdminAccount

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -27,9 +27,19 @@ SELECT
     p.Status,
     p.RejectionReason,
     p.ViewCount,
+    ISNULL(r.RatingCount, 0) AS RatingCount,
+    ISNULL(r.AverageRating, 0) AS AverageRating,
     p.CreatedAt
 FROM Posts p
 INNER JOIN Categories c ON p.CategoryID = c.CategoryID
+LEFT JOIN (
+    SELECT
+        PostID,
+        COUNT(*) AS RatingCount,
+        AVG(CAST(Score AS FLOAT)) AS AverageRating
+    FROM Ratings
+    GROUP BY PostID
+) r ON p.PostID = r.PostID
 WHERE p.CreatedBy = @CreatedBy
 ORDER BY p.CreatedAt DESC;";
                 command.Parameters.AddWithValue("@CreatedBy", adminId);
@@ -189,12 +199,24 @@ SELECT TOP (@Take)
     p.PostID,
     p.Title,
     p.Slug,
+    p.Content,
     p.ThumbnailURL,
     c.CategoryName,
+    p.Status,
     p.ViewCount,
+    ISNULL(r.RatingCount, 0) AS RatingCount,
+    ISNULL(r.AverageRating, 0) AS AverageRating,
     p.CreatedAt
 FROM Posts p
 INNER JOIN Categories c ON p.CategoryID = c.CategoryID
+LEFT JOIN (
+    SELECT
+        PostID,
+        COUNT(*) AS RatingCount,
+        AVG(CAST(Score AS FLOAT)) AS AverageRating
+    FROM Ratings
+    GROUP BY PostID
+) r ON p.PostID = r.PostID
 WHERE p.Status = N'Đã xuất bản'
 ORDER BY p.CreatedAt DESC;";
                 command.Parameters.AddWithValue("@Take", Math.Max(1, take));
@@ -212,6 +234,97 @@ ORDER BY p.CreatedAt DESC;";
             return posts;
         }
 
+        public IList<PostSummary> GetRecentPosts(int take)
+        {
+            var posts = new List<PostSummary>();
+
+            using (var connection = SqlConnectionFactory.CreateConnection())
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = @"
+SELECT TOP (@Take)
+    p.PostID,
+    p.Title,
+    p.Slug,
+    p.Content,
+    p.ThumbnailURL,
+    c.CategoryName,
+    p.Status,
+    p.RejectionReason,
+    p.ViewCount,
+    ISNULL(r.RatingCount, 0) AS RatingCount,
+    ISNULL(r.AverageRating, 0) AS AverageRating,
+    p.CreatedAt
+FROM Posts p
+INNER JOIN Categories c ON p.CategoryID = c.CategoryID
+LEFT JOIN (
+    SELECT
+        PostID,
+        COUNT(*) AS RatingCount,
+        AVG(CAST(Score AS FLOAT)) AS AverageRating
+    FROM Ratings
+    GROUP BY PostID
+) r ON p.PostID = r.PostID
+ORDER BY p.CreatedAt DESC;";
+                command.Parameters.AddWithValue("@Take", Math.Max(1, take));
+
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        posts.Add(MapPostRow(reader));
+                    }
+                }
+            }
+
+            return posts;
+        }
+
+        public PostSummary GetTopPost()
+        {
+            using (var connection = SqlConnectionFactory.CreateConnection())
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = @"
+SELECT TOP 1
+    p.PostID,
+    p.Title,
+    p.Slug,
+    p.Content,
+    p.ThumbnailURL,
+    c.CategoryName,
+    p.Status,
+    p.RejectionReason,
+    p.ViewCount,
+    ISNULL(r.RatingCount, 0) AS RatingCount,
+    ISNULL(r.AverageRating, 0) AS AverageRating,
+    p.CreatedAt
+FROM Posts p
+INNER JOIN Categories c ON p.CategoryID = c.CategoryID
+LEFT JOIN (
+    SELECT
+        PostID,
+        COUNT(*) AS RatingCount,
+        AVG(CAST(Score AS FLOAT)) AS AverageRating
+    FROM Ratings
+    GROUP BY PostID
+) r ON p.PostID = r.PostID
+ORDER BY p.ViewCount DESC, p.CreatedAt DESC;";
+
+                connection.Open();
+                using (var reader = command.ExecuteReader(CommandBehavior.SingleRow))
+                {
+                    if (reader.Read())
+                    {
+                        return MapPostRow(reader);
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public PostSummary GetTopPublishedPost()
         {
             using (var connection = SqlConnectionFactory.CreateConnection())
@@ -222,14 +335,128 @@ SELECT TOP 1
     p.PostID,
     p.Title,
     p.Slug,
+    p.Content,
     p.ThumbnailURL,
     c.CategoryName,
+    p.Status,
     p.ViewCount,
+    ISNULL(r.RatingCount, 0) AS RatingCount,
+    ISNULL(r.AverageRating, 0) AS AverageRating,
     p.CreatedAt
 FROM Posts p
 INNER JOIN Categories c ON p.CategoryID = c.CategoryID
+LEFT JOIN (
+    SELECT
+        PostID,
+        COUNT(*) AS RatingCount,
+        AVG(CAST(Score AS FLOAT)) AS AverageRating
+    FROM Ratings
+    GROUP BY PostID
+) r ON p.PostID = r.PostID
 WHERE p.Status = N'Đã xuất bản'
 ORDER BY p.ViewCount DESC, p.CreatedAt DESC;";
+
+                connection.Open();
+                using (var reader = command.ExecuteReader(CommandBehavior.SingleRow))
+                {
+                    if (reader.Read())
+                    {
+                        return MapPublished(reader);
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public PostSummary GetPublishedPost(int? postId, string slug)
+        {
+            using (var connection = SqlConnectionFactory.CreateConnection())
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = @"
+SELECT TOP 1
+    p.PostID,
+    p.Title,
+    p.Slug,
+    p.Content,
+    p.ThumbnailURL,
+    c.CategoryName,
+    p.Status,
+    p.ViewCount,
+    ISNULL(r.RatingCount, 0) AS RatingCount,
+    ISNULL(r.AverageRating, 0) AS AverageRating,
+    p.CreatedAt
+FROM Posts p
+INNER JOIN Categories c ON p.CategoryID = c.CategoryID
+LEFT JOIN (
+    SELECT
+        PostID,
+        COUNT(*) AS RatingCount,
+        AVG(CAST(Score AS FLOAT)) AS AverageRating
+    FROM Ratings
+    GROUP BY PostID
+) r ON p.PostID = r.PostID
+WHERE p.Status = N'Đã xuất bản'
+  AND (
+        (@PostID IS NOT NULL AND p.PostID = @PostID)
+        OR
+        (@Slug <> N'' AND p.Slug = @Slug)
+      )
+ORDER BY p.CreatedAt DESC;";
+                command.Parameters.AddWithValue("@PostID", postId.HasValue ? (object)postId.Value : DBNull.Value);
+                command.Parameters.AddWithValue("@Slug", string.IsNullOrWhiteSpace(slug) ? string.Empty : slug.Trim());
+
+                connection.Open();
+                using (var reader = command.ExecuteReader(CommandBehavior.SingleRow))
+                {
+                    if (reader.Read())
+                    {
+                        return MapPublished(reader);
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public PostSummary GetPost(int? postId, string slug)
+        {
+            using (var connection = SqlConnectionFactory.CreateConnection())
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = @"
+SELECT TOP 1
+    p.PostID,
+    p.Title,
+    p.Slug,
+    p.Content,
+    p.ThumbnailURL,
+    c.CategoryName,
+    p.Status,
+    p.RejectionReason,
+    p.ViewCount,
+    ISNULL(r.RatingCount, 0) AS RatingCount,
+    ISNULL(r.AverageRating, 0) AS AverageRating,
+    p.CreatedAt
+FROM Posts p
+INNER JOIN Categories c ON p.CategoryID = c.CategoryID
+LEFT JOIN (
+    SELECT
+        PostID,
+        COUNT(*) AS RatingCount,
+        AVG(CAST(Score AS FLOAT)) AS AverageRating
+    FROM Ratings
+    GROUP BY PostID
+) r ON p.PostID = r.PostID
+WHERE (
+        (@PostID IS NOT NULL AND p.PostID = @PostID)
+        OR
+        (@Slug <> N'' AND p.Slug = @Slug)
+      )
+ORDER BY p.CreatedAt DESC;";
+                command.Parameters.AddWithValue("@PostID", postId.HasValue ? (object)postId.Value : DBNull.Value);
+                command.Parameters.AddWithValue("@Slug", string.IsNullOrWhiteSpace(slug) ? string.Empty : slug.Trim());
 
                 connection.Open();
                 using (var reader = command.ExecuteReader(CommandBehavior.SingleRow))
@@ -251,9 +478,13 @@ ORDER BY p.ViewCount DESC, p.CreatedAt DESC;";
                 PostID = Convert.ToInt32(reader["PostID"]),
                 Title = reader["Title"]?.ToString(),
                 Slug = reader["Slug"]?.ToString(),
+                Content = reader["Content"]?.ToString(),
                 ThumbnailURL = reader["ThumbnailURL"]?.ToString(),
                 CategoryName = reader["CategoryName"]?.ToString(),
+                Status = reader["Status"]?.ToString(),
                 ViewCount = Convert.ToInt32(reader["ViewCount"]),
+                RatingCount = Convert.ToInt32(reader["RatingCount"]),
+                AverageRating = Convert.ToDouble(reader["AverageRating"]),
                 CreatedAt = Convert.ToDateTime(reader["CreatedAt"])
             };
         }
@@ -270,6 +501,8 @@ ORDER BY p.ViewCount DESC, p.CreatedAt DESC;";
                 Status = reader["Status"]?.ToString(),
                 RejectionReason = reader["RejectionReason"]?.ToString(),
                 ViewCount = Convert.ToInt32(reader["ViewCount"]),
+                RatingCount = Convert.ToInt32(reader["RatingCount"]),
+                AverageRating = Convert.ToDouble(reader["AverageRating"]),
                 CreatedAt = Convert.ToDateTime(reader["CreatedAt"])
             };
         }

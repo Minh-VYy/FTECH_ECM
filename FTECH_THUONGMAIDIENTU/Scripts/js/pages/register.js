@@ -128,7 +128,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
   btn.textContent = 'Đang xử lý...';
 
   try {
-    const result = await postForm('/Account/Register', new URLSearchParams({
+    const result = await postForm('/register.html', new URLSearchParams({
       LastName: lastName,
       FirstName: firstName,
       Email: email,

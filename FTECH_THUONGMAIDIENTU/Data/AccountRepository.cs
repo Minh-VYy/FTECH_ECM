@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using FTECH_THUONGMAIDIENTU.Infrastructure;
@@ -53,7 +53,7 @@ WHERE Email = @Identifier";
                         Message = "Xác thực thành công.",
                         DisplayName = reader["FullName"]?.ToString(),
                         Email = reader["Email"]?.ToString(),
-                        RoleKey = "customer",
+                        RoleKey = RoleKeys.Customer,
                         RedirectUrl = "/"
                     };
                 }
@@ -123,8 +123,8 @@ VALUES (@FullName, @Email, @PasswordHash, 'default-avatar.png', N'Chưa xác nh�
                 {
                     Success = true,
                     Message = "Đăng ký thành công. Vui lòng đăng nhập để tiếp tục.",
-                    RoleKey = "customer",
-                    RedirectUrl = "/Account/Login"
+                    RoleKey = RoleKeys.Customer,
+                    RedirectUrl = "/login.html"
                 };
             }
         }
@@ -173,7 +173,7 @@ SELECT CASE WHEN @@ROWCOUNT > 0 THEN 1 ELSE 0 END;";
                         {
                             Success = true,
                             Message = "Mật khẩu đã được cập nhật.",
-                            RedirectUrl = "/Account/Login"
+                            RedirectUrl = "/login.html"
                         };
                     }
                 }
@@ -248,20 +248,21 @@ WHERE a.Email = @Identifier OR a.FullName = @Identifier";
         {
             if (string.IsNullOrWhiteSpace(roleName))
             {
-                return "admin";
+                return RoleKeys.Customer;
             }
 
             switch (roleName.Trim())
             {
-                case "Content Manager":
-                    return "content";
-                case "Affiliate Manager":
-                    return "partner";
-                case "User Account Manager":
-                    return "admin";
-                case "Super Admin":
+                case RoleNames.SuperAdmin:
+                    return RoleKeys.SuperAdmin;
+                case RoleNames.ContentManager:
+                    return RoleKeys.ContentManager;
+                case RoleNames.AffiliateManager:
+                    return RoleKeys.AffiliateManager;
+                case RoleNames.UserAccountManager:
+                    return RoleKeys.UserAccountManager;
                 default:
-                    return "admin";
+                    return RoleKeys.Customer;
             }
         }
 
@@ -269,20 +270,21 @@ WHERE a.Email = @Identifier OR a.FullName = @Identifier";
         {
             if (string.IsNullOrWhiteSpace(roleName))
             {
-                return "/Admin/Dashboard";
+                return "/";
             }
 
             switch (roleName.Trim())
             {
-                case "Content Manager":
-                    return "/ContentManager/Post";
-                case "Affiliate Manager":
-                    return "/AffiliateManager/Dashboard";
-                case "User Account Manager":
-                    return "/SuperAdmin/AdminAccount";
-                case "Super Admin":
-                default:
+                case RoleNames.SuperAdmin:
                     return "/Admin/Dashboard";
+                case RoleNames.ContentManager:
+                    return "/ContentManager/Post";
+                case RoleNames.AffiliateManager:
+                    return "/AffiliateManager/Dashboard";
+                case RoleNames.UserAccountManager:
+                    return "/SuperAdmin/AdminAccount";
+                default:
+                    return "/";
             }
         }
     }

@@ -2,33 +2,40 @@
 let selectedRedirect = '/';
 
 const roleConfig = {
-  customer: {
-    icon: '👤',
-    title: 'Xin chào, Người dùng!',
-    desc: 'Bạn có thể truy cập khu vực người dùng để đọc review, lưu nội dung và theo dõi hoạt động cá nhân.',
-    role: 'Người dùng',
-    href: '/'
+  'super-admin': {
+    icon: '⚙️',
+    title: 'Xin chào, Super Admin!',
+    desc: 'Bạn đã được cấp quyền toàn hệ thống để giám sát, duyệt nội dung và quản lý tài khoản quản trị.',
+    role: 'Super Admin',
+    href: '/Admin/Dashboard'
   },
-  content: {
-    icon: '✍️',
+  'content-manager': {
+    icon: '👤',
     title: 'Xin chào, Content Manager!',
     desc: 'Bạn đã được cấp quyền truy cập khu vực Content để tạo, chỉnh sửa và quản lý bài viết.',
     role: 'Content Manager',
     href: '/ContentManager/Post'
   },
-  partner: {
+  'affiliate-manager': {
     icon: '🤝',
     title: 'Xin chào, Affiliate Manager!',
     desc: 'Bạn đã được cấp quyền truy cập khu vực Affiliate để quản lý đối tác, link và hiệu suất chuyển đổi.',
     role: 'Affiliate Manager',
     href: '/AffiliateManager/Dashboard'
   },
-  admin: {
-    icon: '⚙️',
-    title: 'Xin chào, Super Admin!',
-    desc: 'Bạn có toàn quyền giám sát hệ thống, duyệt nội dung, duyệt đối tác và quản lý tài khoản admin.',
-    role: 'Super Admin',
-    href: '/Admin/Dashboard'
+  'user-account-manager': {
+    icon: '🛡️',
+    title: 'Xin chào, User Account Manager!',
+    desc: 'Bạn đã được cấp quyền xử lý tài khoản người dùng và các vi phạm liên quan.',
+    role: 'User Account Manager',
+    href: '/SuperAdmin/AdminAccount'
+  },
+  customer: {
+    icon: '👤',
+    title: 'Xin chào, Người dùng!',
+    desc: 'Bạn có thể truy cập khu vực người dùng để đọc review, lưu nội dung và theo dõi hoạt động cá nhân.',
+    role: 'Người dùng',
+    href: '/'
   }
 };
 
@@ -103,7 +110,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
   btn.textContent = 'Đang xác thực...';
 
   try {
-    const endpoint = document.getElementById('loginForm').action || '/Account/Login';
+    const endpoint = document.getElementById('loginForm').action || '/login.html';
     const result = await postForm(endpoint, new URLSearchParams({
       Identifier: identifier,
       Password: password,

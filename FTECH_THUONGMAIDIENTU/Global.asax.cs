@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using FTECH_THUONGMAIDIENTU.Infrastructure;
 
 namespace FTECH_THUONGMAIDIENTU
 {
@@ -12,6 +13,7 @@ namespace FTECH_THUONGMAIDIENTU
     {
         protected void Application_Start()
         {
+            DatabaseInitializer.EnsureCreated();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

@@ -3,11 +3,13 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Data;
+using FTECH_THUONGMAIDIENTU.Infrastructure;
 using FTECH_THUONGMAIDIENTU.Models.Posts;
 using FTECH_THUONGMAIDIENTU.Models.ContentManager;
 
 namespace FTECH_THUONGMAIDIENTU.Areas.ContentManager.Controllers
 {
+    [FTECH_THUONGMAIDIENTU.Infrastructure.SessionRoleAuthorize(SessionKey = "AdminRole", AllowedRolesCsv = FTECH_THUONGMAIDIENTU.Infrastructure.RoleKeys.SuperAdmin + "," + FTECH_THUONGMAIDIENTU.Infrastructure.RoleKeys.ContentManager, LoginUrl = "/Admin/Account/Login")]
     public class PostController : Controller
     {
         private readonly AdminRepository adminRepository = new AdminRepository();

@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Data;
+using FTECH_THUONGMAIDIENTU.Infrastructure;
 using FTECH_THUONGMAIDIENTU.Models.UserAccount;
 
 namespace FTECH_THUONGMAIDIENTU.Areas.UserAccount.Controllers
@@ -8,6 +9,7 @@ namespace FTECH_THUONGMAIDIENTU.Areas.UserAccount.Controllers
     /// User Account - Quản lý tài khoản người dùng bình thường
     /// Chức năng: Xem trang cá nhân, Quản lý thông tin cá nhân
     /// </summary>
+    [SessionRoleAuthorize(SessionKey = "CurrentUserRole", AllowedRolesCsv = RoleKeys.Customer, LoginUrl = "/Account/Login")]
     public class AccountController : Controller
     {
         private readonly MemberRepository memberRepository = new MemberRepository();

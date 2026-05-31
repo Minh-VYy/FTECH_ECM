@@ -7,6 +7,8 @@ namespace FTECH_THUONGMAIDIENTU.Infrastructure
     {
         public static SqlConnection CreateConnection()
         {
+            DatabaseInitializer.EnsureCreated();
+
             var connectionString = ConfigurationManager.ConnectionStrings["FTechAffiliateDb"]?.ConnectionString;
             if (string.IsNullOrWhiteSpace(connectionString))
             {
