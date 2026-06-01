@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   const TOKEN_KEYS = [
     'ftech_access_token',
     'ftech_refresh_token',
@@ -17,7 +17,7 @@
 
   function logout() {
     clearAuthStorage();
-    window.location.href = '/Account/Login';
+    window.location.href = '/Account/Logout';
   }
 
   function ensureAdminLogoutButton() {

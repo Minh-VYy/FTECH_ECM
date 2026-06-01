@@ -9,17 +9,20 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
     {
         private readonly PostRepository postRepository = new PostRepository();
 
-        public ActionResult Index()
+        public ActionResult Index(string q)
         {
-            ViewBag.Title = "Đánh giá sản phẩm";
-            ViewBag.ReviewPosts = postRepository.GetRecentPosts(12);
+            ViewBag.Title = string.IsNullOrWhiteSpace(q)
+                ? "Đánh giá sản phẩm"
+                : $"Kết quả tìm kiếm: {q.Trim()}";
+            ViewBag.SearchQuery = q;
+            ViewBag.ReviewPosts = postRepository.GetRecentPosts(12, q);
             return View();
         }
 
         [HttpGet]
-        public JsonResult Feed()
+        public JsonResult Feed(string q)
         {
-            var posts = postRepository.GetRecentPosts(12);
+            var posts = postRepository.GetRecentPosts(12, q);
             return Json(new
             {
                 reviews = posts.Select(MapReviewCard)

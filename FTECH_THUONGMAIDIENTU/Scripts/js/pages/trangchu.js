@@ -9,6 +9,32 @@ function excerpt(text) {
   return clean.length > 120 ? `${clean.slice(0, 120)}...` : clean;
 }
 
+function escapeHtml(text) {
+  return String(text ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[char]));
+}
+
+function formatDateTime(value) {
+  const date = new Date(value || Date.now());
+  return date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
+function categoryIcon(name) {
+  const normalized = (name || '').toLowerCase();
+  if (normalized.includes('laptop')) return '💻';
+  if (normalized.includes('điện thoại')) return '📱';
+  if (normalized.includes('phụ kiện')) return '🎧';
+  if (normalized.includes('màn hình')) return '🖥️';
+  if (normalized.includes('gaming')) return '🎮';
+  if (normalized.includes('đồng hồ')) return '⌚';
+  return '📝';
+}
+
 function makeCard(post, compact = false) {
   const title = post.title || post.Title || 'Bài review';
   const category = post.categoryName || post.CategoryName || 'Review';
@@ -31,6 +57,9 @@ function makeCard(post, compact = false) {
 }
 
 async function loadHomeFeed() {
+  const categoriesGrid = document.querySelector('.cats-grid');
+  const testimonialsGrid = document.querySelector('.testi-grid');
+
   try {
     const response = await fetch('/Home/Feed', { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
     if (!response.ok) throw new Error('feed');
@@ -38,6 +67,8 @@ async function loadHomeFeed() {
     const data = await response.json();
     const featuredPosts = data.featuredPosts || [];
     const topPosts = data.topPosts || featuredPosts;
+    const categories = data.categories || [];
+    const comments = data.recentComments || [];
     const partners = data.partnerNames || [];
 
     const flashGrid = document.getElementById('flashGrid');
@@ -57,6 +88,27 @@ async function loadHomeFeed() {
       const names = partners.map(p => p.partnerName || p.PartnerName).filter(Boolean);
       brandsTrack.innerHTML = (names.length ? [...names, ...names] : ['Shopee', 'Lazada', 'Tiki']).map(name => `<div class="brand-item">${name}</div>`).join('');
     }
+
+    if (categoriesGrid) {
+      categoriesGrid.innerHTML = (categories.length ? categories : [{ categoryName: 'Tất cả', postCount: featuredPosts.length }])
+        .map(category => {
+          const name = category.categoryName || category.CategoryName || 'Danh mục';
+          const count = Number(category.postCount ?? category.PostCount ?? 0).toLocaleString('vi-VN');
+          return `<a href="#s-products" class="cat-card"><div class="cat-icon">${categoryIcon(name)}</div><div class="cat-name">${escapeHtml(name)}</div><div class="cat-count">${count} bài viết</div></a>`;
+        }).join('');
+    }
+
+    if (testimonialsGrid) {
+      testimonialsGrid.innerHTML = (comments.length ? comments : [{ memberName: 'Chưa có bình luận', content: 'Hãy thêm comment trong database để hiển thị tại đây.', postTitle: 'FTECH', memberAvatarURL: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80', createdAt: new Date() }])
+        .map(comment => {
+          const name = comment.memberName || comment.MemberName || 'Người dùng';
+          const content = comment.content || comment.Content || '';
+          const title = comment.postTitle || comment.PostTitle || 'Bài viết';
+          const avatar = comment.memberAvatarURL || comment.MemberAvatarURL || 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80';
+          const createdAt = formatDateTime(comment.createdAt || comment.CreatedAt);
+          return `<div class="testi-card"><div class="testi-stars">⭐⭐⭐⭐⭐</div><div class="testi-text">"${escapeHtml(excerpt(content))}"</div><div class="testi-author"><div class="testi-avatar"><img src="${avatar}" alt="${escapeHtml(name)}"></div><div><div class="testi-name">${escapeHtml(name)}</div><div class="testi-meta">${escapeHtml(title)} · ${createdAt}</div></div></div><div class="testi-source">Nguồn: database</div></div>`;
+        }).join('');
+    }
   } catch (error) {
     const flashGrid = document.getElementById('flashGrid');
     const mainGrid = document.getElementById('mainGrid');
@@ -65,6 +117,8 @@ async function loadHomeFeed() {
     if (flashGrid) flashGrid.innerHTML = '<div class="prod-card"><div class="prod-body"><div class="prod-name">Không tải được dữ liệu từ database.</div></div></div>';
     if (mainGrid) mainGrid.innerHTML = '<div class="prod-card"><div class="prod-body"><div class="prod-name">Vui lòng kiểm tra kết nối SQL Server hoặc dữ liệu bài viết.</div></div></div>';
     if (brandsTrack) brandsTrack.innerHTML = '<div class="brand-item">No data</div>';
+    if (categoriesGrid) categoriesGrid.innerHTML = '<div class="cat-card"><div class="cat-icon">📝</div><div class="cat-name">Không tải được danh mục</div><div class="cat-count">0 bài viết</div></div>';
+    if (testimonialsGrid) testimonialsGrid.innerHTML = '<div class="testi-card"><div class="testi-text">Không tải được bình luận từ database.</div></div>';
   }
 }
 
@@ -91,6 +145,84 @@ function makeMockCard(p) {
   </div>`;
 }
 
+function goToReviewSearch(term) {
+  const keyword = String(term || '').trim();
+  if (!keyword) return;
+  window.location.href = `/reviewModule.html?q=${encodeURIComponent(keyword)}`;
+}
+
+function ensureNewsletterStatus() {
+  let status = document.querySelector('.newsletter-status');
+  if (status) return status;
+
+  const form = document.querySelector('.newsletter-form');
+  if (!form) return null;
+
+  status = document.createElement('div');
+  status.className = 'newsletter-status';
+  status.setAttribute('aria-live', 'polite');
+  form.insertAdjacentElement('afterend', status);
+  return status;
+}
+
+function setNewsletterStatus(message, isError = false) {
+  const status = ensureNewsletterStatus();
+  if (!status) return;
+
+  status.textContent = message || '';
+  status.classList.toggle('is-error', Boolean(isError));
+  status.classList.toggle('is-success', !isError && Boolean(message));
+}
+
+async function submitNewsletter() {
+  const input = document.querySelector('.newsletter-input');
+  const button = document.querySelector('.newsletter-btn');
+  if (!input || !button) return;
+
+  const email = String(input.value || '').trim();
+  if (!email) {
+    setNewsletterStatus('Vui lòng nhập email để đăng ký.', true);
+    return;
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    setNewsletterStatus('Email chưa đúng định dạng.', true);
+    return;
+  }
+
+  const previousText = button.textContent;
+  button.disabled = true;
+  button.textContent = 'Đang gửi...';
+  setNewsletterStatus('');
+
+  try {
+    const response = await fetch('/Home/SubscribeNewsletter', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: `email=${encodeURIComponent(email)}`
+    });
+
+    if (!response.ok) {
+      throw new Error('subscribe');
+    }
+
+    const result = await response.json();
+    setNewsletterStatus(result.message || 'Đăng ký newsletter thành công.', !result.success);
+
+    if (result.success && !result.alreadySubscribed) {
+      input.value = '';
+    }
+  } catch (error) {
+    setNewsletterStatus('Không gửi được đăng ký. Vui lòng thử lại sau.', true);
+  } finally {
+    button.disabled = false;
+    button.textContent = previousText;
+  }
+}
+
 loadHomeFeed();
 
 document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', function() {
@@ -114,6 +246,48 @@ const obs = new IntersectionObserver(entries => {
 }, {threshold:0.08});
 document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
-const si = document.querySelector('.header-search input');
-si.addEventListener('keypress', e => { if(e.key==='Enter'&&si.value.trim()) alert('Tìm: '+si.value); });
-document.querySelector('.header-search button').addEventListener('click', () => { if(si.value.trim()) alert('Tìm: '+si.value); });
+const headerSearchInput = document.querySelector('.header-search input');
+const headerSearchButton = document.querySelector('.header-search button');
+if (headerSearchInput) {
+  headerSearchInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      goToReviewSearch(headerSearchInput.value);
+    }
+  });
+}
+if (headerSearchButton) {
+  headerSearchButton.addEventListener('click', () => {
+    goToReviewSearch(headerSearchInput ? headerSearchInput.value : '');
+  });
+}
+
+const finderInput = document.querySelector('.finder-input');
+const finderGo = document.querySelector('.finder-go');
+if (finderInput) {
+  finderInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      goToReviewSearch(finderInput.value);
+    }
+  });
+}
+if (finderGo) {
+  finderGo.addEventListener('click', () => {
+    goToReviewSearch(finderInput ? finderInput.value : '');
+  });
+}
+
+const newsletterInput = document.querySelector('.newsletter-input');
+const newsletterButton = document.querySelector('.newsletter-btn');
+if (newsletterInput) {
+  newsletterInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      submitNewsletter();
+    }
+  });
+}
+if (newsletterButton) {
+  newsletterButton.addEventListener('click', submitNewsletter);
+}

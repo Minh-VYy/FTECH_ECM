@@ -11,8 +11,8 @@
     <title>@ViewBag.Title - FTECH User Account</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
-    @Styles.Render("~/Content/user/css")
-    <link rel="stylesheet" href="~/Content/css/pages/profileManager.css">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/pages/dashboard.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/pages/profileManager.css")">
 </head>
 
 <body>
@@ -32,6 +32,9 @@
             </a>
             <a href="@Url.Action("Edit", "Account", new { area = "UserAccount" })" class="sb-item">
                 <span class="si">✏️</span>Chỉnh Sửa Hồ Sơ
+            </a>
+            <a href="@Url.Action("Logout", "Account", new { area = "" })" data-logout="true" class="sb-item">
+                <span class="si">🚪</span>Đăng Xuất
             </a>
         </nav>
         <div class="sb-bottom">

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Data;
+using FTECH_THUONGMAIDIENTU.Infrastructure;
 using FTECH_THUONGMAIDIENTU.Models.Dashboard;
 using FTECH_THUONGMAIDIENTU.Models.Posts;
+using System.Net.Mail;
 
 namespace FTECH_THUONGMAIDIENTU.Controllers
 {
@@ -21,6 +24,8 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
             ViewBag.Summary = statisticsRepository.GetSummary();
             ViewBag.FeaturedPosts = postRepository.GetRecentPosts(6);
             ViewBag.TopPost = postRepository.GetTopPost();
+            ViewBag.Categories = postRepository.GetCategoriesWithCounts();
+            ViewBag.RecentComments = postRepository.GetRecentComments(4);
             return View("Trangchu");
         }
 
@@ -28,6 +33,8 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
         public JsonResult Feed()
         {
             var featuredPosts = postRepository.GetRecentPosts(12).ToList();
+            var categories = postRepository.GetCategoriesWithCounts().ToList();
+            var comments = postRepository.GetRecentComments(6).ToList();
             var partners = partnerRepository.GetActivePartners(12).ToList();
 
             return Json(new
@@ -35,6 +42,8 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
                 summary = statisticsRepository.GetSummary(),
                 featuredPosts = featuredPosts.Select(MapPostCard),
                 topPosts = featuredPosts.Take(8).Select(MapPostCard),
+                categories,
+                recentComments = comments.Select(MapCommentCard),
                 partnerNames = partners.Select(MapPartnerCard)
             }, JsonRequestBehavior.AllowGet);
         }
@@ -76,6 +85,45 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
             return View("Contact");
         }
 
+        [HttpPost]
+        public JsonResult SubscribeNewsletter(string email)
+        {
+            var normalizedEmail = NormalizeEmail(email);
+            if (string.IsNullOrWhiteSpace(normalizedEmail))
+            {
+                return Json(new { success = false, message = "Vui lòng nhập email hợp lệ." });
+            }
+
+            using (var connection = SqlConnectionFactory.CreateConnection())
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = @"
+IF EXISTS (SELECT 1 FROM dbo.NewsletterSubscribers WHERE Email = @Email)
+BEGIN
+    SELECT 1;
+END
+ELSE
+BEGIN
+    INSERT INTO dbo.NewsletterSubscribers (Email, Status)
+    VALUES (@Email, N'Active');
+    SELECT 0;
+END;";
+                command.Parameters.AddWithValue("@Email", normalizedEmail);
+
+                connection.Open();
+                var alreadySubscribed = Convert.ToInt32(command.ExecuteScalar()) == 1;
+
+                return Json(new
+                {
+                    success = true,
+                    alreadySubscribed,
+                    message = alreadySubscribed
+                        ? "Email này đã được đăng ký trước đó."
+                        : "Đăng ký newsletter thành công."
+                });
+            }
+        }
+
         private static object MapPostCard(PostSummary post)
         {
             return new
@@ -105,6 +153,38 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
                 partner.WebsiteUrl,
                 partner.Status
             };
+        }
+
+        private static object MapCommentCard(FTECH_THUONGMAIDIENTU.Models.Dashboard.CommentSummary comment)
+        {
+            return new
+            {
+                comment.CommentID,
+                comment.PostID,
+                comment.PostSlug,
+                comment.PostTitle,
+                comment.MemberName,
+                comment.MemberAvatarURL,
+                comment.Content,
+                comment.CreatedAt
+            };
+        }
+
+        private static string NormalizeEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return null;
+            }
+
+            try
+            {
+                return new MailAddress(email.Trim()).Address;
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
         }
     }
 }

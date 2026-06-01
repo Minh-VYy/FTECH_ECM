@@ -14,7 +14,8 @@ namespace FTECH_THUONGMAIDIENTU.Areas.UserAccount
             context.MapRoute(
                 name: "UserAccount_default",
                 url: "UserAccount/{controller}/{action}/{id}",
-                defaults: new { controller = "Account", action = "Dashboard", id = UrlParameter.Optional }
+                defaults: new { controller = "Account", action = "Dashboard", id = UrlParameter.Optional },
+                namespaces: new[] { "FTECH_THUONGMAIDIENTU.Areas.UserAccount.Controllers" }
             );
         }
     }

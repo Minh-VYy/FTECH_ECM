@@ -14,7 +14,8 @@ namespace FTECH_THUONGMAIDIENTU.Areas.AffiliateManager
             context.MapRoute(
                 name: "AffiliateManager_default",
                 url: "AffiliateManager/{controller}/{action}/{id}",
-                defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "FTECH_THUONGMAIDIENTU.Areas.AffiliateManager.Controllers" }
             );
         }
     }

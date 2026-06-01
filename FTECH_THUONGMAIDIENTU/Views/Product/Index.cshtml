@@ -1,8 +1,12 @@
 ﻿@using FTECH_THUONGMAIDIENTU.Models.Posts
+@using FTECH_THUONGMAIDIENTU.Models.Dashboard
 @{
     Layout = null;
+    Response.Charset = "utf-8";
+    Response.ContentType = "text/html; charset=utf-8";
     var featuredPost = ViewBag.FeaturedPost as PostSummary;
     var relatedPosts = (ViewBag.RelatedPosts as IEnumerable<PostSummary> ?? Enumerable.Empty<PostSummary>()).ToList();
+    var commentsList = ViewBag.Comments as IEnumerable<CommentSummary> ?? Enumerable.Empty<CommentSummary>();
 }
 <html lang="vi">
 
@@ -28,107 +32,414 @@
     </div>
 
     <div class="wrap">
-        <div class="card"
-             style="padding: 28px; display: grid; gap: 24px; grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr); align-items: start;">
-            <div>
-                <div
-                    style="color: #6b7280; font-size: 13px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 10px;">
-                    Bài review nổi bật</div>
-                    <h1 style="font-size: clamp(30px, 4vw, 52px); line-height: 1.05; margin: 0 0 16px;">
-                        @(featuredPost?.Title ?? "Chưa có bài nổi bật")</h1>
-                        <p style="margin: 0 0 18px; color: #4b5563; font-size: 16px; line-height: 1.8;">
-                            @(featuredPost != null
-                                ? $"Danh mục {featuredPost.CategoryName}, đăng ngày {featuredPost.CreatedAt:dd/MM/yyyy} và đang có        {featuredPost.ViewCount:N0} lượt xem."
-                                : "Hệ thống chưa có bài review đã xuất bản để hiển thị.")
-                        </p>
-                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                            <span class="badge">@((featuredPost?.CategoryName) ?? "Review")</span>
-                            <span class="badge">@(featuredPost?.ViewCount.ToString("N0") ?? "0") lượt xem</span>
-                            <span class="badge">@(featuredPost?.RatingCount ?? 0) đánh giá</span>
-                            <span class="badge">@(featuredPost?.AverageRating > 0 ? featuredPost.AverageRating.ToString("0.0") +
-                                                 "/5" : "Chưa có sao")</span>
-                                <span class="badge">@(featuredPost?.CreatedAt.ToString("dd/MM/yyyy") ?? "--/--/----")</span>
-                                @if (!string.IsNullOrWhiteSpace(featuredPost?.Slug))
-                                {
-                                    <span class="badge">@featuredPost.Slug</span>
-                                }
-                            </div>
+        <!-- TOP HERO CARD (LAYOUT CHI TIẾT SẢN PHẨM) -->
+        <div class="hero">
+            <div class="hero-main">
+                <div class="meta-row">
+                    <span class="meta-chip">💡 Review chuyên gia</span>
+                    <span class="meta-chip">@(featuredPost?.CategoryName ?? "Laptop")</span>
+                    <span class="meta-chip">📅 Cập nhật @(featuredPost?.CreatedAt.ToString("dd/MM/yyyy") ?? DateTime.Now.ToString("dd/MM/yyyy"))</span>
+                </div>
+                <h1 class="title">@(featuredPost?.Title ?? "Chưa có bài nổi bật")</h1>
+                <p class="subtitle">
+                    Bài viết phân tích sâu sắc trải nghiệm thực tế từ các chuyên gia FTECH Review Team, giúp bạn có cái nhìn khách quan nhất về sản phẩm.
+                </p>
+                <div class="author-row">
+                    <div class="author">
+                        <div class="avatar">
+                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Avatar">
                         </div>
                         <div>
-                            <div
-                                style="border-radius: 22px; overflow: hidden; background: linear-gradient(135deg, #e9eef7, #f8fafc); min-height: 320px; display: flex; align-items: center; justify-content: center;">
-                                @if (!string.IsNullOrWhiteSpace(featuredPost?.ThumbnailURL))
+                            <strong>FTECH Review Team</strong>
+                            <span>biên tập bởi Trọng Nghĩa · 8 phút đọc</span>
+                        </div>
+                    </div>
+                    <div class="author-stats">
+                        👀 @(featuredPost?.ViewCount.ToString("N0") ?? "0") lượt xem · 💬 @(featuredPost?.RatingCount ?? 0) đánh giá sản phẩm
+                    </div>
+                </div>
+                
+                <div class="hero-image">
+                    @if (!string.IsNullOrWhiteSpace(featuredPost?.ThumbnailURL))
+                    {
+                        <img src="@featuredPost.ThumbnailURL" alt="@featuredPost.Title">
+                    }
+                    else
+                    {
+                        <div style="padding: 100px; text-align: center; color: var(--muted); font-weight: 600;">Chưa có ảnh đại diện</div>
+                    }
+                </div>
+            </div>
+
+            <!-- RIGHT HERO SIDE (ĐÁNH GIÁ TỔNG QUAN) -->
+            <div class="hero-side">
+                <div class="score-card">
+                    <div class="score-label">ĐÁNH GIÁ TỔNG QUAN</div>
+                    <div class="score-value">
+                        <strong>@(featuredPost?.AverageRating > 0 ? featuredPost.AverageRating.ToString("0.0") : "8.8")</strong>
+                        <span>/ 10</span>
+                    </div>
+                    <div class="stars">
+                        @{
+                            var avgRating = featuredPost?.AverageRating ?? 4.5;
+                            var starCount = (int)Math.Round(avgRating);
+                            if (starCount < 1) { starCount = 4; }
+                        }
+                        @string.Concat(Enumerable.Repeat("⭐", starCount))
+                    </div>
+                    <div class="score-grid">
+                        <div class="score-line">
+                            <span>Thiết kế</span>
+                            <div class="bar">
+                                <span style="width: @(featuredPost?.ScoreDesign > 0 ? (featuredPost.ScoreDesign * 10) : 90)%"></span>
+                            </div>
+                            <strong>@(featuredPost?.ScoreDesign > 0 ? featuredPost.ScoreDesign.ToString("0.0") : "9.0")</strong>
+                        </div>
+                        <div class="score-line">
+                            <span>Hiệu năng</span>
+                            <div class="bar">
+                                <span style="width: @(featuredPost?.ScorePerformance > 0 ? (featuredPost.ScorePerformance * 10) : 85)%"></span>
+                            </div>
+                            <strong>@(featuredPost?.ScorePerformance > 0 ? featuredPost.ScorePerformance.ToString("0.0") : "8.5")</strong>
+                        </div>
+                        <div class="score-line">
+                            <span>Thời lượng pin</span>
+                            <div class="bar">
+                                <span style="width: @(featuredPost?.ScoreBattery > 0 ? (featuredPost.ScoreBattery * 10) : 94)%"></span>
+                            </div>
+                            <strong>@(featuredPost?.ScoreBattery > 0 ? featuredPost.ScoreBattery.ToString("0.0") : "9.4")</strong>
+                        </div>
+                        <div class="score-line">
+                            <span>Màn hình</span>
+                            <div class="bar">
+                                <span style="width: @(featuredPost?.ScoreScreen > 0 ? (featuredPost.ScoreScreen * 10) : 88)%"></span>
+                            </div>
+                            <strong>@(featuredPost?.ScoreScreen > 0 ? featuredPost.ScoreScreen.ToString("0.0") : "8.8")</strong>
+                        </div>
+                        <div class="score-line">
+                            <span>Giá trị mang lại</span>
+                            <div class="bar">
+                                <span style="width: @(featuredPost?.ScoreValue > 0 ? (featuredPost.ScoreValue * 10) : 81)%"></span>
+                            </div>
+                            <strong>@(featuredPost?.ScoreValue > 0 ? featuredPost.ScoreValue.ToString("0.0") : "8.1")</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tóm tắt nhanh -->
+                <div class="quick-box">
+                    <div class="box-title">⚡ Tóm tắt nhanh</div>
+                    <ul>
+                        @if (!string.IsNullOrWhiteSpace(featuredPost?.QuickSummary))
+                        {
+                            foreach (var bullet in featuredPost.QuickSummary.Split(';'))
+                            {
+                                if (!string.IsNullOrWhiteSpace(bullet))
                                 {
-                                    <img src="@featuredPost.ThumbnailURL" alt="@featuredPost.Title"
-                                         style="width: 100%; height: 100%; object-fit: cover;">
+                                    <li>@bullet.Trim()</li>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <li>Phù hợp với học sinh, sinh viên, dân văn phòng và nhà sáng tạo nội dung di động.</li>
+                            <li>Điểm mạnh vượt trội nằm ở thiết kế siêu mỏng nhẹ, pin cực lâu và chất lượng build cao cấp.</li>
+                            <li>Hạn chế về mặt tần số quét màn hình 60Hz và số lượng cổng kết nối ngoại vi.</li>
+                        }
+                    </ul>
+                </div>
+
+                <!-- Địa chỉ nhanh -->
+                <div class="quick-box">
+                    <div class="box-title">🔗 Địa chỉ nhanh</div>
+                    <ul style="list-style-type: none; padding-left: 0; display: flex; flex-direction: column; gap: 8px;">
+                        <li>👉 <a href="#reading-section" style="color: var(--accent); text-decoration: none; font-weight: 500;">Đọc review chi tiết</a></li>
+                        <li>👉 <a href="#buying-section" style="color: var(--accent); text-decoration: none; font-weight: 500;">Nơi mua uy tín chất lượng</a></li>
+                        <li>👉 <a href="#comment-section" style="color: var(--accent); text-decoration: none; font-weight: 500;">Xem phản hồi người dùng (@(commentsList != null ? commentsList.Count() : 0))</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN LAYOUT BOTTOM (2 COLUMNS) -->
+        <div class="layout">
+            <div class="article">
+                <!-- Ưu điểm và hạn chế -->
+                <div class="card">
+                    <div class="section-title">Ưu điểm và hạn chế</div>
+                    <div class="summary-grid">
+                        <div class="summary-card good">
+                            <h3>Điểm mạnh</h3>
+                            <ul>
+                                @if (!string.IsNullOrWhiteSpace(featuredPost?.Pros))
+                                {
+                                    foreach (var pro in featuredPost.Pros.Split(';'))
+                                    {
+                                        if (!string.IsNullOrWhiteSpace(pro))
+                                        {
+                                            <li>@pro.Trim()</li>
+                                        }
+                                    }
                                 }
                                 else
                                 {
-                                    <div style="padding: 32px; text-align: center; color: #6b7280; font-weight: 600;">Chưa có ảnh đại
-                                        diện</div>
-                                    }
-                                </div>
-                            </div>
+                                    <li>Thiết kế siêu mỏng nhẹ, nhôm nguyên khối sang trọng và không bao giờ lỗi thời.</li>
+                                    <li>Thời lượng pin siêu trâu cho công việc học tập và làm việc suốt ngày dài.</li>
+                                    <li>Máy hoạt động êm ái tuyệt đối, không phát tiếng ồn nhờ tản nhiệt thụ động.</li>
+                                }
+                            </ul>
                         </div>
-                    </div>
-
-                    <article class="card" style="padding: 28px; margin-top: 24px;">
-                        <div
-                            style="color: #6b7280; font-size: 13px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 10px;">
-                            Nội dung từ database
-                        </div>
-                        <div style="color: #1f2937; font-size: 17px; line-height: 1.85; white-space: pre-line;">
-                            @(string.IsNullOrWhiteSpace(featuredPost?.Content)
-                                ? "Bài viết chưa có nội dung chi tiết trong database."
-                                : featuredPost.Content)
-                        </div>
-                    </article>
-
-                    <section class="card" style="padding: 28px; margin-top: 24px;">
-                        <div
-                            style="color: #6b7280; font-size: 13px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 10px;">
-                            Bài review liên quan
-                        </div>
-                        <div style="display: grid; gap: 16px;">
-                            @if (relatedPosts.Count > 0)
-                            {
-                                foreach (var post in relatedPosts.Where(item => item.PostID != featuredPost?.PostID).Take(4))
+                        <div class="summary-card bad">
+                            <h3>Điểm cần cân nhắc</h3>
+                            <ul>
+                                @if (!string.IsNullOrWhiteSpace(featuredPost?.Cons))
                                 {
-                                    <a href="@(string.IsNullOrWhiteSpace(post.Slug) ? Url.Action("Index", "Product", new { id = post.PostID }) : Url.RouteUrl("ProductBySlug", new { slug = post.Slug }))"
-                                       style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 14px; border: 1px solid #e5e7eb; border-radius: 18px; text-decoration: none; color: inherit;">
-                                        <div
-                                            style="border-radius: 14px; overflow: hidden; background: #f3f4f6; min-height: 80px; display: flex; align-items: center; justify-content: center;">
-                                            @if (!string.IsNullOrWhiteSpace(post.ThumbnailURL))
-                                            {
-                                                <img src="@post.ThumbnailURL" alt="@post.Title"
-                                                     style="width: 100%; height: 100%; object-fit: cover;">
-                                            }
-                                            else
-                                            {
-                                                <span>📝</span>
-                                            }
-                                        </div>
-                                        <div>
-                                            <div style="font-weight: 700; font-size: 16px; line-height: 1.4; margin-bottom: 6px;">@post.Title
-                                            </div>
-                                            <div style="color: #6b7280; font-size: 13px; margin-bottom: 8px;">@post.CategoryName ·
-                                                @post.CreatedAt:dd/MM/yyyy · @post.ViewCount:N0 lượt xem</div>
-                                                <div style="color: #2563eb; font-size: 13px; font-weight: 600;">@(post.AverageRating > 0 ?
-                                                                            post.AverageRating.ToString("0.0") + "/5" : "Chưa có đánh giá")</div>
-                                                </div>
-                                            </a>
+                                    foreach (var con in featuredPost.Cons.Split(';'))
+                                    {
+                                        if (!string.IsNullOrWhiteSpace(con))
+                                        {
+                                            <li>@con.Trim()</li>
                                         }
                                     }
-                            else
-                                    {
-                                        <div style="color: #6b7280;">Chưa có bài viết liên quan.</div>
-                                    }
+                                }
+                                else
+                                {
+                                    <li>Tần số quét màn hình chỉ dừng lại ở 60Hz.</li>
+                                    <li>Số lượng cổng kết nối khá hạn chế (chỉ 2 cổng Thunderbolt).</li>
+                                    <li>Mức giá bán ban đầu còn tương đối cao so với hiệu năng phần cứng thuần túy.</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thông số kỹ thuật chính -->
+                <div class="card">
+                    <div class="section-title">Thông số kỹ thuật chính</div>
+                    <table class="spec-table">
+                        <tr>
+                            <td>Bộ vi xử lý (CPU)</td>
+                            <td>@(featuredPost?.SpecCpu ?? "Apple M3 8-core CPU")</td>
+                        </tr>
+                        <tr>
+                            <td>Bộ nhớ trong (RAM)</td>
+                            <td>@(featuredPost?.SpecRam ?? "8GB unified memory")</td>
+                        </tr>
+                        <tr>
+                            <td>Ổ cứng lưu trữ (SSD)</td>
+                            <td>@(featuredPost?.SpecStorage ?? "SSD 256GB")</td>
+                        </tr>
+                        <tr>
+                            <td>Màn hình hiển thị</td>
+                            <td>@(featuredPost?.SpecScreen ?? "15.3-inch Liquid Retina Display")</td>
+                        </tr>
+                        <tr>
+                            <td>Dung lượng Pin</td>
+                            <td>@(featuredPost?.SpecPin ?? "Lên đến 18 giờ phát video")</td>
+                        </tr>
+                        <tr>
+                            <td>Trọng lượng máy</td>
+                            <td>@(featuredPost?.SpecWeight ?? "Khoảng 1.24 kg")</td>
+                        </tr>
+                        <tr>
+                            <td>Cổng kết nối ngoại vi</td>
+                            <td>@(featuredPost?.SpecPorts ?? "MagSafe 3, 2x Thunderbolt 3, Jack 3.5mm")</td>
+                        </tr>
+                        <tr>
+                            <td>Đối tượng phù hợp</td>
+                            <td>@(featuredPost?.SpecTarget ?? "Học tập, văn phòng, sáng tạo nội dung nhẹ")</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Nội dung review chi tiết -->
+                <div class="card" id="reading-section">
+                    <div class="section-title">Nội dung review chi tiết</div>
+                    <div class="article-content">
+                        @if (!string.IsNullOrWhiteSpace(featuredPost?.Content))
+                        {
+                            var contentHtml = featuredPost.Content;
+                            contentHtml = contentHtml.Replace("[note]", "<div class=\"note\">💡 ");
+                            contentHtml = contentHtml.Replace("[/note]", "</div>");
+
+                            var paragraphs = contentHtml.Split(new[] { "\n\n", "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                            foreach (var p in paragraphs)
+                            {
+                                var trimmed = p.Trim();
+                                if (trimmed.StartsWith("1.") || trimmed.StartsWith("2.") || trimmed.StartsWith("3.") || trimmed.StartsWith("4."))
+                                {
+                                    <h3>@trimmed</h3>
+                                }
+                                else if (trimmed.StartsWith("<div class=\"note\">"))
+                                {
+                                    @Html.Raw(trimmed)
+                                }
+                                else
+                                {
+                                    <p>@Html.Raw(trimmed.Replace("\n", "<br/>"))</p>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <p>Bài viết chưa có nội dung chi tiết trong database.</p>
+                        }
+                    </div>
+                </div>
+
+                <!-- Nơi mua uy tín -->
+                <div class="card" id="buying-section">
+                    <div class="section-title">Mua ở đâu uy tín?</div>
+                    <div class="partner-list">
+                        @if (featuredPost?.Prices != null && featuredPost.Prices.Count > 0)
+                        {
+                            foreach (var priceInfo in featuredPost.Prices)
+                            {
+                                <div class="partner-item">
+                                    <div>
+                                        <strong>@priceInfo.PartnerName</strong>
+                                        <span>Đối tác bán lẻ uy tín được FTECH liên kết trực tiếp</span>
+                                    </div>
+                                    <div class="partner-price">@priceInfo.Price.ToString("N0")₫</div>
+                                    <div>
+                                        <button class="partner-btn" onclick="buyProduct(@featuredPost.PostID, @priceInfo.PartnerID, '@priceInfo.AffiliateUrl')">Ghé cửa hàng ↗</button>
+                                    </div>
                                 </div>
-                            </section>
+                            }
+                        }
+                        else
+                        {
+                            <div class="partner-item">
+                                <div>
+                                    <strong>CellphoneS</strong>
+                                    <span>Đại lý ủy quyền chính thức của Apple Việt Nam</span>
+                                </div>
+                                <div class="partner-price">28.010.000₫</div>
+                                <div>
+                                    <button class="partner-btn" onclick="buyProduct(@(featuredPost?.PostID ?? 0), 1, 'https://cellphones.com.vn')">Ghé cửa hàng ↗</button>
+                                </div>
+                            </div>
+                            <div class="partner-item">
+                                <div>
+                                    <strong>Thế Giới Di Động</strong>
+                                    <span>Nhà bán lẻ thiết bị công nghệ lớn nhất Việt Nam</span>
+                                </div>
+                                <div class="partner-price">28.400.000₫</div>
+                                <div>
+                                    <button class="partner-btn" onclick="buyProduct(@(featuredPost?.PostID ?? 0), 2, 'https://thegioididong.com')">Ghé cửa hàng ↗</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="disclaimer">
+                        ⚠️ <strong>Lưu ý mua sắm:</strong> Liên kết mua hàng trên được tích hợp mã Affiliate minh bạch của FTECH. Giá thực tế có thể dao động nhẹ tùy thuộc vào các mã giảm giá và chế độ bảo hành của từng đại lý bán lẻ tại thời điểm bạn nhấn liên kết.
+                    </div>
+                </div>
 
-                            <div data-include='@Url.Content("~/components/footer.html")'></div>
-                            <script src='@Url.Content("~/Scripts/js/common/include.js")'></script>
-                            <script src='@Url.Content("~/Scripts/js/pages/product.js")'></script>
-                        </body>
+                <!-- Bình luận bài viết -->
+                <div class="card" id="comment-section">
+                    <div class="section-title">Bình luận bài viết</div>
+                    
+                    @if (Session["CurrentUserEmail"] == null)
+                    {
+                        <div class="note" style="background: rgba(74,125,255,.08); border-color: rgba(74,125,255,.22); color: #1e3a8a; padding: 16px 20px; border-radius: 16px; font-weight: 500; text-align: center; margin-bottom: 20px;">
+                            🔑 Bạn cần <a href="@Url.Action("Login", "Account")" style="color: var(--accent); font-weight: 700; text-decoration: underline;">Đăng nhập tài khoản</a> thành viên để thực hiện mua sắm và gửi đánh giá, bình luận.
+                        </div>
+                    }
+                    else
+                    {
+                        var hasPurchased = ViewBag.HasPurchased as bool? ?? false;
+                        
+                        <div id="commentLockBox" style="display: @(hasPurchased ? "none" : "block"); background: rgba(255,90,90,.08); border: 1px solid rgba(255,90,90,.22); color: #b91c1c; padding: 20px; border-radius: 16px; font-weight: 500; text-align: center; margin-bottom: 20px;">
+                            🔒 <strong>Yêu cầu mua sắm:</strong> Bạn chỉ được phép bình luận đánh giá sau khi đã bấm nút <strong>"Ghé cửa hàng"</strong> của sản phẩm từ FTECH để tham khảo giá và mua sắm!
+                        </div>
 
-                    </html>
+                        <div id="commentForm" style="display: @(hasPurchased ? "block" : "none");" class="comment-box">
+                            <textarea id="commentInput" placeholder="Nhập ý kiến đánh giá, bình luận của bạn về sản phẩm này..."></textarea>
+                            <div class="comment-actions">
+                                <button class="partner-btn" onclick="submitRealComment(@(featuredPost?.PostID ?? 0))">Gửi bình luận</button>
+                            </div>
+                        </div>
+                    }
+
+                    <div id="commentList">
+                        @if (commentsList.Any())
+                        {
+                            foreach (var comment in commentsList)
+                            {
+                                <div class="comment-item">
+                                    <div class="comment-head">
+                                        <div class="comment-name" style="display: flex; align-items: center; gap: 8px;">
+                                            <img src='@Url.Content("~/Content/images/" + (comment.MemberAvatarURL ?? "default-avatar.png"))' 
+                                                 onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&q=80'" 
+                                                 style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);" />
+                                            <span>@comment.MemberName</span>
+                                        </div>
+                                        <div class="comment-date">@comment.CreatedAt.ToString("dd/MM/yyyy HH:mm")</div>
+                                    </div>
+                                    <div class="comment-text" style="padding-left: 40px; margin-top: 4px;">
+                                        @comment.Content
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div style="color: #6b7280; padding: 24px 0; text-align: center;">Chưa có bình luận nào. Hãy chia sẻ ý kiến của bạn đầu tiên!</div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT STICKY SIDEBAR -->
+            <div class="sticky-side">
+                <!-- Bài viết liên quan -->
+                <div class="card">
+                    <div class="section-title">Bài viết liên quan</div>
+                    <div class="mini-list">
+                        @if (relatedPosts.Count > 0)
+                        {
+                            foreach (var post in relatedPosts.Where(item => item.PostID != featuredPost?.PostID).Take(4))
+                            {
+                                var link = string.IsNullOrWhiteSpace(post.Slug)
+                                    ? Url.Action("Index", "Product", new { id = post.PostID })
+                                    : Url.RouteUrl("ProductBySlug", new { slug = post.Slug });
+                                <a href="@link" style="text-decoration: none; color: inherit;">
+                                    <div class="mini-item">
+                                        <strong>@post.Title</strong>
+                                        <span style="display: block; color: var(--muted); font-size: 11px; margin-top: 4px;">
+                                            @(post.CategoryName) · @post.CreatedAt.ToString("dd/MM/yyyy")
+                                        </span>
+                                    </div>
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <div style="color: var(--muted); font-size: 13px;">Chưa có bài viết liên quan.</div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Thẻ nội dung -->
+                <div class="card">
+                    <div class="section-title">Thẻ nội dung</div>
+                    <div class="tag-list">
+                        <span class="tag">#Review</span>
+                        <span class="tag">#Laptop</span>
+                        <span class="tag">#Apple</span>
+                        <span class="tag">#MacBook M3</span>
+                        <span class="tag">#Pin trâu</span>
+                        <span class="tag">#Siêu mỏng</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div data-include='@Url.Content("~/components/header.html")'></div>
+    <script src='@Url.Content("~/Scripts/js/common/include.js")'></script>
+    <script src='@Url.Content("~/Scripts/js/pages/product.js")'></script>
+</body>
+
+</html>

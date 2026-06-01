@@ -17,7 +17,8 @@ namespace FTECH_THUONGMAIDIENTU.Areas.ContentManager
             context.MapRoute(
                 name: "ContentManager_default",
                 url: "ContentManager/{controller}/{action}/{id}",
-                defaults: new { controller = "Post", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Post", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "FTECH_THUONGMAIDIENTU.Areas.ContentManager.Controllers" }
             );
         }
     }

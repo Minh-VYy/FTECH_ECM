@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Data;
 using FTECH_THUONGMAIDIENTU.Infrastructure;
 using FTECH_THUONGMAIDIENTU.Models.Auth;
@@ -24,6 +24,12 @@ namespace FTECH_THUONGMAIDIENTU.Areas.Admin.Controllers
                 Session["AdminName"] = result.DisplayName;
                 Session["AdminEmail"] = result.Email;
                 Session["AdminRole"] = result.RoleKey;
+
+                // Sync with public session keys for unified login experience
+                Session["CurrentUserName"] = result.DisplayName;
+                Session["CurrentUserEmail"] = result.Email;
+                Session["CurrentUserRole"] = result.RoleKey;
+
                 result.RedirectUrl = Url.Action("Index", "Dashboard", new { area = "Admin" });
             }
 

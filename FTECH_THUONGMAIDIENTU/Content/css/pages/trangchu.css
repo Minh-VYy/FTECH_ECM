@@ -126,6 +126,7 @@
     .hero h1 em {
       font-style: normal;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
+      background-clip: text;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
     .hero p { color: var(--body); font-size: 17px; line-height: 1.8; max-width: 460px; margin-bottom: 36px; }
@@ -506,6 +507,14 @@
       border: none; cursor: pointer; white-space: nowrap; transition: opacity .2s;
     }
     .newsletter-btn:hover { opacity: .85; }
+    .newsletter-status {
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--body);
+    }
+    .newsletter-status.is-success { color: #0f9d58; }
+    .newsletter-status.is-error { color: #d64545; }
 
     /* ── FOOTER ── */
     footer { margin-top: 90px; background: #e8e4ff; border-top: 1px solid var(--border2); }

@@ -3,6 +3,10 @@ let photoCount = 0;
 let shownCount = 3;
 let loadedReviews = [];
 
+function getSearchQuery() {
+  return new URLSearchParams(window.location.search).get('q') || '';
+}
+
 const starLabels = ['', 'Rất tệ', 'Không hài lòng', 'Bình thường', 'Hài lòng', 'Tuyệt vời!'];
 
 function setMainStar(v) {
@@ -139,12 +143,20 @@ function renderReviews(list) {
 }
 
 async function loadReviewFeed() {
+  const searchQuery = getSearchQuery().trim();
   try {
-    const response = await fetch('/Review/Feed', { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+    const feedUrl = searchQuery ? `/Review/Feed?q=${encodeURIComponent(searchQuery)}` : '/Review/Feed';
+    const response = await fetch(feedUrl, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
     if (!response.ok) throw new Error('feed');
 
     const data = await response.json();
     loadedReviews = data.reviews || [];
+
+    const title = document.querySelector('.rh-title');
+    if (title) {
+      title.textContent = searchQuery ? `Kết quả tìm kiếm: ${searchQuery}` : 'Tất cả đánh giá';
+    }
+
     renderReviews(loadedReviews);
   } catch (error) {
     const container = document.getElementById('reviewsList');

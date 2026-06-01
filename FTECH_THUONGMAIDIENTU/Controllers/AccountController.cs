@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Data;
 using FTECH_THUONGMAIDIENTU.Infrastructure;
 using FTECH_THUONGMAIDIENTU.Models.Auth;
@@ -26,6 +26,15 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
                 Session["CurrentUserName"] = result.DisplayName;
                 Session["CurrentUserEmail"] = result.Email;
                 Session["CurrentUserRole"] = result.RoleKey;
+
+                // Propagate to Admin Session keys if an administrator logs in
+                if (result.RoleKey != RoleKeys.Customer)
+                {
+                    Session["AdminName"] = result.DisplayName;
+                    Session["AdminEmail"] = result.Email;
+                    Session["AdminRole"] = result.RoleKey;
+                }
+
                 result.RedirectUrl = ResolveRedirectUrl(result.RoleKey);
             }
 
@@ -105,6 +114,13 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
             ViewBag.UserRole = "Khách Hàng";
             ViewBag.UserAvatar = profile.AvatarURL;
             return View("~/Areas/UserAccount/Views/Account/Profile.cshtml", profile);
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Login", "Account");
         }
 
         private string ResolveRedirectUrl(string roleKey)

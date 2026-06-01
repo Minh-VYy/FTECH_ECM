@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,25 +16,29 @@ namespace FTECH_THUONGMAIDIENTU
             routes.MapRoute(
                 name: "ProductBySlug",
                 url: "product/{slug}.html",
-                defaults: new { controller = "Product", action = "Index" }
+                defaults: new { controller = "Product", action = "Index" },
+                namespaces: new[] { "FTECH_THUONGMAIDIENTU.Controllers" }
             );
 
             routes.MapRoute(
                 name: "LegacyProduct",
                 url: "product.html",
-                defaults: new { controller = "Product", action = "Index" }
+                defaults: new { controller = "Product", action = "Index" },
+                namespaces: new[] { "FTECH_THUONGMAIDIENTU.Controllers" }
             );
 
             routes.MapRoute(
                 name: "LegacyReview",
                 url: "reviewModule.html",
-                defaults: new { controller = "Review", action = "Index" }
+                defaults: new { controller = "Review", action = "Index" },
+                namespaces: new[] { "FTECH_THUONGMAIDIENTU.Controllers" }
             );
 
             routes.MapRoute(
                 name: "LegacyHome",
                 url: "trangchu.html",
-                defaults: new { controller = "Home", action = "Index" }
+                defaults: new { controller = "Home", action = "Index" },
+                namespaces: new[] { "FTECH_THUONGMAIDIENTU.Controllers" }
             );
 
             routes.MapRoute(
@@ -54,7 +58,8 @@ namespace FTECH_THUONGMAIDIENTU
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "FTECH_THUONGMAIDIENTU.Controllers" }
             );
         }
     }

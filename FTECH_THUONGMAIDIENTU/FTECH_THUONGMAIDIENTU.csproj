@@ -161,6 +161,8 @@
     <Compile Include="Models\Admin\AdminProfileSummary.cs" />
     <Compile Include="Models\Dashboard\DashboardSummary.cs" />
     <Compile Include="Models\Dashboard\AffiliatePartnerSummary.cs" />
+    <Compile Include="Models\Dashboard\CategorySummary.cs" />
+    <Compile Include="Models\Dashboard\CommentSummary.cs" />
     <Compile Include="Models\ContentManager\CategoryOption.cs" />
     <Compile Include="Models\ContentManager\PostEditorRequest.cs" />
     <Compile Include="Models\ContentManager\PostEditorViewModel.cs" />
