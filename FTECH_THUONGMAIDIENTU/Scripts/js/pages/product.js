@@ -122,3 +122,60 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
+async function editComment(commentId, oldContent) {
+    const newContent = prompt("Chỉnh sửa bình luận đánh giá của bạn (Chỉ được sửa tối đa 1 lần):", oldContent);
+    if (newContent === null) return; // User cancelled
+    const trimmed = newContent.trim();
+    if (!trimmed) {
+        alert("Nội dung không được để trống.");
+        return;
+    }
+    if (trimmed === oldContent.trim()) return; // No change
+
+    try {
+        const response = await fetch("/Product/EditComment", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            body: `commentId=${commentId}&content=${encodeURIComponent(trimmed)}`
+        });
+
+        const data = await response.json();
+        if (data.success) {
+            alert("Cập nhật bình luận thành công!");
+            window.location.reload();
+        } else {
+            alert(data.message || "Không thể cập nhật bình luận.");
+        }
+    } catch (err) {
+        alert("Lỗi kết nối khi cập nhật bình luận. Vui lòng thử lại.");
+    }
+}
+
+async function deleteComment(commentId) {
+    if (!confirm("Bạn có chắc chắn muốn xóa bài đánh giá này không?")) return;
+
+    try {
+        const response = await fetch("/Product/DeleteComment", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            body: `commentId=${commentId}`
+        });
+
+        const data = await response.json();
+        if (data.success) {
+            alert("Đã xóa bình luận thành công!");
+            window.location.reload();
+        } else {
+            alert(data.message || "Không thể xóa bình luận.");
+        }
+    } catch (err) {
+        alert("Lỗi kết nối khi xóa bình luận. Vui lòng thử lại.");
+    }
+}

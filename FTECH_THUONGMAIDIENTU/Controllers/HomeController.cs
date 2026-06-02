@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -36,15 +36,17 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
             var categories = postRepository.GetCategoriesWithCounts().ToList();
             var comments = postRepository.GetRecentComments(6).ToList();
             var partners = partnerRepository.GetActivePartners(12).ToList();
+            var brands = postRepository.GetActiveBrands().ToList();
 
             return Json(new
             {
                 summary = statisticsRepository.GetSummary(),
                 featuredPosts = featuredPosts.Select(MapPostCard),
-                topPosts = featuredPosts.Take(8).Select(MapPostCard),
+                topPosts = featuredPosts.Take(12).Select(MapPostCard),
                 categories,
                 recentComments = comments.Select(MapCommentCard),
-                partnerNames = partners.Select(MapPartnerCard)
+                partnerNames = partners.Select(MapPartnerCard),
+                brands = brands
             }, JsonRequestBehavior.AllowGet);
         }
 

@@ -19,5 +19,11 @@ namespace FTECH_THUONGMAIDIENTU.Models.Dashboard
         public string Content { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public int? MemberID { get; set; }
+
+        public int EditCount { get; set; }
+
+        public int RatingStar { get; set; }
     }
 }

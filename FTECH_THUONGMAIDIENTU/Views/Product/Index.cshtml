@@ -338,7 +338,10 @@
 
                 <!-- Bình luận bài viết -->
                 <div class="card" id="comment-section">
-                    <div class="section-title">Bình luận bài viết</div>
+                    <div class="section-title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <span>Bình luận bài viết</span>
+                        <a href="@Url.Action("Index", "Review", new { id = featuredPost?.PostID })" style="font-size: 13px; color: var(--accent); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">Xem chi tiết đánh giá & chấm điểm sao ⭐</a>
+                    </div>
                     
                     @if (Session["CurrentUserEmail"] == null)
                     {
@@ -367,7 +370,7 @@
                         {
                             foreach (var comment in commentsList)
                             {
-                                <div class="comment-item">
+                                <div class="comment-item" id="comment-item-@comment.CommentID" style="margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px dashed var(--border);">
                                     <div class="comment-head">
                                         <div class="comment-name" style="display: flex; align-items: center; gap: 8px;">
                                             <img src='@Url.Content("~/Content/images/" + (comment.MemberAvatarURL ?? "default-avatar.png"))' 
@@ -375,11 +378,31 @@
                                                  style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);" />
                                             <span>@comment.MemberName</span>
                                         </div>
-                                        <div class="comment-date">@comment.CreatedAt.ToString("dd/MM/yyyy HH:mm")</div>
+                                        <div class="comment-date">
+                                            @comment.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+                                            @if (comment.EditCount >= 1)
+                                            {
+                                                <span style="color: var(--muted); font-size: 11px; margin-left: 6px; font-style: italic;">(Đã sửa)</span>
+                                            }
+                                        </div>
                                     </div>
-                                    <div class="comment-text" style="padding-left: 40px; margin-top: 4px;">
+                                    <div class="comment-text" style="padding-left: 40px; margin-top: 4px; color: var(--text); line-height: 1.6;">
                                         @comment.Content
                                     </div>
+                                    @if (ViewBag.CurrentMemberID != null && comment.MemberID == (int)ViewBag.CurrentMemberID)
+                                    {
+                                        <div class="comment-ops" style="padding-left: 40px; margin-top: 8px; display: flex; gap: 14px; font-size: 12px;">
+                                            @if (comment.EditCount < 1)
+                                            {
+                                                <a href="javascript:void(0)" onclick="editComment(@comment.CommentID, '@HttpUtility.JavaScriptStringEncode(comment.Content)')" style="color: var(--accent); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">✏️ Sửa (còn 1 lần)</a>
+                                            }
+                                            else
+                                            {
+                                                <span style="color: var(--muted); font-style: italic;">✏️ Đã hết lượt sửa</span>
+                                            }
+                                            <a href="javascript:void(0)" onclick="deleteComment(@comment.CommentID)" style="color: var(--red); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-left: 8px;">🗑️ Xóa đánh giá</a>
+                                        </div>
+                                    }
                                 </div>
                             }
                         }

@@ -1,4 +1,4 @@
-﻿function buildStars(rating) {
+function buildStars(rating) {
   const count = Math.max(0, Math.min(5, Math.round(rating || 0)));
   return '⭐'.repeat(count) || 'Chưa có đánh giá';
 }
@@ -56,6 +56,8 @@ function makeCard(post, compact = false) {
   </div>`;
 }
 
+let allHomePosts = [];
+
 async function loadHomeFeed() {
   const categoriesGrid = document.querySelector('.cats-grid');
   const testimonialsGrid = document.querySelector('.testi-grid');
@@ -79,9 +81,18 @@ async function loadHomeFeed() {
       flashGrid.innerHTML = (featuredPosts.slice(0, 5).length ? featuredPosts.slice(0, 5) : topPosts.slice(0, 5)).map(item => makeCard(item, true)).join('');
     }
 
+    allHomePosts = topPosts.length ? topPosts : featuredPosts;
     if (mainGrid) {
-      const mainItems = topPosts.length ? topPosts : featuredPosts;
-      mainGrid.innerHTML = mainItems.map(item => makeCard(item)).join('');
+      renderMainGrid(allHomePosts.slice(0, 4));
+    }
+
+    const loadMoreBtn = document.getElementById('loadMoreHomeBtn');
+    if (loadMoreBtn) {
+      if (allHomePosts.length <= 4) {
+        loadMoreBtn.style.display = 'none';
+      } else {
+        loadMoreBtn.style.display = 'inline-block';
+      }
     }
 
     if (brandsTrack) {
@@ -108,6 +119,18 @@ async function loadHomeFeed() {
           const createdAt = formatDateTime(comment.createdAt || comment.CreatedAt);
           return `<div class="testi-card"><div class="testi-stars">⭐⭐⭐⭐⭐</div><div class="testi-text">"${escapeHtml(excerpt(content))}"</div><div class="testi-author"><div class="testi-avatar"><img src="${avatar}" alt="${escapeHtml(name)}"></div><div><div class="testi-name">${escapeHtml(name)}</div><div class="testi-meta">${escapeHtml(title)} · ${createdAt}</div></div></div><div class="testi-source">Nguồn: database</div></div>`;
         }).join('');
+    }
+
+    // Populate brand select dynamically from DB
+    const brands = data.brands || [];
+    const brandSelect = document.getElementById('brandSelect');
+    if (brandSelect) {
+      const selectedValue = brandSelect.value;
+      brandSelect.innerHTML = '<option value="">Tất cả thương hiệu</option>' + 
+        brands.map(brand => `<option value="${escapeHtml(brand)}">${escapeHtml(brand)}</option>`).join('');
+      if (selectedValue && brands.includes(selectedValue)) {
+        brandSelect.value = selectedValue;
+      }
     }
   } catch (error) {
     const flashGrid = document.getElementById('flashGrid');
@@ -145,10 +168,46 @@ function makeMockCard(p) {
   </div>`;
 }
 
+function renderMainGrid(posts) {
+  const mainGrid = document.getElementById('mainGrid');
+  if (!mainGrid) return;
+  if (posts.length === 0) {
+    mainGrid.innerHTML = '<div class="prod-card"><div class="prod-body"><div class="prod-name">Không tìm thấy sản phẩm nào trong danh mục này.</div></div></div>';
+    return;
+  }
+  mainGrid.innerHTML = posts.map(item => makeCard(item)).join('');
+}
+
+function loadMoreHomePosts() {
+  renderMainGrid(allHomePosts);
+  const loadMoreBtn = document.getElementById('loadMoreHomeBtn');
+  if (loadMoreBtn) {
+    loadMoreBtn.style.display = 'none';
+  }
+}
+
 function goToReviewSearch(term) {
   const keyword = String(term || '').trim();
-  if (!keyword) return;
-  window.location.href = `/reviewModule.html?q=${encodeURIComponent(keyword)}`;
+  const brandSelect = document.getElementById('brandSelect');
+  const sortSelect = document.getElementById('sortSelect');
+  
+  let brand = '';
+  if (brandSelect && brandSelect.value !== 'Tất cả thương hiệu') {
+    brand = brandSelect.value;
+  }
+  
+  let sort = '';
+  if (sortSelect) {
+    sort = sortSelect.value;
+  }
+  
+  let url = `/Review?`;
+  const params = [];
+  if (keyword) params.push(`q=${encodeURIComponent(keyword)}`);
+  if (brand) params.push(`brand=${encodeURIComponent(brand)}`);
+  if (sort) params.push(`sort=${encodeURIComponent(sort)}`);
+  
+  window.location.href = url + params.join('&');
 }
 
 function ensureNewsletterStatus() {
@@ -228,7 +287,56 @@ loadHomeFeed();
 document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', function() {
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   this.classList.add('active');
+  
+  const tabText = this.textContent.trim().toLowerCase();
+  if (tabText === 'tất cả') {
+    renderMainGrid(allHomePosts);
+  } else {
+    const filtered = allHomePosts.filter(post => {
+      const cat = (post.categoryName || post.CategoryName || '').toLowerCase();
+      const title = (post.title || post.Title || '').toLowerCase();
+      return cat.includes(tabText) || title.includes(tabText);
+    });
+    renderMainGrid(filtered);
+  }
 }));
+
+// Category card click interaction
+document.addEventListener('click', function(e) {
+  const catCard = e.target.closest('.cat-card');
+  if (catCard) {
+    e.preventDefault();
+    const catName = catCard.querySelector('.cat-name').textContent.trim().toLowerCase();
+    
+    // Find a tab that matches this category name
+    let matchedTab = null;
+    document.querySelectorAll('.tab').forEach(tab => {
+      const tabText = tab.textContent.trim().toLowerCase();
+      if (catName.includes(tabText) || tabText.includes(catName)) {
+        matchedTab = tab;
+      }
+    });
+
+    if (matchedTab) {
+      matchedTab.click();
+    } else {
+      // If no tab matches, clear all tabs active states, and filter the grid dynamically!
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+      const filtered = allHomePosts.filter(post => {
+        const cat = (post.categoryName || post.CategoryName || '').toLowerCase();
+        const title = (post.title || post.Title || '').toLowerCase();
+        return cat.includes(catName) || title.includes(catName);
+      });
+      renderMainGrid(filtered);
+    }
+    
+    // Smooth scroll to s-products section
+    const productsSection = document.getElementById('s-products');
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+});
 
 let secs = 8*3600+24*60+55;
 function updateTimer() {

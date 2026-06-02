@@ -23,10 +23,6 @@
       "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\admin\\views\\affiliate\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\admin\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\admin\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\admin\\views\\account\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\admin\\views\\account\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -55,39 +51,35 @@
       "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\review\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\review\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\review\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\home\\trangchu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\home\\trangchu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\home\\trangchu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\account\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\account\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\account\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\account\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\account\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\areas\\contentmanager\\views\\post\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\contentmanager\\views\\post\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\contentmanager\\views\\post\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|e:\\thuongmaidientu\\ftech_thuongmaidientu\\areas\\contentmanager\\views\\post\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\contentmanager\\views\\post\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\contentmanager\\views\\post\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
@@ -241,6 +233,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\areas\\affiliatemanager\\views\\analytics\\performance.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8CEEF05A-C67F-4A5A-A928-BE9B2DE09999}|FTECH_THUONGMAIDIENTU.csproj|solutionrelative:areas\\affiliatemanager\\views\\analytics\\performance.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Account\\Login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Areas\\Admin\\Views\\Account\\Login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\Profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\Account\\Profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -250,7 +250,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -265,14 +265,30 @@
               "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Post\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Views\\Post\\Index.cshtml",
+              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Post\\Index.cshtml",
+              "RelativeToolTip": "Areas\\SuperAdmin\\Views\\Post\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-09T14:08:44.068Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
               "Title": "Login.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Account\\Login.cshtml",
               "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Account\\Login.cshtml",
               "RelativeToolTip": "Areas\\Admin\\Views\\Account\\Login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-09T13:48:19.072Z"
             },
@@ -320,26 +336,13 @@
               "RelativeDocumentMoniker": "Areas\\UserAccount\\Views\\Account\\Dashboard.cshtml",
               "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Views\\Account\\Dashboard.cshtml",
               "RelativeToolTip": "Areas\\UserAccount\\Views\\Account\\Dashboard.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-09T14:10:21.308Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Post\\Index.cshtml",
-              "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Views\\Post\\Index.cshtml",
-              "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Post\\Index.cshtml",
-              "RelativeToolTip": "Areas\\SuperAdmin\\Views\\Post\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-09T14:08:44.068Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Account\\Index.cshtml",
               "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Account\\Index.cshtml",
@@ -351,31 +354,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "_UserAccountLayout.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Views\\Shared\\_UserAccountLayout.cshtml",
               "RelativeDocumentMoniker": "Areas\\UserAccount\\Views\\Shared\\_UserAccountLayout.cshtml",
               "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Views\\Shared\\_UserAccountLayout.cshtml",
               "RelativeToolTip": "Areas\\UserAccount\\Views\\Shared\\_UserAccountLayout.cshtml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwDsAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-09T14:08:02.91Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Views\\Account\\Edit.cshtml",
               "RelativeDocumentMoniker": "Areas\\UserAccount\\Views\\Account\\Edit.cshtml",
               "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Views\\Account\\Edit.cshtml",
               "RelativeToolTip": "Areas\\UserAccount\\Views\\Account\\Edit.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-09T14:22:20.509Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "AccountController.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Areas\\UserAccount\\Controllers\\AccountController.cs",
@@ -387,7 +390,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
@@ -395,11 +398,12 @@
               "RelativeToolTip": "Views\\_ViewStart.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-09T13:15:28.042Z"
+              "WhenOpened": "2026-05-09T13:15:28.042Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
@@ -411,7 +415,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 11,
               "Title": "Error.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Shared\\Error.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\Error.cshtml",
@@ -423,91 +427,93 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 12,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Review\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Review\\Index.cshtml",
               "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Review\\Index.cshtml",
               "RelativeToolTip": "Views\\Review\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-09T14:41:17.983Z"
+              "WhenOpened": "2026-05-09T14:41:17.983Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Product\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Product\\Index.cshtml",
               "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Product\\Index.cshtml",
               "RelativeToolTip": "Views\\Product\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-09T14:40:38.498Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "Trangchu.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Home\\Trangchu.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Trangchu.cshtml",
               "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Home\\Trangchu.cshtml",
               "RelativeToolTip": "Views\\Home\\Trangchu.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAI8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-09T14:39:54.205Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "ResetPassword.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\ResetPassword.cshtml",
               "RelativeDocumentMoniker": "Views\\Account\\ResetPassword.cshtml",
               "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\ResetPassword.cshtml",
               "RelativeToolTip": "Views\\Account\\ResetPassword.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-09T14:38:54.847Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "Register.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\Register.cshtml",
               "RelativeDocumentMoniker": "Views\\Account\\Register.cshtml",
               "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\Register.cshtml",
               "RelativeToolTip": "Views\\Account\\Register.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAH8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-09T14:38:31.823Z"
+              "WhenOpened": "2026-05-09T14:38:31.823Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 59,
               "Title": "Profile.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\Profile.cshtml",
               "RelativeDocumentMoniker": "Views\\Account\\Profile.cshtml",
               "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\Profile.cshtml",
               "RelativeToolTip": "Views\\Account\\Profile.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-09T14:42:04.123Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 17,
               "Title": "Login.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "Views\\Account\\Login.cshtml",
               "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\Account\\Login.cshtml",
               "RelativeToolTip": "Views\\Account\\Login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-09T14:38:09.904Z"
+              "WhenOpened": "2026-05-09T14:38:09.904Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 18,
               "Title": "Create.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Views\\Post\\Create.cshtml",
               "RelativeDocumentMoniker": "Areas\\ContentManager\\Views\\Post\\Create.cshtml",
@@ -519,7 +525,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 19,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Views\\Post\\Edit.cshtml",
               "RelativeDocumentMoniker": "Areas\\ContentManager\\Views\\Post\\Edit.cshtml",
@@ -531,7 +537,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 21,
               "Title": "PartnerController.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Controllers\\PartnerController.cs",
               "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Controllers\\PartnerController.cs",
@@ -543,7 +549,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 20,
               "Title": "_SuperAdminLayout.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Shared\\_SuperAdminLayout.cshtml",
               "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Views\\Shared\\_SuperAdminLayout.cshtml",
@@ -555,7 +561,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 22,
               "Title": "DashboardController.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Controllers\\DashboardController.cs",
               "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Controllers\\DashboardController.cs",
@@ -567,7 +573,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 23,
               "Title": "AdminAccountController.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Controllers\\AdminAccountController.cs",
               "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Controllers\\AdminAccountController.cs",
@@ -579,7 +585,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 24,
               "Title": "ContentManagerAreaRegistration.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\ContentManagerAreaRegistration.cs",
               "RelativeDocumentMoniker": "Areas\\ContentManager\\ContentManagerAreaRegistration.cs",
@@ -591,7 +597,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 25,
               "Title": "_ContentManagerLayout.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Views\\Shared\\_ContentManagerLayout.cshtml",
               "RelativeDocumentMoniker": "Areas\\ContentManager\\Views\\Shared\\_ContentManagerLayout.cshtml",
@@ -603,7 +609,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 26,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Views\\Post\\Index.cshtml",
               "RelativeDocumentMoniker": "Areas\\ContentManager\\Views\\Post\\Index.cshtml",
@@ -615,7 +621,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 27,
               "Title": "PostController.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\ContentManager\\Controllers\\PostController.cs",
               "RelativeDocumentMoniker": "Areas\\ContentManager\\Controllers\\PostController.cs",
@@ -627,7 +633,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 28,
               "Title": "PartnerController.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Controllers\\PartnerController.cs",
               "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\PartnerController.cs",
@@ -639,7 +645,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 29,
               "Title": "DashboardController.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Controllers\\DashboardController.cs",
               "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\DashboardController.cs",
@@ -651,7 +657,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 30,
               "Title": "AccountController.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\AccountController.cs",
@@ -663,7 +669,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 32,
               "Title": "UserAccountAreaRegistration.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\UserAccount\\UserAccountAreaRegistration.cs",
               "RelativeDocumentMoniker": "Areas\\UserAccount\\UserAccountAreaRegistration.cs",
@@ -675,7 +681,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 31,
               "Title": "manage-affiliates.html",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\manage-affiliates.html",
               "RelativeDocumentMoniker": "Views\\manage-affiliates.html",
@@ -687,7 +693,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 33,
               "Title": "AffiliateManagerAreaRegistration.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\AffiliateManagerAreaRegistration.cs",
               "RelativeDocumentMoniker": "Areas\\AffiliateManager\\AffiliateManagerAreaRegistration.cs",
@@ -699,7 +705,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 34,
               "Title": "SuperAdminAreaRegistration.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\SuperAdminAreaRegistration.cs",
               "RelativeDocumentMoniker": "Areas\\SuperAdmin\\SuperAdminAreaRegistration.cs",
@@ -711,7 +717,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 57,
               "Title": "Performance.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Analytics\\Performance.cshtml",
               "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Views\\Analytics\\Performance.cshtml",
@@ -723,7 +729,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 56,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Analytics\\Index.cshtml",
               "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Views\\Analytics\\Index.cshtml",
@@ -735,7 +741,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 55,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Affiliate\\Index.cshtml",
               "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Views\\Affiliate\\Index.cshtml",
@@ -747,7 +753,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 54,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Dashboard\\Index.cshtml",
               "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Views\\Dashboard\\Index.cshtml",
@@ -759,7 +765,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 53,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\AdminAccount\\Index.cshtml",
               "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Views\\AdminAccount\\Index.cshtml",
@@ -771,7 +777,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 52,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Partner\\Index.cshtml",
               "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Views\\Partner\\Index.cshtml",
@@ -783,7 +789,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 51,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Views\\Dashboard\\Index.cshtml",
               "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Views\\Dashboard\\Index.cshtml",
@@ -795,7 +801,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 50,
               "Title": "_AffiliateManagerLayout.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Views\\Shared\\_AffiliateManagerLayout.cshtml",
               "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Views\\Shared\\_AffiliateManagerLayout.cshtml",
@@ -807,7 +813,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 49,
               "Title": "AnalyticsController.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Controllers\\AnalyticsController.cs",
               "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Controllers\\AnalyticsController.cs",
@@ -819,7 +825,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 48,
               "Title": "AffiliateController.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Controllers\\AffiliateController.cs",
               "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Controllers\\AffiliateController.cs",
@@ -831,7 +837,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 47,
               "Title": "DashboardController.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\AffiliateManager\\Controllers\\DashboardController.cs",
               "RelativeDocumentMoniker": "Areas\\AffiliateManager\\Controllers\\DashboardController.cs",
@@ -843,7 +849,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 46,
               "Title": "PostController.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\SuperAdmin\\Controllers\\PostController.cs",
               "RelativeDocumentMoniker": "Areas\\SuperAdmin\\Controllers\\PostController.cs",
@@ -855,19 +861,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 35,
               "Title": "_AdminLayout.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Shared\\_AdminLayout.cshtml",
               "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Shared\\_AdminLayout.cshtml",
               "ToolTip": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Shared\\_AdminLayout.cshtml",
               "RelativeToolTip": "Areas\\Admin\\Views\\Shared\\_AdminLayout.cshtml",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAEBVwC8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-09T13:51:22.555Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 36,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Areas\\Admin\\Views\\Partner\\Index.cshtml",
               "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Partner\\Index.cshtml",
@@ -879,7 +885,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 37,
               "Title": "dashboard.html",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\dashboard.html",
               "RelativeDocumentMoniker": "Views\\dashboard.html",
@@ -891,7 +897,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 38,
               "Title": "login.html",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\login.html",
               "RelativeDocumentMoniker": "Views\\login.html",
@@ -903,7 +909,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 39,
               "Title": "manage-accounts.html",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\manage-accounts.html",
               "RelativeDocumentMoniker": "Views\\manage-accounts.html",
@@ -915,7 +921,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 40,
               "Title": "content-manager.html",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\content-manager.html",
               "RelativeDocumentMoniker": "Views\\content-manager.html",
@@ -927,7 +933,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 42,
               "Title": "FilterConfig.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\App_Start\\FilterConfig.cs",
               "RelativeDocumentMoniker": "App_Start\\FilterConfig.cs",
@@ -939,7 +945,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 41,
               "Title": "RouteConfig.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\App_Start\\RouteConfig.cs",
               "RelativeDocumentMoniker": "App_Start\\RouteConfig.cs",
@@ -951,7 +957,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 43,
               "Title": "manage-partners.html",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Views\\manage-partners.html",
               "RelativeDocumentMoniker": "Views\\manage-partners.html",
@@ -963,7 +969,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 44,
               "Title": "packages.config",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\packages.config",
               "RelativeDocumentMoniker": "packages.config",
@@ -975,7 +981,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 45,
               "Title": "HomeController.cs",
               "DocumentMoniker": "E:\\ThuongMaiDienTu\\FTECH_THUONGMAIDIENTU\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",

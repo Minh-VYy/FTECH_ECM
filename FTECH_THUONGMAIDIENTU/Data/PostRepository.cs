@@ -133,6 +133,8 @@ ORDER BY c.CategoryName;";
 SELECT TOP (@Take)
     c.CommentID,
     c.PostID,
+    c.MemberID,
+    c.EditCount,
     p.Slug AS PostSlug,
     p.Title AS PostTitle,
     ISNULL(m.FullName, N'Khách') AS MemberName,
@@ -142,7 +144,14 @@ SELECT TOP (@Take)
 FROM Comments c
 LEFT JOIN Members m ON c.MemberID = m.MemberID
 LEFT JOIN Posts p ON c.PostID = p.PostID
-ORDER BY c.CreatedAt DESC;";
+LEFT JOIN (
+    SELECT
+        PostID,
+        AVG(CAST(RatingStar AS FLOAT)) AS AverageRating
+    FROM Ratings
+    GROUP BY PostID
+) r ON c.PostID = r.PostID
+ORDER BY ISNULL(r.AverageRating, 0) DESC, c.CreatedAt DESC;";
                 command.Parameters.AddWithValue("@Take", Math.Max(1, take));
 
                 connection.Open();
@@ -154,6 +163,8 @@ ORDER BY c.CreatedAt DESC;";
                         {
                             CommentID = Convert.ToInt32(reader["CommentID"]),
                             PostID = reader["PostID"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["PostID"]),
+                            MemberID = reader["MemberID"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["MemberID"]),
+                            EditCount = HasColumn(reader, "EditCount") && reader["EditCount"] != DBNull.Value ? Convert.ToInt32(reader["EditCount"]) : 0,
                             PostSlug = reader["PostSlug"]?.ToString(),
                             PostTitle = reader["PostTitle"]?.ToString(),
                             MemberName = reader["MemberName"]?.ToString(),
@@ -316,15 +327,17 @@ ORDER BY p.CreatedAt DESC;";
             return posts;
         }
 
-        public IList<PostSummary> GetRecentPosts(int take, string searchTerm = null)
+        public IList<PostSummary> GetRecentPosts(int take, string searchTerm = null, string category = null, string brand = null, string sort = null)
         {
             var posts = new List<PostSummary>();
             var term = string.IsNullOrWhiteSpace(searchTerm) ? string.Empty : searchTerm.Trim();
+            var cat = string.IsNullOrWhiteSpace(category) ? string.Empty : category.Trim();
+            var brnd = string.IsNullOrWhiteSpace(brand) ? string.Empty : brand.Trim();
 
             using (var connection = SqlConnectionFactory.CreateConnection())
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = @"
+                string sql = @"
 SELECT TOP (@Take)
     p.PostID,
     p.Title,
@@ -348,13 +361,67 @@ LEFT JOIN (
     FROM Ratings
     GROUP BY PostID
 ) r ON p.PostID = r.PostID
-    WHERE (
-        @SearchTerm = N''
-        OR p.Title LIKE N'%' + @SearchTerm + N'%'
-        OR p.Content LIKE N'%' + @SearchTerm + N'%'
-        OR c.CategoryName LIKE N'%' + @SearchTerm + N'%'
-    )
-ORDER BY p.CreatedAt DESC;";
+WHERE (
+    @SearchTerm = N''
+    OR p.Title LIKE N'%' + @SearchTerm + N'%'
+    OR p.Content LIKE N'%' + @SearchTerm + N'%'
+    OR c.CategoryName LIKE N'%' + @SearchTerm + N'%'
+)";
+
+                if (!string.IsNullOrEmpty(cat))
+                {
+                    sql += " AND c.CategoryName LIKE N'%' + @Category + N'%'";
+                    command.Parameters.AddWithValue("@Category", cat);
+                }
+
+                if (!string.IsNullOrEmpty(brnd) && brnd != "Tất cả thương hiệu")
+                {
+                    sql += @" AND (
+                        CASE 
+                            WHEN p.Title LIKE N'%Apple%' OR p.Title LIKE N'%iPhone%' OR p.Title LIKE N'%MacBook%' OR p.Title LIKE N'%AirPods%' OR p.Title LIKE N'%iPad%' THEN 'Apple'
+                            WHEN p.Title LIKE N'%Samsung%' OR p.Title LIKE N'%Galaxy%' OR p.Title LIKE N'%Buds%' THEN 'Samsung'
+                            WHEN p.Title LIKE N'%Sony%' THEN 'Sony'
+                            WHEN p.Title LIKE N'%ASUS%' OR p.Title LIKE N'%ROG%' OR p.Title LIKE N'%TUF%' THEN 'ASUS'
+                            WHEN p.Title LIKE N'%Xiaomi%' OR p.Title LIKE N'%Redmi%' THEN 'Xiaomi'
+                            WHEN p.Title LIKE N'%OPPO%' THEN 'OPPO'
+                            WHEN p.Title LIKE N'%Vivo%' THEN 'Vivo'
+                            WHEN p.Title LIKE N'%Google%' OR p.Title LIKE N'%Pixel%' THEN 'Google'
+                            WHEN p.Title LIKE N'%Dell%' OR p.Title LIKE N'%XPS%' OR p.Title LIKE N'%Alienware%' THEN 'Dell'
+                            WHEN p.Title LIKE N'%Lenovo%' OR p.Title LIKE N'%Legion%' OR p.Title LIKE N'%ThinkPad%' THEN 'Lenovo'
+                            WHEN p.Title LIKE N'%Garmin%' THEN 'Garmin'
+                            WHEN p.Title LIKE N'%HP%' OR p.Title LIKE N'%Pavilion%' OR p.Title LIKE N'%Omen%' THEN 'HP'
+                            WHEN p.Title LIKE N'%Acer%' OR p.Title LIKE N'%Predator%' OR p.Title LIKE N'%Nitro%' THEN 'Acer'
+                            ELSE NULL
+                        END = @Brand
+                    )";
+                    command.Parameters.AddWithValue("@Brand", brnd);
+                }
+
+                string orderBy = " ORDER BY p.CreatedAt DESC";
+                if (!string.IsNullOrEmpty(sort))
+                {
+                    var s = sort.Trim().ToLower();
+                    if (s == "nhiều lượt xem" || s == "views" || s == "helpful")
+                    {
+                        orderBy = " ORDER BY p.ViewCount DESC, p.CreatedAt DESC";
+                    }
+                    else if (s == "đánh giá cao" || s == "highest" || s == "rating")
+                    {
+                        orderBy = " ORDER BY AverageRating DESC, p.CreatedAt DESC";
+                    }
+                    else if (s == "lowest")
+                    {
+                        orderBy = " ORDER BY AverageRating ASC, p.CreatedAt DESC";
+                    }
+                    else if (s == "so sánh nổi bật" || s == "featured")
+                    {
+                        orderBy = " ORDER BY p.ViewCount DESC, AverageRating DESC";
+                    }
+                }
+
+                sql += orderBy + ";";
+
+                command.CommandText = sql;
                 command.Parameters.AddWithValue("@Take", Math.Max(1, take));
                 command.Parameters.AddWithValue("@SearchTerm", term);
 
@@ -646,15 +713,19 @@ ORDER BY pp.Price ASC;";
 SELECT
     c.CommentID,
     c.PostID,
+    c.MemberID,
+    c.EditCount,
     p.Slug AS PostSlug,
     p.Title AS PostTitle,
     ISNULL(m.FullName, N'Khách') AS MemberName,
     ISNULL(m.AvatarURL, N'default-avatar.png') AS MemberAvatarURL,
     c.Content,
-    c.CreatedAt
+    c.CreatedAt,
+    ISNULL(r.RatingStar, 5) AS RatingStar
 FROM Comments c
 LEFT JOIN Members m ON c.MemberID = m.MemberID
 LEFT JOIN Posts p ON c.PostID = p.PostID
+LEFT JOIN Ratings r ON c.MemberID = r.MemberID AND c.PostID = r.PostID
 WHERE c.PostID = @PostID
 ORDER BY c.CreatedAt DESC;";
                 command.Parameters.AddWithValue("@PostID", postId);
@@ -668,12 +739,15 @@ ORDER BY c.CreatedAt DESC;";
                         {
                             CommentID = Convert.ToInt32(reader["CommentID"]),
                             PostID = reader["PostID"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["PostID"]),
+                            MemberID = reader["MemberID"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["MemberID"]),
+                            EditCount = HasColumn(reader, "EditCount") && reader["EditCount"] != DBNull.Value ? Convert.ToInt32(reader["EditCount"]) : 0,
                             PostSlug = reader["PostSlug"]?.ToString(),
                             PostTitle = reader["PostTitle"]?.ToString(),
                             MemberName = reader["MemberName"]?.ToString(),
                             MemberAvatarURL = reader["MemberAvatarURL"]?.ToString(),
                             Content = reader["Content"]?.ToString(),
-                            CreatedAt = Convert.ToDateTime(reader["CreatedAt"])
+                            CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
+                            RatingStar = HasColumn(reader, "RatingStar") && reader["RatingStar"] != DBNull.Value ? Convert.ToInt32(reader["RatingStar"]) : 5
                         });
                     }
                 }
@@ -768,6 +842,57 @@ ORDER BY c.CreatedAt DESC;";
             if (HasColumn(reader, "ScoreValue")) post.ScoreValue = reader["ScoreValue"] == DBNull.Value ? 0.0 : Convert.ToDouble(reader["ScoreValue"]);
 
             return post;
+        }
+
+        public IList<string> GetActiveBrands()
+        {
+            var brands = new List<string>();
+
+            using (var connection = SqlConnectionFactory.CreateConnection())
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = @"
+SELECT DISTINCT BrandName
+FROM (
+    SELECT 
+        CASE 
+            WHEN p.Title LIKE N'%Apple%' OR p.Title LIKE N'%iPhone%' OR p.Title LIKE N'%MacBook%' OR p.Title LIKE N'%AirPods%' OR p.Title LIKE N'%iPad%' THEN 'Apple'
+            WHEN p.Title LIKE N'%Samsung%' OR p.Title LIKE N'%Galaxy%' OR p.Title LIKE N'%Buds%' THEN 'Samsung'
+            WHEN p.Title LIKE N'%Sony%' THEN 'Sony'
+            WHEN p.Title LIKE N'%ASUS%' OR p.Title LIKE N'%ROG%' OR p.Title LIKE N'%TUF%' THEN 'ASUS'
+            WHEN p.Title LIKE N'%Xiaomi%' OR p.Title LIKE N'%Redmi%' THEN 'Xiaomi'
+            WHEN p.Title LIKE N'%OPPO%' THEN 'OPPO'
+            WHEN p.Title LIKE N'%Vivo%' THEN 'Vivo'
+            WHEN p.Title LIKE N'%Google%' OR p.Title LIKE N'%Pixel%' THEN 'Google'
+            WHEN p.Title LIKE N'%Dell%' OR p.Title LIKE N'%XPS%' OR p.Title LIKE N'%Alienware%' THEN 'Dell'
+            WHEN p.Title LIKE N'%Lenovo%' OR p.Title LIKE N'%Legion%' OR p.Title LIKE N'%ThinkPad%' THEN 'Lenovo'
+            WHEN p.Title LIKE N'%Garmin%' THEN 'Garmin'
+            WHEN p.Title LIKE N'%HP%' OR p.Title LIKE N'%Pavilion%' OR p.Title LIKE N'%Omen%' THEN 'HP'
+            WHEN p.Title LIKE N'%Acer%' OR p.Title LIKE N'%Predator%' OR p.Title LIKE N'%Nitro%' THEN 'Acer'
+            ELSE NULL
+        END AS BrandName
+    FROM Posts p
+    INNER JOIN Categories c ON p.CategoryID = c.CategoryID
+    WHERE p.Status = N'Đã xuất bản'
+) t
+WHERE BrandName IS NOT NULL
+ORDER BY BrandName ASC;";
+
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var brand = reader["BrandName"]?.ToString();
+                        if (!string.IsNullOrWhiteSpace(brand))
+                        {
+                            brands.Add(brand);
+                        }
+                    }
+                }
+            }
+
+            return brands;
         }
     }
 }

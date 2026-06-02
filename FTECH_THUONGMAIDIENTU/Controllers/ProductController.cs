@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Data;
 using FTECH_THUONGMAIDIENTU.Models.Posts;
@@ -21,6 +21,7 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
 
             bool hasPurchased = false;
             var email = Session["CurrentUserEmail"] as string;
+            int? currentMemberId = null;
 
             if (featuredPost != null)
             {
@@ -32,6 +33,7 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
                     var member = new MemberRepository().GetByEmail(email);
                     if (member != null)
                     {
+                        currentMemberId = member.MemberID;
                         using (var connection = SqlConnectionFactory.CreateConnection())
                         using (var command = connection.CreateCommand())
                         {
@@ -54,6 +56,7 @@ WHERE MemberID = @MemberID AND PostID = @PostID;";
                 ViewBag.Comments = new List<FTECH_THUONGMAIDIENTU.Models.Dashboard.CommentSummary>();
             }
 
+            ViewBag.CurrentMemberID = currentMemberId;
             ViewBag.HasPurchased = hasPurchased;
             return View();
         }
@@ -151,7 +154,7 @@ VALUES (@LinkID, @PartnerID, @PostID, @MemberID, GETDATE(), @IPAddress, @Referre
         }
 
         [HttpPost]
-        public JsonResult AddComment(int postId, string content)
+        public JsonResult AddComment(int postId, string content, int? ratingStar)
         {
             var email = Session["CurrentUserEmail"] as string;
             if (string.IsNullOrWhiteSpace(email))
@@ -192,22 +195,208 @@ WHERE MemberID = @MemberID AND PostID = @PostID;";
                 return Json(new { success = false, message = "Vui lòng nhập nội dung bình luận đánh giá." });
             }
 
-            // Insert comment into DB
+            // Insert/Upsert rating and insert comment into DB
             using (var connection = SqlConnectionFactory.CreateConnection())
-            using (var command = connection.CreateCommand())
             {
-                command.CommandText = @"
+                connection.Open();
+
+                // 1. Upsert rating if provided
+                if (ratingStar.HasValue && ratingStar.Value >= 1 && ratingStar.Value <= 5)
+                {
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"
+IF EXISTS (SELECT 1 FROM Ratings WHERE MemberID = @MemberID AND PostID = @PostID)
+BEGIN
+    UPDATE Ratings SET RatingStar = @RatingStar, CreatedAt = GETDATE() WHERE MemberID = @MemberID AND PostID = @PostID;
+END
+ELSE
+BEGIN
+    INSERT INTO Ratings (MemberID, PostID, RatingStar, CreatedAt) VALUES (@MemberID, @PostID, @RatingStar, GETDATE());
+END";
+                        command.Parameters.AddWithValue("@MemberID", member.MemberID);
+                        command.Parameters.AddWithValue("@PostID", postId);
+                        command.Parameters.AddWithValue("@RatingStar", ratingStar.Value);
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                // 2. Insert comment into DB
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = @"
 INSERT INTO Comments (MemberID, PostID, Content, CreatedAt)
 VALUES (@MemberID, @PostID, @Content, GETDATE());";
-                command.Parameters.AddWithValue("@MemberID", member.MemberID);
-                command.Parameters.AddWithValue("@PostID", postId);
-                command.Parameters.AddWithValue("@Content", content.Trim());
-
-                connection.Open();
-                command.ExecuteNonQuery();
+                    command.Parameters.AddWithValue("@MemberID", member.MemberID);
+                    command.Parameters.AddWithValue("@PostID", postId);
+                    command.Parameters.AddWithValue("@Content", content.Trim());
+                    command.ExecuteNonQuery();
+                }
             }
 
             return Json(new { success = true, memberName = member.FullName, memberAvatar = member.AvatarURL });
+        }
+
+        [HttpPost]
+        public JsonResult EditComment(int commentId, string content, int? ratingStar)
+        {
+            var email = Session["CurrentUserEmail"] as string;
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return Json(new { success = false, message = "Bạn phải đăng nhập để thực hiện chức năng này." });
+            }
+
+            var member = new MemberRepository().GetByEmail(email);
+            if (member == null)
+            {
+                return Json(new { success = false, message = "Không tìm thấy thông tin tài khoản thành viên hợp lệ." });
+            }
+
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                return Json(new { success = false, message = "Nội dung bình luận không được trống." });
+            }
+
+            using (var connection = SqlConnectionFactory.CreateConnection())
+            {
+                connection.Open();
+
+                // 1. Fetch existing comment owner, post ID and edit count
+                int? dbMemberId = null;
+                int? dbPostId = null;
+                int editCount = 0;
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT MemberID, PostID, ISNULL(EditCount, 0) AS EditCount FROM Comments WHERE CommentID = @CommentID;";
+                    command.Parameters.AddWithValue("@CommentID", commentId);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            dbMemberId = reader["MemberID"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["MemberID"]);
+                            dbPostId = reader["PostID"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["PostID"]);
+                            editCount = Convert.ToInt32(reader["EditCount"]);
+                        }
+                        else
+                        {
+                            return Json(new { success = false, message = "Không tìm thấy bình luận cần chỉnh sửa." });
+                        }
+                    }
+                }
+
+                // 2. Security Check: owner matches currently logged-in member
+                if (dbMemberId != member.MemberID)
+                {
+                    return Json(new { success = false, message = "Bạn không có quyền chỉnh sửa bình luận này." });
+                }
+
+                // 3. Edit Limit Check: EditCount < 1
+                if (editCount >= 1)
+                {
+                    return Json(new { success = false, message = "Bạn đã hết lượt chỉnh sửa bình luận này (chỉ được sửa tối đa 1 lần)." });
+                }
+
+                // 4. Perform Update
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "UPDATE Comments SET Content = @Content, EditCount = EditCount + 1 WHERE CommentID = @CommentID;";
+                    command.Parameters.AddWithValue("@Content", content.Trim());
+                    command.Parameters.AddWithValue("@CommentID", commentId);
+                    command.ExecuteNonQuery();
+                }
+
+                if (ratingStar.HasValue && ratingStar.Value >= 1 && ratingStar.Value <= 5 && dbPostId.HasValue)
+                {
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = @"
+IF EXISTS (SELECT 1 FROM Ratings WHERE MemberID = @MemberID AND PostID = @PostID)
+BEGIN
+    UPDATE Ratings SET RatingStar = @RatingStar, CreatedAt = GETDATE() WHERE MemberID = @MemberID AND PostID = @PostID;
+END
+ELSE
+BEGIN
+    INSERT INTO Ratings (MemberID, PostID, RatingStar, CreatedAt) VALUES (@MemberID, @PostID, @RatingStar, GETDATE());
+END";
+                        command.Parameters.AddWithValue("@MemberID", dbMemberId.Value);
+                        command.Parameters.AddWithValue("@PostID", dbPostId.Value);
+                        command.Parameters.AddWithValue("@RatingStar", ratingStar.Value);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        public JsonResult DeleteComment(int commentId)
+        {
+            var email = Session["CurrentUserEmail"] as string;
+            var role = Session["CurrentUserRole"] as string;
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return Json(new { success = false, message = "Bạn phải đăng nhập để thực hiện chức năng này." });
+            }
+
+            var member = new MemberRepository().GetByEmail(email);
+            if (member == null)
+            {
+                return Json(new { success = false, message = "Không tìm thấy thông tin tài khoản thành viên hợp lệ." });
+            }
+
+            using (var connection = SqlConnectionFactory.CreateConnection())
+            {
+                connection.Open();
+
+                // 1. Fetch existing comment owner and post ID
+                int? dbMemberId = null;
+                int? dbPostId = null;
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT MemberID, PostID FROM Comments WHERE CommentID = @CommentID;";
+                    command.Parameters.AddWithValue("@CommentID", commentId);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            dbMemberId = reader["MemberID"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["MemberID"]);
+                            dbPostId = reader["PostID"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["PostID"]);
+                        }
+                        else
+                        {
+                            return Json(new { success = false, message = "Không tìm thấy bình luận cần xóa." });
+                        }
+                    }
+                }
+
+                // 2. Security Check: owner matches currently logged-in member OR user is Admin
+                bool isAdmin = !string.IsNullOrWhiteSpace(role) && role != "customer";
+                if (dbMemberId != member.MemberID && !isAdmin)
+                {
+                    return Json(new { success = false, message = "Bạn không có quyền xóa bình luận này." });
+                }
+
+                // 3. Perform Delete of comment and corresponding rating
+                if (dbMemberId.HasValue && dbPostId.HasValue)
+                {
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = "DELETE FROM Ratings WHERE MemberID = @MemberID AND PostID = @PostID;";
+                        command.Parameters.AddWithValue("@MemberID", dbMemberId.Value);
+                        command.Parameters.AddWithValue("@PostID", dbPostId.Value);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "DELETE FROM Comments WHERE CommentID = @CommentID;";
+                    command.Parameters.AddWithValue("@CommentID", commentId);
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            return Json(new { success = true });
         }
     }
 }

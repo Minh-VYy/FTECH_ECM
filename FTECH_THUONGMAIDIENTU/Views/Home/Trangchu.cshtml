@@ -35,10 +35,6 @@ assetVersion) +
     html = html.Replace("register.html", Url.Action("Register", "Account"));
     html = html.Replace("product.html", Url.Action("Index", "Product"));
     html = html.Replace("reviewModule.html", Url.Action("Index", "Review"));
-    html = Regex.Replace(
-        html,
-        "<a href=\"[^\"]+\" class=\"view-all\">Xem tất cả bài viết →</a>",
-        "<a href=\"" + Url.Action("Index", "Review") + "\" class=\"view-all\">Xem tất cả bài viết →</a>");
     html = html.Replace("<a href=\"#s-products\" class=\"view-all\">Xem tất cả chủ đề →</a>",
         "<a href=\"#s-cats\" class=\"view-all\">Xem tất cả chủ đề →</a>");
     html = Regex.Replace(

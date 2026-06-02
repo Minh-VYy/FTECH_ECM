@@ -1,5 +1,11 @@
 ﻿@{
     Layout = null;
+    var currentAction = (ViewContext.RouteData.Values["action"] ?? "").ToString();
+    Func<string, string> activeClass = action =>
+        string.Equals(currentAction, action, StringComparison.OrdinalIgnoreCase)
+        || (string.Equals(currentAction, "Profile", StringComparison.OrdinalIgnoreCase) && string.Equals(action, "Dashboard", StringComparison.OrdinalIgnoreCase))
+            ? " active"
+            : "";
 }
 
 <!DOCTYPE html>
@@ -11,8 +17,7 @@
     <title>@ViewBag.Title - FTECH User Account</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
-    <link rel="stylesheet" href="@Url.Content("~/Content/css/pages/dashboard.css")">
-    <link rel="stylesheet" href="@Url.Content("~/Content/css/pages/profileManager.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/pages/dashboard.css?v=useraccount-20260602-2")">
 </head>
 
 <body>
@@ -24,38 +29,48 @@
         </div>
         <div class="sb-label">User Account</div>
         <nav class="sb-menu">
-            <a href="@Url.Action("Dashboard", "Account", new { area = "UserAccount" })" class="sb-item">
-                <span class="si">👤</span>Trang Cá Nhân
+            <a href="@Url.Action("Dashboard", "Account", new { area = "UserAccount" })" class="sb-item @activeClass("Dashboard")">
+                Tổng Quan
             </a>
-            <a href="@Url.Action("Profile", "Account", new { area = "UserAccount" })" class="sb-item">
-                <span class="si">⚙️</span>Quản Lý Thông Tin
-            </a>
-            <a href="@Url.Action("Edit", "Account", new { area = "UserAccount" })" class="sb-item">
-                <span class="si">✏️</span>Chỉnh Sửa Hồ Sơ
+            <a href="@Url.Action("Edit", "Account", new { area = "UserAccount" })" class="sb-item @activeClass("Edit")">
+                Cập Nhật Hồ Sơ
             </a>
             <a href="@Url.Action("Logout", "Account", new { area = "" })" data-logout="true" class="sb-item">
-                <span class="si">🚪</span>Đăng Xuất
+                Đăng Xuất
             </a>
         </nav>
         <div class="sb-bottom">
             <div class="sb-user">
-                <div class="sb-avatar"><img src="@(ViewBag.UserAvatar ?? "https://i.pravatar.cc/120?img=20")"
-                                                alt="User"></div>
-                    <div>
-                        <div class="sb-user-name">@(ViewBag.UserName ?? "User Account")</div>
-                        <div class="sb-user-role">@(ViewBag.UserRole ?? "Khách Hàng")</div>
-                    </div>
+                <div class="sb-avatar">
+                    @{
+                        var initial = "U";
+                        var uName = ViewBag.UserName as string;
+                        if (!string.IsNullOrWhiteSpace(uName)) {
+                            initial = uName.Substring(0, 1).ToUpperInvariant();
+                        }
+                    }
+                    <span class="sb-avatar-initial">@initial</span>
+                    @if (ViewBag.UserAvatar != null && !string.IsNullOrWhiteSpace(ViewBag.UserAvatar.ToString())) {
+                        <img src="@ViewBag.UserAvatar" alt="User" onerror="this.style.display='none';">
+                    } else {
+                        <img src="https://i.pravatar.cc/120?img=20" alt="User" onerror="this.style.display='none';">
+                    }
+                </div>
+                <div>
+                    <div class="sb-user-name">@(ViewBag.UserName ?? "User Account")</div>
+                    <div class="sb-user-role">@(ViewBag.UserRole ?? "Khách Hàng")</div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="main">
-            @RenderBody()
-        </div>
+    <div class="main">
+        @RenderBody()
+    </div>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-    </body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
 
 </html>

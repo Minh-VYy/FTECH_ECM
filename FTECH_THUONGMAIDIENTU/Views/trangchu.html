@@ -131,14 +131,14 @@
     </div>
     <div class="finder-bar">
       <input class="finder-input" type="text" placeholder="Ví dụ: laptop văn phòng, iPhone 16, tai nghe chống ồn..." />
-      <select class="finder-select">
+      <select class="finder-select" id="brandSelect">
         <option>Tất cả thương hiệu</option>
         <option>Apple</option>
         <option>Samsung</option>
         <option>Sony</option>
         <option>ASUS</option>
       </select>
-      <select class="finder-select">
+      <select class="finder-select" id="sortSelect">
         <option>Mới nhất</option>
         <option>Nhiều lượt xem</option>
         <option>Đánh giá cao</option>
@@ -147,11 +147,11 @@
       <button class="finder-go">Tìm bài review</button>
     </div>
     <div class="finder-tags">
-      <a href="#s-products" class="finder-tag">🔥 Đang hot: iPhone 16</a>
-      <a href="#s-products" class="finder-tag">💻 Laptop cho sinh viên</a>
-      <a href="#s-products" class="finder-tag">🎧 Tai nghe chống ồn</a>
-      <a href="#s-products" class="finder-tag">🎮 Màn hình gaming</a>
-      <a href="#s-products" class="finder-tag">⌚ Đồng hồ thông minh</a>
+      <a href="javascript:void(0)" class="finder-tag" onclick="goToReviewSearch('iPhone 16')">🔥 Đang hot: iPhone 16</a>
+      <a href="javascript:void(0)" class="finder-tag" onclick="goToReviewSearch('Laptop')">💻 Laptop cho sinh viên</a>
+      <a href="javascript:void(0)" class="finder-tag" onclick="goToReviewSearch('Tai nghe')">🎧 Tai nghe chống ồn</a>
+      <a href="javascript:void(0)" class="finder-tag" onclick="goToReviewSearch('Màn hình')">🎮 Màn hình gaming</a>
+      <a href="javascript:void(0)" class="finder-tag" onclick="goToReviewSearch('Đồng hồ')">⌚ Đồng hồ thông minh</a>
     </div>
   </div>
 </section>
@@ -219,7 +219,6 @@
 <section class="products-wrap fade-up" id="s-products">
   <div class="section-head">
     <div><div class="section-label">Tham khảo nhanh</div><div class="section-title">Sản phẩm được quan tâm nhiều</div></div>
-    <a href="product.html" class="view-all">Xem thêm review →</a>
   </div>
   <div class="tab-bar">
     <button class="tab active">Tất cả</button>
@@ -231,7 +230,7 @@
   </div>
   <div class="main-grid" id="mainGrid"></div>
   <div class="u-style-136">
-    <a href="reviewModule.html" class="btn-ghost u-style-137">Xem thêm bài so sánh</a>
+    <a href="javascript:void(0)" id="loadMoreHomeBtn" class="btn-ghost u-style-137" onclick="loadMoreHomePosts()">Xem thêm bài so sánh</a>
   </div>
 </section>
 
@@ -239,7 +238,6 @@
 <section class="blog-wrap fade-up" id="s-blog">
   <div class="section-head">
     <div><div class="section-label">Nội dung</div><div class="section-title">Bài review & hướng dẫn nổi bật</div></div>
-    <a href="product.html" class="view-all">Xem tất cả bài viết →</a>
   </div>
   <div class="blog-grid">
     <div class="blog-featured">

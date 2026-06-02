@@ -1,53 +1,80 @@
 ﻿@model FTECH_THUONGMAIDIENTU.Models.UserAccount.MemberProfileSummary
 @{
-    ViewBag.Title = "Trang Cá Nhân";
+    ViewBag.Title = "Trang Ca Nhan";
     Layout = "~/Areas/UserAccount/Views/Shared/_UserAccountLayout.cshtml";
+    var displayName = string.IsNullOrWhiteSpace(Model.FullName) ? "User" : Model.FullName.Trim();
+    var avatarInitial = displayName.Substring(0, 1).ToUpperInvariant();
 }
 
 <div class="topbar">
-    <div class="topbar-title">Trang Cá Nhân Của Tôi</div>
+    <div>
+        <div class="topbar-title">T&#7893;ng quan t&#224;i kho&#7843;n</div>
+        <div class="topbar-sub">H&#7891; s&#417;, tr&#7841;ng th&#225;i v&#224; ho&#7841;t &#273;&#7897;ng c&#7911;a b&#7841;n</div>
+    </div>
     <div class="topbar-actions">
         <button class="btn-primary"
-                onclick="location.href='@Url.Action("Edit", "Account", new { area = "UserAccount" })'">✏️ Chỉnh Sửa</button>
+                onclick="location.href='@Url.Action("Edit", "Account", new { area = "UserAccount" })'">C&#7853;p nh&#7853;t h&#7891; s&#417;</button>
     </div>
 </div>
 
 <div class="content">
-    <div class="card">
-        <div class="card-title">Thông Tin Cá Nhân</div>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="account-alert">@TempData["SuccessMessage"]</div>
+    }
 
-        <div style="padding: 20px;">
-            <div style="display: flex; gap: 20px; margin-bottom: 20px;">
-                <img src="@(Model.AvatarURL ?? "https://i.pravatar.cc/150?img=20")" alt="User"
-                     style="width: 150px; height: 150px; border-radius: 50%;">
-                <div>
-                    <h3>@Model.FullName</h3>
-                    <p>Email: @Model.Email</p>
-                    <p>Tham gia: @Model.CreatedAt.ToString("dd/MM/yyyy")</p>
-                    <p><strong>Vai Trò:</strong> Khách Hàng</p>
-                    <p><strong>Trạng thái:</strong> @Model.Status</p>
-                </div>
+    <section class="account-hero">
+        <div class="account-identity">
+            <div class="account-avatar-wrap">
+                <span>@avatarInitial</span>
+                <img src="@(Model.AvatarURL ?? "https://i.pravatar.cc/150?img=20")" alt="@displayName" onerror="this.style.display='none';">
             </div>
-
-            <div style="border-top: 1px solid #eee; padding-top: 20px;">
-                <h4>Thống Kê</h4>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 24px; font-weight: bold; color: #3498db;">@Model.ClickCount</div>
-                        <div style="font-size: 12px; color: #7f8c8d;">Lượt click affiliate</div>
-                    </div>
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 24px; font-weight: bold; color: #27ae60;">@Model.CommentCount</div>
-                        <div style="font-size: 12px; color: #7f8c8d;">Bình luận đã gửi</div>
-                    </div>
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 24px; font-weight: bold; color: #e74c3c;">@Model.RatingCount</div>
-                        <div style="font-size: 12px; color: #7f8c8d;">Đánh giá đã gửi</div>
-                    </div>
+            <div>
+                <div class="account-eyebrow">T&#224;i kho&#7843;n kh&#225;ch h&#224;ng</div>
+                <h1>@displayName</h1>
+                <div class="account-meta">@Model.Email</div>
+                <div class="account-tags">
+                    <span class="account-tag">Kh&#225;ch H&#224;ng</span>
+                    <span class="account-tag is-muted">@Model.Status</span>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="account-joined">
+            <span>Ng&#224;y tham gia</span>
+            <strong>@Model.CreatedAt.ToString("dd/MM/yyyy")</strong>
+        </div>
+    </section>
+
+    <section class="account-grid">
+        <div class="kpi-card kc-blue">
+            <div class="kpi-label">Affiliate</div>
+            <div class="kpi-val">@Model.ClickCount</div>
+            <div class="kpi-sub">L&#432;&#7907;t click &#273;&#227; ghi nh&#7853;n</div>
+        </div>
+        <div class="kpi-card kc-green">
+            <div class="kpi-label">B&#236;nh lu&#7853;n</div>
+            <div class="kpi-val">@Model.CommentCount</div>
+            <div class="kpi-sub">B&#236;nh lu&#7853;n &#273;&#227; g&#7917;i</div>
+        </div>
+        <div class="kpi-card kc-orange">
+            <div class="kpi-label">&#272;&#225;nh gi&#225;</div>
+            <div class="kpi-val">@Model.RatingCount</div>
+            <div class="kpi-sub">&#272;&#225;nh gi&#225; s&#7843;n ph&#7849;m</div>
+        </div>
+    </section>
+
+    <section class="card account-details">
+        <div>
+            <div class="card-title">Th&#244;ng tin h&#7891; s&#417;</div>
+            <div class="card-sub">C&#225;c th&#244;ng tin &#273;&#7883;nh danh hi&#7879;n &#273;ang d&#249;ng trong h&#7879; th&#7889;ng.</div>
+        </div>
+        <div class="detail-list">
+            <div class="detail-row"><span>H&#7885; v&#224; t&#234;n</span><strong>@displayName</strong></div>
+            <div class="detail-row"><span>Email</span><strong>@Model.Email</strong></div>
+            <div class="detail-row"><span>Vai tr&#242;</span><strong>Kh&#225;ch H&#224;ng</strong></div>
+            <div class="detail-row"><span>Tr&#7841;ng th&#225;i</span><strong>@Model.Status</strong></div>
+        </div>
+    </section>
 </div>
 
 @section scripts {

@@ -274,7 +274,10 @@ BEGIN
         ALTER TABLE dbo.ClickTracking ADD IsSuspicious BIT NULL;
     END;
 
-    EXEC(N'UPDATE dbo.ClickTracking SET ClickTime = ClickedAt WHERE ClickTime IS NULL AND ClickedAt IS NOT NULL;');
+    IF EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('dbo.ClickTracking') AND name = 'ClickedAt')
+    BEGIN
+        EXEC(N'UPDATE dbo.ClickTracking SET ClickTime = ClickedAt WHERE ClickTime IS NULL AND ClickedAt IS NOT NULL;');
+    END;
 END;
 ");
 
@@ -364,6 +367,16 @@ BEGIN
         CONSTRAINT FK_ProductPrices_Posts FOREIGN KEY (PostID) REFERENCES dbo.Posts(PostID) ON DELETE CASCADE,
         CONSTRAINT FK_ProductPrices_Partners FOREIGN KEY (PartnerID) REFERENCES dbo.AffiliatePartners(PartnerID) ON DELETE CASCADE
     );
+END;");
+
+            // 4.5. Upgrade Comments table to add EditCount column if not exists
+            ExecuteNonQuery(connectionString, @"
+IF OBJECT_ID('dbo.Comments', 'U') IS NOT NULL
+BEGIN
+    IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('dbo.Comments') AND name = 'EditCount')
+    BEGIN
+        ALTER TABLE dbo.Comments ADD EditCount INT NOT NULL CONSTRAINT DF_Comments_EditCount DEFAULT 0;
+    END;
 END;");
 
             // 5. Seed sample data (Roles, Admin, Categories, Partners, detailed MacBook Post and prices)
