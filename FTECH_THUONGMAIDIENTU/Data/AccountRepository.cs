@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using FTECH_THUONGMAIDIENTU.Infrastructure;
@@ -251,15 +251,16 @@ WHERE a.Email = @Identifier OR a.FullName = @Identifier";
                 return RoleKeys.Customer;
             }
 
-            switch (roleName.Trim())
+            var normalized = roleName.Trim().Replace(" ", "").ToLowerInvariant();
+            switch (normalized)
             {
-                case RoleNames.SuperAdmin:
+                case "superadmin":
                     return RoleKeys.SuperAdmin;
-                case RoleNames.ContentManager:
+                case "contentmanager":
                     return RoleKeys.ContentManager;
-                case RoleNames.AffiliateManager:
+                case "affiliatemanager":
                     return RoleKeys.AffiliateManager;
-                case RoleNames.UserAccountManager:
+                case "useraccountmanager":
                     return RoleKeys.UserAccountManager;
                 default:
                     return RoleKeys.Customer;
@@ -273,15 +274,16 @@ WHERE a.Email = @Identifier OR a.FullName = @Identifier";
                 return "/";
             }
 
-            switch (roleName.Trim())
+            var normalized = roleName.Trim().Replace(" ", "").ToLowerInvariant();
+            switch (normalized)
             {
-                case RoleNames.SuperAdmin:
+                case "superadmin":
                     return "/Admin/Dashboard";
-                case RoleNames.ContentManager:
+                case "contentmanager":
                     return "/ContentManager/Post";
-                case RoleNames.AffiliateManager:
+                case "affiliatemanager":
                     return "/AffiliateManager/Dashboard";
-                case RoleNames.UserAccountManager:
+                case "useraccountmanager":
                     return "/SuperAdmin/AdminAccount";
                 default:
                     return "/";

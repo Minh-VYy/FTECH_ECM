@@ -30,7 +30,11 @@ namespace FTECH_THUONGMAIDIENTU.Areas.Admin.Controllers
                 Session["CurrentUserEmail"] = result.Email;
                 Session["CurrentUserRole"] = result.RoleKey;
 
-                result.RedirectUrl = Url.Action("Index", "Dashboard", new { area = "Admin" });
+                // Keep repository's redirected URL to ensure each role goes to the correct panel, fallback to /Admin/Dashboard
+                if (string.IsNullOrWhiteSpace(result.RedirectUrl) || result.RedirectUrl == "/")
+                {
+                    result.RedirectUrl = Url.Action("Index", "Dashboard", new { area = "Admin" });
+                }
             }
 
             return Json(new
