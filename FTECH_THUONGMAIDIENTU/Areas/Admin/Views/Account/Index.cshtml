@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "Cập Nhật Tài Khoản Admin";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
@@ -111,7 +111,7 @@
 
         @if (ViewBag.AdminAccounts != null)
         {
-            @foreach (var admin in ViewBag.AdminAccounts)
+            foreach (var admin in ViewBag.AdminAccounts)
             {
                 <div class="t-row">
                     <div><input type="checkbox" class="admin-checkbox" value="@admin.Id"></div>
