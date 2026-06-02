@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -159,6 +159,8 @@
     <Compile Include="Models\Auth\RegisterMemberRequest.cs" />
     <Compile Include="Models\Auth\ResetPasswordRequest.cs" />
     <Compile Include="Models\Admin\AdminProfileSummary.cs" />
+    <Compile Include="Models\Admin\AdminViewModels.cs" />
+
     <Compile Include="Models\Dashboard\DashboardSummary.cs" />
     <Compile Include="Models\Dashboard\AffiliatePartnerSummary.cs" />
     <Compile Include="Models\Dashboard\CategorySummary.cs" />

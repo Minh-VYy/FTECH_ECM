@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Data;
 using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Infrastructure;
+using FTECH_THUONGMAIDIENTU.Models.Admin;
 
 namespace FTECH_THUONGMAIDIENTU.Areas.SuperAdmin.Controllers
 {
     [SessionRoleAuthorize(SessionKey = "AdminRole", AllowedRolesCsv = RoleKeys.SuperAdmin + "," + RoleKeys.UserAccountManager, LoginUrl = "/Admin/Account/Login")]
     public class AdminAccountController : Controller
     {
-        // GET: SuperAdmin/AdminAccount
         public ActionResult Index()
         {
             ViewBag.Title = "Quản Lý Tài Khoản Admin";
 
-            var adminAccounts = new List<object>();
+            var adminAccounts = new List<AdminAccountViewModel>();
             int totalAccounts = 0, activeAccounts = 0, lockedAccounts = 0, newAccountsThisWeek = 0, partnerCount = 0;
 
             using (var connection = SqlConnectionFactory.CreateConnection())
@@ -32,36 +32,36 @@ ORDER BY a.CreatedAt DESC;";
                     {
                         while (reader.Read())
                         {
-                            var adminId = Convert.ToInt32(reader["AdminID"]);
-                            var fullName = reader["FullName"]?.ToString() ?? "";
-                            var email = reader["Email"]?.ToString() ?? "";
-                            var status = reader["Status"]?.ToString() ?? "";
-                            var createdAt = reader["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(reader["CreatedAt"]) : DateTime.Now;
-                            var roleName = reader["RoleName"]?.ToString() ?? "";
+                            int adminId    = Convert.ToInt32(reader["AdminID"]);
+                            string name    = reader["FullName"] as string ?? "";
+                            string email   = reader["Email"] as string ?? "";
+                            string status  = reader["Status"] as string ?? "";
+                            var createdAt  = reader["CreatedAt"] == DBNull.Value ? DateTime.Now : Convert.ToDateTime(reader["CreatedAt"]);
+                            string role    = reader["RoleName"] as string ?? "";
 
-                            var mappedStatus = string.Equals(status, "Hoạt động", StringComparison.OrdinalIgnoreCase) ? "Active" : "Locked";
+                            string mappedStatus = string.Equals(status, "Hoạt động", StringComparison.OrdinalIgnoreCase)
+                                ? "Active" : "Locked";
 
-                            var permissions = "Truy cập cơ bản";
-                            if (roleName.Contains("Super") || roleName.ToLower().Contains("superadmin")) permissions = "Toàn quyền hệ thống";
-                            else if (roleName.Contains("Content")) permissions = "Biên tập & Phê duyệt bài đăng";
-                            else if (roleName.Contains("Affiliate")) permissions = "Quản lý liên kết & Doanh số";
-                            else if (roleName.Contains("User")) permissions = "Kiểm duyệt & Xử lý người dùng";
+                            string permissions = "Truy cập cơ bản";
+                            if (role.Contains("Super"))     permissions = "Toàn quyền hệ thống";
+                            else if (role.Contains("Content")) permissions = "Biên tập & Phê duyệt bài đăng";
+                            else if (role.Contains("Affiliate")) permissions = "Quản lý liên kết & Doanh số";
+                            else if (role.Contains("User"))  permissions = "Kiểm duyệt & Xử lý người dùng";
 
-                            adminAccounts.Add(new
+                            adminAccounts.Add(new AdminAccountViewModel
                             {
-                                Id = adminId,
-                                Avatar = "https://i.pravatar.cc/120?img=" + (10 + adminId),
-                                FullName = fullName,
-                                Email = email,
-                                Role = roleName,
-                                Status = mappedStatus,
+                                Id          = adminId,
+                                FullName    = name,
+                                Email       = email,
+                                Role        = role,
+                                Status      = mappedStatus,
                                 StatusLabel = status,
                                 Permissions = permissions,
                                 LastUpdated = createdAt
                             });
 
                             totalAccounts++;
-                            if (string.Equals(status, "Hoạt động", StringComparison.OrdinalIgnoreCase)) activeAccounts++;
+                            if (mappedStatus == "Active") activeAccounts++;
                             else lockedAccounts++;
                             if ((DateTime.Now - createdAt).TotalDays <= 7) newAccountsThisWeek++;
                         }
@@ -71,22 +71,22 @@ ORDER BY a.CreatedAt DESC;";
                 using (var cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = "SELECT COUNT(*) FROM AffiliatePartners WHERE Status = N'Hoạt động';";
-                    partnerCount = Convert.ToInt32(cmd.ExecuteScalar());
+                    var scalar = cmd.ExecuteScalar();
+                    partnerCount = scalar == DBNull.Value ? 0 : Convert.ToInt32(scalar);
                 }
             }
 
-            ViewBag.AdminAccounts = adminAccounts;
-            ViewBag.TotalAccounts = totalAccounts;
-            ViewBag.ActiveAccounts = activeAccounts;
-            ViewBag.LockedAccounts = lockedAccounts;
-            ViewBag.NewAccountsThisWeek = newAccountsThisWeek;
-            ViewBag.ActivePercentage = totalAccounts > 0 ? (activeAccounts * 100 / totalAccounts) : 0;
-            ViewBag.PartnerCount = partnerCount;
+            ViewBag.AdminAccounts        = adminAccounts;
+            ViewBag.TotalAccounts        = totalAccounts;
+            ViewBag.ActiveAccounts       = activeAccounts;
+            ViewBag.LockedAccounts       = lockedAccounts;
+            ViewBag.NewAccountsThisWeek  = newAccountsThisWeek;
+            ViewBag.ActivePercentage     = totalAccounts > 0 ? (activeAccounts * 100 / totalAccounts) : 0;
+            ViewBag.PartnerCount         = partnerCount;
 
             return View();
         }
 
-        // POST: SuperAdmin/AdminAccount/UpdateRole
         [HttpPost]
         public JsonResult UpdateRole(int id, string newRole, string note)
         {
@@ -105,9 +105,9 @@ IF @RoleId IS NOT NULL
 SELECT @RoleId;";
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@roleName", newRole ?? "");
-                        var result = cmd.ExecuteScalar();
-                        var success = result != null && result != DBNull.Value;
-                        return Json(new { success = success, message = success ? "Đã cập nhật vai trò thành công!" : "Không tìm thấy vai trò hoặc tài khoản." });
+                        var result  = cmd.ExecuteScalar();
+                        bool ok     = result != null && result != DBNull.Value;
+                        return Json(new { success = ok, message = ok ? "Đã cập nhật vai trò thành công!" : "Không tìm thấy vai trò hoặc tài khoản." });
                     }
                 }
             }
@@ -117,7 +117,6 @@ SELECT @RoleId;";
             }
         }
 
-        // POST: SuperAdmin/AdminAccount/ToggleLock
         [HttpPost]
         public JsonResult ToggleLock(int id)
         {
@@ -134,7 +133,7 @@ SET Status = CASE WHEN Status = N'Hoạt động' THEN N'Đã khóa' ELSE N'Ho�
 WHERE AdminID = @id;
 SELECT Status FROM Admins WHERE AdminID = @id;";
                         cmd.Parameters.AddWithValue("@id", id);
-                        var newStatus = cmd.ExecuteScalar()?.ToString() ?? "";
+                        string newStatus = cmd.ExecuteScalar() as string ?? "";
                         return Json(new { success = true, newStatus = newStatus, message = newStatus == "Đã khóa" ? "Đã khóa tài khoản." : "Đã mở khóa tài khoản." });
                     }
                 }
@@ -145,7 +144,6 @@ SELECT Status FROM Admins WHERE AdminID = @id;";
             }
         }
 
-        // GET: SuperAdmin/AdminAccount/Create
         public ActionResult Create()
         {
             ViewBag.Title = "Tạo Tài Khoản Admin Mới";

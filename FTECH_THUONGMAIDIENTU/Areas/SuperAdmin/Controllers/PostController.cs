@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Infrastructure;
+using FTECH_THUONGMAIDIENTU.Models.Admin;
 
 namespace FTECH_THUONGMAIDIENTU.Areas.SuperAdmin.Controllers
 {
@@ -15,14 +16,14 @@ namespace FTECH_THUONGMAIDIENTU.Areas.SuperAdmin.Controllers
             ViewBag.Title = "Duyệt Bài Viết";
             ViewBag.CurrentStatus = status;
 
-            var posts = new List<object>();
+            var posts = new List<PostViewModel>();
             int totalCount = 0, draftCount = 0, pendingCount = 0, approvedCount = 0, rejectedCount = 0;
 
             using (var connection = SqlConnectionFactory.CreateConnection())
             {
                 connection.Open();
 
-                // Load KPI counts
+                // KPI counts
                 using (var cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = @"
@@ -37,32 +38,29 @@ FROM Posts;";
                     {
                         if (reader.Read())
                         {
-                            totalCount = Convert.ToInt32(reader["Total"]);
-                            draftCount = Convert.ToInt32(reader["DraftCount"]);
-                            pendingCount = Convert.ToInt32(reader["PendingCount"]);
+                            totalCount    = Convert.ToInt32(reader["Total"]);
+                            draftCount    = Convert.ToInt32(reader["DraftCount"]);
+                            pendingCount  = Convert.ToInt32(reader["PendingCount"]);
                             approvedCount = Convert.ToInt32(reader["ApprovedCount"]);
                             rejectedCount = Convert.ToInt32(reader["RejectedCount"]);
                         }
                     }
                 }
 
-                // Load posts list (filtered by status if requested)
+                // Posts list
                 using (var cmd = connection.CreateCommand())
                 {
                     var statusFilter = "";
-                    if (!string.IsNullOrEmpty(status) && status != "all")
+                    switch (status)
                     {
-                        switch (status)
-                        {
-                            case "draft": statusFilter = "AND p.Status = N'Nháp'"; break;
-                            case "pending": statusFilter = "AND p.Status = N'Chờ duyệt'"; break;
-                            case "approved": statusFilter = "AND p.Status = N'Đã xuất bản'"; break;
-                            case "rejected": statusFilter = "AND p.Status = N'Từ chối'"; break;
-                        }
+                        case "draft":    statusFilter = "AND p.Status = N'Nháp'"; break;
+                        case "pending":  statusFilter = "AND p.Status = N'Chờ duyệt'"; break;
+                        case "approved": statusFilter = "AND p.Status = N'Đã xuất bản'"; break;
+                        case "rejected": statusFilter = "AND p.Status = N'Từ chối'"; break;
                     }
 
-                    cmd.CommandText = $@"
-SELECT TOP 50
+                    cmd.CommandText = string.Format(@"
+SELECT TOP 100
     p.PostID, p.Title, p.Slug, p.Status, p.ThumbnailURL,
     p.ViewCount, p.CreatedAt, p.RejectionReason,
     c.CategoryName,
@@ -72,37 +70,37 @@ SELECT TOP 50
 FROM Posts p
 INNER JOIN Categories c ON p.CategoryID = c.CategoryID
 INNER JOIN Admins a ON p.CreatedBy = a.AdminID
-WHERE 1=1 {statusFilter}
-ORDER BY p.CreatedAt DESC;";
+WHERE 1=1 {0}
+ORDER BY p.CreatedAt DESC;", statusFilter);
 
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            posts.Add(new
+                            posts.Add(new PostViewModel
                             {
-                                Id = Convert.ToInt32(reader["PostID"]),
-                                Title = reader["Title"]?.ToString() ?? "",
-                                Slug = reader["Slug"]?.ToString() ?? "",
-                                Status = reader["Status"]?.ToString() ?? "",
-                                Thumbnail = reader["ThumbnailURL"] != DBNull.Value ? reader["ThumbnailURL"]?.ToString() : "",
-                                ViewCount = Convert.ToInt32(reader["ViewCount"]),
-                                CreatedAt = reader["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(reader["CreatedAt"]) : DateTime.Now,
-                                RejectionReason = reader["RejectionReason"] != DBNull.Value ? reader["RejectionReason"]?.ToString() : "",
-                                Category = reader["CategoryName"]?.ToString() ?? "",
-                                Author = reader["AuthorName"]?.ToString() ?? "",
-                                AffLinkCount = Convert.ToInt32(reader["AffLinkCount"]),
-                                ClickCount = Convert.ToInt32(reader["ClickCount"])
+                                Id              = Convert.ToInt32(reader["PostID"]),
+                                Title           = reader["Title"] as string ?? "",
+                                Slug            = reader["Slug"] as string ?? "",
+                                Status          = reader["Status"] as string ?? "",
+                                Thumbnail       = reader["ThumbnailURL"] == DBNull.Value ? null : reader["ThumbnailURL"] as string,
+                                ViewCount       = Convert.ToInt32(reader["ViewCount"]),
+                                CreatedAt       = reader["CreatedAt"] == DBNull.Value ? DateTime.Now : Convert.ToDateTime(reader["CreatedAt"]),
+                                RejectionReason = reader["RejectionReason"] == DBNull.Value ? null : reader["RejectionReason"] as string,
+                                Category        = reader["CategoryName"] as string ?? "",
+                                Author          = reader["AuthorName"] as string ?? "",
+                                AffLinkCount    = Convert.ToInt32(reader["AffLinkCount"]),
+                                ClickCount      = Convert.ToInt32(reader["ClickCount"])
                             });
                         }
                     }
                 }
             }
 
-            ViewBag.Posts = posts;
-            ViewBag.TotalCount = totalCount;
-            ViewBag.DraftCount = draftCount;
-            ViewBag.PendingCount = pendingCount;
+            ViewBag.Posts         = posts;
+            ViewBag.TotalCount    = totalCount;
+            ViewBag.DraftCount    = draftCount;
+            ViewBag.PendingCount  = pendingCount;
             ViewBag.ApprovedCount = approvedCount;
             ViewBag.RejectedCount = rejectedCount;
 
@@ -122,7 +120,7 @@ ORDER BY p.CreatedAt DESC;";
                     {
                         cmd.CommandText = "UPDATE Posts SET Status = N'Đã xuất bản', RejectionReason = NULL WHERE PostID = @id";
                         cmd.Parameters.AddWithValue("@id", id);
-                        var rows = cmd.ExecuteNonQuery();
+                        int rows = cmd.ExecuteNonQuery();
                         return Json(new { success = rows > 0, message = rows > 0 ? "Bài viết đã được duyệt thành công!" : "Không tìm thấy bài viết." });
                     }
                 }
@@ -137,13 +135,10 @@ ORDER BY p.CreatedAt DESC;";
         [HttpPost]
         public JsonResult Reject(int id, string reason)
         {
+            if (string.IsNullOrWhiteSpace(reason))
+                return Json(new { success = false, message = "Vui lòng nhập lý do từ chối." });
             try
             {
-                if (string.IsNullOrWhiteSpace(reason))
-                {
-                    return Json(new { success = false, message = "Vui lòng nhập lý do từ chối." });
-                }
-
                 using (var connection = SqlConnectionFactory.CreateConnection())
                 {
                     connection.Open();
@@ -152,7 +147,7 @@ ORDER BY p.CreatedAt DESC;";
                         cmd.CommandText = "UPDATE Posts SET Status = N'Từ chối', RejectionReason = @reason WHERE PostID = @id";
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@reason", reason);
-                        var rows = cmd.ExecuteNonQuery();
+                        int rows = cmd.ExecuteNonQuery();
                         return Json(new { success = rows > 0, message = rows > 0 ? "Đã từ chối bài viết." : "Không tìm thấy bài viết." });
                     }
                 }
@@ -174,11 +169,11 @@ ORDER BY p.CreatedAt DESC;";
                     connection.Open();
                     using (var cmd = connection.CreateCommand())
                     {
-                        cmd.CommandText = @"UPDATE Posts SET Title = @title, Status = @status WHERE PostID = @id";
+                        cmd.CommandText = "UPDATE Posts SET Title = @title, Status = @status WHERE PostID = @id";
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@title", title ?? "");
                         cmd.Parameters.AddWithValue("@status", statusVal ?? "Nháp");
-                        var rows = cmd.ExecuteNonQuery();
+                        int rows = cmd.ExecuteNonQuery();
                         return Json(new { success = rows > 0, message = rows > 0 ? "Đã cập nhật bài viết thành công!" : "Không tìm thấy bài viết." });
                     }
                 }
@@ -214,21 +209,22 @@ WHERE p.PostID = @id;";
                         {
                             if (reader.Read())
                             {
+                                var content = reader["Content"] as string ?? "";
                                 return Json(new
                                 {
                                     success = true,
                                     data = new
                                     {
-                                        id = Convert.ToInt32(reader["PostID"]),
-                                        title = reader["Title"]?.ToString() ?? "",
-                                        content = reader["Content"]?.ToString() ?? "",
-                                        status = reader["Status"]?.ToString() ?? "",
-                                        thumbnail = reader["ThumbnailURL"] != DBNull.Value ? reader["ThumbnailURL"]?.ToString() : "",
+                                        id        = Convert.ToInt32(reader["PostID"]),
+                                        title     = reader["Title"] as string ?? "",
+                                        content   = content,
+                                        status    = reader["Status"] as string ?? "",
+                                        thumbnail = reader["ThumbnailURL"] == DBNull.Value ? "" : reader["ThumbnailURL"] as string,
                                         viewCount = Convert.ToInt32(reader["ViewCount"]),
-                                        createdAt = reader["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(reader["CreatedAt"]).ToString("dd/MM/yyyy") : "",
-                                        rejectionReason = reader["RejectionReason"] != DBNull.Value ? reader["RejectionReason"]?.ToString() : "",
-                                        category = reader["CategoryName"]?.ToString() ?? "",
-                                        author = reader["AuthorName"]?.ToString() ?? ""
+                                        createdAt = reader["CreatedAt"] == DBNull.Value ? "" : Convert.ToDateTime(reader["CreatedAt"]).ToString("dd/MM/yyyy"),
+                                        rejectionReason = reader["RejectionReason"] == DBNull.Value ? "" : reader["RejectionReason"] as string,
+                                        category  = reader["CategoryName"] as string ?? "",
+                                        author    = reader["AuthorName"] as string ?? ""
                                     }
                                 }, JsonRequestBehavior.AllowGet);
                             }

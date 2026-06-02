@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Data;
 using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Infrastructure;
+using FTECH_THUONGMAIDIENTU.Models.Admin;
 
 namespace FTECH_THUONGMAIDIENTU.Areas.SuperAdmin.Controllers
 {
     [SessionRoleAuthorize(SessionKey = "AdminRole", AllowedRolesCsv = RoleKeys.SuperAdmin, LoginUrl = "/Admin/Account/Login")]
     public class PartnerController : Controller
     {
-        // GET: SuperAdmin/Partner
         public ActionResult Index()
         {
             ViewBag.Title = "Duyệt Đối Tác Mới";
 
-            var partners = new List<object>();
+            var partners = new List<PartnerViewModel>();
             int totalCount = 0, pendingCount = 0, activeCount = 0, rejectedCount = 0, suspendedCount = 0;
             long totalClicks = 0;
 
@@ -36,10 +36,10 @@ FROM AffiliatePartners;";
                     {
                         if (reader.Read())
                         {
-                            totalCount = Convert.ToInt32(reader["Total"]);
-                            pendingCount = Convert.ToInt32(reader["PendingCount"]);
-                            activeCount = Convert.ToInt32(reader["ActiveCount"]);
-                            rejectedCount = Convert.ToInt32(reader["RejectedCount"]);
+                            totalCount     = Convert.ToInt32(reader["Total"]);
+                            pendingCount   = Convert.ToInt32(reader["PendingCount"]);
+                            activeCount    = Convert.ToInt32(reader["ActiveCount"]);
+                            rejectedCount  = Convert.ToInt32(reader["RejectedCount"]);
                             suspendedCount = Convert.ToInt32(reader["SuspendedCount"]);
                         }
                     }
@@ -48,7 +48,8 @@ FROM AffiliatePartners;";
                 using (var cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = "SELECT COUNT(*) FROM ClickTracking WHERE MONTH(ClickTime) = MONTH(GETDATE()) AND YEAR(ClickTime) = YEAR(GETDATE());";
-                    totalClicks = Convert.ToInt64(cmd.ExecuteScalar());
+                    var scalar = cmd.ExecuteScalar();
+                    totalClicks = scalar == DBNull.Value ? 0 : Convert.ToInt64(scalar);
                 }
 
                 using (var cmd = connection.CreateCommand())
@@ -67,30 +68,30 @@ ORDER BY
                     {
                         while (reader.Read())
                         {
-                            partners.Add(new
+                            partners.Add(new PartnerViewModel
                             {
-                                Id = Convert.ToInt32(reader["PartnerID"]),
-                                Name = reader["PartnerName"]?.ToString() ?? "",
-                                Website = reader["WebsiteURL"]?.ToString() ?? "",
-                                Contact = reader["ContactInfo"] != DBNull.Value ? reader["ContactInfo"]?.ToString() : "",
-                                CommissionRate = reader["CurrentCommissionRate"] != DBNull.Value ? Convert.ToDecimal(reader["CurrentCommissionRate"]) : 0m,
-                                Status = reader["Status"]?.ToString() ?? "",
-                                CreatedAt = reader["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(reader["CreatedAt"]) : DateTime.Now,
-                                MonthClicks = Convert.ToInt32(reader["MonthClicks"]),
-                                ActiveLinks = Convert.ToInt32(reader["ActiveLinks"])
+                                Id             = Convert.ToInt32(reader["PartnerID"]),
+                                Name           = reader["PartnerName"] as string ?? "",
+                                Website        = reader["WebsiteURL"] as string ?? "",
+                                Contact        = reader["ContactInfo"] == DBNull.Value ? "" : reader["ContactInfo"] as string,
+                                CommissionRate = reader["CurrentCommissionRate"] == DBNull.Value ? 0m : Convert.ToDecimal(reader["CurrentCommissionRate"]),
+                                Status         = reader["Status"] as string ?? "",
+                                CreatedAt      = reader["CreatedAt"] == DBNull.Value ? DateTime.Now : Convert.ToDateTime(reader["CreatedAt"]),
+                                MonthClicks    = Convert.ToInt32(reader["MonthClicks"]),
+                                ActiveLinks    = Convert.ToInt32(reader["ActiveLinks"])
                             });
                         }
                     }
                 }
             }
 
-            ViewBag.Partners = partners;
-            ViewBag.TotalCount = totalCount;
-            ViewBag.PendingCount = pendingCount;
-            ViewBag.ActiveCount = activeCount;
-            ViewBag.RejectedCount = rejectedCount;
+            ViewBag.Partners       = partners;
+            ViewBag.TotalCount     = totalCount;
+            ViewBag.PendingCount   = pendingCount;
+            ViewBag.ActiveCount    = activeCount;
+            ViewBag.RejectedCount  = rejectedCount;
             ViewBag.SuspendedCount = suspendedCount;
-            ViewBag.TotalClicks = totalClicks;
+            ViewBag.TotalClicks    = totalClicks;
 
             return View();
         }
@@ -107,7 +108,7 @@ ORDER BY
                     {
                         cmd.CommandText = "UPDATE AffiliatePartners SET Status = N'Hoạt động' WHERE PartnerID = @id";
                         cmd.Parameters.AddWithValue("@id", id);
-                        var rows = cmd.ExecuteNonQuery();
+                        int rows = cmd.ExecuteNonQuery();
                         return Json(new { success = rows > 0, message = rows > 0 ? "Đã duyệt đối tác thành công!" : "Không tìm thấy đối tác." });
                     }
                 }
@@ -130,7 +131,7 @@ ORDER BY
                     {
                         cmd.CommandText = "UPDATE AffiliatePartners SET Status = N'Từ chối' WHERE PartnerID = @id";
                         cmd.Parameters.AddWithValue("@id", id);
-                        var rows = cmd.ExecuteNonQuery();
+                        int rows = cmd.ExecuteNonQuery();
                         return Json(new { success = rows > 0, message = rows > 0 ? "Đã từ chối đối tác." : "Không tìm thấy đối tác." });
                     }
                 }
@@ -153,7 +154,7 @@ ORDER BY
                     {
                         cmd.CommandText = "UPDATE AffiliatePartners SET Status = N'Tạm ngưng' WHERE PartnerID = @id";
                         cmd.Parameters.AddWithValue("@id", id);
-                        var rows = cmd.ExecuteNonQuery();
+                        int rows = cmd.ExecuteNonQuery();
                         return Json(new { success = rows > 0, message = rows > 0 ? "Đã tạm ngưng đối tác." : "Không tìm thấy đối tác." });
                     }
                 }
