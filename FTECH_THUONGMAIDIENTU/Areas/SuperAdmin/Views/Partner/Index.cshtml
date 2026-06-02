@@ -1,61 +1,349 @@
-﻿@{
+@{
     ViewBag.Title = "Duyệt Đối Tác Mới";
     Layout = "~/Areas/SuperAdmin/Views/Shared/_SuperAdminLayout.cshtml";
+    int total = ViewBag.TotalCount ?? 0;
+    int pending = ViewBag.PendingCount ?? 0;
+    int active = ViewBag.ActiveCount ?? 0;
+    int rejected = ViewBag.RejectedCount ?? 0;
+    int suspended = ViewBag.SuspendedCount ?? 0;
+    long totalClicks = ViewBag.TotalClicks ?? 0L;
+    var partners = ViewBag.Partners as System.Collections.Generic.List<object> ?? new System.Collections.Generic.List<object>();
+    ViewBag.PartnerPendingCount = pending;
 }
 
 <div class="topbar">
     <div class="topbar-title">Duyệt Đối Tác Mới</div>
-    <div class="topbar-search"><input type="text" placeholder="Tìm đối tác, ngành hàng..."><button>🔍</button></div>
+    <div class="topbar-search">
+        <input type="text" id="searchInput" placeholder="Tìm đối tác, ngành hàng...">
+        <button onclick="filterPartners()">🔍</button>
+    </div>
     <div class="topbar-actions">
-        <button class="btn-ghost">Xuất báo cáo</button>
-        <button class="btn-primary">Hồ sơ chờ duyệt</button>
+        <button class="btn-ghost" onclick="exportCSV()">Xuất báo cáo</button>
+        <button class="btn-primary" onclick="filterStatus('Chờ duyệt')">Hồ sơ chờ duyệt (@pending)</button>
     </div>
 </div>
 
 <div class="content">
-    <div class="stat-row">
-        <div class="stat-card">
-            <div class="stat-label">Tổng Đối Tác</div>
-            <div class="stat-val sc-a">34</div>
-            <div class="stat-sub">28 đang hoạt động</div>
+    <!-- KPI -->
+    <div class="stat-row" style="grid-template-columns:repeat(5,1fr)">
+        <div class="stat-card sc-all">
+            <div class="stat-icon" style="font-size:22px">🤝</div>
+            <div>
+                <div class="stat-label">Tổng đối tác</div>
+                <div class="stat-val sv-all">@total</div>
+                <div class="stat-sub">@active đang hoạt động</div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-label">Chờ Duyệt</div>
-            <div class="stat-val sc-p">4</div>
-            <div class="stat-sub">Cần phản hồi</div>
+        <div class="stat-card sc-pending">
+            <div class="stat-icon" style="font-size:22px">⏳</div>
+            <div>
+                <div class="stat-label">Chờ duyệt</div>
+                <div class="stat-val sv-pending">@pending</div>
+                <div class="stat-sub">Cần phản hồi hôm nay</div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-label">Tổng Click</div>
-            <div class="stat-val sc-g">24.8K</div>
-            <div class="stat-sub">Trong tháng</div>
+        <div class="stat-card sc-approved">
+            <div class="stat-icon" style="font-size:22px">🖱️</div>
+            <div>
+                <div class="stat-label">Tổng click tháng</div>
+                <div class="stat-val sv-approved">@totalClicks.ToString("N0")</div>
+                <div class="stat-sub">+9% vs tháng trước</div>
+            </div>
+        </div>
+        <div class="stat-card sc-rejected">
+            <div class="stat-icon" style="font-size:22px">💰</div>
+            <div>
+                <div class="stat-label">Tạm ngưng</div>
+                <div class="stat-val sv-rejected">@suspended</div>
+                <div class="stat-sub">Chờ xử lý</div>
+            </div>
+        </div>
+        <div class="stat-card" style="border-top-color:#8a5bff">
+            <div class="stat-icon" style="font-size:22px">⭐</div>
+            <div>
+                <div class="stat-label">Từ chối</div>
+                <div class="stat-val" style="color:#8a5bff">@rejected</div>
+                <div class="stat-sub">Không đủ điều kiện</div>
+            </div>
         </div>
     </div>
 
-    <div class="section-head">
-        <div class="sec-title">Đối tác nổi bật</div>
+    <!-- Featured cards -->
+    @{
+        var featured = new System.Collections.Generic.List<dynamic>();
+        foreach (dynamic p in partners) { featured.Add(p); if (featured.Count >= 3) break; }
+    }
+
+    @if (featured.Count > 0)
+    {
+        <div style="margin-bottom:8px;display:flex;align-items:center;justify-content:space-between">
+            <div class="sec-title" style="font-size:16px;font-weight:700;color:#303a75">Đối tác nổi bật</div>
+            <div style="display:flex;gap:8px">
+                <select class="fsel" id="filterIndustry" onchange="filterPartners()"><option value="">Tất cả ngành</option><option>TMĐT</option><option>Gaming</option><option>Phụ kiện</option></select>
+                <select class="fsel" id="filterStatus" onchange="filterPartners()">
+                    <option value="">Tất cả trạng thái</option>
+                    <option>Hoạt động</option><option>Chờ duyệt</option><option>Tạm ngưng</option><option>Từ chối</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="partners-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px">
+            @foreach (dynamic p in featured)
+            {
+                string statusCss = "pcs-pending";
+                string statusLabel = p.Status;
+                string pStatus = p.Status;
+                if (pStatus == "Hoạt động") statusCss = "pcs-active";
+                else if (pStatus == "Tạm ngưng") statusCss = "pcs-suspended";
+                else if (pStatus == "Từ chối") statusCss = "pcs-rejected";
+
+                string logoImg = "https://ui-avatars.com/api/?name=" + Uri.EscapeDataString(p.Name) + "&background=4a7dff&color=fff&size=80";
+
+                <div class="partner-card" data-id="@p.Id" data-status="@pStatus">
+                    <div class="pc-head">
+                        <div class="pc-logo"><img src="@logoImg" alt="@p.Name" onerror="this.style.display='none'"></div>
+                        <span class="pc-status @statusCss">@statusLabel</span>
+                    </div>
+                    <div class="pc-name" style="font-size:16px;font-weight:700;color:#303a75;margin:10px 0 4px">@p.Name</div>
+                    <div class="pc-cat">
+                        <div class="cat-dot"></div>TMĐT · @(p.Website.Length > 30 ? p.Website.Substring(0,30)+"..." : p.Website)
+                    </div>
+                    <div class="pc-meta" style="font-size:12px;color:#8a93b8;margin:10px 0">
+                        <div>Liên hệ: @(string.IsNullOrEmpty(p.Contact) ? "N/A" : p.Contact)</div>
+                        <div>Hợp tác từ: @((DateTime)p.CreatedAt).ToString("MM/yyyy")</div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0;text-align:center">
+                        <div>
+                            <div style="font-size:18px;font-weight:700;color:#303a75">@p.MonthClicks.ToString("N0")</div>
+                            <div style="font-size:10px;color:#8a93b8">Lượt click</div>
+                        </div>
+                        <div>
+                            <div style="font-size:18px;font-weight:700;color:#1bcf8a">@p.ActiveLinks</div>
+                            <div style="font-size:10px;color:#8a93b8">Link hoạt động</div>
+                        </div>
+                        <div>
+                            <div style="font-size:18px;font-weight:700;color:#8a5bff">@p.CommissionRate.ToString("0.#")%</div>
+                            <div style="font-size:10px;color:#8a93b8">Hoa hồng</div>
+                        </div>
+                    </div>
+                    <div class="pc-footer" style="display:flex;gap:8px;margin-top:14px">
+                        @if (pStatus == "Chờ duyệt")
+                        {
+                            <button class="pc-btn" onclick="rejectPartner(@p.Id, '@System.Web.HttpUtility.JavaScriptStringEncode(p.Name)')">Từ chối</button>
+                            <button class="pc-btn-primary" onclick="approvePartner(@p.Id)">Duyệt đối tác</button>
+                        }
+                        @if (pStatus == "Hoạt động")
+                        {
+                            <button class="pc-btn" onclick="suspendPartner(@p.Id)">Tạm ngưng</button>
+                            <button class="pc-btn-primary" onclick="viewPartnerDetail(@p.Id)">Xem chi tiết</button>
+                        }
+                        @if (pStatus == "Tạm ngưng" || pStatus == "Từ chối")
+                        {
+                            <button class="pc-btn-primary" onclick="approvePartner(@p.Id)">Kích hoạt lại</button>
+                            <button class="pc-btn" onclick="viewPartnerDetail(@p.Id)">Cập nhật thông tin</button>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <!-- All partners table -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div class="sec-title">Tất cả đối tác (@total)</div>
+        <button class="btn-ghost" onclick="document.getElementById('allPartnersTable').scrollIntoView({behavior:'smooth'})">Xem tất cả ↓</button>
     </div>
 
-    <div class="partners-grid">
-        <div class="partner-card pc-pending">
-            <div class="pc-head">
-                <div class="pc-logo u-style-055"><img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=120&q=80" alt="Partner"></div>
-                <span class="pc-status pcs-pending">Chờ duyệt</span>
-            </div>
-            <div class="pc-name">Đối Tác Mới</div>
-            <div class="pc-cat"><div class="cat-dot"></div>Ngành hàng · website.com</div>
-            <div class="pc-meta">
-                <div>Liên hệ: contact@partner.com</div>
-                <div>Gửi từ: 29/03/2026</div>
-            </div>
-            <div class="pc-footer">
-                <button class="pc-btn" type="button" onclick="alert('Từ chối đối tác')">Từ Chối</button>
-                <button class="pc-btn-primary" type="button" onclick="alert('Duyệt đối tác')">Duyệt Đối Tác</button>
-            </div>
+    <div class="table-wrap" id="allPartnersTable">
+        <div class="t-head" style="grid-template-columns:44px 2fr 1.2fr 1fr 80px 80px 80px 100px 110px">
+            <div><input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)"></div>
+            <div class="th">Đối tác</div>
+            <div class="th">Ngành hàng</div>
+            <div class="th">Email liên hệ</div>
+            <div class="th">Click</div>
+            <div class="th">CVR</div>
+            <div class="th">Hoa hồng</div>
+            <div class="th">Trạng thái</div>
+            <div class="th">Thao tác</div>
+        </div>
+
+        @if (partners.Count == 0)
+        {
+            <div style="padding:40px;text-align:center;color:#8a93b8;font-size:14px">📭 Chưa có đối tác nào trong hệ thống</div>
+        }
+
+        @{
+            foreach (dynamic p in partners)
+            {
+                string pStatus = p.Status;
+                string statusCss2 = "pcs-pending";
+                if (pStatus == "Hoạt động") statusCss2 = "pcs-active";
+                else if (pStatus == "Tạm ngưng") statusCss2 = "pcs-suspended";
+                else if (pStatus == "Từ chối") statusCss2 = "pcs-rejected";
+
+                string logoImg2 = "https://ui-avatars.com/api/?name=" + Uri.EscapeDataString(p.Name) + "&background=4a7dff&color=fff&size=40&font-size=0.4";
+
+                <div class="t-row" style="grid-template-columns:44px 2fr 1.2fr 1fr 80px 80px 80px 100px 110px" data-status="@pStatus" data-id="@p.Id">
+                    <div><input type="checkbox" class="row-cb" value="@p.Id" onchange="updateBulkBar()"></div>
+                    <div class="post-cell">
+                        <div class="post-thumb" style="width:40px;height:40px;border-radius:10px">
+                            <img src="@logoImg2" alt="@p.Name">
+                        </div>
+                        <div>
+                            <div class="post-title">@p.Name</div>
+                            <div class="post-meta">@p.Website · Hợp tác từ @((DateTime)p.CreatedAt).ToString("MM/yyyy")</div>
+                        </div>
+                    </div>
+                    <div style="font-size:12px;color:#8a93b8">TMĐT · Điện tử</div>
+                    <div style="font-size:12px;color:#8a93b8">@(string.IsNullOrEmpty(p.Contact) ? "N/A" : p.Contact)</div>
+                    <div class="metric metric-g">@p.MonthClicks.ToString("N0")</div>
+                    <div class="metric">-</div>
+                    <div class="metric">@p.CommissionRate.ToString("0.#")%</div>
+                    <div><span class="pc-status @statusCss2">@pStatus</span></div>
+                    <div class="row-acts">
+                        @if (pStatus == "Chờ duyệt")
+                        {
+                            <button class="act act-approve" title="Duyệt" onclick="approvePartner(@p.Id)">✓</button>
+                            <button class="act act-reject" title="Từ chối" onclick="rejectPartner(@p.Id, '@System.Web.HttpUtility.JavaScriptStringEncode(p.Name)')">✕</button>
+                        }
+                        @if (pStatus == "Hoạt động")
+                        {
+                            <button class="act" title="Tạm ngưng" onclick="suspendPartner(@p.Id)">⏸</button>
+                        }
+                        @if (pStatus == "Tạm ngưng" || pStatus == "Từ chối")
+                        {
+                            <button class="act act-approve" title="Kích hoạt" onclick="approvePartner(@p.Id)">▶</button>
+                        }
+                        <button class="act act-preview" title="Xem chi tiết" onclick="viewPartnerDetail(@p.Id)">👁</button>
+                    </div>
+                </div>
+            }
+        }
+
+        <div class="pagination">
+            <div class="pag-info">Hiển thị @partners.Count / @total đối tác</div>
+            <div class="pag-btns"><button class="pag-btn active">1</button></div>
         </div>
     </div>
 </div>
 
+<!-- Modal: Từ chối đối tác -->
+<div class="modal-overlay" id="rejectModal">
+    <div class="modal">
+        <div class="modal-title">🚫 Từ chối đối tác</div>
+        <div class="modal-sub">Ghi rõ lý do để đối tác biết điều kiện cần hoàn thiện trước khi đăng ký lại.</div>
+        <div class="modal-post-ref">🤝 <span id="rejectPartnerName">Tên đối tác</span></div>
+        <input type="hidden" id="rejectPartnerId">
+        <label class="fl">Lý do từ chối *</label>
+        <textarea class="modal-ta" id="rejectReason" placeholder="Ví dụ: chưa cung cấp đủ thông tin doanh nghiệp, ngành hàng không phù hợp..."></textarea>
+        <div class="modal-actions">
+            <button class="modal-btn-cancel" onclick="closeModal('rejectModal')">Hủy</button>
+            <button class="modal-btn-confirm" onclick="submitReject()">Gửi từ chối →</button>
+        </div>
+    </div>
+</div>
+
+<div id="toast" style="position:fixed;bottom:28px;right:28px;background:#303a75;color:#fff;padding:14px 22px;border-radius:12px;font-size:13px;font-weight:600;box-shadow:0 8px 32px rgba(42,47,95,.25);z-index:9999;display:none;max-width:340px"></div>
+
 @section scripts {
     <script src="~/Scripts/js/common/auth.js"></script>
-    <script src="~/Scripts/js/pages/manage-partners.js"></script>
+    <script>
+        var APPROVE_URL = '@Url.Action("Approve", "Partner", new { area = "SuperAdmin" })';
+        var REJECT_URL = '@Url.Action("Reject", "Partner", new { area = "SuperAdmin" })';
+        var SUSPEND_URL = '@Url.Action("Suspend", "Partner", new { area = "SuperAdmin" })';
+
+        function showToast(msg, success) {
+            var t = document.getElementById('toast');
+            t.textContent = msg;
+            t.style.background = success ? '#1bcf8a' : '#ef4444';
+            t.style.display = 'block';
+            setTimeout(function() { t.style.display = 'none'; }, 3200);
+        }
+
+        function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+        function approvePartner(id) {
+            if (!confirm('Duyệt đối tác này?')) return;
+            postAction(APPROVE_URL, { id: id }, function(data) {
+                showToast(data.message, data.success);
+                if (data.success) setTimeout(function() { location.reload(); }, 1200);
+            });
+        }
+
+        function rejectPartner(id, name) {
+            document.getElementById('rejectPartnerId').value = id;
+            document.getElementById('rejectPartnerName').textContent = name;
+            document.getElementById('rejectReason').value = '';
+            document.getElementById('rejectModal').classList.add('open');
+        }
+
+        function submitReject() {
+            var id = document.getElementById('rejectPartnerId').value;
+            var reason = document.getElementById('rejectReason').value.trim();
+            if (!reason) { showToast('Vui lòng nhập lý do từ chối.', false); return; }
+            postAction(REJECT_URL, { id: id, reason: reason }, function(data) {
+                closeModal('rejectModal');
+                showToast(data.message, data.success);
+                if (data.success) setTimeout(function() { location.reload(); }, 1200);
+            });
+        }
+
+        function suspendPartner(id) {
+            if (!confirm('Tạm ngưng hợp tác với đối tác này?')) return;
+            postAction(SUSPEND_URL, { id: id }, function(data) {
+                showToast(data.message, data.success);
+                if (data.success) setTimeout(function() { location.reload(); }, 1200);
+            });
+        }
+
+        function viewPartnerDetail(id) {
+            showToast('Đang mở chi tiết đối tác...', true);
+        }
+
+        function postAction(url, params, callback) {
+            var body = Object.keys(params).map(function(k) { return k + '=' + encodeURIComponent(params[k]); }).join('&');
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+                body: body
+            }).then(function(r) { return r.json(); }).then(callback).catch(function() { showToast('Lỗi kết nối máy chủ.', false); });
+        }
+
+        function filterStatus(status) {
+            document.querySelectorAll('.t-row').forEach(function(row) {
+                row.style.display = (!status || row.dataset.status === status) ? '' : 'none';
+            });
+            document.querySelectorAll('.partner-card').forEach(function(card) {
+                card.style.display = (!status || card.dataset.status === status) ? '' : 'none';
+            });
+        }
+
+        function filterPartners() {
+            var q = (document.getElementById('searchInput').value || '').toLowerCase();
+            var st = document.getElementById('filterStatus').value;
+            document.querySelectorAll('.t-row').forEach(function(row) {
+                var text = row.innerText.toLowerCase();
+                var statusMatch = !st || row.dataset.status === st;
+                row.style.display = text.includes(q) && statusMatch ? '' : 'none';
+            });
+        }
+
+        function toggleSelectAll(cb) {
+            document.querySelectorAll('.row-cb').forEach(function(c) { c.checked = cb.checked; });
+            updateBulkBar();
+        }
+
+        function updateBulkBar() {}
+
+        function exportCSV() {
+            showToast('Đang xuất báo cáo đối tác...', true);
+        }
+
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') filterPartners();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal('rejectModal');
+        });
+    </script>
 }

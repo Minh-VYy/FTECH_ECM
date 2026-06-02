@@ -1,67 +1,347 @@
-﻿@{
-    ViewBag.Title = "Quản Lý Tài Khoản Admin";
+@{
+    ViewBag.Title = "Cập Nhật Hồ Sơ Tài Khoản Admin";
     Layout = "~/Areas/SuperAdmin/Views/Shared/_SuperAdminLayout.cshtml";
+    int total = ViewBag.TotalAccounts ?? 0;
+    int activeAccs = ViewBag.ActiveAccounts ?? 0;
+    int lockedAccs = ViewBag.LockedAccounts ?? 0;
+    int newWeek = ViewBag.NewAccountsThisWeek ?? 0;
+    int partnerCount = ViewBag.PartnerCount ?? 0;
+    int activePct = ViewBag.ActivePercentage ?? 0;
+    var accounts = ViewBag.AdminAccounts as System.Collections.Generic.List<object> ?? new System.Collections.Generic.List<object>();
 }
 
 <div class="topbar">
-    <div class="topbar-title">Quản Lý Tài Khoản Admin</div>
-    <div class="topbar-search"><input type="text" placeholder="Tìm tài khoản, email..."><button>🔍</button></div>
+    <div class="topbar-title">Cập Nhật Hồ Sơ</div>
+    <div class="topbar-search">
+        <input type="text" id="searchInput" placeholder="Tìm tên, email, số điện thoại...">
+        <button onclick="filterAccounts()">🔍</button>
+    </div>
     <div class="topbar-actions">
-        <button class="btn-ghost">Xuất báo cáo</button>
-        <button class="btn-primary" onclick="location.href='@Url.Action("Create", "AdminAccount", new { area = "SuperAdmin" })'">+ Tạo Admin Mới</button>
+        <button class="btn-ghost" onclick="exportCSV()">Xuất CSV</button>
+        <button class="btn-primary" id="addAdminBtn" onclick="openAddAdmin()">+ Thêm tài khoản</button>
     </div>
 </div>
 
 <div class="content">
-    <div class="stat-row">
-        <div class="stat-card">
-            <div class="stat-label">Tổng Admin</div>
-            <div class="stat-val sc-a">5</div>
-            <div class="stat-sub">Đang hoạt động</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">Super Admin</div>
-            <div class="stat-val sc-p">1</div>
-            <div class="stat-sub">Quản trị viên chính</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">Content Manager</div>
-            <div class="stat-val sc-g">1</div>
-            <div class="stat-sub">Quản lý nội dung</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">Affiliate Manager</div>
-            <div class="stat-val sc-o">1</div>
-            <div class="stat-sub">Quản lý liên kết</div>
-        </div>
-    </div>
-
-    <div class="section-head">
-        <div class="sec-title">Danh sách tài khoản admin</div>
-    </div>
-
-    <div class="table-wrap">
-        <div class="t-head">
-            <div class="th">Tên</div>
-            <div class="th">Email</div>
-            <div class="th">Vai Trò</div>
-            <div class="th">Trạng Thái</div>
-            <div class="th">Thao Tác</div>
-        </div>
-        <div class="t-row">
-            <div>Admin Name</div>
-            <div>admin@ftech.com</div>
-            <div><span class="cat-tag">Super Admin</span></div>
-            <div><span class="sp sp-approved">✓ Hoạt động</span></div>
-            <div>
-                <button class="act" type="button">✏️ Sửa</button>
-                <button class="act" type="button">🔒 Khóa</button>
+    <!-- KPI Cards -->
+    <div class="stat-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px">
+        <div class="stat-card sc-all">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                <div style="font-size:28px">👥</div>
+                <div>
+                    <div class="stat-label">Tổng tài khoản</div>
+                    <div class="stat-val sv-all">@total.ToString("N0")</div>
+                </div>
             </div>
+            <div class="stat-sub">+@newWeek tuần này</div>
+        </div>
+        <div class="stat-card sc-approved">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                <div style="font-size:28px">✅</div>
+                <div>
+                    <div class="stat-label">Đang hoạt động</div>
+                    <div class="stat-val sv-approved">@activeAccs</div>
+                </div>
+            </div>
+            <div class="stat-sub">@activePct% tổng tài khoản</div>
+        </div>
+        <div class="stat-card sc-pending">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                <div style="font-size:28px">🤝</div>
+                <div>
+                    <div class="stat-label">Đối tác / Partner</div>
+                    <div class="stat-val sv-pending">@partnerCount</div>
+                </div>
+            </div>
+            <div class="stat-sub">+3 tháng này</div>
+        </div>
+        <div class="stat-card sc-rejected">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                <div style="font-size:28px">🔒</div>
+                <div>
+                    <div class="stat-label">Tài khoản bị khóa</div>
+                    <div class="stat-val sv-rejected">@lockedAccs</div>
+                </div>
+            </div>
+            <div class="stat-sub">Cần xem xét</div>
+        </div>
+    </div>
+
+    <!-- Info panels -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px">
+        <div style="background:#fff;border:1px solid rgba(76,84,170,0.14);border-radius:14px;padding:18px">
+            <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8a93b8;margin-bottom:12px">Nhóm quản trị hiện có</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+                <li style="font-size:13px;color:#5d6897">• Affiliate Manager: quản lý affiliate link và hiệu suất</li>
+                <li style="font-size:13px;color:#5d6897">• Affiliate Partner Manager: duyệt và cập nhật đối tác</li>
+                <li style="font-size:13px;color:#5d6897">• User Account Manager: xử lý tài khoản người dùng</li>
+            </ul>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(76,84,170,0.14);border-radius:14px;padding:18px">
+            <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8a93b8;margin-bottom:12px">Quyền Super Admin</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+                <li style="font-size:13px;color:#5d6897">• Cấp nhật tài khoản Admin</li>
+                <li style="font-size:13px;color:#5d6897">• Phân quyền vai trò</li>
+                <li style="font-size:13px;color:#5d6897">• Xem trạng thái hoạt động của từng admin</li>
+                <li style="font-size:13px;color:#5d6897">• Điều phối quyền truy cập hệ thống</li>
+            </ul>
+        </div>
+        <div style="background:#fff;border:1px solid rgba(76,84,170,0.14);border-radius:14px;padding:18px">
+            <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8a93b8;margin-bottom:12px">Tác vụ trên trang</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+                <li style="font-size:13px;color:#5d6897">• Tùy chỉnh thông tin</li>
+                <li style="font-size:13px;color:#5d6897">• Đổi vai trò quản trị</li>
+                <li style="font-size:13px;color:#5d6897">• Kích hoạt / khóa tài khoản</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Filter bar -->
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+        <select class="fsel" id="filterRole" onchange="filterAccounts()">
+            <option value="">Tất cả vai trò</option>
+            <option>SuperAdmin</option><option>ContentManager</option><option>AffiliateManager</option><option>UserAccountManager</option>
+        </select>
+        <select class="fsel" id="filterStatus" onchange="filterAccounts()">
+            <option value="">Tất cả trạng thái</option>
+            <option value="Active">Hoạt động</option>
+            <option value="Locked">Đã khóa</option>
+        </select>
+        <select class="fsel" id="sortBy" onchange="filterAccounts()">
+            <option value="newest">Mới cập nhật</option>
+            <option value="name">Tên A-Z</option>
+        </select>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+        <div class="t-head" style="grid-template-columns:44px 2fr 1.5fr 1fr 1fr 1fr 120px">
+            <div><input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)"></div>
+            <div class="th">Tài khoản Admin</div>
+            <div class="th">Vai trò</div>
+            <div class="th">Trạng thái</div>
+            <div class="th">Quyền chính</div>
+            <div class="th">Cập nhật</div>
+            <div class="th">Thao tác</div>
+        </div>
+
+        @if (accounts.Count == 0)
+        {
+            <div style="padding:40px;text-align:center;color:#8a93b8;font-size:14px">📭 Chưa có tài khoản admin nào</div>
+        }
+
+        @{
+            foreach (dynamic acc in accounts)
+            {
+                string acStatus = acc.Status;
+                string statusCss = acStatus == "Active" ? "sp sp-approved" : "sp sp-rejected";
+                string statusLabel = acStatus == "Active" ? "Hoạt động" : "Đã khóa";
+
+                string roleCss = "cat-tag";
+                string role = acc.Role ?? "";
+                if (role.Contains("Super")) roleCss = "cat-tag" + " role-super";
+                else if (role.Contains("Content")) roleCss = "cat-tag role-content";
+                else if (role.Contains("Affiliate")) roleCss = "cat-tag role-affiliate";
+
+                <div class="t-row" style="grid-template-columns:44px 2fr 1.5fr 1fr 1fr 1fr 120px" data-status="@acStatus" data-role="@role" data-id="@acc.Id">
+                    <div><input type="checkbox" class="row-cb" value="@acc.Id" onchange="updateBulkBar()"></div>
+                    <div class="post-cell">
+                        <div class="sb-avatar" style="width:38px;height:38px;border-radius:50%;overflow:hidden;flex-shrink:0">
+                            <img src="@acc.Avatar" alt="@acc.FullName" onerror="this.style.background='#4a7dff';this.style.display='none'">
+                        </div>
+                        <div>
+                            <div class="post-title">@acc.FullName</div>
+                            <div class="post-meta">@acc.Email</div>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="@roleCss" style="font-size:11px">@role</span>
+                    </div>
+                    <div>
+                        <span class="@statusCss">@(acStatus == "Active" ? "● " : "○ ")@statusLabel</span>
+                    </div>
+                    <div style="font-size:12px;color:#5d6897">@acc.Permissions</div>
+                    <div style="font-size:12px;color:#8a93b8">@((DateTime)acc.LastUpdated).ToString("dd/MM/yyyy")</div>
+                    <div class="row-acts">
+                        <button class="act act-preview" title="Cập nhật vai trò"
+                                onclick="openEditAccount(@acc.Id, '@System.Web.HttpUtility.JavaScriptStringEncode(acc.FullName)', '@role', '@acStatus')">✏</button>
+                        <button class="act @(acStatus == "Active" ? "act-reject" : "act-approve")"
+                                title="@(acStatus == "Active" ? "Khóa tài khoản" : "Mở khóa")"
+                                onclick="toggleLock(@acc.Id, '@System.Web.HttpUtility.JavaScriptStringEncode(acc.FullName)', '@acStatus')">
+                            @(acStatus == "Active" ? "🔒" : "🔓")
+                        </button>
+                    </div>
+                </div>
+            }
+        }
+
+        <div class="pagination">
+            <div class="pag-info">Hiển thị @accounts.Count / @total tài khoản admin</div>
+            <div class="pag-btns"><button class="pag-btn active">1</button></div>
         </div>
     </div>
 </div>
 
+<!-- Modal: Cập nhật tài khoản -->
+<div class="modal-overlay" id="editAccountModal">
+    <div class="modal" style="width:520px">
+        <div class="modal-title">✏️ Cập nhật tài khoản Admin</div>
+        <div class="modal-sub">Thay đổi vai trò và trạng thái của tài khoản admin này.</div>
+        <div class="modal-post-ref">🛡️ <span id="editAccName">Tên tài khoản</span></div>
+        <input type="hidden" id="editAccId">
+        <div class="form-grid" style="margin-bottom:14px">
+            <div>
+                <label class="fl">Họ tên admin</label>
+                <input class="input-field" id="editAccFullName" type="text" readonly style="background:#f3f1ff">
+            </div>
+            <div>
+                <label class="fl">Vai trò mới</label>
+                <select class="input-field select-field" id="editAccRole">
+                    <option value="SuperAdmin">SuperAdmin</option>
+                    <option value="ContentManager">Content Manager</option>
+                    <option value="AffiliateManager">Affiliate Manager</option>
+                    <option value="UserAccountManager">User Account Manager</option>
+                </select>
+            </div>
+        </div>
+        <label class="fl">Ghi chú cập nhật</label>
+        <textarea class="modal-ta" id="editAccNote" placeholder="Ví dụ: thay đổi phân quyền theo yêu cầu, tạm thời nâng quyền..."></textarea>
+        <div class="modal-actions">
+            <button class="modal-btn-cancel" onclick="closeModal('editAccountModal')">Đóng</button>
+            <button class="modal-btn-confirm" style="background:linear-gradient(135deg,#4a7dff,#8a5bff)" onclick="submitEditAccount()">Lưu cập nhật</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Thêm admin -->
+<div class="modal-overlay" id="addAdminModal">
+    <div class="modal" style="width:500px">
+        <div class="modal-title">➕ Thêm tài khoản Admin mới</div>
+        <div class="modal-sub">Tạo một tài khoản quản trị mới và phân quyền vai trò phù hợp.</div>
+        <div class="form-grid" style="margin-bottom:14px">
+            <div>
+                <label class="fl">Họ tên</label>
+                <input class="input-field" id="newAccName" type="text" placeholder="Nguyễn Văn A">
+            </div>
+            <div>
+                <label class="fl">Email</label>
+                <input class="input-field" id="newAccEmail" type="email" placeholder="admin@ftech.vn">
+            </div>
+        </div>
+        <div class="form-grid" style="margin-bottom:14px">
+            <div>
+                <label class="fl">Vai trò</label>
+                <select class="input-field select-field" id="newAccRole">
+                    <option value="ContentManager">Content Manager</option>
+                    <option value="AffiliateManager">Affiliate Manager</option>
+                    <option value="UserAccountManager">User Account Manager</option>
+                </select>
+            </div>
+            <div>
+                <label class="fl">Mật khẩu tạm</label>
+                <input class="input-field" id="newAccPwd" type="password" placeholder="••••••••">
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button class="modal-btn-cancel" onclick="closeModal('addAdminModal')">Hủy</button>
+            <button class="modal-btn-confirm" style="background:linear-gradient(135deg,#4a7dff,#8a5bff)" onclick="submitAddAdmin()">Tạo tài khoản</button>
+        </div>
+    </div>
+</div>
+
+<div id="toast" style="position:fixed;bottom:28px;right:28px;background:#303a75;color:#fff;padding:14px 22px;border-radius:12px;font-size:13px;font-weight:600;box-shadow:0 8px 32px rgba(42,47,95,.25);z-index:9999;display:none;max-width:340px"></div>
+
 @section scripts {
     <script src="~/Scripts/js/common/auth.js"></script>
-    <script src="~/Scripts/js/pages/manage-accounts.js"></script>
+    <script>
+        var UPDATE_ROLE_URL = '@Url.Action("UpdateRole", "AdminAccount", new { area = "SuperAdmin" })';
+        var TOGGLE_LOCK_URL = '@Url.Action("ToggleLock", "AdminAccount", new { area = "SuperAdmin" })';
+
+        function showToast(msg, success) {
+            var t = document.getElementById('toast');
+            t.textContent = msg;
+            t.style.background = success ? '#1bcf8a' : '#ef4444';
+            t.style.display = 'block';
+            setTimeout(function() { t.style.display = 'none'; }, 3200);
+        }
+
+        function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+        function openEditAccount(id, name, role, status) {
+            document.getElementById('editAccId').value = id;
+            document.getElementById('editAccName').textContent = name;
+            document.getElementById('editAccFullName').value = name;
+            document.getElementById('editAccRole').value = role;
+            document.getElementById('editAccNote').value = '';
+            document.getElementById('editAccountModal').classList.add('open');
+        }
+
+        function submitEditAccount() {
+            var id = document.getElementById('editAccId').value;
+            var newRole = document.getElementById('editAccRole').value;
+            var note = document.getElementById('editAccNote').value;
+            fetch(UPDATE_ROLE_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+                body: 'id=' + id + '&newRole=' + encodeURIComponent(newRole) + '&note=' + encodeURIComponent(note)
+            }).then(function(r) { return r.json(); }).then(function(data) {
+                closeModal('editAccountModal');
+                showToast(data.message, data.success);
+                if (data.success) setTimeout(function() { location.reload(); }, 1200);
+            }).catch(function() { showToast('Lỗi kết nối máy chủ.', false); });
+        }
+
+        function toggleLock(id, name, status) {
+            var action = status === 'Active' ? 'khóa' : 'mở khóa';
+            if (!confirm('Bạn có chắc muốn ' + action + ' tài khoản ' + name + '?')) return;
+            fetch(TOGGLE_LOCK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+                body: 'id=' + id
+            }).then(function(r) { return r.json(); }).then(function(data) {
+                showToast(data.message, data.success);
+                if (data.success) setTimeout(function() { location.reload(); }, 1200);
+            }).catch(function() { showToast('Lỗi kết nối máy chủ.', false); });
+        }
+
+        function openAddAdmin() {
+            document.getElementById('addAdminModal').classList.add('open');
+        }
+
+        function submitAddAdmin() {
+            showToast('Chức năng tạo tài khoản đang được phát triển.', false);
+        }
+
+        function filterAccounts() {
+            var q = (document.getElementById('searchInput').value || '').toLowerCase();
+            var role = document.getElementById('filterRole').value;
+            var st = document.getElementById('filterStatus').value;
+            document.querySelectorAll('.t-row').forEach(function(row) {
+                var text = row.innerText.toLowerCase();
+                var roleMatch = !role || (row.dataset.role || '').includes(role);
+                var statusMatch = !st || row.dataset.status === st;
+                row.style.display = text.includes(q) && roleMatch && statusMatch ? '' : 'none';
+            });
+        }
+
+        function toggleSelectAll(cb) {
+            document.querySelectorAll('.row-cb').forEach(function(c) { c.checked = cb.checked; });
+            updateBulkBar();
+        }
+
+        function updateBulkBar() {}
+
+        function exportCSV() {
+            showToast('Đang xuất danh sách tài khoản...', true);
+        }
+
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') filterAccounts();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                ['editAccountModal','addAdminModal'].forEach(function(id) { closeModal(id); });
+            }
+        });
+    </script>
 }

@@ -1,5 +1,9 @@
-﻿@{
+@{
     Layout = null;
+    var currentArea = (ViewContext.RouteData.DataTokens["area"] ?? "").ToString();
+    var currentCtrl = (ViewContext.RouteData.Values["controller"] ?? "").ToString();
+    Func<string, string> active = ctrl =>
+        string.Equals(currentCtrl, ctrl, StringComparison.OrdinalIgnoreCase) ? " active" : "";
 }
 
 <!DOCTYPE html>
@@ -8,11 +12,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - FTECH Super Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet">
+    <title>@ViewBag.Title - FTECH Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     @Styles.Render("~/Content/admin/css")
-    <link rel="stylesheet" href="~/Content/css/pages/dashboard.css">
     <link rel="stylesheet" href="~/Content/css/pages/manage-posts.css">
     <link rel="stylesheet" href="~/Content/css/pages/manage-partners.css">
     <link rel="stylesheet" href="~/Content/css/pages/manage-accounts.css">
@@ -21,28 +23,39 @@
 <body>
     <div class="sidebar">
         <div class="sb-logo">
-            <a href="@Url.Action("Index", "Dashboard", new { area = "SuperAdmin" })" class="logo">
-                <span class="logo-badge">F</span>FTECH Super Admin
+            <a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })" class="logo">
+                <span class="logo-badge">F</span>FTECH Admin
             </a>
         </div>
         <div class="sb-label">Super Admin</div>
         <nav class="sb-menu">
-            <a href="@Url.Action("Index", "Dashboard", new { area = "SuperAdmin" })" class="sb-item">
-                <span class="si">📊</span>Dashboard
+            <a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })" class="sb-item @active("Dashboard")">
+                <span class="si">📊</span>Xem báo cáo thống kê
             </a>
-            <a href="@Url.Action("Index", "Post", new { area = "SuperAdmin" })" class="sb-item">
-                <span class="si">✅</span>Duyệt Bài Viết
+            <a href="@Url.Action("Index", "Post", new { area = "SuperAdmin" })" class="sb-item @active("Post")">
+                <span class="si">✅</span>Duyệt bài viết
+                @if (ViewBag.PendingCount != null && (int)ViewBag.PendingCount > 0)
+                {
+                    <span class="sb-badge">@ViewBag.PendingCount</span>
+                }
             </a>
-            <a href="@Url.Action("Index", "Partner", new { area = "SuperAdmin" })" class="sb-item">
-                <span class="si">🆕</span>Duyệt Đối Tác
+            <a href="@Url.Action("Index", "Partner", new { area = "SuperAdmin" })" class="sb-item @active("Partner")">
+                <span class="si">🆕</span>Duyệt đối tác mới
+                @if (ViewBag.PartnerPendingCount != null && (int)ViewBag.PartnerPendingCount > 0)
+                {
+                    <span class="sb-badge">@ViewBag.PartnerPendingCount</span>
+                }
             </a>
-            <a href="@Url.Action("Index", "AdminAccount", new { area = "SuperAdmin" })" class="sb-item">
-                <span class="si">🛡️</span>Tài Khoản Admin
+            <a href="@Url.Action("Accounts", "Account", new { area = "Admin" })" class="sb-item @active("AdminAccount")">
+                <span class="si">🛡️</span>Tài khoản admin
             </a>
         </nav>
         <div class="sb-bottom">
             <div class="sb-user">
-                <div class="sb-avatar"><img src="https://i.pravatar.cc/120?img=12" alt="Admin"></div>
+                <div class="sb-avatar">
+                    <img src="https://i.pravatar.cc/120?img=12" alt="Admin"
+                         onerror="this.style.display='none'">
+                </div>
                 <div>
                     <div class="sb-user-name">@(ViewBag.AdminName ?? ViewBag.UserName ?? "Super Admin")</div>
                     <div class="sb-user-role">Super Admin</div>

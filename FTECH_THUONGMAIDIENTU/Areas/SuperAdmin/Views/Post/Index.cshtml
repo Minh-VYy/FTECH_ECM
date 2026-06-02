@@ -1,66 +1,490 @@
-﻿@{
+@{
     ViewBag.Title = "Duyệt Bài Viết";
     Layout = "~/Areas/SuperAdmin/Views/Shared/_SuperAdminLayout.cshtml";
+    var currentStatus = (ViewBag.CurrentStatus ?? "all").ToString();
+    int total = ViewBag.TotalCount ?? 0;
+    int draft = ViewBag.DraftCount ?? 0;
+    int pending = ViewBag.PendingCount ?? 0;
+    int approved = ViewBag.ApprovedCount ?? 0;
+    int rejected = ViewBag.RejectedCount ?? 0;
+    var posts = ViewBag.Posts as System.Collections.Generic.List<object> ?? new System.Collections.Generic.List<object>();
 }
 
 <div class="topbar">
     <div class="topbar-title">Duyệt Bài Viết</div>
-    <div class="topbar-search"><input type="text" placeholder="Tìm bài viết, tác giả..."><button>🔍</button></div>
+    <div class="topbar-search">
+        <input type="text" id="searchInput" placeholder="Tìm tiêu đề, tác giả, danh mục...">
+        <button onclick="filterTable()">🔍</button>
+    </div>
     <div class="topbar-actions">
-        <button class="btn-ghost">Xuất báo cáo</button>
-        <button class="btn-primary">Làm mới</button>
+        <button class="btn-ghost" onclick="exportCSV()">Xuất CSV</button>
+        <button class="btn-primary" id="pendingQuickBtn" onclick="filterByStatus('pending')">
+            Bài chờ duyệt (@pending)
+        </button>
     </div>
 </div>
 
 <div class="content">
+    <!-- KPI Stats -->
     <div class="stat-row">
-        <div class="stat-card">
-            <div class="stat-label">Chờ Duyệt</div>
-            <div class="stat-val sc-p">7</div>
-            <div class="stat-sub">Cần xử lý ngay</div>
+        <div class="stat-card sc-all">
+            <div class="stat-icon" style="font-size:22px">📋</div>
+            <div>
+                <div class="stat-label">Tổng bài viết</div>
+                <div class="stat-val sv-all">@total</div>
+                <div class="stat-sub">Toàn bộ nội dung trong hệ thống</div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-label">Đã Duyệt</div>
-            <div class="stat-val sc-g">248</div>
-            <div class="stat-sub">Đã xuất bản</div>
+        <div class="stat-card sc-draft">
+            <div class="stat-icon" style="font-size:22px">📝</div>
+            <div>
+                <div class="stat-label">Bản nháp</div>
+                <div class="stat-val sv-draft">@draft</div>
+                <div class="stat-sub">Chờ gửi lên duyệt</div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-label">Từ Chối</div>
-            <div class="stat-val sc-o">12</div>
-            <div class="stat-sub">Cần chỉnh sửa</div>
+        <div class="stat-card sc-pending">
+            <div class="stat-icon" style="font-size:22px">⏳</div>
+            <div>
+                <div class="stat-label">Chờ duyệt</div>
+                <div class="stat-val sv-pending">@pending</div>
+                <div class="stat-sub">Ưu tiên kiểm tra hôm nay</div>
+            </div>
+        </div>
+        <div class="stat-card sc-approved">
+            <div class="stat-icon" style="font-size:22px">✅</div>
+            <div>
+                <div class="stat-label">Đã duyệt</div>
+                <div class="stat-val sv-approved">@approved</div>
+                <div class="stat-sub">Đang hiển thị công khai</div>
+            </div>
+        </div>
+        <div class="stat-card sc-rejected">
+            <div class="stat-icon" style="font-size:22px">❌</div>
+            <div>
+                <div class="stat-label">Từ chối</div>
+                <div class="stat-val sv-rejected">@rejected</div>
+                <div class="stat-sub">Đã gửi yêu cầu chỉnh sửa</div>
+            </div>
         </div>
     </div>
 
-    <div class="section-head">
-        <div class="sec-title">Bài viết chờ duyệt</div>
-        <select class="fsel">
-            <option>Mới cập nhật</option>
-            <option>Cũ nhất</option>
+    <!-- Filter chips + toolbar -->
+    <div class="filter-wrap">
+        <button class="fchip @(currentStatus == "all" ? "active" : "")" onclick="filterByStatus('all')">Tất cả (@total)</button>
+        <button class="fchip fc-draft @(currentStatus == "draft" ? "active" : "")" onclick="filterByStatus('draft')">Nháp (@draft)</button>
+        <button class="fchip fc-pending @(currentStatus == "pending" ? "active" : "")" onclick="filterByStatus('pending')">Chờ duyệt (@pending)</button>
+        <button class="fchip fc-approved @(currentStatus == "approved" ? "active" : "")" onclick="filterByStatus('approved')">Đã duyệt (@approved)</button>
+        <button class="fchip fc-rejected @(currentStatus == "rejected" ? "active" : "")" onclick="filterByStatus('rejected')">Từ chối (@rejected)</button>
+        <select class="fsel" style="margin-left:auto" onchange="filterByCategory(this.value)">
+            <option value="">Tất cả danh mục</option>
+            <option>Laptop</option>
+            <option>Điện thoại</option>
+            <option>Phụ kiện</option>
+            <option>Màn hình</option>
+            <option>Gaming</option>
+        </select>
+        <select class="fsel" onchange="sortPosts(this.value)">
+            <option value="newest">Mới cập nhật</option>
+            <option value="oldest">Cũ nhất</option>
+            <option value="views">Nhiều lượt xem</option>
         </select>
     </div>
 
+    <!-- Bulk action bar -->
+    <div class="bulk-bar" id="bulkBar">
+        <span class="bulk-info" id="bulkInfo">0 bài được chọn</span>
+        <button class="btn-ghost" onclick="bulkApprove()">✅ Duyệt tất cả</button>
+        <button class="btn-ghost" style="color:#ef4444;border-color:rgba(239,68,68,.3)" onclick="bulkReject()">❌ Từ chối tất cả</button>
+    </div>
+
+    <!-- Table -->
     <div class="table-wrap">
         <div class="t-head">
-            <div class="th">Bài Viết</div>
-            <div class="th">Tác Giả</div>
-            <div class="th">Ngày Gửi</div>
-            <div class="th">Danh Mục</div>
-            <div class="th">Thao Tác</div>
+            <div><input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)"></div>
+            <div class="th">Bài viết</div>
+            <div class="th">Tác giả</div>
+            <div class="th">Danh mục</div>
+            <div class="th">Trạng thái</div>
+            <div class="th">Lượt xem</div>
+            <div class="th">Click AFF</div>
+            <div class="th">Cập nhật</div>
+            <div class="th">Thao tác</div>
         </div>
-        <div class="t-row">
-            <div>Tiêu đề bài viết</div>
-            <div>Nguyễn A</div>
-            <div>20/03/2026</div>
-            <div><span class="cat-tag">Review</span></div>
-            <div>
-                <button class="act" type="button">✓ Duyệt</button>
-                <button class="act" type="button">✕ Từ chối</button>
+
+        @if (posts.Count == 0)
+        {
+            <div style="padding:40px;text-align:center;color:#8a93b8;font-size:14px">
+                📭 Không có bài viết nào trong trạng thái này
+            </div>
+        }
+
+        @{
+            foreach (dynamic post in posts)
+            {
+                string statusCss = "sp-draft";
+                string statusLabel = "Bản nháp";
+                string postStatus = post.Status;
+                if (postStatus == "Chờ duyệt") { statusCss = "sp-pending"; statusLabel = "Chờ duyệt"; }
+                else if (postStatus == "Đã xuất bản") { statusCss = "sp-approved"; statusLabel = "Đã duyệt"; }
+                else if (postStatus == "Từ chối") { statusCss = "sp-rejected"; statusLabel = "Từ chối"; }
+
+                string thumb = string.IsNullOrEmpty(post.Thumbnail)
+                    ? "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=200&q=60"
+                    : post.Thumbnail;
+
+                <div class="t-row" data-id="@post.Id" data-status="@postStatus" data-category="@post.Category">
+                    <div><input type="checkbox" class="row-cb" value="@post.Id" onchange="updateBulkBar()"></div>
+                    <div class="post-cell">
+                        <div class="post-thumb">
+                            <img src="@thumb" alt="thumb" onerror="this.style.display='none'">
+                        </div>
+                        <div>
+                            <div class="post-title">@post.Title</div>
+                            <div class="post-meta">@post.Author · @((int)post.AffLinkCount) affiliate link đang hoạt động</div>
+                        </div>
+                    </div>
+                    <div style="font-size:13px;color:#303a75;font-weight:600">@post.Author</div>
+                    <div><span class="cat-tag">@post.Category</span></div>
+                    <div><span class="sp @statusCss">@statusLabel</span></div>
+                    <div class="metric">@post.ViewCount.ToString("N0")</div>
+                    <div class="metric @(post.ClickCount > 0 ? "metric-g" : "metric-m")">@post.ClickCount.ToString("N0")</div>
+                    <div style="font-size:12px;color:#8a93b8">@((DateTime)post.CreatedAt).ToString("dd/MM/yyyy")</div>
+                    <div class="row-acts">
+                        <button class="act act-preview" title="Preview" onclick="openPreview(@post.Id)">👁</button>
+                        <button class="act" title="Chỉnh sửa" onclick="openEdit(@post.Id, '@System.Web.HttpUtility.JavaScriptStringEncode(post.Title)', '@postStatus')">✏</button>
+                        @if (postStatus == "Chờ duyệt" || postStatus == "Nháp")
+                        {
+                            <button class="act act-approve" title="Duyệt" onclick="approvePost(@post.Id)">✓</button>
+                            <button class="act act-reject" title="Từ chối" onclick="openReject(@post.Id, '@System.Web.HttpUtility.JavaScriptStringEncode(post.Title)')">✕</button>
+                        }
+                        @if (postStatus == "Đã xuất bản")
+                        {
+                            <button class="act act-reject" title="Thu hồi" onclick="openReject(@post.Id, '@System.Web.HttpUtility.JavaScriptStringEncode(post.Title)')">↩</button>
+                        }
+                    </div>
+                </div>
+            }
+        }
+
+        <div class="pagination">
+            <div class="pag-info">Hiển thị @posts.Count / @total bài viết</div>
+            <div class="pag-btns">
+                <button class="pag-btn active">1</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Modal: Preview -->
+<div class="modal-overlay" id="previewModal">
+    <div class="preview-modal">
+        <div class="pv-head">
+            <div class="pv-title">Preview kiểm duyệt bài viết</div>
+            <button class="pv-close" onclick="closeModal('previewModal')">✕</button>
+        </div>
+        <div class="pv-body" id="previewBody">
+            <div style="text-align:center;padding:40px;color:#8a93b8">Đang tải...</div>
+        </div>
+        <div class="pv-foot" id="previewFooter">
+            <button class="modal-btn-cancel" onclick="closeModal('previewModal')">Đóng</button>
+            <button class="modal-btn-confirm" style="background:linear-gradient(135deg,#ef4444,#f97316)" id="previewRejectBtn" onclick="openRejectFromPreview()">✕ Từ chối</button>
+            <button class="modal-btn-confirm" style="background:linear-gradient(135deg,#1bcf8a,#10b981)" id="previewApproveBtn" onclick="approveFromPreview()">✓ Duyệt bài</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Từ chối -->
+<div class="modal-overlay" id="rejectModal">
+    <div class="modal">
+        <div class="modal-title">🚫 Từ chối bài viết</div>
+        <div class="modal-sub">Vui lòng nhập lý do để tác giả biết cần chỉnh sửa nội dung nào trước khi gửi duyệt lại.</div>
+        <div class="modal-post-ref">📄 <span id="rejectPostTitle">Tiêu đề bài viết</span></div>
+        <input type="hidden" id="rejectPostId">
+        <label class="fl">Lý do từ chối *</label>
+        <textarea class="modal-ta" id="rejectReason" placeholder="Ví dụ: nội dung chưa đầy đủ, thiếu affiliate link, thông tin sai lệch..."></textarea>
+        <div style="margin-top:14px">
+            <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8a93b8;margin-bottom:10px">Mức độ</div>
+            <label style="margin-right:16px"><input type="radio" name="rejectLevel" value="minor"> Sửa nhỏ</label>
+            <label style="margin-right:16px"><input type="radio" name="rejectLevel" value="major" checked> Sửa lại nhiều</label>
+            <label><input type="radio" name="rejectLevel" value="notaccept"> Không đăng</label>
+        </div>
+        <div class="modal-actions">
+            <button class="modal-btn-cancel" onclick="closeModal('rejectModal')">Hủy</button>
+            <button class="modal-btn-confirm" onclick="submitReject()">Gửi từ chối →</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Cập nhật bài viết -->
+<div class="modal-overlay" id="editModal">
+    <div class="modal" style="width:520px">
+        <div class="modal-title">✏️ Cập nhật bài viết</div>
+        <div class="modal-sub">Biểu mẫu này dùng cho kịch bản cập nhật bài viết ngay từ màn hình quản lý nội dung.</div>
+        <div class="modal-post-ref">📄 <span id="editPostRef">Tiêu đề</span></div>
+        <input type="hidden" id="editPostId">
+        <div class="form-grid" style="margin-bottom:12px">
+            <div>
+                <label class="fl">Tiêu đề bài viết</label>
+                <input class="input-field" id="editTitle" type="text" placeholder="Nhập tiêu đề">
+            </div>
+            <div>
+                <label class="fl">Trạng thái</label>
+                <select class="input-field select-field" id="editStatus">
+                    <option value="Nháp">Bản nháp</option>
+                    <option value="Chờ duyệt">Chờ duyệt</option>
+                    <option value="Đã xuất bản">Đã duyệt</option>
+                    <option value="Từ chối">Từ chối</option>
+                </select>
+            </div>
+        </div>
+        <label class="fl">Ghi chú cập nhật</label>
+        <textarea class="modal-ta" id="editNote" placeholder="Ví dụ: cập nhật mô tả ngắn, chỉnh affiliate link, đổi danh mục hiển thị..."></textarea>
+        <div class="modal-actions">
+            <button class="modal-btn-cancel" onclick="closeModal('editModal')">Đóng</button>
+            <button class="modal-btn-confirm" style="background:linear-gradient(135deg,#4a7dff,#8a5bff)" onclick="submitEdit()">Lưu cập nhật</button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast notification -->
+<div id="toast" style="position:fixed;bottom:28px;right:28px;background:#303a75;color:#fff;padding:14px 22px;border-radius:12px;font-size:13px;font-weight:600;box-shadow:0 8px 32px rgba(42,47,95,.25);z-index:9999;display:none;transition:all .3s;max-width:340px"></div>
+
 @section scripts {
     <script src="~/Scripts/js/common/auth.js"></script>
-    <script src="~/Scripts/js/pages/manage-posts.js"></script>
+    <script>
+        // ===== URLS =====
+        var APPROVE_URL = '@Url.Action("Approve", "Post", new { area = "SuperAdmin" })';
+        var REJECT_URL = '@Url.Action("Reject", "Post", new { area = "SuperAdmin" })';
+        var UPDATE_URL = '@Url.Action("UpdatePost", "Post", new { area = "SuperAdmin" })';
+        var DETAIL_URL = '@Url.Action("GetDetail", "Post", new { area = "SuperAdmin" })';
+        var PAGE_URL = '@Url.Action("Index", "Post", new { area = "SuperAdmin" })';
+
+        var currentPreviewId = null;
+
+        // ===== TOAST =====
+        function showToast(msg, success) {
+            var t = document.getElementById('toast');
+            t.textContent = msg;
+            t.style.background = success ? '#1bcf8a' : '#ef4444';
+            t.style.display = 'block';
+            setTimeout(function() { t.style.display = 'none'; }, 3200);
+        }
+
+        // ===== MODALS =====
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('open');
+        }
+
+        // ===== FILTER =====
+        function filterByStatus(status) {
+            window.location.href = PAGE_URL + '?status=' + status;
+        }
+
+        function filterTable() {
+            var q = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.t-row').forEach(function(row) {
+                var text = row.innerText.toLowerCase();
+                row.style.display = text.includes(q) ? '' : 'none';
+            });
+        }
+
+        function filterByCategory(cat) {
+            document.querySelectorAll('.t-row').forEach(function(row) {
+                if (!cat) { row.style.display = ''; return; }
+                row.style.display = row.dataset.category === cat ? '' : 'none';
+            });
+        }
+
+        function sortPosts(val) {
+            // Client-side sort
+            var wrap = document.querySelector('.table-wrap');
+            var rows = Array.from(document.querySelectorAll('.t-row'));
+            rows.sort(function(a, b) {
+                if (val === 'views') {
+                    return parseInt(b.cells[5]?.innerText || 0) - parseInt(a.cells[5]?.innerText || 0);
+                }
+                return 0;
+            });
+        }
+
+        // ===== SELECT ALL =====
+        function toggleSelectAll(cb) {
+            document.querySelectorAll('.row-cb').forEach(function(c) { c.checked = cb.checked; });
+            updateBulkBar();
+        }
+
+        function updateBulkBar() {
+            var selected = document.querySelectorAll('.row-cb:checked').length;
+            var bar = document.getElementById('bulkBar');
+            bar.classList.toggle('show', selected > 0);
+            document.getElementById('bulkInfo').textContent = selected + ' bài được chọn';
+        }
+
+        function getSelectedIds() {
+            return Array.from(document.querySelectorAll('.row-cb:checked')).map(function(c) { return c.value; });
+        }
+
+        // ===== APPROVE =====
+        function approvePost(id) {
+            if (!confirm('Duyệt bài viết này?')) return;
+            fetch(APPROVE_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+                body: 'id=' + id
+            }).then(function(r) { return r.json(); }).then(function(data) {
+                showToast(data.message, data.success);
+                if (data.success) setTimeout(function() { location.reload(); }, 1200);
+            }).catch(function() { showToast('Lỗi kết nối máy chủ.', false); });
+        }
+
+        function approveFromPreview() {
+            if (currentPreviewId) approvePost(currentPreviewId);
+        }
+
+        function bulkApprove() {
+            var ids = getSelectedIds();
+            if (!ids.length) return;
+            if (!confirm('Duyệt ' + ids.length + ' bài viết?')) return;
+            var done = 0;
+            ids.forEach(function(id) {
+                fetch(APPROVE_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+                    body: 'id=' + id
+                }).then(function() { done++; if (done === ids.length) { showToast('Đã duyệt ' + ids.length + ' bài!', true); setTimeout(function() { location.reload(); }, 1400); } });
+            });
+        }
+
+        // ===== REJECT =====
+        function openReject(id, title) {
+            currentPreviewId = id;
+            document.getElementById('rejectPostId').value = id;
+            document.getElementById('rejectPostTitle').textContent = title;
+            document.getElementById('rejectReason').value = '';
+            document.getElementById('rejectModal').classList.add('open');
+        }
+
+        function openRejectFromPreview() {
+            var title = document.getElementById('previewBody').querySelector('.pv-post-title')?.textContent || '';
+            closeModal('previewModal');
+            openReject(currentPreviewId, title);
+        }
+
+        function submitReject() {
+            var id = document.getElementById('rejectPostId').value;
+            var reason = document.getElementById('rejectReason').value.trim();
+            if (!reason) { showToast('Vui lòng nhập lý do từ chối.', false); return; }
+            fetch(REJECT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+                body: 'id=' + id + '&reason=' + encodeURIComponent(reason)
+            }).then(function(r) { return r.json(); }).then(function(data) {
+                closeModal('rejectModal');
+                showToast(data.message, data.success);
+                if (data.success) setTimeout(function() { location.reload(); }, 1200);
+            }).catch(function() { showToast('Lỗi kết nối máy chủ.', false); });
+        }
+
+        function bulkReject() {
+            var ids = getSelectedIds();
+            if (!ids.length) return;
+            var reason = prompt('Lý do từ chối (áp dụng cho ' + ids.length + ' bài):');
+            if (!reason) return;
+            var done = 0;
+            ids.forEach(function(id) {
+                fetch(REJECT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+                    body: 'id=' + id + '&reason=' + encodeURIComponent(reason)
+                }).then(function() { done++; if (done === ids.length) { showToast('Đã từ chối ' + ids.length + ' bài.', true); setTimeout(function() { location.reload(); }, 1400); } });
+            });
+        }
+
+        // ===== PREVIEW =====
+        function openPreview(id) {
+            currentPreviewId = id;
+            document.getElementById('previewModal').classList.add('open');
+            document.getElementById('previewBody').innerHTML = '<div style="text-align:center;padding:40px;color:#8a93b8">Đang tải...</div>';
+            fetch(DETAIL_URL + '?id=' + id, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (!data.success) { document.getElementById('previewBody').innerHTML = '<div style="color:#ef4444;padding:20px">' + data.message + '</div>'; return; }
+                    var d = data.data;
+                    var thumbHtml = d.thumbnail ? '<div class="pv-thumb" style="background:url(\'' + d.thumbnail + '\') center/cover no-repeat"></div>' : '';
+                    document.getElementById('previewBody').innerHTML =
+                        thumbHtml +
+                        '<span class="pv-tag">' + (d.category || 'Bài viết') + '</span>' +
+                        '<div class="pv-post-title">' + d.title + '</div>' +
+                        '<div class="pv-meta"><span>Tác giả: ' + d.author + '</span><span>Ngày cập nhật: ' + d.createdAt + '</span><span>' + d.viewCount + ' lượt xem</span></div>' +
+                        '<div class="pv-content">' + (d.content || '').substring(0, 600) + (d.content && d.content.length > 600 ? '...' : '') + '</div>';
+
+                    var isPending = d.status === 'Chờ duyệt' || d.status === 'Nháp';
+                    document.getElementById('previewApproveBtn').style.display = isPending ? '' : 'none';
+                    document.getElementById('previewRejectBtn').style.display = isPending || d.status === 'Đã xuất bản' ? '' : 'none';
+                })
+                .catch(function() { document.getElementById('previewBody').innerHTML = '<div style="color:#ef4444;padding:20px">Lỗi tải dữ liệu.</div>'; });
+        }
+
+        // ===== EDIT =====
+        function openEdit(id, title, status) {
+            document.getElementById('editPostId').value = id;
+            document.getElementById('editPostRef').textContent = title;
+            document.getElementById('editTitle').value = title;
+            document.getElementById('editStatus').value = status;
+            document.getElementById('editNote').value = '';
+            document.getElementById('editModal').classList.add('open');
+        }
+
+        function submitEdit() {
+            var id = document.getElementById('editPostId').value;
+            var title = document.getElementById('editTitle').value.trim();
+            var status = document.getElementById('editStatus').value;
+            var note = document.getElementById('editNote').value.trim();
+            if (!title) { showToast('Vui lòng nhập tiêu đề.', false); return; }
+            fetch(UPDATE_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+                body: 'id=' + id + '&title=' + encodeURIComponent(title) + '&statusVal=' + encodeURIComponent(status) + '&note=' + encodeURIComponent(note)
+            }).then(function(r) { return r.json(); }).then(function(data) {
+                closeModal('editModal');
+                showToast(data.message, data.success);
+                if (data.success) setTimeout(function() { location.reload(); }, 1200);
+            }).catch(function() { showToast('Lỗi kết nối máy chủ.', false); });
+        }
+
+        // ===== CSV EXPORT =====
+        function exportCSV() {
+            var rows = [['ID', 'Tiêu đề', 'Tác giả', 'Danh mục', 'Trạng thái', 'Lượt xem', 'Click AFF', 'Ngày']];
+            document.querySelectorAll('.t-row').forEach(function(row) {
+                var cells = row.querySelectorAll('div');
+                rows.push([
+                    row.dataset.id,
+                    cells[1]?.querySelector('.post-title')?.textContent?.trim() || '',
+                    cells[2]?.textContent?.trim() || '',
+                    cells[3]?.textContent?.trim() || '',
+                    cells[4]?.textContent?.trim() || '',
+                    cells[5]?.textContent?.trim() || '',
+                    cells[6]?.textContent?.trim() || '',
+                    cells[7]?.textContent?.trim() || ''
+                ]);
+            });
+            var csv = rows.map(function(r) { return r.map(function(c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(','); }).join('\n');
+            var blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'bai-viet-' + new Date().toISOString().slice(0,10) + '.csv';
+            link.click();
+        }
+
+        // ===== KEYBOARD SHORTCUTS =====
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') filterTable();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                ['previewModal','rejectModal','editModal'].forEach(function(id) { closeModal(id); });
+            }
+        });
+    </script>
 }
