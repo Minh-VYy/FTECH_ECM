@@ -2,8 +2,8 @@
 @{
     Layout = null;
     var assetVersion = DateTime.UtcNow.Ticks.ToString();
-    // Read reviewModule.html with Default (ANSI) encoding since it's an ANSI file
-    var html = System.IO.File.ReadAllText(Server.MapPath("~/Views/reviewModule.html"), System.Text.Encoding.Default);
+    var html = System.IO.File.ReadAllText(Server.MapPath("~/Views/reviewModule.html"), System.Text.Encoding.UTF8);
+
 
     var product = ViewBag.Product as PostSummary;
     var hasPurchased = ViewBag.HasPurchased as bool? ?? false;

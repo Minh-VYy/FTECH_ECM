@@ -16,8 +16,8 @@
     var authActionHtml = isAuthenticated
         ? "<div class=\"header-actions header-auth\"><div class=\"header-user\"><span class=\"header-user-label\">Xin chào</span><strong class=\"header-user-name\">" + HttpUtility.HtmlEncode(currentUserName) + "</strong></div><a href=\"" + (string.Equals(currentUserRole, "customer", StringComparison.OrdinalIgnoreCase) ? Url.Action("Profile", "Account") : Url.Action("Index", "Dashboard", new { area = "Admin" })) + "\" class=\"btn-primary\">Tài khoản</a></div>"
         : "<div class=\"header-actions\"><a href=\"" + Url.Action("Login", "Account") + "\" class=\"btn-ghost\">Đăng nhập</a><a href=\"" + Url.Action("Register", "Account") + "\" class=\"btn-primary\">Đăng ký</a></div>";
-    // Read trangchu.html with Default (ANSI/Windows-1252) encoding since it's an ANSI file
-    var html = System.IO.File.ReadAllText(Server.MapPath("~/Views/trangchu.html"), System.Text.Encoding.Default);
+    var html = System.IO.File.ReadAllText(Server.MapPath("~/Views/trangchu.html"), System.Text.Encoding.UTF8);
+
     var summary = ViewBag.Summary as DashboardSummary;
     var featuredPosts = (ViewBag.FeaturedPosts as IEnumerable<PostSummary> ?? Enumerable.Empty<PostSummary>()).ToList();
     var topPost = ViewBag.TopPost as PostSummary ?? featuredPosts.FirstOrDefault();
