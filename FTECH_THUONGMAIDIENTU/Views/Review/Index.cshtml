@@ -2,7 +2,8 @@
 @{
     Layout = null;
     var assetVersion = DateTime.UtcNow.Ticks.ToString();
-    var html = System.IO.File.ReadAllText(Server.MapPath("~/Views/reviewModule.html"));
+    // Read reviewModule.html with Default (ANSI) encoding since it's an ANSI file
+    var html = System.IO.File.ReadAllText(Server.MapPath("~/Views/reviewModule.html"), System.Text.Encoding.Default);
 
     var product = ViewBag.Product as PostSummary;
     var hasPurchased = ViewBag.HasPurchased as bool? ?? false;
@@ -30,18 +31,18 @@
                             "    </div>" +
                             "    <div class=\"account-meta\">" +
                             "      <span class=\"account-name\">" + HttpUtility.HtmlEncode(currentUserName) + "</span>" +
-                            "      <span class=\"account-role\">" + (string.Equals(currentUserRole, "customer", StringComparison.OrdinalIgnoreCase) ? "KhÃ¡ch thÃ nh viÃªn" : "Quáº£n trá»‹ viÃªn") + "</span>" +
+                            "      <span class=\"account-role\">" + (string.Equals(currentUserRole, "customer", StringComparison.OrdinalIgnoreCase) ? "Khách thành viên" : "Quản trị viên") + "</span>" +
                             "    </div>" +
                             "  </div>" +
-                            "  <a href=\"" + (string.Equals(currentUserRole, "customer", StringComparison.OrdinalIgnoreCase) ? Url.Action("Profile", "Account") : Url.Action("Index", "Dashboard", new { area = "Admin" })) + "\" class=\"ftab active\" style=\"margin-left:12px;text-decoration:none;padding:5px 12px;font-size:12px;border-radius:6px;background:var(--accent);color:#0c1017;font-weight:600\">TÃ i khoáº£n</a>" +
-                            "  <a href=\"" + Url.Action("Logout", "Account") + "\" class=\"ftab\" style=\"margin-left:8px;text-decoration:none;padding:5px 12px;font-size:12px;border-radius:6px;border:1px solid var(--red);color:var(--red)\">ÄÄƒng xuáº¥t</a>" +
+                            "  <a href=\"" + (string.Equals(currentUserRole, "customer", StringComparison.OrdinalIgnoreCase) ? Url.Action("Profile", "Account") : Url.Action("Index", "Dashboard", new { area = "Admin" })) + "\" class=\"ftab active\" style=\"margin-left:12px;text-decoration:none;padding:5px 12px;font-size:12px;border-radius:6px;background:var(--accent);color:#0c1017;font-weight:600\">Tài khoản</a>" +
+                            "  <a href=\"" + Url.Action("Logout", "Account") + "\" class=\"ftab\" style=\"margin-left:8px;text-decoration:none;padding:5px 12px;font-size:12px;border-radius:6px;border:1px solid var(--red);color:var(--red)\">Đăng xuất</a>" +
                             "</div>";
     }
     else
     {
         dynamicHeaderHtml = "<div class=\"hdr-right\">" +
-                            "  <a href=\"" + Url.Action("Login", "Account") + "\" class=\"ftab\" style=\"text-decoration:none;padding:6px 15px;\">ÄÄƒng nháº­p</a>" +
-                            "  <a href=\"" + Url.Action("Register", "Account") + "\" class=\"ftab active\" style=\"margin-left:8px;text-decoration:none;padding:6px 15px;\">ÄÄƒng kÃ½</a>" +
+                            "  <a href=\"" + Url.Action("Login", "Account") + "\" class=\"ftab\" style=\"text-decoration:none;padding:6px 15px;\">Đăng nhập</a>" +
+                            "  <a href=\"" + Url.Action("Register", "Account") + "\" class=\"ftab active\" style=\"margin-left:8px;text-decoration:none;padding:6px 15px;\">Đăng ký</a>" +
                             "</div>";
     }
 
@@ -53,16 +54,16 @@
     );
 
     // Dynamic Title tag
-    string pageTitle = product != null ? "FTECH â€“ ÄÃ¡nh giÃ¡ " + product.Title : "FTECH â€“ ÄÃ¡nh giÃ¡ & So sÃ¡nh cÃ´ng nghá»‡ hÃ ng Ä‘áº§u";
-    html = html.Replace("<title>FTECH â€“ ÄÃ¡nh giÃ¡ sáº£n pháº©m</title>", "<title>" + HttpUtility.HtmlEncode(pageTitle) + "</title>");
+    string pageTitle = product != null ? "FTECH – Đánh giá " + product.Title : "FTECH – Đánh giá & So sánh công nghệ hàng đầu";
+    html = html.Replace("<title>FTECH – Đánh giá sản phẩm</title>", "<title>" + HttpUtility.HtmlEncode(pageTitle) + "</title>");
 
     // Dynamic Breadcrumb and sections hide/show CSS
     string injectedStyle;
     if (product == null)
     {
         // General reviews/comparisons listing feed
-        var generalBreadcrumb = "<div class=\"bc\"><a href=\"" + Url.Action("Index", "Home") + "\">Trang chá»§</a><span>â€º</span><span>Táº¥t cáº£ bÃ i viáº¿t review & so sÃ¡nh</span></div>";
-        html = html.Replace("<div class=\"bc\"><a href=\"trangchu.html\">Trang chá»§</a><span>â€º</span><a href=\"product.html\">ÄÃ¡nh giÃ¡ MacBook Air M3</a><span>â€º</span><span>ÄÃ¡nh giÃ¡ sáº£n pháº©m</span></div>", generalBreadcrumb);
+        var generalBreadcrumb = "<div class=\"bc\"><a href=\"" + Url.Action("Index", "Home") + "\">Trang chủ</a><span>›</span><span>Tất cả bài viết review &amp; so sánh</span></div>";
+        html = html.Replace("<div class=\"bc\"><a href=\"trangchu.html\">Trang chủ</a><span>›</span><a href=\"product.html\">Đánh giá MacBook Air M3</a><span>›</span><span>Đánh giá sản phẩm</span></div>", generalBreadcrumb);
 
         injectedStyle = "<style>" +
                         "  .product-mini, .write-card, .bc, .page > div:last-child { display: none !important; }" +
@@ -78,9 +79,9 @@
             ? Url.Action("Index", "Product", new { id = product.PostID })
             : Url.RouteUrl("ProductBySlug", new { slug = product.Slug });
 
-        var dynBreadcrumb = "<div class=\"bc bc-dyn\" style=\"display: flex;\"><a href=\"" + Url.Action("Index", "Home") + "\">Trang chá»§</a><span>â€º</span><a href=\"" + productUrl + "\">" + HttpUtility.HtmlEncode(product.CategoryName) + "</a><span>â€º</span><span>ÄÃ¡nh giÃ¡ " + HttpUtility.HtmlEncode(product.Title) + "</span></div>";
+        var dynBreadcrumb = "<div class=\"bc bc-dyn\" style=\"display: flex;\"><a href=\"" + Url.Action("Index", "Home") + "\">Trang chủ</a><span>›</span><a href=\"" + productUrl + "\">" + HttpUtility.HtmlEncode(product.CategoryName) + "</a><span>›</span><span>Đánh giá " + HttpUtility.HtmlEncode(product.Title) + "</span></div>";
 
-        html = html.Replace("<div class=\"bc\"><a href=\"trangchu.html\">Trang chá»§</a><span>â€º</span><a href=\"product.html\">ÄÃ¡nh giÃ¡ MacBook Air M3</a><span>â€º</span><span>ÄÃ¡nh giÃ¡ sáº£n pháº©m</span></div>", dynBreadcrumb);
+        html = html.Replace("<div class=\"bc\"><a href=\"trangchu.html\">Trang chủ</a><span>›</span><a href=\"product.html\">Đánh giá MacBook Air M3</a><span>›</span><span>Đánh giá sản phẩm</span></div>", dynBreadcrumb);
 
         // Hide MacBook-specific specs card in sidebar (.u-style-125 is the sidebar-card stats)
         injectedStyle = "<style>" +
@@ -96,25 +97,25 @@
         // No purchase gate - any logged-in member can write a review
 
         // Fill dynamic product specs mini-bar at the top
-        string priceHtml = "LiÃªn há»‡";
+        string priceHtml = "Liên hệ";
         if (product.Prices != null && product.Prices.Count > 0)
         {
-            priceHtml = product.Prices.First().Price.ToString("N0") + "â‚«";
+            priceHtml = product.Prices.First().Price.ToString("N0") + "₫";
         }
         var avgRating = product.AverageRating > 0 ? product.AverageRating : 5.0;
-        var starStars = string.Concat(Enumerable.Repeat("â­", (int)Math.Round(avgRating)));
+        var starStars = string.Concat(Enumerable.Repeat("⭐", (int)Math.Round(avgRating)));
 
-        string dynamicProductMini = 
+        string dynamicProductMini =
             "<div class=\"product-mini\">" +
             "  <div class=\"pm-img\"><img src=\"" + HttpUtility.HtmlAttributeEncode(product.ThumbnailURL ?? "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=120&q=80") + "\" alt=\"" + HttpUtility.HtmlAttributeEncode(product.Title) + "\"></div>" +
             "  <div class=\"pm-info\">" +
             "    <div class=\"pm-brand\">" + HttpUtility.HtmlEncode(product.CategoryName) + "</div>" +
             "    <div class=\"pm-name\">" + HttpUtility.HtmlEncode(product.Title) + "</div>" +
-            "    <div class=\"pm-score\"><span class=\"pm-stars\">" + starStars + "</span><strong>" + avgRating.ToString("0.0") + "</strong><span>Â· " + product.RatingCount + " Ä‘Ã¡nh giÃ¡ tá»« FTECH</span></div>" +
+            "    <div class=\"pm-score\"><span class=\"pm-stars\">" + starStars + "</span><strong>" + avgRating.ToString("0.0") + "</strong><span>· " + product.RatingCount + " đánh giá từ FTECH</span></div>" +
             "  </div>" +
             "  <div class=\"pm-right\">" +
             "    <div class=\"pm-price\">" + priceHtml + "</div>" +
-            "    <a href=\"" + productUrl + "\" class=\"pm-link\">â† Quay láº¡i chi tiáº¿t sáº£n pháº©m</a>" +
+            "    <a href=\"" + productUrl + "\" class=\"pm-link\">← Quay lại chi tiết sản phẩm</a>" +
             "  </div>" +
             "</div>";
 
@@ -124,11 +125,11 @@
     <div class=""pm-info"">
       <div class=""pm-brand"">Apple</div>
       <div class=""pm-name"">MacBook Air M3 15"" 8GB/256GB Starlight</div>
-      <div class=""pm-score""><span class=""pm-stars"">â­â­â­â­â­</span><strong>4.9</strong><span>Â· 1.240 Ä‘Ã¡nh giÃ¡ Â· Ä‘Ã£ liÃªn káº¿t trá»±c tiáº¿p tá»« bÃ i review</span></div>
+      <div class=""pm-score""><span class=""pm-stars"">⭐⭐⭐⭐⭐</span><strong>4.9</strong><span>· 1.240 đánh giá · đã liên kết trực tiếp từ bài review</span></div>
     </div>
     <div class=""pm-right"">
-      <div class=""pm-price"">28.990.000â‚«</div>
-      <a href=""product.html"" class=""pm-link"">â† Quay láº¡i bÃ i review</a>
+      <div class=""pm-price"">28.990.000₫</div>
+      <a href=""product.html"" class=""pm-link"">← Quay lại bài review</a>
     </div>
   </div>";
         html = html.Replace(macbookMiniText, dynamicProductMini);
@@ -142,7 +143,7 @@
 
     // Inject Login Prompt and Comment Lock Box elements inside write-card
     var loginPromptHtml = "<div id=\"loginPrompt\" style=\"display: none; background: rgba(74,125,255,.08); border: 1px solid rgba(74,125,255,.22); color: #1e3a8a; padding: 20px; border-radius: 16px; font-weight: 500; text-align: center; margin-bottom: 8px;\">" +
-                          "  ðŸ”‘ Báº¡n cáº§n <a href=\"" + Url.Action("Login", "Account") + "\" style=\"color: var(--accent); font-weight: 700; text-decoration: underline;\">ÄÄƒng nháº­p tÃ i khoáº£n</a> thÃ nh viÃªn Ä‘á»ƒ thá»±c hiá»‡n mua sáº¯m vÃ  gá»­i Ä‘Ã¡nh giÃ¡." +
+                          "  🔑 Bạn cần <a href=\"" + Url.Action("Login", "Account") + "\" style=\"color: var(--accent); font-weight: 700; text-decoration: underline;\">Đăng nhập tài khoản</a> thành viên để thực hiện mua sắm và gửi đánh giá." +
                           "</div>";
 
     html = html.Replace("<div class=\"write-card\" id=\"writeSection\">", "<div class=\"write-card\" id=\"writeSection\">" + loginPromptHtml);

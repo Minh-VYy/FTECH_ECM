@@ -1,4 +1,4 @@
-ï»¿@using System.Collections.Generic
+@using System.Collections.Generic
 @using System.Linq
 @using System.Text
 @using System.Text.RegularExpressions
@@ -14,9 +14,10 @@
     var currentUserRole = Session["CurrentUserRole"] as string ?? Session["AdminRole"] as string;
     var isAuthenticated = !string.IsNullOrWhiteSpace(currentUserName);
     var authActionHtml = isAuthenticated
-        ? "<div class=\"header-actions header-auth\"><div class=\"header-user\"><span class=\"header-user-label\">Xin chÃ o</span><strong class=\"header-user-name\">" + HttpUtility.HtmlEncode(currentUserName) + "</strong></div><a href=\"" + (string.Equals(currentUserRole, "customer", StringComparison.OrdinalIgnoreCase) ? Url.Action("Profile", "Account") : Url.Action("Index", "Dashboard", new { area = "Admin" })) + "\" class=\"btn-primary\">TÃ i khoáº£n</a></div>"
-        : "<div class=\"header-actions\"><a href=\"" + Url.Action("Login", "Account") + "\" class=\"btn-ghost\">ÄÄƒng nháº­p</a><a href=\"" + Url.Action("Register", "Account") + "\" class=\"btn-primary\">ÄÄƒng kÃ½</a></div>";
-    var html = System.IO.File.ReadAllText(Server.MapPath("~/Views/trangchu.html"), System.Text.Encoding.UTF8);
+        ? "<div class=\"header-actions header-auth\"><div class=\"header-user\"><span class=\"header-user-label\">Xin chào</span><strong class=\"header-user-name\">" + HttpUtility.HtmlEncode(currentUserName) + "</strong></div><a href=\"" + (string.Equals(currentUserRole, "customer", StringComparison.OrdinalIgnoreCase) ? Url.Action("Profile", "Account") : Url.Action("Index", "Dashboard", new { area = "Admin" })) + "\" class=\"btn-primary\">Tài khoản</a></div>"
+        : "<div class=\"header-actions\"><a href=\"" + Url.Action("Login", "Account") + "\" class=\"btn-ghost\">Đăng nhập</a><a href=\"" + Url.Action("Register", "Account") + "\" class=\"btn-primary\">Đăng ký</a></div>";
+    // Read trangchu.html with Default (ANSI/Windows-1252) encoding since it's an ANSI file
+    var html = System.IO.File.ReadAllText(Server.MapPath("~/Views/trangchu.html"), System.Text.Encoding.Default);
     var summary = ViewBag.Summary as DashboardSummary;
     var featuredPosts = (ViewBag.FeaturedPosts as IEnumerable<PostSummary> ?? Enumerable.Empty<PostSummary>()).ToList();
     var topPost = ViewBag.TopPost as PostSummary ?? featuredPosts.FirstOrDefault();
@@ -35,8 +36,6 @@ assetVersion) +
     html = html.Replace("register.html", Url.Action("Register", "Account"));
     html = html.Replace("product.html", Url.Action("Index", "Product"));
     html = html.Replace("reviewModule.html", Url.Action("Index", "Review"));
-    html = html.Replace("<a href=\"#s-products\" class=\"view-all\">Xem táº¥t cáº£ chá»§ Ä‘á» â†’</a>",
-        "<a href=\"#s-cats\" class=\"view-all\">Xem táº¥t cáº£ chá»§ Ä‘á» â†’</a>");
     html = Regex.Replace(
         html,
         "<div class=\"header-actions\">[\\s\\S]*?<\\/div>",
@@ -45,16 +44,23 @@ assetVersion) +
 
     if (summary != null)
     {
-        html = html.Replace("<div><div class=\"hero-stat-num\">1.2K+</div><div class=\"hero-stat-label\">BÃ i review & so sÃ¡nh</div></div>",
-            "<div><div class=\"hero-stat-num\">" + summary.PostCount.ToString("N0") + "</div><div class=\"hero-stat-label\">BÃ i review & so sÃ¡nh</div></div>");
-        html = html.Replace("<div><div class=\"hero-stat-num\">35+</div><div class=\"hero-stat-label\">Äá»‘i tÃ¡c liÃªn káº¿t</div></div>",
-            "<div><div class=\"hero-stat-num\">" + summary.PartnerCount.ToString("N0") + "</div><div class=\"hero-stat-label\">Äá»‘i tÃ¡c liÃªn káº¿t</div></div>");
+        html = html.Replace("<div><div class=\"hero-stat-num\">1.2K+</div><div class=\"hero-stat-label\">Bài review &amp; so sánh</div></div>",
+            "<div><div class=\"hero-stat-num\">" + summary.PostCount.ToString("N0") + "</div><div class=\"hero-stat-label\">Bài review &amp; so sánh</div></div>");
+        html = html.Replace("<div><div class=\"hero-stat-num\">35+</div><div class=\"hero-stat-label\">Đối tác liên kết</div></div>",
+            "<div><div class=\"hero-stat-num\">" + summary.PartnerCount.ToString("N0") + "</div><div class=\"hero-stat-label\">Đối tác liên kết</div></div>");
     }
 
     html = Regex.Replace(
         html,
         "<div class=\"blog-grid\">[\\s\\S]*?</div>\\s*</section>\\s*<!-- BRANDS -->",
-        BuildBlogGrid(topPost, featuredPosts) + "\r\n</section>\r\n\r\n<!-- BRANDS -->");
+        BuildBlogGrid(topPost, featuredPosts) + "\r\n</section>\r\n\r\n<!-- BRANDS -->",
+        RegexOptions.Singleline);
+
+    // Ensure proper UTF-8 charset meta tag is present
+    if (!html.Contains("charset=UTF-8") && !html.Contains("charset=utf-8"))
+    {
+        html = html.Replace("<head>", "<head>\n    <meta charset=\"UTF-8\">");
+    }
 }
 @Html.Raw(html)
 
@@ -67,38 +73,38 @@ assetVersion) +
         if (topPost != null)
         {
             builder.AppendLine("<a class=\"blog-featured\" href=\"" + BuildProductUrl(topPost) + "\">");
-            builder.AppendLine("  <div class=\"blog-featured-img\">" + BuildPostImage(topPost, "ðŸ’»") + "</div>");
+            builder.AppendLine("  <div class=\"blog-featured-img\">" + BuildPostImage(topPost, "💻") + "</div>");
             builder.AppendLine("  <div class=\"blog-featured-body\">");
-            builder.AppendLine("    <span class=\"blog-tag blog-tag-review\">ÄÃ¡nh giÃ¡ chuyÃªn sÃ¢u</span>");
+            builder.AppendLine("    <span class=\"blog-tag blog-tag-review\">Đánh giá chuyên sâu</span>");
             builder.AppendLine("    <div class=\"blog-featured-title\">" + Encode(topPost.Title) + "</div>");
-            builder.AppendLine("    <div class=\"blog-featured-excerpt\">BÃ i viáº¿t thuá»™c danh má»¥c " + Encode(topPost.CategoryName) + ", Ä‘ang cÃ³ " + topPost.ViewCount.ToString("N0") + " lÆ°á»£t xem.</div>");
+            builder.AppendLine("    <div class=\"blog-featured-excerpt\">Bài viết thuộc danh mục " + Encode(topPost.CategoryName) + ", đang có " + topPost.ViewCount.ToString("N0") + " lượt xem.</div>");
             builder.AppendLine("    <div class=\"blog-meta\"><span>FTECH Editorial</span><span>" +
-topPost.CreatedAt.ToString("dd/MM/yyyy") + "</span><span>Äá»c review</span></div>");
+topPost.CreatedAt.ToString("dd/MM/yyyy") + "</span><span>Đọc review</span></div>");
             builder.AppendLine("  </div>");
             builder.AppendLine("</a>");
         }
         else
         {
-            builder.AppendLine("<div class=\"blog-featured\"><div class=\"blog-featured-img\">ðŸ’»</div><div class=\"blog-featured-body\"><span class=\"blog-tag blog-tag-review\">ÄÃ¡nh giÃ¡ chuyÃªn sÃ¢u</span><div class=\"blog-featured-title\">ChÆ°a cÃ³ bÃ i review Ä‘Ã£ xuáº¥t báº£n</div><div class=\"blog-featured-excerpt\">Khi Content Manager xuáº¥t báº£n bÃ i viáº¿t, dá»¯ liá»‡u sáº½ hiá»ƒn thá»‹ táº¡i Ä‘Ã¢y.</div></div></div>");
+            builder.AppendLine("<div class=\"blog-featured\"><div class=\"blog-featured-img\">💻</div><div class=\"blog-featured-body\"><span class=\"blog-tag blog-tag-review\">Đánh giá chuyên sâu</span><div class=\"blog-featured-title\">Chưa có bài review đã xuất bản</div><div class=\"blog-featured-excerpt\">Khi Content Manager xuất bản bài viết, dữ liệu sẽ hiển thị tại đây.</div></div></div>");
         }
 
         builder.AppendLine("<div class=\"blog-side\">");
         foreach (var post in posts.Where(item => topPost == null || item.PostID != topPost.PostID).Take(4))
         {
             builder.AppendLine("<a class=\"blog-mini\" href=\"" + BuildProductUrl(post) + "\">");
-            builder.AppendLine("  <div class=\"blog-mini-icon\">ðŸ“</div>");
+            builder.AppendLine("  <div class=\"blog-mini-icon\">📝</div>");
             builder.AppendLine("  <div>");
             builder.AppendLine("    <div class=\"blog-mini-tag u-style-138\">" + Encode(post.CategoryName) + "</div>");
             builder.AppendLine("    <div class=\"blog-mini-title\">" + Encode(post.Title) + "</div>");
-            builder.AppendLine("    <div class=\"blog-mini-date\">" + post.CreatedAt.ToString("dd/MM/yyyy") + " Â· " +
-post.ViewCount.ToString("N0") + " lÆ°á»£t xem</div>");
+            builder.AppendLine("    <div class=\"blog-mini-date\">" + post.CreatedAt.ToString("dd/MM/yyyy") + " · " +
+post.ViewCount.ToString("N0") + " lượt xem</div>");
             builder.AppendLine("  </div>");
             builder.AppendLine("</a>");
         }
 
         if (posts.Count <= 1)
         {
-            builder.AppendLine("<div class=\"blog-mini\"><div class=\"blog-mini-icon\">ðŸ“Œ</div><div><div class=\"blog-mini-tag u-style-114\">Dá»¯ liá»‡u DB</div><div class=\"blog-mini-title\">Hiá»‡n cÃ³ " + posts.Count + " bÃ i Ä‘Ã£ xuáº¥t báº£n trong database.</div><div class=\"blog-mini-date\">ThÃªm bÃ i vÃ  Ä‘áº·t tráº¡ng thÃ¡i ÄÃ£ xuáº¥t báº£n Ä‘á»ƒ hiá»ƒn thá»‹ thÃªm.</div></div></div>");
+            builder.AppendLine("<div class=\"blog-mini\"><div class=\"blog-mini-icon\">📌</div><div><div class=\"blog-mini-tag u-style-114\">Dữ liệu DB</div><div class=\"blog-mini-title\">Hiện có " + posts.Count + " bài đã xuất bản trong database.</div><div class=\"blog-mini-date\">Thêm bài và đặt trạng thái Đã xuất bản để hiển thị thêm.</div></div></div>");
         }
 
         builder.AppendLine("</div>");
