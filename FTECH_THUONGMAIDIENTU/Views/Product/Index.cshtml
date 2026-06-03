@@ -1,4 +1,4 @@
-﻿@using FTECH_THUONGMAIDIENTU.Models.Posts
+@using FTECH_THUONGMAIDIENTU.Models.Posts
 @using FTECH_THUONGMAIDIENTU.Models.Dashboard
 @{
     Layout = null;
@@ -351,13 +351,7 @@
                     }
                     else
                     {
-                        var hasPurchased = ViewBag.HasPurchased as bool? ?? false;
-                        
-                        <div id="commentLockBox" style="display: @(hasPurchased ? "none" : "block"); background: rgba(255,90,90,.08); border: 1px solid rgba(255,90,90,.22); color: #b91c1c; padding: 20px; border-radius: 16px; font-weight: 500; text-align: center; margin-bottom: 20px;">
-                            🔒 <strong>Yêu cầu mua sắm:</strong> Bạn chỉ được phép bình luận đánh giá sau khi đã bấm nút <strong>"Ghé cửa hàng"</strong> của sản phẩm từ FTECH để tham khảo giá và mua sắm!
-                        </div>
-
-                        <div id="commentForm" style="display: @(hasPurchased ? "block" : "none");" class="comment-box">
+                        <div id="commentForm" class="comment-box">
                             <textarea id="commentInput" placeholder="Nhập ý kiến đánh giá, bình luận của bạn về sản phẩm này..."></textarea>
                             <div class="comment-actions">
                                 <button class="partner-btn" onclick="submitRealComment(@(featuredPost?.PostID ?? 0))">Gửi bình luận</button>

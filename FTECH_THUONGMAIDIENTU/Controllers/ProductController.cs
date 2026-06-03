@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Web.Mvc;
 using FTECH_THUONGMAIDIENTU.Data;
 using FTECH_THUONGMAIDIENTU.Models.Posts;
@@ -57,7 +57,7 @@ WHERE MemberID = @MemberID AND PostID = @PostID;";
             }
 
             ViewBag.CurrentMemberID = currentMemberId;
-            ViewBag.HasPurchased = hasPurchased;
+            ViewBag.HasPurchased = true; // Allow any logged-in user to comment
             return View();
         }
 
@@ -168,27 +168,8 @@ VALUES (@LinkID, @PartnerID, @PostID, @MemberID, GETDATE(), @IPAddress, @Referre
                 return Json(new { success = false, message = "Không tìm thấy thông tin tài khoản thành viên hợp lệ." });
             }
 
-            // Verify they have purchased (clicked the buy affiliate link)
-            bool hasPurchased = false;
-            using (var connection = SqlConnectionFactory.CreateConnection())
-            using (var command = connection.CreateCommand())
-            {
-                command.CommandText = @"
-SELECT COUNT(*) 
-FROM ClickTracking 
-WHERE MemberID = @MemberID AND PostID = @PostID;";
-                command.Parameters.AddWithValue("@MemberID", member.MemberID);
-                command.Parameters.AddWithValue("@PostID", postId);
-
-                connection.Open();
-                int count = Convert.ToInt32(command.ExecuteScalar());
-                hasPurchased = count > 0;
-            }
-
-            if (!hasPurchased)
-            {
-                return Json(new { success = false, message = "Yêu cầu mua sắm: Bạn chỉ có thể đánh giá, bình luận sau khi đã click xem và mua sản phẩm từ đối tác của chúng tôi!" });
-            }
+            // All logged-in members can comment - no purchase required
+            // (Purchase is tracked via ClickTracking but not enforced as a gate)
 
             if (string.IsNullOrWhiteSpace(content))
             {

@@ -1,4 +1,4 @@
-﻿@using FTECH_THUONGMAIDIENTU.Models.Posts
+@using FTECH_THUONGMAIDIENTU.Models.Posts
 @{
     Layout = null;
     var assetVersion = DateTime.UtcNow.Ticks.ToString();
@@ -93,10 +93,7 @@
         {
             injectedStyle += "<style>#writeSection .field, #writeSection .submit-btn { display: none !important; } #loginPrompt { display: block !important; }</style>";
         }
-        else if (!hasPurchased)
-        {
-            injectedStyle += "<style>#writeSection .field, #writeSection .submit-btn { display: none !important; } #commentLockBox { display: block !important; }</style>";
-        }
+        // No purchase gate - any logged-in member can write a review
 
         // Fill dynamic product specs mini-bar at the top
         string priceHtml = "Liên hệ";
@@ -148,10 +145,6 @@
                           "  🔑 Bạn cần <a href=\"" + Url.Action("Login", "Account") + "\" style=\"color: var(--accent); font-weight: 700; text-decoration: underline;\">Đăng nhập tài khoản</a> thành viên để thực hiện mua sắm và gửi đánh giá." +
                           "</div>";
 
-    var lockBoxHtml = "<div id=\"commentLockBox\" style=\"display: none; background: rgba(255,90,90,.08); border: 1px solid rgba(255,90,90,.22); color: #b91c1c; padding: 20px; border-radius: 16px; font-weight: 500; text-align: center; margin-bottom: 8px;\">" +
-                      "  🔒 <strong>Yêu cầu mua sắm:</strong> Bạn chỉ được phép bình luận đánh giá sau khi đã bấm nút <strong>\"Ghé cửa hàng\"</strong> của sản phẩm từ FTECH để tham khảo giá và mua sắm!" +
-                      "</div>";
-
-    html = html.Replace("<div class=\"write-card\" id=\"writeSection\">", "<div class=\"write-card\" id=\"writeSection\">" + loginPromptHtml + lockBoxHtml);
+    html = html.Replace("<div class=\"write-card\" id=\"writeSection\">", "<div class=\"write-card\" id=\"writeSection\">" + loginPromptHtml);
 }
 @Html.Raw(html)

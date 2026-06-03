@@ -32,7 +32,7 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
         [HttpGet]
         public JsonResult Feed()
         {
-            var featuredPosts = postRepository.GetRecentPosts(12).ToList();
+            var featuredPosts = postRepository.GetRecentPosts(500).ToList(); // load all published posts
             var categories = postRepository.GetCategoriesWithCounts().ToList();
             var comments = postRepository.GetRecentComments(6).ToList();
             var partners = partnerRepository.GetActivePartners(12).ToList();
@@ -42,7 +42,7 @@ namespace FTECH_THUONGMAIDIENTU.Controllers
             {
                 summary = statisticsRepository.GetSummary(),
                 featuredPosts = featuredPosts.Select(MapPostCard),
-                topPosts = featuredPosts.Take(12).Select(MapPostCard),
+                topPosts = featuredPosts.Select(MapPostCard), // all posts for load more
                 categories,
                 recentComments = comments.Select(MapCommentCard),
                 partnerNames = partners.Select(MapPartnerCard),

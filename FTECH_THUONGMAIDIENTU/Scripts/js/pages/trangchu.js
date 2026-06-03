@@ -82,18 +82,13 @@ async function loadHomeFeed() {
     }
 
     allHomePosts = topPosts.length ? topPosts : featuredPosts;
+    currentFilteredPosts = []; // reset any active filter
+    currentFilterLabel = '';
+    homeShownCount = 4;
     if (mainGrid) {
-      renderMainGrid(allHomePosts.slice(0, 4));
+      renderMainGrid(allHomePosts);
     }
 
-    const loadMoreBtn = document.getElementById('loadMoreHomeBtn');
-    if (loadMoreBtn) {
-      if (allHomePosts.length <= 4) {
-        loadMoreBtn.style.display = 'none';
-      } else {
-        loadMoreBtn.style.display = 'inline-block';
-      }
-    }
 
     if (brandsTrack) {
       const names = partners.map(p => p.partnerName || p.PartnerName).filter(Boolean);
@@ -168,46 +163,89 @@ function makeMockCard(p) {
   </div>`;
 }
 
-function renderMainGrid(posts) {
+let homeShownCount = 4;
+
+function renderMainGrid(posts, filterLabel) {
   const mainGrid = document.getElementById('mainGrid');
   if (!mainGrid) return;
   if (posts.length === 0) {
-    mainGrid.innerHTML = '<div class="prod-card"><div class="prod-body"><div class="prod-name">Không tìm thấy sản phẩm nào trong danh mục này.</div></div></div>';
+    mainGrid.innerHTML = '<div class="prod-card"><div class="prod-body"><div class="prod-name">Không tìm thấy sản phẩm nào phù hợp.</div></div></div>';
+    updateLoadMoreBtn(0, 0);
     return;
   }
-  mainGrid.innerHTML = posts.map(item => makeCard(item)).join('');
+  // Show filter label if any
+  const labelEl = document.getElementById('productsFilterLabel');
+  if (labelEl) {
+    if (filterLabel) {
+      labelEl.textContent = `Kết quả lọc: "${filterLabel}" — ${posts.length} bài viết`;
+      labelEl.style.display = 'block';
+    } else {
+      labelEl.style.display = 'none';
+    }
+  }
+  const slice = posts.slice(0, homeShownCount);
+  mainGrid.innerHTML = slice.map(item => makeCard(item)).join('');
+  updateLoadMoreBtn(slice.length, posts.length);
 }
+
+function updateLoadMoreBtn(shown, total) {
+  const loadMoreBtn = document.getElementById('loadMoreHomeBtn');
+  if (!loadMoreBtn) return;
+  if (shown >= total) {
+    loadMoreBtn.style.display = 'none';
+  } else {
+    loadMoreBtn.style.display = 'inline-block';
+    loadMoreBtn.textContent = `Xem thêm (${total - shown} bài còn lại)`;
+  }
+}
+
+let currentFilteredPosts = [];
+let currentFilterLabel = '';
 
 function loadMoreHomePosts() {
-  renderMainGrid(allHomePosts);
-  const loadMoreBtn = document.getElementById('loadMoreHomeBtn');
-  if (loadMoreBtn) {
-    loadMoreBtn.style.display = 'none';
-  }
+  homeShownCount += 8;
+  renderMainGrid(currentFilteredPosts.length > 0 ? currentFilteredPosts : allHomePosts, currentFilterLabel);
 }
 
-function goToReviewSearch(term) {
+function goToReviewSearch(term, brand, sort) {
   const keyword = String(term || '').trim();
-  const brandSelect = document.getElementById('brandSelect');
-  const sortSelect = document.getElementById('sortSelect');
-  
-  let brand = '';
-  if (brandSelect && brandSelect.value !== 'Tất cả thương hiệu') {
-    brand = brandSelect.value;
+  const brandVal = brand || (document.getElementById('brandSelect')?.value || '');
+  const sortVal = sort || (document.getElementById('sortSelect')?.value || '');
+
+  // Build a combined label for display
+  const parts = [keyword, brandVal].filter(Boolean);
+  const filterLabel = parts.join(' · ');
+
+  // Filter allHomePosts in-memory first
+  let filtered = allHomePosts.filter(post => {
+    const title = (post.title || post.Title || '').toLowerCase();
+    const cat = (post.categoryName || post.CategoryName || '').toLowerCase();
+    const content = (post.content || post.Content || '').toLowerCase();
+    const kw = keyword.toLowerCase();
+    const br = brandVal.toLowerCase();
+    const keywordMatch = !kw || title.includes(kw) || cat.includes(kw) || content.includes(kw);
+    const brandMatch = !br || title.includes(br) || cat.includes(br);
+    return keywordMatch && brandMatch;
+  });
+
+  // Sort
+  if (sortVal && (sortVal.includes('xem') || sortVal === 'views')) {
+    filtered.sort((a, b) => Number(b.viewCount ?? b.ViewCount ?? 0) - Number(a.viewCount ?? a.ViewCount ?? 0));
+  } else if (sortVal && (sortVal.includes('đánh giá') || sortVal === 'rating')) {
+    filtered.sort((a, b) => Number(b.averageRating ?? b.AverageRating ?? 0) - Number(a.averageRating ?? a.AverageRating ?? 0));
   }
-  
-  let sort = '';
-  if (sortSelect) {
-    sort = sortSelect.value;
+
+  currentFilteredPosts = filtered;
+  currentFilterLabel = filterLabel;
+  homeShownCount = 8; // show more results when searching
+
+  renderMainGrid(filtered, filterLabel);
+
+  // Scroll to products section
+  const productsSection = document.getElementById('s-products');
+  if (productsSection) {
+    productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-  
-  let url = `/Review?`;
-  const params = [];
-  if (keyword) params.push(`q=${encodeURIComponent(keyword)}`);
-  if (brand) params.push(`brand=${encodeURIComponent(brand)}`);
-  if (sort) params.push(`sort=${encodeURIComponent(sort)}`);
-  
-  window.location.href = url + params.join('&');
 }
 
 function ensureNewsletterStatus() {
@@ -289,16 +327,22 @@ document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', funct
   this.classList.add('active');
   
   const tabText = this.textContent.trim().toLowerCase();
+  let filtered;
   if (tabText === 'tất cả') {
-    renderMainGrid(allHomePosts);
+    filtered = allHomePosts;
+    currentFilteredPosts = [];
+    currentFilterLabel = '';
   } else {
-    const filtered = allHomePosts.filter(post => {
+    filtered = allHomePosts.filter(post => {
       const cat = (post.categoryName || post.CategoryName || '').toLowerCase();
       const title = (post.title || post.Title || '').toLowerCase();
       return cat.includes(tabText) || title.includes(tabText);
     });
-    renderMainGrid(filtered);
+    currentFilteredPosts = filtered;
+    currentFilterLabel = tabText;
   }
+  homeShownCount = 4;
+  renderMainGrid(filtered, currentFilterLabel);
 }));
 
 // Category card click interaction
@@ -320,14 +364,17 @@ document.addEventListener('click', function(e) {
     if (matchedTab) {
       matchedTab.click();
     } else {
-      // If no tab matches, clear all tabs active states, and filter the grid dynamically!
+      // If no tab matches, filter the grid dynamically
       document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
       const filtered = allHomePosts.filter(post => {
         const cat = (post.categoryName || post.CategoryName || '').toLowerCase();
         const title = (post.title || post.Title || '').toLowerCase();
         return cat.includes(catName) || title.includes(catName);
       });
-      renderMainGrid(filtered);
+      currentFilteredPosts = filtered;
+      currentFilterLabel = catName;
+      homeShownCount = 4;
+      renderMainGrid(filtered, catName);
     }
     
     // Smooth scroll to s-products section
