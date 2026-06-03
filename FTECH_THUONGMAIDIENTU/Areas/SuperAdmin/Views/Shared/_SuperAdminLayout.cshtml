@@ -13,7 +13,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - FTECH Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     @Styles.Render("~/Content/admin/css")
     <link rel="stylesheet" href="~/Content/css/pages/manage-posts.css">
     <link rel="stylesheet" href="~/Content/css/pages/manage-partners.css">
@@ -46,7 +46,7 @@
                     <span class="sb-badge">@ViewBag.PartnerPendingCount</span>
                 }
             </a>
-            <a href="@Url.Action("Accounts", "Account", new { area = "Admin" })" class="sb-item @active("AdminAccount")">
+            <a href="@Url.Action("Index", "AdminAccount", new { area = "SuperAdmin" })" class="sb-item @active("AdminAccount")">
                 <span class="si">🛡️</span>Tài khoản admin
             </a>
         </nav>
@@ -61,6 +61,9 @@
                     <div class="sb-user-role">Super Admin</div>
                 </div>
             </div>
+            <a href="@Url.Action("Logout", "Account")" style="display:block;margin-top:10px;text-align:center;font-size:12px;color:#ef4444;text-decoration:none;padding:6px;border-radius:8px;border:1px solid rgba(239,68,68,.25);font-weight:600;">
+                Đăng xuất
+            </a>
         </div>
     </div>
 

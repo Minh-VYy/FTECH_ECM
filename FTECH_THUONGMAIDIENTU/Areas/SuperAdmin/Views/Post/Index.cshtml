@@ -286,7 +286,6 @@
             return Array.from(document.querySelectorAll('.row-cb:checked')).map(function(c) { return c.value; });
         }
 
-        /* ---- APPROVE ---- */
         function approvePost(id) {
             if (!confirm('Duyệt bài viết này?')) return;
             postAction(APPROVE_URL, { id: id }, function(d) {
@@ -307,7 +306,6 @@
             });
         }
 
-        /* ---- REJECT ---- */
         function openReject(id, title) {
             currentPreviewId = id;
             document.getElementById('rejectPostId').value = id;
@@ -344,7 +342,6 @@
             });
         }
 
-        /* ---- PREVIEW ---- */
         function openPreview(id) {
             currentPreviewId = id;
             document.getElementById('previewModal').classList.add('open');
@@ -378,7 +375,6 @@
                 });
         }
 
-        /* ---- EDIT ---- */
         function openEdit(id, title, status) {
             document.getElementById('editPostId').value = id;
             document.getElementById('editPostRef').textContent = title;
@@ -400,7 +396,6 @@
             });
         }
 
-        /* ---- CSV ---- */
         function exportCSV() {
             var rows = [['ID','Tiêu đề','Tác giả','Danh mục','Trạng thái','Lượt xem','Click AFF','Ngày']];
             document.querySelectorAll('.t-row').forEach(function(row) {
@@ -423,7 +418,6 @@
             a.click();
         }
 
-        /* ---- UTIL ---- */
         function postAction(url, params, cb) {
             var body = Object.keys(params).map(function(k) { return k + '=' + encodeURIComponent(params[k]); }).join('&');
             fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' }, body: body })

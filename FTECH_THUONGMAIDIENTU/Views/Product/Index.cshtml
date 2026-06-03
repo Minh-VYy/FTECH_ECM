@@ -2,8 +2,6 @@
 @using FTECH_THUONGMAIDIENTU.Models.Dashboard
 @{
     Layout = null;
-    Response.Charset = "utf-8";
-    Response.ContentType = "text/html; charset=utf-8";
     var featuredPost = ViewBag.FeaturedPost as PostSummary;
     var relatedPosts = (ViewBag.RelatedPosts as IEnumerable<PostSummary> ?? Enumerable.Empty<PostSummary>()).ToList();
     var commentsList = ViewBag.Comments as IEnumerable<CommentSummary> ?? Enumerable.Empty<CommentSummary>();
@@ -14,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FTECH - @(featuredPost?.Title ?? "Chi tiết bài review sản phẩm")</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href='@Url.Content("~/Content/css/common/base.css")'>
     <link rel="stylesheet" href='@Url.Content("~/Content/css/common/layout.css")'>
@@ -32,12 +30,12 @@
     </div>
 
     <div class="wrap">
-        <!-- TOP HERO CARD (LAYOUT CHI TIẾT SẢN PHẨM) -->
+        <!-- TOP HERO CARD -->
         <div class="hero">
             <div class="hero-main">
                 <div class="meta-row">
                     <span class="meta-chip">💡 Review chuyên gia</span>
-                    <span class="meta-chip">@(featuredPost?.CategoryName ?? "Laptop")</span>
+                    <span class="meta-chip">@(featuredPost?.CategoryName ?? "Công nghệ")</span>
                     <span class="meta-chip">📅 Cập nhật @(featuredPost?.CreatedAt.ToString("dd/MM/yyyy") ?? DateTime.Now.ToString("dd/MM/yyyy"))</span>
                 </div>
                 <h1 class="title">@(featuredPost?.Title ?? "Chưa có bài nổi bật")</h1>
@@ -58,7 +56,7 @@
                         👀 @(featuredPost?.ViewCount.ToString("N0") ?? "0") lượt xem · 💬 @(featuredPost?.RatingCount ?? 0) đánh giá sản phẩm
                     </div>
                 </div>
-                
+
                 <div class="hero-image">
                     @if (!string.IsNullOrWhiteSpace(featuredPost?.ThumbnailURL))
                     {
@@ -332,7 +330,7 @@
                         }
                     </div>
                     <div class="disclaimer">
-                        ⚠️ <strong>Lưu ý mua sắm:</strong> Liên kết mua hàng trên được tích hợp mã Affiliate minh bạch của FTECH. Giá thực tế có thể dao động nhẹ tùy thuộc vào các mã giảm giá và chế độ bảo hành của từng đại lý bán lẻ tại thời điểm bạn nhấn liên kết.
+                        ⚠️ <strong>Lưu ý mua sắm:</strong> Liên kết mua hàng trên được tích hợp mã Affiliate minh bạch của FTECH. Giá thực tế có thể dao động nhẹ tùy thuộc vào các mã giảm giá và chế độ bảo hành của từng đại lý bán lẻ tại thời điểm bạn nhận liên kết.
                     </div>
                 </div>
 
@@ -340,9 +338,9 @@
                 <div class="card" id="comment-section">
                     <div class="section-title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                         <span>Bình luận bài viết</span>
-                        <a href="@Url.Action("Index", "Review", new { id = featuredPost?.PostID })" style="font-size: 13px; color: var(--accent); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">Xem chi tiết đánh giá & chấm điểm sao ⭐</a>
+                        <a href="@Url.Action("Index", "Review", new { id = featuredPost?.PostID })" style="font-size: 13px; color: var(--accent); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">Xem chi tiết đánh giá &amp; chấm điểm sao ⭐</a>
                     </div>
-                    
+
                     @if (Session["CurrentUserEmail"] == null)
                     {
                         <div class="note" style="background: rgba(74,125,255,.08); border-color: rgba(74,125,255,.22); color: #1e3a8a; padding: 16px 20px; border-radius: 16px; font-weight: 500; text-align: center; margin-bottom: 20px;">
@@ -367,8 +365,8 @@
                                 <div class="comment-item" id="comment-item-@comment.CommentID" style="margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px dashed var(--border);">
                                     <div class="comment-head">
                                         <div class="comment-name" style="display: flex; align-items: center; gap: 8px;">
-                                            <img src='@Url.Content("~/Content/images/" + (comment.MemberAvatarURL ?? "default-avatar.png"))' 
-                                                 onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&q=80'" 
+                                            <img src='@Url.Content("~/Content/images/" + (comment.MemberAvatarURL ?? "default-avatar.png"))'
+                                                 onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&q=80'"
                                                  style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);" />
                                             <span>@comment.MemberName</span>
                                         </div>
